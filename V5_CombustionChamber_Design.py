@@ -122,7 +122,7 @@ class MicroJetCombustor:
         area_internal = m_fuel_per_tube / (rho_fuel * target_v)
         id_tube = math.sqrt(area_internal / math.pi) * 2
         id_tube = max(id_tube, 0.004) #min 4mm
-        od_tube = id_tube + 0.001     #.5mm wall
+        od_tube = id_tube + 0.001 #added thickness must be standard tube thickness
         #vapor exit vel. check
         rho_vapor = self.res['P2_Pa'] / (self.R * self.FUEL['T_BOIL'])
         v_exit_vapor = m_fuel_per_tube / (rho_vapor * (math.pi*(id_tube/2)**2))

@@ -1,0 +1,6 @@
+# pack-refs with: peeled fully-peeled sorted 
+050605c4ec5ef42e35a73d0b05c42cb31026f6ab refs/heads/main
+2a53d145b626b645a9bb478619810cd205c4c8d7 refs/heads/tests_and_cicd
+f29a96c9ded33b71ce85dcc7b8b1b6e187bcaa91 refs/tags/v0.0.0-2a53d14
+56bb95927bf2b08e597012e9d7c8aed679b54a8c refs/tags/v1.0.0
+050605c4ec5ef42e35a73d0b05c42cb31026f6ab refs/tags/v1.0.1
