@@ -222,15 +222,15 @@ if __name__ == "__main__":
     KEYS = ['casing_od_inch', 'wall_thickness_mm', 'pressure_ratio',
             'compressor_efficiency', 'mass_flow_air_kg_s', 'target_tit_k']
 
-    auto_manual = input(f"Enter '1' to manually input values. Any other key will "
-                        f"use default values in program: ")
+    auto_manual = input("Enter '1' to manually input values. Any other key will "
+                        "use default values in program: ")
 
     if auto_manual == "1":
         print("\nEnter values separated by spaces in this order:")
         print("  casing_od_inch | wall_thickness_mm | pressure_ratio | "
               "compressor_efficiency | mass_flow_air_kg_s | target_tit_k")
         print("  Example: 6.0 1.5 1.5 0.94 0.487 900.0")
-        print("  (Enter nothing for mass_flow_air_kg_s to use autoscale)\n")
+        print("  (Enter 'none' for mass_flow_air_kg_s to use autoscale)\n")
 
         while True:
             raw = input("Enter: ").strip().split()
