@@ -252,3 +252,10 @@ if __name__ == "__main__":
     model = MicroJetCombustor(chosen_inputs)
     results = model.run()
     print_report(results, chosen_inputs)
+    print()
+    CL=False
+    while CL==False:
+        close=input("Pressing X, Q, or 5 to close this window, results will not be saved: ")
+        close_list=["x","X","Q","q","5"]
+        if close in close_list:
+            break
