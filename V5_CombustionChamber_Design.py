@@ -166,8 +166,7 @@ class MicroJetCombustor:
 
 def print_report(res, original_inputs):
     print("\n")
-    print(f"Reverse Flow Combustor (Rev 7 - Variable Cp)")
-    print("\n")
+    print(f"Reverse Flow Combustor (Rev 8 - Variable Cp)")
     print(f"\n[1] Thermo")
     print(f"   Inlet Temp (T2):  {res['T2_K']:.0f} K")
     print(f"   Target TIT:       {original_inputs['target_tit_k']} K")
@@ -217,6 +216,39 @@ kj66_inputs = {
 #def compare_kj66()
 
 if __name__ == "__main__":
-    model = MicroJetCombustor(user_inputs)
+    print("-"*60)
+    print("-"*60)
+    print("-"*60)
+    KEYS = ['casing_od_inch', 'wall_thickness_mm', 'pressure_ratio',
+            'compressor_efficiency', 'mass_flow_air_kg_s', 'target_tit_k']
+
+    auto_manual = input(f"Enter '1' to manually input values. Any other key will "
+                        f"use default values in program: ")
+
+    if auto_manual == "1":
+        print("\nEnter values separated by spaces in this order:")
+        print("  casing_od_inch | wall_thickness_mm | pressure_ratio | "
+              "compressor_efficiency | mass_flow_air_kg_s | target_tit_k")
+        print("  Example: 6.0 1.5 1.5 0.94 0.487 900.0")
+        print("  (Enter nothing for mass_flow_air_kg_s to use autoscale)\n")
+
+        while True:
+            raw = input("Enter: ").strip().split()
+            if len(raw) != len(KEYS):
+                print(f"Expected {len(KEYS)} values, got {len(raw)}. Please try again.")
+                continue
+            try:
+                parsed = [float(v) if v.lower() != 'none' else None for v in raw]
+                break
+            except ValueError:
+                print("Invalid input — ensure all values are numbers. Try again.")
+
+        chosen_inputs = dict(zip(KEYS, parsed))
+        print(f"\nUsing inputs: {chosen_inputs}")
+    else:
+        chosen_inputs = user_inputs
+        print(f"\nUsing default inputs: {chosen_inputs}")
+
+    model = MicroJetCombustor(chosen_inputs)
     results = model.run()
-    print_report(results, user_inputs)
+    print_report(results, chosen_inputs)
