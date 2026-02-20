@@ -6,3 +6,6 @@
 	ignorecase = true
 [remote "origin"]
 	url = https://github.com/atciamb/Reverse-Flow-Micro-jet-Combustion-Chamber-Design
+[remote "upstream"]
+	url = https://github.com/atciamb/Reverse-Flow-Micro-jet-Combustion-Chamber-Design
+	fetch = +refs/heads/*:refs/remotes/upstream/*
