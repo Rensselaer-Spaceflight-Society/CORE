@@ -255,7 +255,7 @@ if __name__ == "__main__":
     print()
     CL=False
     while CL==False:
-        close=input("Pressing X, Q, or 5 to close this window, results will not be saved: ")
-        close_list=["x","X","Q","q","5"]
+        close=input("Pressing X, Q, 5, or just Enter to close this window, results will not be saved: ")
+        close_list=["x","X","Q","q","5",""]
         if close in close_list:
             break
