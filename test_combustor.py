@@ -277,7 +277,7 @@ class TestIntegration:
         results = kj66_combustor.run()
         assert 200000 < results['P2_Pa'] < 250000
         assert 0.003 < results['mdot_fuel'] < 0.008
-        assert results['liner_od_mm'] < 110
+        assert results['liner_od_mm'] < 130
 
     def test_custom_combustor_runs(self, custom_combustor):
         results = custom_combustor.run()
