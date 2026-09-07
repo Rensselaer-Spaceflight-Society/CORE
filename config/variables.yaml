@@ -1,0 +1,1147 @@
+T00_K:
+  unit: K
+  desc: Ambient static temperature
+  owner: SEED
+  frozen_at: A
+P00_Pa:
+  unit: Pa
+  desc: Ambient static pressure
+  owner: SEED
+  frozen_at: A
+F_target_N:
+  unit: N
+  desc: Design-point thrust. THE scale-setter.
+  owner: SEED
+  frozen_at: A
+T04_K:
+  unit: K
+  desc: Turbine inlet temperature. Material-limited.
+  owner: SEED
+  frozen_at: A
+PR_c_ratio:
+  unit: ratio
+  desc: Compressor total-to-total pressure ratio
+  owner: SEED
+  frozen_at: A
+N_rpm:
+  unit: rpm
+  desc: Spool speed at design point
+  owner: SEED
+  frozen_at: A
+eta_c_isen:
+  unit: isen
+  desc: Compressor isentropic efficiency (assumed, then refined)
+  owner: SEED
+  frozen_at: D
+eta_t_isen:
+  unit: isen
+  desc: Turbine isentropic efficiency (assumed, then refined)
+  owner: SEED
+  frozen_at: D
+eta_b_frac:
+  unit: frac
+  desc: Combustion efficiency
+  owner: SEED
+  frozen_at: D
+eta_mech_frac:
+  unit: frac
+  desc: Shaft mechanical efficiency
+  owner: SEED
+  frozen_at: D
+dP34_frac:
+  unit: frac
+  desc: Combustor total pressure loss / P03
+  owner: SEED
+  frozen_at: D
+dP02_frac:
+  unit: frac
+  desc: Intake total pressure loss / P00
+  owner: SEED
+  frozen_at: D
+Cv_nozzle_ratio:
+  unit: ratio
+  desc: Nozzle velocity coefficient
+  owner: SEED
+  frozen_at: D
+cp_cold_J_kgK:
+  unit: J_kgK
+  desc: Specific heat, cold section
+  owner: SEED
+  frozen_at: A
+cp_hot_J_kgK:
+  unit: J_kgK
+  desc: Specific heat, hot section
+  owner: SEED
+  frozen_at: A
+gamma_cold_ratio:
+  unit: ratio
+  desc: Ratio of specific heats, cold section
+  owner: SEED
+  frozen_at: A
+gamma_hot_ratio:
+  unit: ratio
+  desc: Ratio of specific heats, hot section
+  owner: SEED
+  frozen_at: A
+R_gas_J_kgK:
+  unit: J_kgK
+  desc: Specific gas constant for air
+  owner: SEED
+  frozen_at: A
+LHV_fuel_J_kg:
+  unit: J_kg
+  desc: Fuel lower heating value (Jet-A / kerosene)
+  owner: SEED
+  frozen_at: A
+Z_imp_count:
+  unit: count
+  desc: Impeller full blade count (splitters counted separately)
+  owner: SEED
+  frozen_at: B
+beta2b_deg:
+  unit: deg
+  desc: Impeller exit blade angle from radial (0 = radial)
+  owner: SEED
+  frozen_at: B
+inducer_hub_tip_ratio:
+  unit: ratio
+  desc: Inducer hub/shroud radius ratio
+  owner: SEED
+  frozen_at: B
+K_annular_ratio:
+  unit: ratio
+  desc: Lefebvre pressure-loss factor, annular combustor
+  owner: SEED
+  frozen_at: B
+phi_pz_ratio:
+  unit: ratio
+  desc: Primary-zone equivalence ratio
+  owner: SEED
+  frozen_at: B
+psi_turb_ratio:
+  unit: ratio
+  desc: Turbine stage loading coefficient dh0/U^2
+  owner: SEED
+  frozen_at: B
+rho_turb_kg_m3:
+  unit: kg_m3
+  desc: Turbine wheel material density
+  owner: SEED
+  frozen_at: B
+rho_imp_kg_m3:
+  unit: kg_m3
+  desc: Impeller material density
+  owner: SEED
+  frozen_at: B
+d_bearing_bore_m:
+  unit: m
+  desc: Selected bearing bore diameter
+  owner: SEED
+  frozen_at: C
+T02_K:
+  unit: K
+  desc: Compressor inlet total temperature
+  owner: m01_cycle
+  frozen_at: A
+P02_Pa:
+  unit: Pa
+  desc: Compressor inlet total pressure
+  owner: m01_cycle
+  frozen_at: A
+T03_K:
+  unit: K
+  desc: Compressor exit total temperature
+  owner: m01_cycle
+  frozen_at: A
+P03_Pa:
+  unit: Pa
+  desc: Compressor exit total pressure
+  owner: m01_cycle
+  frozen_at: A
+P04_Pa:
+  unit: Pa
+  desc: Turbine inlet total pressure
+  owner: m01_cycle
+  frozen_at: A
+T05_K:
+  unit: K
+  desc: Turbine exit total temperature (EGT)
+  owner: m01_cycle
+  frozen_at: A
+P05_Pa:
+  unit: Pa
+  desc: Turbine exit total pressure
+  owner: m01_cycle
+  frozen_at: A
+w_comp_J_kg:
+  unit: J_kg
+  desc: Specific compressor work
+  owner: m01_cycle
+  frozen_at: A
+w_turb_J_kg:
+  unit: J_kg
+  desc: Specific turbine work required
+  owner: m01_cycle
+  frozen_at: A
+Fs_N_per_kg_s:
+  unit: N_per_kg_s
+  desc: Specific thrust, N per kg/s of air
+  owner: m01_cycle
+  frozen_at: A
+mdot_kg_s:
+  unit: kg_s
+  desc: Core air mass flow at design point
+  owner: m01_cycle
+  frozen_at: A
+mdot_fuel_kg_s:
+  unit: kg_s
+  desc: Fuel mass flow at design point
+  owner: m01_cycle
+  frozen_at: A
+FAR_ratio:
+  unit: ratio
+  desc: Fuel-air ratio
+  owner: m01_cycle
+  frozen_at: A
+U2_m_s:
+  unit: m_s
+  desc: Impeller tip (exducer) speed
+  owner: m10_compressor
+  frozen_at: B
+D2_m:
+  unit: m
+  desc: Impeller exducer diameter. The KJ66's '66'.
+  owner: m10_compressor
+  frozen_at: B
+D1s_m:
+  unit: m
+  desc: Inducer shroud diameter
+  owner: m10_compressor
+  frozen_at: B
+D1h_m:
+  unit: m
+  desc: Inducer hub diameter
+  owner: m10_compressor
+  frozen_at: B
+b2_m:
+  unit: m
+  desc: Impeller exit blade width
+  owner: m10_compressor
+  frozen_at: B
+sigma_slip_ratio:
+  unit: ratio
+  desc: Slip factor (Stanitz)
+  owner: m10_compressor
+  frozen_at: B
+Cm2_m_s:
+  unit: m_s
+  desc: Meridional velocity at impeller exit
+  owner: m10_compressor
+  frozen_at: B
+Ctheta2_m_s:
+  unit: m_s
+  desc: Tangential velocity at impeller exit
+  owner: m10_compressor
+  frozen_at: B
+alpha2_deg:
+  unit: deg
+  desc: Absolute flow angle at impeller exit (from radial)
+  owner: m10_compressor
+  frozen_at: B
+M2_abs_ratio:
+  unit: ratio
+  desc: Absolute Mach number at impeller exit
+  owner: m10_compressor
+  frozen_at: B
+M1s_rel_ratio:
+  unit: ratio
+  desc: Relative Mach at inducer shroud. Design constraint.
+  owner: m10_compressor
+  frozen_at: B
+rho03_kg_m3:
+  unit: kg_m3
+  desc: Density at compressor exit
+  owner: m10_compressor
+  frozen_at: B
+m_imp_kg:
+  unit: kg
+  desc: Impeller mass
+  owner: m10_compressor
+  frozen_at: B
+D3_m:
+  unit: m
+  desc: Radial diffuser exit diameter. Sets casing OD floor.
+  owner: m11_diffuser
+  frozen_at: B
+n_vanes_diff_count:
+  unit: count
+  desc: Radial diffuser vane count
+  owner: m11_diffuser
+  frozen_at: B
+A_throat_diff_m2:
+  unit: m2
+  desc: Diffuser throat area (total)
+  owner: m11_diffuser
+  frozen_at: B
+C3_m_s:
+  unit: m_s
+  desc: Velocity leaving the diffuser
+  owner: m11_diffuser
+  frozen_at: B
+D_liner_out_m:
+  unit: m
+  desc: Liner outer diameter. Casing reads this.
+  owner: m20_combustor
+  frozen_at: B
+D_liner_in_m:
+  unit: m
+  desc: Liner inner diameter. Shaft tunnel clearance.
+  owner: m20_combustor
+  frozen_at: B
+L_liner_m:
+  unit: m
+  desc: Liner length. Drives engine length.
+  owner: m20_combustor
+  frozen_at: B
+tau_res_s:
+  unit: s
+  desc: Primary-zone residence time
+  owner: m20_combustor
+  frozen_at: B
+air_split_pz_frac:
+  unit: frac
+  desc: Fraction of air into the primary zone
+  owner: m20_combustor
+  frozen_at: B
+T_liner_wall_K:
+  unit: K
+  desc: Predicted liner wall temperature
+  owner: m20_combustor
+  frozen_at: D
+n_vaporizers_count:
+  unit: count
+  desc: Vaporizer stick count (KJ66 uses 6)
+  owner: m20_combustor
+  frozen_at: B
+A_throat_ngv_m2:
+  unit: m2
+  desc: NGV throat area. Chokes the engine -- the single most critical hot-section
+    dimension.
+  owner: m12_ngv
+  frozen_at: B
+n_vanes_ngv_count:
+  unit: count
+  desc: Nozzle guide vane count
+  owner: m12_ngv
+  frozen_at: B
+alpha_ngv_exit_deg:
+  unit: deg
+  desc: NGV exit swirl angle from axial
+  owner: m12_ngv
+  frozen_at: B
+ngv_choked_flag:
+  unit: flag
+  desc: 1 if the NGV throat is choked at design point
+  owner: m12_ngv
+  frozen_at: B
+D_turb_tip_m:
+  unit: m
+  desc: Turbine wheel tip diameter
+  owner: m13_turbine
+  frozen_at: B
+D_turb_hub_m:
+  unit: m
+  desc: Turbine wheel hub diameter
+  owner: m13_turbine
+  frozen_at: B
+D_turb_mean_m:
+  unit: m
+  desc: Turbine mean-line diameter
+  owner: m13_turbine
+  frozen_at: B
+h_blade_m:
+  unit: m
+  desc: Turbine blade height
+  owner: m13_turbine
+  frozen_at: B
+n_blades_turb_count:
+  unit: count
+  desc: Turbine rotor blade count
+  owner: m13_turbine
+  frozen_at: B
+U_turb_mean_m_s:
+  unit: m_s
+  desc: Blade speed at mean radius
+  owner: m13_turbine
+  frozen_at: B
+A_annulus_turb_m2:
+  unit: m2
+  desc: Turbine annulus area
+  owner: m13_turbine
+  frozen_at: B
+t_tip_clear_m:
+  unit: m
+  desc: Turbine tip clearance (cold)
+  owner: m13_turbine
+  frozen_at: C
+m_turb_kg:
+  unit: kg
+  desc: Turbine wheel mass. Shaft and rotordynamics read this.
+  owner: m13_turbine
+  frozen_at: B
+I_turb_kg_m2:
+  unit: kg_m2
+  desc: Turbine polar moment of inertia
+  owner: m13_turbine
+  frozen_at: B
+AN2_m2_rpm2:
+  unit: m2_rpm2
+  desc: Annulus area times speed squared. Classic blade-stress index.
+  owner: m33_turb_stress
+  frozen_at: D
+sigma_root_Pa:
+  unit: Pa
+  desc: Blade root centrifugal stress
+  owner: m33_turb_stress
+  frozen_at: D
+burst_margin_ratio:
+  unit: ratio
+  desc: Deprecated alias of blade_stress_speed_margin_ratio; NOT actual rotor burst
+    margin
+  owner: m33_turb_stress
+  frozen_at: D
+F_blade_root_N:
+  unit: N
+  desc: Centrifugal force at one blade root
+  owner: m33_turb_stress
+  frozen_at: D
+d_shaft_m:
+  unit: m
+  desc: Shaft diameter at the bearing seats
+  owner: m30_shaft
+  frozen_at: C
+L_shaft_m:
+  unit: m
+  desc: Overall shaft length
+  owner: m30_shaft
+  frozen_at: C
+L_bear_span_m:
+  unit: m
+  desc: Distance between bearing centres
+  owner: m30_shaft
+  frozen_at: C
+torque_Nm:
+  unit: Nm
+  desc: Shaft torque at design point
+  owner: m30_shaft
+  frozen_at: C
+m_shaft_kg:
+  unit: kg
+  desc: Shaft mass
+  owner: m30_shaft
+  frozen_at: C
+DN_mm_rpm:
+  unit: mm_rpm
+  desc: Bearing DN number. Bore mm times rpm.
+  owner: m31_bearings
+  frozen_at: C
+F_axial_N:
+  unit: N
+  desc: Net axial thrust on the bearing pair
+  owner: m31_bearings
+  frozen_at: C
+k_bearing_N_m:
+  unit: N_m
+  desc: Bearing radial stiffness estimate
+  owner: m31_bearings
+  frozen_at: C
+N_crit1_rpm:
+  unit: rpm
+  desc: First bending critical speed
+  owner: m32_rotordyn
+  frozen_at: D
+N_crit_margin_frac:
+  unit: frac
+  desc: Fractional separation from the operating speed
+  owner: m32_rotordyn
+  frozen_at: D
+D_casing_out_m:
+  unit: m
+  desc: Engine outer diameter. The envelope.
+  owner: m34_casing
+  frozen_at: C
+L_engine_m:
+  unit: m
+  desc: Overall engine length
+  owner: m34_casing
+  frozen_at: C
+m_engine_kg:
+  unit: kg
+  desc: Total dry mass
+  owner: m34_casing
+  frozen_at: C
+A8_m2:
+  unit: m2
+  desc: Nozzle exit area
+  owner: m40_nozzle
+  frozen_at: C
+D8_m:
+  unit: m
+  desc: Nozzle exit diameter
+  owner: m40_nozzle
+  frozen_at: C
+V8_m_s:
+  unit: m_s
+  desc: Nozzle exit velocity
+  owner: m40_nozzle
+  frozen_at: C
+F_gross_N:
+  unit: N
+  desc: Computed gross thrust. Check against F_target_N.
+  owner: m40_nozzle
+  frozen_at: C
+nozzle_choked_flag:
+  unit: flag
+  desc: 1 if the nozzle is choked at design point
+  owner: m40_nozzle
+  frozen_at: C
+Vdot_fuel_m3_s:
+  unit: m3_s
+  desc: Volumetric fuel flow
+  owner: m50_fuel
+  frozen_at: D
+d_fuel_line_m:
+  unit: m
+  desc: Fuel line internal diameter
+  owner: m50_fuel
+  frozen_at: D
+P_pump_req_Pa:
+  unit: Pa
+  desc: Required pump delivery pressure
+  owner: m50_fuel
+  frozen_at: D
+Cm2_U2_ratio:
+  unit: ratio
+  desc: Impeller exit meridional velocity / tip speed
+  owner: SEED
+  frozen_at: B
+beta1s_deg:
+  unit: deg
+  desc: Inducer shroud relative flow angle from axial. Optimum 55-65.
+  owner: SEED
+  frozen_at: B
+blockage_frac:
+  unit: frac
+  desc: Aerodynamic blockage allowance in the impeller passage
+  owner: SEED
+  frozen_at: B
+power_input_factor_ratio:
+  unit: ratio
+  desc: Extra impeller work for disc friction and recirculation
+  owner: SEED
+  frozen_at: B
+diff_radius_ratio:
+  unit: ratio
+  desc: Diffuser exit / impeller exit diameter
+  owner: SEED
+  frozen_at: B
+diff_diffusion_ratio:
+  unit: ratio
+  desc: Velocity ratio across the diffuser C2/C3
+  owner: SEED
+  frozen_at: B
+D_shaft_tunnel_m:
+  unit: m
+  desc: Shaft tunnel outer diameter. Floors the combustor bore.
+  owner: SEED
+  frozen_at: C
+annulus_gap_frac:
+  unit: frac
+  desc: Cooling annulus as a fraction of casing bore
+  owner: SEED
+  frozen_at: B
+phi_turb_ratio:
+  unit: ratio
+  desc: Turbine flow coefficient Vx/U
+  owner: SEED
+  frozen_at: B
+reaction_turb_ratio:
+  unit: ratio
+  desc: Turbine degree of reaction
+  owner: SEED
+  frozen_at: B
+aspect_ratio_turb_ratio:
+  unit: ratio
+  desc: Turbine blade height / chord
+  owner: SEED
+  frozen_at: B
+solidity_turb_ratio:
+  unit: ratio
+  desc: Turbine chord / pitch
+  owner: SEED
+  frozen_at: B
+aspect_ratio_ngv_ratio:
+  unit: ratio
+  desc: NGV height / chord
+  owner: SEED
+  frozen_at: B
+zweifel_ratio:
+  unit: ratio
+  desc: Zweifel loading criterion target, ~0.8
+  owner: SEED
+  frozen_at: B
+tip_clear_frac:
+  unit: frac
+  desc: Turbine tip clearance / blade height
+  owner: SEED
+  frozen_at: C
+blade_taper_factor_ratio:
+  unit: ratio
+  desc: Linear blade section tip/root area ratio; used consistently for mass, centroid
+    and root load
+  owner: SEED
+  frozen_at: D
+sigma_allow_turb_Pa:
+  unit: Pa
+  desc: Turbine material allowable stress at temperature
+  owner: SEED
+  frozen_at: D
+tau_allow_shaft_Pa:
+  unit: Pa
+  desc: Shaft material allowable shear stress
+  owner: SEED
+  frozen_at: C
+rho_shaft_kg_m3:
+  unit: kg_m3
+  desc: Shaft material density
+  owner: SEED
+  frozen_at: C
+E_shaft_Pa:
+  unit: Pa
+  desc: Shaft Young's modulus
+  owner: SEED
+  frozen_at: C
+bear_span_frac:
+  unit: frac
+  desc: Bearing span / shaft length
+  owner: SEED
+  frozen_at: C
+bearing_stiffness_N_m:
+  unit: N_m
+  desc: Radial stiffness of one preloaded bearing
+  owner: SEED
+  frozen_at: C
+casing_wall_m:
+  unit: m
+  desc: Casing wall thickness
+  owner: SEED
+  frozen_at: C
+rho_casing_kg_m3:
+  unit: kg_m3
+  desc: Casing material density
+  owner: SEED
+  frozen_at: C
+accessory_mass_frac:
+  unit: frac
+  desc: Brackets, fittings and hardware as a fraction of dry mass
+  owner: SEED
+  frozen_at: C
+rho_fuel_kg_m3:
+  unit: kg_m3
+  desc: Fuel density
+  owner: SEED
+  frozen_at: D
+mu_fuel_Pa_s:
+  unit: Pa_s
+  desc: Fuel dynamic viscosity
+  owner: SEED
+  frozen_at: D
+v_fuel_line_m_s:
+  unit: m_s
+  desc: Target fuel line velocity
+  owner: SEED
+  frozen_at: D
+L_fuel_line_m:
+  unit: m
+  desc: Fuel line run length
+  owner: SEED
+  frozen_at: D
+dP_injector_Pa:
+  unit: Pa
+  desc: Pressure drop across the fuel injector
+  owner: SEED
+  frozen_at: D
+phi_sz_ratio:
+  unit: ratio
+  desc: Secondary-zone equivalence ratio
+  owner: SEED
+  frozen_at: B
+film_cool_frac:
+  unit: frac
+  desc: Air fraction reserved for liner film cooling
+  owner: SEED
+  frozen_at: B
+vap_air_frac:
+  unit: frac
+  desc: Primary air ingested through the vaporizers
+  owner: SEED
+  frozen_at: B
+v_annulus_outer_m_s:
+  unit: m_s
+  desc: Outer feed annulus target velocity
+  owner: SEED
+  frozen_at: B
+vap_pitch_m:
+  unit: m
+  desc: Circumferential pitch between vaporizer scoops
+  owner: SEED
+  frozen_at: B
+f_outer_feed_frac:
+  unit: frac
+  desc: Air fraction down the outer feed annulus
+  owner: SEED
+  frozen_at: B
+tau_min_s:
+  unit: s
+  desc: Residence time floor for chamber length sizing
+  owner: SEED
+  frozen_at: B
+L_D_min_ratio:
+  unit: ratio
+  desc: Chamber length floor / mean combustion diameter
+  owner: SEED
+  frozen_at: B
+L_D_max_ratio:
+  unit: ratio
+  desc: Chamber length ceiling / mean combustion diameter
+  owner: SEED
+  frozen_at: B
+Cd_hole_ratio:
+  unit: ratio
+  desc: Liner hole discharge coefficient
+  owner: SEED
+  frozen_at: B
+liner_wall_temp_frac:
+  unit: frac
+  desc: Liner metal temperature as a fraction of TIT
+  owner: SEED
+  frozen_at: B
+alpha_liner_per_K:
+  unit: per_K
+  desc: Liner thermal expansion coefficient
+  owner: SEED
+  frozen_at: B
+A_comb_m2:
+  unit: m2
+  desc: Combustion annulus cross-sectional area
+  owner: m20_combustor
+  frozen_at: B
+D_mean_comb_m:
+  unit: m
+  desc: Mean combustion annulus diameter
+  owner: m20_combustor
+  frozen_at: B
+comb_gap_m:
+  unit: m
+  desc: Combustion annulus radial height
+  owner: m20_combustor
+  frozen_at: B
+L_pz_m:
+  unit: m
+  desc: Primary zone length
+  owner: m20_combustor
+  frozen_at: B
+L_sz_m:
+  unit: m
+  desc: Secondary zone length
+  owner: m20_combustor
+  frozen_at: B
+L_dz_m:
+  unit: m
+  desc: Dilution zone length
+  owner: m20_combustor
+  frozen_at: B
+air_split_sz_frac:
+  unit: frac
+  desc: Air fraction into the secondary zone
+  owner: m20_combustor
+  frozen_at: B
+air_split_dz_frac:
+  unit: frac
+  desc: Air fraction into the dilution zone
+  owner: m20_combustor
+  frozen_at: B
+air_split_film_frac:
+  unit: frac
+  desc: Air fraction into film cooling
+  owner: m20_combustor
+  frozen_at: B
+d_vap_od_m:
+  unit: m
+  desc: Vaporizer tube outer diameter
+  owner: m20_combustor
+  frozen_at: B
+d_vap_id_m:
+  unit: m
+  desc: Vaporizer tube bore
+  owner: m20_combustor
+  frozen_at: B
+d_vap_crimp_m:
+  unit: m
+  desc: Vaporizer crimp orifice diameter
+  owner: m20_combustor
+  frozen_at: B
+d_vap_scoop_m:
+  unit: m
+  desc: Vaporizer scoop inlet diameter
+  owner: m20_combustor
+  frozen_at: B
+n_holes_pri_count:
+  unit: count
+  desc: Primary hole count per liner
+  owner: m20_combustor
+  frozen_at: D
+d_holes_pri_out_m:
+  unit: m
+  desc: Primary hole diameter, outer liner
+  owner: m20_combustor
+  frozen_at: D
+d_holes_pri_in_m:
+  unit: m
+  desc: Primary hole diameter, inner liner
+  owner: m20_combustor
+  frozen_at: D
+n_holes_sec_count:
+  unit: count
+  desc: Secondary hole count per liner
+  owner: m20_combustor
+  frozen_at: D
+d_holes_sec_out_m:
+  unit: m
+  desc: Secondary hole diameter, outer liner
+  owner: m20_combustor
+  frozen_at: D
+d_holes_sec_in_m:
+  unit: m
+  desc: Secondary hole diameter, inner liner
+  owner: m20_combustor
+  frozen_at: D
+n_holes_dil_count:
+  unit: count
+  desc: Dilution hole count per liner
+  owner: m20_combustor
+  frozen_at: D
+d_holes_dil_out_m:
+  unit: m
+  desc: Dilution hole diameter, outer liner
+  owner: m20_combustor
+  frozen_at: D
+d_holes_dil_in_m:
+  unit: m
+  desc: Dilution hole diameter, inner liner
+  owner: m20_combustor
+  frozen_at: D
+v_annulus_inner_m_s:
+  unit: m_s
+  desc: Inner annulus velocity, SOLVED by the pressure balance
+  owner: m20_combustor
+  frozen_at: B
+D_liner_out_cold_m:
+  unit: m
+  desc: Outer liner OD, COLD BUILD dimension
+  owner: m20_combustor
+  frozen_at: D
+D_liner_in_cold_m:
+  unit: m
+  desc: Inner liner OUTSIDE diameter, cold at 293 K; legacy name
+  owner: m20_combustor
+  frozen_at: D
+eta_comb_predicted_frac:
+  unit: frac
+  desc: 'Deprecated name: assumed cycle combustion efficiency, not predicted from
+    CLP'
+  owner: m20_combustor
+  frozen_at: D
+CLP_ratio:
+  unit: ratio
+  desc: Combustion loading parameter
+  owner: m24_combustor_checks
+  frozen_at: D
+q_dome_W_m2:
+  unit: W_m2
+  desc: Dome heat flux. LOW CONFIDENCE -- see PATCHES.md P7
+  owner: m24_combustor_checks
+  frozen_at: D
+q_dome_spread_W_m2:
+  unit: W_m2
+  desc: Spread between competing dome-flux methods
+  owner: m24_combustor_checks
+  frozen_at: D
+J_primary_ratio:
+  unit: ratio
+  desc: Primary jet momentum flux ratio
+  owner: m24_combustor_checks
+  frozen_at: D
+dil_pen_ratio:
+  unit: ratio
+  desc: Dilution jet penetration / annulus height
+  owner: m24_combustor_checks
+  frozen_at: D
+sigma_hoop_liner_Pa:
+  unit: Pa
+  desc: Peak liner hoop stress
+  owner: m24_combustor_checks
+  frozen_at: D
+hole_K_ratio:
+  unit: ratio
+  desc: 'Hole pressure-drop coefficient. Lefebvre: >= 6'
+  owner: m24_combustor_checks
+  frozen_at: D
+D_casing_req_m:
+  unit: m
+  desc: Casing OD the combustor requires to pass its flow at the allowed loss
+  owner: m20_combustor
+  frozen_at: B
+A_ref_m2:
+  unit: m2
+  desc: Combustor reference area (Lefebvre Sec. 4.3)
+  owner: m20_combustor
+  frozen_at: B
+V_ref_m_s:
+  unit: m_s
+  desc: Combustor reference velocity
+  owner: m20_combustor
+  frozen_at: B
+casing_fit_margin_m:
+  unit: m
+  desc: Radial clearance between the combustor and the casing bore
+  owner: m20_combustor
+  frozen_at: C
+liner_area_frac:
+  unit: frac
+  desc: Flame tube area / combustor reference area
+  owner: SEED
+  frozen_at: B
+A_blade_root_m2:
+  unit: m2
+  desc: Preliminary A_blade_root_m2
+  owner: m13_turbine
+  frozen_at: review
+D_inner_liner_id_cold_m:
+  unit: m
+  desc: Preliminary D_inner_liner_id_cold_m
+  owner: m20_combustor
+  frozen_at: review
+D_outer_liner_id_cold_m:
+  unit: m
+  desc: Preliminary D_outer_liner_id_cold_m
+  owner: m20_combustor
+  frozen_at: review
+L_liner_cold_m:
+  unit: m
+  desc: Preliminary L_liner_cold_m
+  owner: m20_combustor
+  frozen_at: review
+M_ngv_exit_ratio:
+  unit: ratio
+  desc: Preliminary M_ngv_exit_ratio
+  owner: m12_ngv
+  frozen_at: review
+N_operating_max_rpm:
+  unit: rpm
+  description: 'Preliminary: N_operating_max_rpm'
+  owner: See module declaration / seed
+N_operating_min_rpm:
+  unit: rpm
+  description: 'Preliminary: N_operating_min_rpm'
+  owner: See module declaration / seed
+P_ngv_exit_Pa:
+  unit: Pa
+  desc: Preliminary P_ngv_exit_Pa
+  owner: m12_ngv
+  frozen_at: review
+T_ngv_exit_K:
+  unit: K
+  desc: Preliminary T_ngv_exit_K
+  owner: m12_ngv
+  frozen_at: review
+U_turb_tip_m_s:
+  unit: m_s
+  desc: Preliminary U_turb_tip_m_s
+  owner: m13_turbine
+  frozen_at: review
+blade_stress_speed_margin_ratio:
+  unit: ratio
+  desc: Preliminary blade_stress_speed_margin_ratio
+  owner: m33_turb_stress
+  frozen_at: review
+comb_CLP_ratio:
+  unit: ratio
+  desc: Preliminary comb_CLP_ratio
+  owner: m20_combustor
+  frozen_at: review
+comb_J_primary_ratio:
+  unit: ratio
+  desc: Preliminary comb_J_primary_ratio
+  owner: m20_combustor
+  frozen_at: review
+comb_dil_pen_ratio:
+  unit: ratio
+  desc: Preliminary comb_dil_pen_ratio
+  owner: m20_combustor
+  frozen_at: review
+comb_hole_K_ratio:
+  unit: ratio
+  desc: Preliminary comb_hole_K_ratio
+  owner: m20_combustor
+  frozen_at: review
+comb_inner_mass_error_kg_s:
+  unit: kg_s
+  desc: Preliminary comb_inner_mass_error_kg_s
+  owner: m20_combustor
+  frozen_at: review
+comb_outer_mass_error_kg_s:
+  unit: kg_s
+  desc: Preliminary comb_outer_mass_error_kg_s
+  owner: m20_combustor
+  frozen_at: review
+comb_q_dome_W_m2:
+  unit: W_m2
+  desc: Preliminary comb_q_dome_W_m2
+  owner: m20_combustor
+  frozen_at: review
+comb_q_spread_W_m2:
+  unit: W_m2
+  desc: Preliminary comb_q_spread_W_m2
+  owner: m20_combustor
+  frozen_at: review
+comb_sigma_hoop_Pa:
+  unit: Pa
+  desc: Preliminary comb_sigma_hoop_Pa
+  owner: m20_combustor
+  frozen_at: review
+comb_tau_s:
+  unit: s
+  desc: Preliminary comb_tau_s
+  owner: m20_combustor
+  frozen_at: review
+critical_crossed_flag:
+  unit: flag
+  desc: Preliminary critical_crossed_flag
+  owner: m32_rotordyn
+  frozen_at: review
+liner_thermal_scale_ratio:
+  unit: ratio
+  desc: Preliminary liner_thermal_scale_ratio
+  owner: m20_combustor
+  frozen_at: review
+m_blade_kg:
+  unit: kg
+  desc: Preliminary m_blade_kg
+  owner: m13_turbine
+  frozen_at: review
+r_blade_cg_m:
+  unit: m
+  desc: Preliminary r_blade_cg_m
+  owner: m13_turbine
+  frozen_at: review
+vap_air_budget_Pa:
+  unit: Pa
+  desc: Preliminary vap_air_budget_Pa
+  owner: m20_combustor
+  frozen_at: review
+vap_path_loss_Pa:
+  unit: Pa
+  desc: Preliminary vap_path_loss_Pa
+  owner: m20_combustor
+  frozen_at: review
+dP_pump_req_Pa:
+  unit: Pa
+  desc: Preliminary dP_pump_req_Pa
+  owner: m50_fuel
+  frozen_at: review
+dP_fuel_line_Pa:
+  unit: Pa
+  desc: Preliminary dP_fuel_line_Pa
+  owner: m50_fuel
+  frozen_at: review
+fuel_minor_K_ratio:
+  unit: ratio
+  desc: Provisional fuel_minor_K_ratio
+  owner: SEED
+  frozen_at: review
+dP_fuel_filter_Pa:
+  unit: Pa
+  desc: Provisional dP_fuel_filter_Pa
+  owner: SEED
+  frozen_at: review
+d_holes_pri_out_cold_m:
+  unit: m
+  desc: Preliminary d_holes_pri_out_cold_m
+  owner: m20_combustor
+  frozen_at: review
+d_holes_pri_in_cold_m:
+  unit: m
+  desc: Preliminary d_holes_pri_in_cold_m
+  owner: m20_combustor
+  frozen_at: review
+d_holes_sec_out_cold_m:
+  unit: m
+  desc: Preliminary d_holes_sec_out_cold_m
+  owner: m20_combustor
+  frozen_at: review
+d_holes_sec_in_cold_m:
+  unit: m
+  desc: Preliminary d_holes_sec_in_cold_m
+  owner: m20_combustor
+  frozen_at: review
+d_holes_dil_out_cold_m:
+  unit: m
+  desc: Preliminary d_holes_dil_out_cold_m
+  owner: m20_combustor
+  frozen_at: review
+d_holes_dil_in_cold_m:
+  unit: m
+  desc: Preliminary d_holes_dil_in_cold_m
+  owner: m20_combustor
+  frozen_at: review
+L_pz_cold_m:
+  unit: m
+  desc: Preliminary L_pz_cold_m
+  owner: m20_combustor
+  frozen_at: review
+L_sz_cold_m:
+  unit: m
+  desc: Preliminary L_sz_cold_m
+  owner: m20_combustor
+  frozen_at: review
+L_dz_cold_m:
+  unit: m
+  desc: Preliminary L_dz_cold_m
+  owner: m20_combustor
+  frozen_at: review
+d_film_outer_cold_m:
+  unit: m
+  desc: Preliminary d_film_outer_cold_m
+  owner: m20_combustor
+  frozen_at: review
+n_film_outer_per_row_count:
+  unit: count
+  desc: Preliminary n_film_outer_per_row_count
+  owner: m20_combustor
+  frozen_at: review
+d_film_inner_cold_m:
+  unit: m
+  desc: Preliminary d_film_inner_cold_m
+  owner: m20_combustor
+  frozen_at: review
+n_film_inner_per_row_count:
+  unit: count
+  desc: Preliminary n_film_inner_per_row_count
+  owner: m20_combustor
+  frozen_at: review
+n_film_rows_count:
+  unit: count
+  desc: Preliminary n_film_rows_count
+  owner: m20_combustor
+  frozen_at: review

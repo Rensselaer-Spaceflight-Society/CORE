@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+<title id="title">CORE team workflow</title><desc id="desc">Choose an issue, agree inputs and owners, calculate and test, open a pull request, obtain independent review, then update downstream work. A separate evidence, drawing and shop review authorizes manufacturing specific parts.</desc>
+<defs><style>text{font-family:Segoe UI,Arial,sans-serif}.body{font-size:20px;fill:white}.label{font-size:15px;font-weight:700;fill:#67ddcf}.box{fill:#1c3044;stroke:#385069}</style></defs>
+<rect width="1200" height="560" rx="20" fill="#101e2c"/>
+<text x="48" y="53" class="label" letter-spacing="2">CORE / HOW WE WORK TOGETHER</text>
+<text x="48" y="101" font-size="34" font-weight="700" fill="white">A clear hand-off every week</text>
+<rect x="48" y="145" width="344" height="115" rx="12" class="box"/>
+<text x="68" y="178" class="label">1 / PICK AN ISSUE</text><text x="68" y="213" class="body">Name an owner and reviewer</text><text x="68" y="242" font-size="17" fill="#bdcbd9">Agree inputs and acceptance criteria</text>
+<rect x="428" y="145" width="344" height="115" rx="12" class="box"/>
+<text x="448" y="178" class="label">2 / CALCULATE AND TEST</text><text x="448" y="213" class="body">Work on a branch</text><text x="448" y="242" font-size="17" fill="#bdcbd9">Explain changes, units and evidence</text>
+<rect x="808" y="145" width="344" height="115" rx="12" class="box"/>
+<text x="828" y="178" class="label">3 / OPEN A PULL REQUEST</text><text x="828" y="213" class="body">Obtain independent review</text><text x="828" y="242" font-size="17" fill="#bdcbd9">Resolve comments, then merge</text>
+<text x="400" y="210" font-size="27" fill="#67ddcf">→</text><text x="780" y="210" font-size="27" fill="#67ddcf">→</text>
+<text x="48" y="307" font-size="20" fill="#bdcbd9">After a merge: tell affected component owners and repeat downstream checks.</text>
+<rect x="48" y="350" width="1104" height="139" rx="12" class="box"/>
+<text x="68" y="385" font-size="15" font-weight="700" fill="#f3c477">SEPARATE DECISION / MAY WE MANUFACTURE THIS PART?</text>
+<text x="68" y="423" class="body">Current evidence + approved revision and drawings + shop and inspection plan</text>
+<text x="68" y="459" class="body">→ Named reviewers approve the specific part → manufacturing begins</text>
+<text x="48" y="532" font-size="17" fill="#f3c477">Passing software tests does not release hardware.</text>
+</svg>

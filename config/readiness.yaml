@@ -1,0 +1,62 @@
+design_fingerprint: pending
+evidence:
+  cycle_and_maps:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  combustor_pressure_and_stability:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  thermal_and_pattern_factor:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  liner_material_and_buckling:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  rotor_strength_and_life:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  rotordynamics_and_balance:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  bearings_lubrication_and_thrust:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  fuel_controls_and_shutdown:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  containment_and_test_site:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null
+  drawings_tolerances_and_processes:
+    status: pending
+    reviewer: null
+    review_date: null
+    artifact: null
+    sha256: null

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+<title id="title">CORE component design order</title>
+<desc id="desc">Start from requirements and one cycle. Work on compressor and diffuser, turbine and guide vanes, combustor and checks, and nozzle concurrently. Integrate the engine. Review evidence and drawings before manufacturing approved parts.</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#6b839b"/></marker>
+<style>text{font-family:Segoe UI,Arial,sans-serif}.label{font-size:15px;font-weight:700;fill:#67ddcf}.body{font-size:20px;fill:white}.box{fill:#1c3044;stroke:#385069}.line{fill:none;stroke:#6b839b;stroke-width:2}</style>
+</defs>
+<rect width="1200" height="820" rx="20" fill="#101e2c"/>
+<text x="48" y="54" class="label" letter-spacing="2">CORE / FROM REQUIREMENTS TO FIRST PARTS</text>
+<text x="48" y="101" font-size="34" font-weight="700" fill="white">What do we solve first?</text>
+<text x="48" y="134" font-size="18" fill="#bdcbd9">Design information moves in this order. Physical gas flow follows a different path.</text>
+<rect x="48" y="167" width="1104" height="107" rx="12" class="box"/>
+<text x="68" y="198" class="label">1 / AGREE THE DESIGN POINT</text>
+<text x="68" y="229" class="body">Requirements → cycle → one station table, airflow, fuel flow and shaft work</text>
+<path d="M600 274 V300 M182 318 V300 H1018 V318 M460 300 V318 M738 300 V318" class="line"/>
+<rect x="48" y="318" width="270" height="128" rx="12" class="box"/>
+<text x="68" y="349" class="label">2A / COLD SECTION</text>
+<text x="68" y="380" class="body">Compressor</text><text x="68" y="407" class="body">↓ Diffuser</text>
+<rect x="326" y="318" width="270" height="128" rx="12" class="box"/>
+<text x="346" y="349" class="label">2B / TURBINE</text>
+<text x="346" y="380" class="body">Turbine rotor</text><text x="346" y="407" class="body">↓ Guide vanes</text>
+<rect x="604" y="318" width="270" height="128" rx="12" class="box"/>
+<text x="624" y="349" class="label">2C / COMBUSTION</text>
+<text x="624" y="380" class="body">Combustor sizing</text><text x="624" y="407" class="body">↓ Geometry checks</text>
+<rect x="882" y="318" width="270" height="128" rx="12" class="box"/>
+<text x="902" y="349" class="label">2D / EXHAUST</text>
+<text x="902" y="380" class="body">Turbine exit state</text><text x="902" y="407" class="body">↓ Nozzle sizing</text>
+<text x="48" y="477" font-size="17" fill="#bdcbd9">Work these branches concurrently after agreeing their shared inputs.</text>
+<path d="M600 490 V515" class="line" marker-end="url(#arrow)"/>
+<rect x="48" y="523" width="1104" height="106" rx="12" class="box"/>
+<text x="68" y="554" font-size="15" font-weight="700" fill="#b4a9f4">3 / INTEGRATE THE ENGINE</text>
+<text x="68" y="585" class="body">Shaft • bearings • rotor dynamics and stress • casing • fuel • controls</text>
+<path d="M600 629 V661" class="line" marker-end="url(#arrow)"/>
+<rect x="48" y="669" width="1104" height="100" rx="12" class="box"/>
+<text x="68" y="700" font-size="15" font-weight="700" fill="#f3c477">4 / REVIEW BEFORE MANUFACTURING</text>
+<text x="68" y="731" class="body">Evidence + approved drawings + shop/inspection plan → release specific parts</text>
+<text x="48" y="799" font-size="15" fill="#f3c477">DECEMBER 2026 TARGET: START APPROVED PARTS. CURRENT ENGINE DESIGN IS NOT RELEASED.</text>
+</svg>

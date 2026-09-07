@@ -1,0 +1,21 @@
+name: Model or software bug
+description: Reproduce an incorrect calculation, interface or report
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Revision, inputs and command to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Actual and expected results, with units and evidence
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Which dimensions, interfaces or checks are affected?

@@ -1,0 +1,64 @@
+"""
+MXX -- <what this component is>.
+
+Copy this file to modules/mXX_yourpart.py and fill it in.
+
+Write three or four sentences here explaining the PHYSICS, not the code:
+what governs this component, which equation or correlation you are using,
+where it comes from, and what its validity limits are. The person who picks
+this up when you are busy with midterms will read this paragraph and nothing
+else, so make it the paragraph you would want.
+
+If you are validating against the KJ66, say what you checked and how close
+you got. If you could not validate, say that instead -- an honest "not
+validated" is worth more than a silent assumption.
+"""
+
+import math
+from core.module import module
+from core import gas          # shared gas dynamics -- do not reimplement these
+
+
+@module(
+    tier=0,                    # roughly where in the pipeline this sits, 1-6
+    title="<one line, shows up on the status board>",
+    owner="SLOT-1",            # primary. A real slot ID from the roster.
+    second="SLOT-2",           # backup. Required. Bus factor 2 on everything.
+    status="stub",             # stub -> draft -> verified. Be honest.
+    reads=[
+        # Every state variable you read. If you read it and it is not here,
+        # the run fails with a clear message -- that is deliberate, because a
+        # hidden read means the solver's ordering is wrong.
+    ],
+    writes=[
+        # Every state variable you produce. Exactly one module in the whole
+        # repo may write any given variable. Add each one to
+        # config/variables.yaml with its unit, description and owner.
+    ],
+    notes="STUB: say what is fake in here and what has to replace it.",
+)
+def mXX_yourpart(s):
+    # Read inputs. Names carry their SI unit as a suffix -- always.
+    # x = s["some_input_m"]
+
+    # Do the physics. Local variables stay local; only the state is shared.
+    # Small internal iterations are fine and normal -- the combustor sizes its
+    # own reference area that way. Just keep them inside the module.
+
+    # Return exactly what you declared in writes=.
+    return {}
+
+
+# ---------------------------------------------------------------------------
+# CHECKLIST BEFORE YOU OPEN A PULL REQUEST
+#
+#   [ ] every writes= entry is in config/variables.yaml, with a unit and a
+#       one-line description
+#   [ ] every variable name ends in its SI unit
+#   [ ] status= reflects reality (stub / draft / verified)
+#   [ ] second= is a real person who has actually agreed to it
+#   [ ] you added at least one test in tests/ -- ideally a KJ66 check, or a
+#       hand calculation you did on paper, or a limiting case you know
+#   [ ] `python run.py` still solves and `python -m pytest tests/` is green
+#   [ ] the docstring says where your equations come from
+# ---------------------------------------------------------------------------

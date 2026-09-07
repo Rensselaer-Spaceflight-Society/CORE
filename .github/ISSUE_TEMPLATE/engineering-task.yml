@@ -1,0 +1,35 @@
+name: Engineering task
+description: A bounded component task with an owner and acceptance evidence
+title: "[Engineering] "
+labels: [engineering]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What must this task deliver?
+      description: Name the component, problem and measurable acceptance criterion.
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Required inputs and affected interfaces
+    validations:
+      required: true
+  - type: input
+    id: owners
+    attributes:
+      label: Primary owner and independent reviewer
+      placeholder: Name accepted owners, or write staffing needed
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Analysis, test or supplier evidence needed
+    validations:
+      required: true
+  - type: input
+    id: due
+    attributes:
+      label: Target review date
