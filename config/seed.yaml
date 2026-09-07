@@ -1,0 +1,178 @@
+# ============================================================================
+# THE SEED SET  --  the numbers a human chooses, not a computer.
+#
+# This is the answer to "we have to start somewhere". Everything else in the
+# engine is derived from what is in this file. Change one number, re-run, and
+# the whole design updates. That is the point of the whole exercise.
+#
+# The first block is the one that matters. The rest are modelling choices and
+# material properties that you set once and rarely touch.
+#
+# CURRENT VALUES ARE A PLACEHOLDER SCALE-UP OF THE KJ66 -- about 3.3x its
+# thrust, so about 1.8x linear. Replace with CORE's real design point at Gate A.
+# ============================================================================
+
+# ============================ THE FOUR THAT SET EVERYTHING ==================
+# Thrust sets the scale -- it is the only place absolute size enters.
+# T04 is set by what the turbine survives uncooled.
+# PR and N are a pair: pick PR from what one radial stage can do, and N follows
+# from the tip speed limit. Or pick a COTS turbo wheel and both follow from it.
+F_target_N:       250.0      # KJ66 is ~75 N
+T04_K:            1150.0     # uncooled Inconel 713C; hard limit 1200 K
+PR_c_ratio:       3.2        # single radial stage; KJ66 achieves ~1.96
+N_rpm:            66000.0    # KJ66 runs 117k on a 66 mm wheel
+
+# ============================ ambient =======================================
+T00_K:            288.15
+P00_Pa:           101325.0
+
+# ============================ assumed component performance =================
+# GUESSES at Gate A. The outer refinement loop replaces them once geometry
+# exists. Do not quote these to anyone as if they were results.
+eta_c_isen:       0.76
+eta_t_isen:       0.82
+eta_b_frac:       0.98
+eta_mech_frac:    0.98
+dP34_frac:        0.06       # KJ66 measures ~0.12 -- the reverse-flow turn is
+                             # expensive. Revisit this at Gate B with CFD.
+dP02_frac:        0.01
+Cv_nozzle_ratio:  0.97
+
+# ============================ gas properties ================================
+cp_cold_J_kgK:    1005.0
+cp_hot_J_kgK:     1150.0
+gamma_cold_ratio: 1.400
+gamma_hot_ratio:  1.333
+R_gas_J_kgK:      287.0
+LHV_fuel_J_kg:    43.1e6     # Jet-A / kerosene
+
+# ============================ compressor design choices =====================
+Z_imp_count:              12       # full blades; KJ66's turbo wheel is 6 + 6 splitters
+beta2b_deg:               0.0      # 0 = radial. 20-35 deg backsweep buys surge margin.
+inducer_hub_tip_ratio:    0.40
+Cm2_U2_ratio:             0.25     # meridional velocity as a fraction of tip speed
+beta1s_deg:               60.0     # inducer shroud relative flow angle; optimum 55-65
+blockage_frac:            0.10
+power_input_factor_ratio: 1.04     # disc friction and recirculation
+rho_imp_kg_m3:            2810.0   # 7075-T6
+
+# ============================ diffuser ======================================
+diff_radius_ratio:        1.45     # D3/D2 for a vaned radial diffuser
+diff_diffusion_ratio:     2.20     # C2/C3
+
+# ============================ combustor =====================================
+# These drive core/combustor.py, the patched port of V21. See PATCHES.md.
+K_annular_ratio:          20.0     # Lefebvre Table 4.1 loss factor, annular
+phi_pz_ratio:             1.60     # primary zone equivalence ratio. Rich, which is
+                                   # right for a vaporizer combustor -- Lefebvre's
+                                   # conventional guidance (AFR 18, phi ~0.82) is for
+                                   # pressure-atomizing designs.
+phi_sz_ratio:             0.60     # secondary zone; Lefebvre Sec. 4.3 standard
+liner_area_frac:          0.45     # A_liner / A_ref. NOT Lefebvre's typical 0.66 --
+                                   # see the note below. This is the value the hole
+                                   # discharge-coefficient check forces.
+film_cool_frac:           0.12     # air reserved for liner film cooling
+vap_air_frac:             0.12     # primary air ingested through the vaporizers
+v_annulus_outer_m_s:      35.0     # outer feed annulus target velocity. The INNER
+                                   # velocity is solved by the pressure balance --
+                                   # see PATCH P5, it used to be asserted.
+vap_pitch_m:              0.050    # circumferential pitch between vaporizer scoops.
+                                   # KJ66: 6 tubes on a 95.8 mm dome = 50.2 mm.
+f_outer_feed_frac:        0.60     # fraction of air down the outer annulus
+tau_min_s:                0.0014   # residence time floor. THIS IS THE BINDING CONSTRAINT
+                                   # on the whole combustor -- see the note below.
+L_D_min_ratio:            0.70     # chamber length floor as a multiple of D_mean
+L_D_max_ratio:            2.00     # ceiling. Without it the residence-time floor can
+                                   # silently return a combustor longer than the engine.
+Cd_hole_ratio:            0.60     # sharp-edged liner holes. Lefebvre Fig. 4.3 shows
+                                   # Cd is a function of K; 0.60 implies K ~ 8-15.
+liner_wall_temp_frac:     0.72     # liner metal temperature as a fraction of TIT
+alpha_liner_per_K:        16.0e-6  # 316SS thermal expansion coefficient
+D_shaft_tunnel_m:         0.048    # outer diameter of the shaft tunnel
+annulus_gap_frac:         0.12     # cooling annulus as a fraction of casing bore
+
+# --- WHY tau_min_s IS 1.4 ms AND NOT 2.0 ------------------------------------
+# At 2.0 ms there is NO feasible combustor at CORE's design point. Not at any
+# casing size, not at any pressure loss, not at any area split:
+#
+#   change                                   L/D     K    verdict
+#   baseline: tau 2.0 ms, 180 mm casing       --     --   infeasible
+#   casing grown to 210 mm, tau 2.0 ms        --     --   infeasible
+#   mass flow cut to 0.35 kg/s, tau 2.0 ms    --     --   infeasible
+#   tau -> 1.4 ms                            1.51   6.0   feasible
+#
+# Growing the casing does not help, which is counterintuitive until you see
+# why: the combustor's reference area is set by the pressure loss it is allowed
+# (Lefebvre Sec. 4.3), not by the space available. A bigger casing just means
+# more empty annulus. The residence-time floor and the L/D ceiling are what
+# actually fight each other.
+#
+# 1.4 ms is the KJ66's own value and it is what that engine demonstrably runs
+# on. It is well below Lefebvre's 3-5 ms guidance, which is for full-size
+# combustors -- a small high-loading microturbine runs leaner on time. But it
+# IS the number the whole combustor design is standing on, so if anybody
+# proposes raising it, that is a redesign, not a tweak.
+#
+# --- WHY liner_area_frac IS 0.45 AND NOT THE TEXTBOOK 0.66 -------------------
+# Lefebvre's typical flame-tube-to-reference area ratio for a straight-through
+# annular combustor is about 0.66. At that value this design's feed annuli run
+# at 62 m/s, which puts the hole pressure-drop coefficient K at 2.3 -- well
+# below the minimum of 6 that Lefebvre states for the primary holes, and far
+# below the K of 8-15 that the assumed Cd of 0.60 implies. The Cd would not be
+# supportable and every hole diameter would be wrong.
+#
+# There is a real trade here, and it is worth understanding before changing it:
+#
+#   liner_frac   v_annulus   K      comb gap    chamber L   Cd valid?
+#       0.66      62 m/s    2.3      26.6 mm     116 mm       no
+#       0.55      47 m/s    4.1      22.1 mm     140 mm       no
+#       0.50      42 m/s    5.0      20.0 mm     154 mm       no
+#       0.45      38 m/s    6.1      18.0 mm     171 mm       yes
+#       0.40      35 m/s    7.2      16.0 mm     192 mm       yes
+#       0.35        --       --         --         --      L/D ceiling trips
+#
+# Slower annuli need more feed area, which leaves a thinner combustion annulus,
+# which needs a longer chamber to hold the residence time. 0.45 sits at the
+# boundary where the hole criterion is just satisfied. That is a deliberate
+# choice at a constraint, not a comfortable design point, and it is a good
+# argument for revisiting the 4% pressure-loss target -- a reverse-flow can
+# probably cannot afford to be that stingy. The KJ66 measures 12%.
+
+# ============================ turbine =======================================
+psi_turb_ratio:           1.60     # stage loading dh0/U^2
+phi_turb_ratio:           0.55     # flow coefficient Cx/U
+reaction_turb_ratio:      0.50     # degree of reaction
+aspect_ratio_turb_ratio:  1.30     # blade height / chord
+solidity_turb_ratio:      1.20     # chord / pitch
+aspect_ratio_ngv_ratio:   1.00
+zweifel_ratio:            0.80     # standard Zweifel target
+tip_clear_frac:           0.020    # tip clearance as a fraction of blade height
+rho_turb_kg_m3:           7900.0   # Inconel 713C
+blade_taper_factor_ratio: 0.65     # tapered blade relief on root stress
+sigma_allow_turb_Pa:      620.0e6  # Inconel 713C at temperature, with a margin
+
+# ============================ shaft, bearings, structure ====================
+d_bearing_bore_m:         0.015    # 15 mm; KJ66 uses 8 mm ISO 608
+tau_allow_shaft_Pa:       280.0e6  # 4340 steel, allowable shear
+rho_shaft_kg_m3:          7850.0
+E_shaft_Pa:               205.0e9
+bear_span_frac:           0.55     # bearing span / shaft length
+bearing_stiffness_N_m:    5.0e7    # preloaded angular contact pair, per bearing
+casing_wall_m:            0.0015
+rho_casing_kg_m3:         2700.0   # 6061
+accessory_mass_frac:      0.35     # brackets, fittings, hardware
+
+# ============================ fuel system ===================================
+rho_fuel_kg_m3:           800.0
+mu_fuel_Pa_s:             0.0016
+v_fuel_line_m_s:          2.0
+L_fuel_line_m:            1.5
+dP_injector_Pa:           250000.0
+
+# Provisional continuous operating envelope; supplier/maps must substantiate it.
+N_operating_min_rpm: 30000.0
+N_operating_max_rpm: 66000.0
+
+# Provisional plumbing budget; replace from the selected line/fittings/filter.
+fuel_minor_K_ratio: 5.0
+dP_fuel_filter_Pa: 10000.0

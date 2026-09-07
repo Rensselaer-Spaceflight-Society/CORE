@@ -1,0 +1,53 @@
+# ============================================================================
+# CAD PARAMETER MAP.
+#
+# Left side: the parameter name in the CAD model's expression / design table.
+# Right side: the state variable it comes from.
+#
+# run.py writes out/cad_dims.csv in millimetres. Point your CAD design table at
+# that file and the model rebuilds when the code changes. Nobody retypes a
+# dimension, and nobody works from a screenshot of somebody's spreadsheet.
+#
+# Keep CAD-side names in CAD conventions and physics-side names in physics
+# conventions. This file is the translation layer, and it is the only place the
+# two vocabularies meet.
+# ============================================================================
+
+IMP_EXDUCER_DIA:      D2_m
+IMP_INDUCER_DIA:      D1s_m
+IMP_HUB_DIA:          D1h_m
+IMP_EXIT_WIDTH:       b2_m
+DIFF_OUTER_DIA:       D3_m
+LINER_OUTER_DIA:      D_liner_out_cold_m
+LINER_INNER_DIA:      D_inner_liner_id_cold_m
+LINER_LENGTH:         L_liner_cold_m
+TURB_TIP_DIA:         D_turb_tip_m
+TURB_HUB_DIA:         D_turb_hub_m
+TURB_MEAN_DIA:        D_turb_mean_m
+TURB_BLADE_HEIGHT:    h_blade_m
+TURB_TIP_CLEARANCE:   t_tip_clear_m
+SHAFT_DIA:            d_shaft_m
+SHAFT_LENGTH:         L_shaft_m
+BEARING_SPAN:         L_bear_span_m
+BEARING_BORE:         d_bearing_bore_m
+CASING_OUTER_DIA:     D_casing_out_m
+CASING_WALL:          casing_wall_m
+ENGINE_LENGTH:        L_engine_m
+NOZZLE_EXIT_DIA:      D8_m
+FUEL_LINE_BORE:       d_fuel_line_m
+
+OUTER_LINER_ID_COLD: D_outer_liner_id_cold_m
+INNER_LINER_OD_COLD: D_liner_in_cold_m
+
+# Liner hole diameters and axial zones: cold 293 K, preliminary.
+D_HOLES_PRI_OUT_COLD_M: d_holes_pri_out_cold_m
+D_HOLES_PRI_IN_COLD_M: d_holes_pri_in_cold_m
+D_HOLES_SEC_OUT_COLD_M: d_holes_sec_out_cold_m
+D_HOLES_SEC_IN_COLD_M: d_holes_sec_in_cold_m
+D_HOLES_DIL_OUT_COLD_M: d_holes_dil_out_cold_m
+D_HOLES_DIL_IN_COLD_M: d_holes_dil_in_cold_m
+L_PZ_COLD_M: L_pz_cold_m
+L_SZ_COLD_M: L_sz_cold_m
+L_DZ_COLD_M: L_dz_cold_m
+D_FILM_OUTER_COLD_M: d_film_outer_cold_m
+D_FILM_INNER_COLD_M: d_film_inner_cold_m

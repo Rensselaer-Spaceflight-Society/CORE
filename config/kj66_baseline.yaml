@@ -1,0 +1,138 @@
+# ============================================================================
+# KJ66 PUBLISHED NUMBERS  --  the regression oracle.
+#
+# Every module should be runnable against this baseline and reproduce the
+# published KJ66 value within a stated tolerance. That is how a new member
+# knows their module works before it has ever been used on CORE's own design.
+#
+# IMPORTANT AND SLIGHTLY UNCOMFORTABLE: these numbers come from several
+# independent sources and they DO NOT FULLY CLOSE as a single self-consistent
+# cycle. See tests/test_kj66_regression.py, which quantifies the mismatch
+# rather than papering over it. Treat this file as evidence, not as truth.
+#
+# confidence:  high   = multiple independent sources agree
+#              medium = one credible source, or sources within ~10%
+#              low    = single hobbyist source, or an outlier
+# ============================================================================
+
+meta:
+  engine: "KJ66"
+  designers: "Kurt Schreckling and Jesus Artes"
+  layout: "single-spool turbojet, radial compressor, annular reverse-flow combustor, single-stage axial turbine"
+
+performance:
+  F_gross_N:
+    value: 75.0
+    confidence: medium
+    note: "GTBA quotes 75 N at 117k rpm. A U. Sydney paper quotes 92 N at 128k rpm. Not reconciled."
+    source: "https://www.gtba.co.uk/engine_designs/kj66.htm"
+  N_max_rpm:
+    value: 117000.0
+    confidence: high
+    note: "GTBA states 117,000 rpm; Xiang et al. tested the compressor to exactly 117 kr/min."
+    source: "https://doi.org/10.1177/0954410016644632"
+  mdot_kg_s:
+    value: 0.23
+    confidence: low
+    note: "0.25 kg/s quoted by U. Sydney; Mentor Graphics CFD shows 0.20-0.21 kg/s at 120k. Using the midpoint."
+    source: "https://cadflo.com/fileadmin/user_upload/Trebunskikh__-FloEFD_simulation_of_micro-turbine_engine.pdf"
+  PR_c_ratio:
+    value: 1.96
+    confidence: high
+    note: "Xiang, Schluter & Duan 2017: total PR 1.54 at 80k rising to 1.96 at 117k."
+    source: "https://doi.org/10.1177/0954410016644632"
+  eta_c_isen:
+    value: 0.55
+    confidence: high
+    note: "At 117k. Peaks at 0.73 near 80k then falls off badly. A useful warning about running a turbo wheel past its map."
+    source: "https://doi.org/10.1177/0954410016644632"
+  T04_K:
+    value: 983.0
+    confidence: medium
+    note: "Mass-averaged HPT inlet from a coupled CFD study. NOT the ~2400 K local peak flame temperature, which is a different quantity."
+    source: "https://resources.system-analysis.cadence.com/computational-fluid-dynamics-articles/fully-coupled-fluid-dynamics-engine-simulation-of-a-gas-turbine"
+  T05_K:
+    value: 843.0
+    confidence: medium
+    note: "570 degC EGT per GTBA. Mentor CFD gives ~990 K at the combustor exit plane; measurement station differs."
+    source: "https://www.gtba.co.uk/engine_designs/kj66.htm"
+  dP34_frac:
+    value: 0.12
+    confidence: medium
+    note: "12% of compressor delivery pressure. Roughly double the 5-6% typical of a straight-through annular can -- this is the price of the reverse-flow turn."
+    source: "https://www.academia.edu/26795777/Micro_propulsion_activities_at_the_university_of_Sydney"
+
+geometry:
+  D2_m:
+    value: 0.066
+    confidence: high
+    note: "Compressor exducer diameter. The '66' in KJ66. COTS KKK turbocharger wheel."
+    source: "https://cadflo.com/fileadmin/user_upload/Trebunskikh__-FloEFD_simulation_of_micro-turbine_engine.pdf"
+  D_turb_tip_m:
+    value: 0.066
+    confidence: high
+    note: "Turbine wheel is also ~66 mm. Schreckling gives vane mean diameter 55 mm and vane length 11 mm, which is consistent."
+    source: "Schreckling, Home Built Model Turbines"
+  D_turb_mean_m:
+    value: 0.055
+    confidence: medium
+    source: "Schreckling, Home Built Model Turbines"
+  h_blade_m:
+    value: 0.011
+    confidence: medium
+    note: "Schreckling gives 'vane length 11mm'. Consistent with 66 mm tip and 44 mm hub."
+    source: "Schreckling, Home Built Model Turbines"
+  n_blades_turb_count:
+    value: 23
+    confidence: medium
+    note: "Mentor Graphics CFD of unmodified KJ66 says 23. A Tsinghua paper on a redesigned variant says 24."
+    source: "https://cadflo.com/fileadmin/user_upload/Trebunskikh__-FloEFD_simulation_of_micro-turbine_engine.pdf"
+  n_vaporizers_count:
+    value: 6
+    confidence: high
+    note: "Six vaporizer sticks. The single best-corroborated fact about this engine -- six independent sources agree."
+  Z_imp_count:
+    value: 6
+    confidence: medium
+    note: "6 full + 6 splitter. From a paper describing a redesigned variant, but consistent with an automotive turbo wheel."
+  L_engine_m:
+    value: 0.240
+    confidence: high
+    source: "https://www.gtba.co.uk/engine_designs/kj66.htm"
+  D_casing_out_m:
+    value: 0.110
+    confidence: high
+    note: "GTBA says 110 mm; Sydney says 108 mm; Embry-Riddle measured 107.4 mm. Rounding, not disagreement."
+  m_engine_kg:
+    value: 0.93
+    confidence: high
+    note: "Range across sources 0.93 to 1.2 kg depending on build."
+  d_bearing_bore_m:
+    value: 0.008
+    confidence: high
+    note: "ISO 608, 8 x 22 x 7 mm, C3 clearance, glass-fibre cage, rated to 120,000 rpm."
+  t_tip_clear_m:
+    value: 0.000175
+    confidence: medium
+    note: "Schreckling gives 0.15-0.20 mm turbine tip clearance. Midpoint used."
+  F_blade_root_N:
+    value: 4430.0
+    confidence: medium
+    note: "Schreckling's worked blade-root centrifugal load. Excellent check case for the stress module."
+    source: "Schreckling, Home Built Model Turbines"
+
+materials:
+  turbine: "Inconel 713C, cast, ~6 mm disc thickness"
+  liner: "stainless steel, UK 316 or 310 spec"
+  diffuser: "aluminium, wedge-vane radial"
+  vaporizers: "Inconel 601, 6 mm tube"
+  lubrication: "5% turbine oil premixed into the kerosene"
+
+not_found:
+  - "inducer diameter, exducer blade width, backsweep angle"
+  - "combustor liner inner/outer diameters and length"
+  - "liner hole pattern: counts and diameters for primary/secondary/dilution"
+  - "NGV throat area; NGV count disputed between 11 and 18"
+  - "nozzle exit diameter and area"
+  - "bearing span, shaft diameter"
+  - "any published scaling study of the KJ66 to another thrust class"

@@ -1,0 +1,29 @@
+name: Part release review
+description: Review a specific revision before manufacturing
+title: "[Review] "
+labels: [design-review]
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Exact parts, revision and proposed manufacturing operation
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Drawings, tolerances, material/process, inspection and supporting evidence
+    validations:
+      required: true
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Open limits, assumptions and evidence gaps
+    validations:
+      required: true
+  - type: textarea
+    id: reviewers
+    attributes:
+      label: Accepted independent engineering, Safety and shop reviewers
+    validations:
+      required: true

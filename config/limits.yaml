@@ -1,0 +1,98 @@
+# ============================================================================
+# HARD LIMITS  --  owned by the Safety Director.
+#
+# Every module asserts against this file. CI fails the build if any limit is
+# violated, and a pull request that edits this file requires the Safety
+# Director's review. This is what "Ben can stop anything" looks like in code:
+# it is not a meeting, it is a failing test.
+#
+# Each limit needs a one-line justification. A limit nobody can defend is a
+# limit that gets quietly relaxed at 2am in week 11.
+# ============================================================================
+
+T04_max_K:            1200.0
+# Uncooled Inconel 713C. Continuous service ~1173 K, short-term peak ~1366 K.
+# 1200 K leaves margin for the combustor pattern factor -- the mean gas
+# temperature is not what the hottest blade sees.
+
+U2_max_m_s:           520.0
+# Impeller tip speed. 7075-T6 aluminium radial impellers are generally held
+# under ~520 m/s. Going faster means titanium and a much bigger bill.
+
+M1s_rel_max_ratio:    0.90
+# Relative Mach at the inducer shroud. Above ~0.9 shock losses eat the
+# efficiency gain from the extra flow.
+
+burst_margin_min_ratio: 1.50
+# Burst speed over design speed. Standard practice for an uncontained rotor
+# with people in the same building.
+
+AN2_max_m2_rpm2:      6.0e7
+# Annulus area times speed squared, the classic turbine blade-stress index.
+# Traditional range is 0.3-6e7 m^2 rpm^2; we sit at the top only with a
+# justified material allowable.
+
+DN_max_mm_rpm:        1.6e6
+# Bearing bore in mm times rpm. Hybrid ceramic angular contact with proper
+# preload and oil-mist. Grease-packed steel bearings are good for maybe 0.5e6.
+
+T_liner_wall_max_K:   1150.0
+# Inconel 625 liner with film cooling. Above this the liner distorts and the
+# hole pattern stops doing what it was designed to do.
+
+N_crit_margin_min_frac: 0.20
+# Required separation between any bending critical speed and the operating
+# range. 20% each side is the usual API-style rule.
+
+tip_speed_turb_max_m_s: 450.0
+# Turbine tip speed, Inconel 713C at temperature.
+
+# --- combustor, added when core/combustor.py landed --------------------------
+
+q_dome_max_W_m2:      600.0e3
+# Dome heat flux ceiling. TREAT WITH SUSPICION: three published methods applied
+# to the same geometry disagree by roughly an order of magnitude (Lefebvre's own
+# liner-convection method ~300 kW/m2, Martin impingement ~1100, a flat-plate
+# correlation ~1300). The model reports Lefebvre's, which is what the cited
+# reference recommends for this geometry. Until somebody picks a method and
+# defends it in writing, this limit is a placeholder and the Safety Director
+# should not sign anything against it. See PATCHES.md P7.
+
+J_primary_min_ratio:  5.0
+J_primary_max_ratio:  80.0
+# Primary jet momentum flux ratio. Below 5 the recirculation vortex collapses
+# and the flame lifts off; above 80 the jets over-penetrate and the vortex
+# splits. Lefebvre Sec. 4.3, widened at the lower end for a dual-wall
+# reverse-flow geometry with vaporizer assist.
+
+dil_pen_max_ratio:    0.75
+# Dilution jet penetration as a fraction of annulus height. Beyond ~0.75 the
+# opposing jets from the two liners collide and impinge on the far wall.
+# Computed with Lefebvre Eq. 4.20 (multi-jet), not Eq. 4.19 (single jet) --
+# the difference is about 30% and it matters here. See PATCHES.md P6.
+
+tau_res_min_s:        0.0012
+# Combustor residence time floor.
+#
+# This limit was originally set at 1.5 ms and had to be lowered, which is worth
+# recording rather than quietly editing. The reasoning that produced 1.5 ms was
+# Lefebvre's ~5 ms for a full-size combustor and Cranfield's 3 ms worked example
+# for kerosene, discounted for a small high-loading machine. But the KJ66 runs
+# at roughly 1.2-1.4 ms and thousands of them have flown for twenty-five years.
+# A limit that the best-documented engine in this class violates is a limit
+# derived from the wrong reference population.
+#
+# 1.2 ms is set from that empirical evidence, not from the textbook. The design
+# sits at 1.4 ms, so the margin is thin and it is the constraint the whole
+# combustor is standing on -- see the note in config/seed.yaml. If part-throttle
+# blowout shows up on the test stand, this is the first number to revisit.
+
+hole_K_min_ratio:     6.0
+# Hole pressure-drop coefficient: the ratio of hole dynamic pressure to annulus
+# dynamic pressure. Lefebvre Sec. 4.6.1 states K should not fall below 6
+# upstream of the primary holes, and Fig. 4.3 shows the discharge coefficient
+# collapsing below that. The assumed Cd of 0.60 corresponds to K roughly 8-15.
+
+casing_fit_margin_min_m: 0.002
+# Radial clearance the combustor needs inside the casing bore. Zero means the
+# liner is touching the casing, which is not an assembly.

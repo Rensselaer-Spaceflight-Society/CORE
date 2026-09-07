@@ -1,0 +1,24 @@
+# ============================================================================
+# FIRST GUESSES FOR THE COUPLED VARIABLES.
+#
+# Most of this design is a straight line and needs no guessing. But a few
+# variables sit inside a genuine circular dependency -- in a reverse-flow
+# engine the combustor liner and the casing size each other, and the shaft
+# length depends on the combustor length which depends on the casing.
+#
+# The solver iterates those to a fixed point, but it has to start somewhere.
+# These are those starting points. They do not need to be right; they need to
+# be in the right postcode. If the loop fails to converge, a better guess here
+# is the first thing to try.
+#
+# If you find yourself adding lots of entries to this file, that is a signal
+# that the module boundaries are wrong -- two modules that need each other's
+# answers this badly probably want to be one module.
+# ============================================================================
+
+D_casing_out_m:   0.180     # engine outer diameter, first guess
+L_liner_m:        0.090     # combustor liner length, first guess
+L_shaft_m:        0.150     # shaft length, first guess
+D_liner_out_m:    0.150
+D_liner_in_m:     0.070
+D8_m:             0.075

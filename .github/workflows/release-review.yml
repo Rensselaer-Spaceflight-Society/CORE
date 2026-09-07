@@ -1,0 +1,28 @@
+name: Manufacturing evidence check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest
+      - name: Require numerical limits and reviewed current evidence
+        run: python run.py --release-check
+      - name: Report blockers
+        if: always()
+        run: python scripts/ci_summary.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: manufacturing-evidence-check
+          path: out/
