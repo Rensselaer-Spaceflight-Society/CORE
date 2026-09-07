@@ -214,7 +214,15 @@ def main():
             raise ValueError(f"CAD variable missing: {var}")
         cad[cad_name] = round(state[var] * 1000.0, 4)   # mm for CAD
     with open(os.path.join(OUT, "cad_dims.json"), "w") as f:
-        json.dump(cad, f, indent=2)
+        from core.readiness import design_fingerprint
+        json.dump({
+            'schema_version': 2,
+            'release_status': 'PRELIMINARY - NOT FOR MANUFACTURE',
+            'design_fingerprint': design_fingerprint(HERE),
+            'dimension_note': 'Liner surfaces/holes/lengths: cold at 293 K from prescribed metal temperature. Other component thermal fits unresolved.',
+            'dimensions_mm': cad,
+            'hole_counts': {k:int(v) for k,v in state.items() if k.startswith(('n_holes','n_film','n_vaporizers'))},
+        }, f, indent=2, allow_nan=False)
     with open(os.path.join(OUT, "cad_dims.csv"), "w") as f:
         f.write("parameter,value_mm\n")
         for k, v in cad.items():

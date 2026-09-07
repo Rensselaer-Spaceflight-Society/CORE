@@ -196,10 +196,16 @@ def test_self_loop_and_tiny_relaxation_do_not_false_converge():
 
 
 def test_release_gate_is_blocked_for_unvalidated_design():
+    import json
     assert blockers(ROOT)
     r=subprocess.run([sys.executable,'run.py','--release-check'],cwd=ROOT,capture_output=True,text=True)
     assert r.returncode==1
     assert 'NOT FOR MANUFACTURE' in r.stdout
+    cad=json.loads((ROOT/'out/cad_dims.json').read_text())
+    assert cad['schema_version']==2
+    assert cad['release_status']=='PRELIMINARY - NOT FOR MANUFACTURE'
+    assert cad['dimensions_mm']['OUTER_LINER_ID_COLD'] < cad['dimensions_mm']['LINER_OUTER_DIA']
+    assert cad['hole_counts'] and len(cad['design_fingerprint'])==64
 
 
 def test_sweep_preserves_design_state_and_total_static():

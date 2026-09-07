@@ -47,6 +47,8 @@ python run.py --status
 
 Reports go into `out/`: total station conditions, shared state, preliminary cold liner dimensions, and a readiness report listing failed limits and missing evidence. `python run.py` returns failure when numerical limits fail. `--report-only` deliberately returns success for diagnostic generation. **Never use that flag to authorize hardware.**
 
+`cad_dims.json` schema 2 includes release status, design fingerprint, `dimensions_mm` and separate `hole_counts`. The two-column `cad_dims.csv` is an import convenience; keep it with its JSON metadata and readiness report.
+
 ```bash
 python run.py --release-check
 ```

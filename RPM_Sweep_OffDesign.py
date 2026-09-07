@@ -72,11 +72,7 @@ R_AIR      = 287.05   # J/(kg·K)
 GAMMA_COLD = 1.40     # cold air (compressor side)
 GAMMA_HOT  = 1.33     # hot combustion products (turbine side)
 LHV_JET_A  = 43.0e6  # J/kg  — Jet-A lower heating value
-# NOTE: combustion efficiency is NOT hard-coded here.
-# It is computed dynamically from the CLP at each operating point via _clp_eta(),
-# then used directly in the fuel mass balance.  The design-point value (CLP≈10 → η≈0.999,
-# degrading toward 0.85 at high CLP) and the heat_loss_factor anchored from V21 together
-# replace the old constant ETA_COMB = 0.96 that was previously used here.
+# Combustion efficiency is an assumed design-card input; CLP does not alter fuel flow.
 P_AMB      = 101_325  # Pa
 T_AMB      = 288.15   # K
 
@@ -494,7 +490,7 @@ def evaluate_off_design_point(
         "AFR":                  round(AFR, 3),
         "phi_overall":          round(phi, 4),
         "cp_avg_J_kgK":         round(cp_avg, 1),
-        "eta_comb_used":        round(eta_est, 4),   # dynamic CLP-based value used in fuel calc
+        "eta_comb_used":        round(eta_est, 4),   # assumed value used in fuel calculation
         "heat_loss_factor":     hlf,                 # anchored from V21 design card
         # Combustor exit (turbine inlet)
         "P4_Pa":                round(P4, 1),
@@ -576,7 +572,7 @@ def print_design_card_summary(card: dict):
 
     print()
     print("=" * 98)
-    print("  COMBUSTOR DESIGN CARD  —  V22 OFF-DESIGN ANALYSIS")
+    print("  PRELIMINARY COMBUSTOR DESIGN CARD - PRESCRIBED-POINT SCREENING")
     print("=" * 98)
 
     _hdr("GEOMETRY  (all mm except area)")
@@ -707,7 +703,7 @@ def print_sweep_table(sweep_results: list[dict]):
           " P4_static [kPa] | T4_total [K] | P4_total [kPa] |")
     print("           V4 [m/s] | Ma4 (✖ choked ≥1.0 / ⚠ compressible >0.25) |"
           " dP% | CLP_eff (Lefebvre θ) | η_comb | τ [ms]")
-    print("  ⚠CLP: instability risk (CLP_eff ≥ 15). ⚠τ: blowout risk (τ < 2 ms).")
+    print("  CLP and residence-time flags are screening thresholds; they do not establish stability or blowout.")
 
 
 # ===========================================================================
@@ -792,8 +788,9 @@ if __name__ == "__main__":
     print_sweep_table(sweep)
 
     # ── 5.  JSON file output ──────────────────────────────────────────────────
-    card_path  = f"design_card_{ts}.json"
-    sweep_path = f"sweep_results_{ts}.json"
+    os.makedirs("out",exist_ok=True)
+    card_path  = os.path.join("out",f"design_card_{ts}.json")
+    sweep_path = os.path.join("out",f"sweep_results_{ts}.json")
 
     # Strip the bulky raw V21 dict from the card before saving
     # (it's still in memory if needed; the other sections carry everything

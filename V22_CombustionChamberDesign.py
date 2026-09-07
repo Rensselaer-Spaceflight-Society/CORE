@@ -11,7 +11,7 @@ standalone script share one copy. There is no second implementation to drift.
     python V22_CombustionChamberDesign.py            # KJ66 preset
     python V22_CombustionChamberDesign.py 6inch      # 6-inch preset
 
-Every change from V21 is listed in PATCHES.md with before/after numbers.
+Current corrections and limitations are documented in docs/model-review.md.
 """
 
 import os
@@ -30,10 +30,7 @@ kj66_inputs = {
     'mass_flow_air_kg_s':    0.23,
     'target_tit_k':         1123.0,
     'liner_material':       '304SS',
-    # PATCH P5: target_inner_annulus_vel is NO LONGER NEEDED here. V21 set it to
-    # 20.0 m/s as an explicit KJ66 empirical calibration. The reformulated
-    # pressure balance now predicts ~23 m/s on its own. Left out deliberately --
-    # put it back only if you want to reproduce V21's exact geometry.
+    # Fixed geometry is rated; historical velocity matching is not validation.
     'tau_min_s': 0.0014,
 }
 
@@ -61,7 +58,7 @@ def print_report(res, inputs):
 
     print("\n" + "=" * W)
     print("   REVERSE-FLOW ANNULAR MICRO-JET COMBUSTOR  --  V22 (patched)")
-    print(f"   {len(PATCH_NOTES)} patches applied; see PATCHES.md")
+    print("   PRELIMINARY - NOT FOR MANUFACTURE; see docs/model-review.md")
     print("=" * W)
 
     hdr("INLET")
@@ -74,7 +71,7 @@ def print_report(res, inputs):
     row("fuel flow", f"{res['mdot_fuel']*1000:.3f}", "g/s")
     row("fuel-air ratio", f"{res['FAR']:.5f}")
     row("overall phi", f"{res['overall_phi']:.4f}")
-    row("combustion efficiency", f"{res['eta_comb_converged']:.4f}", "", "converged, not assumed")
+    row("combustion efficiency", f"{res['eta_comb_converged']:.4f}", "", "assumed input, not CLP prediction")
     row("TIT round-trip error", f"{res['TIT_roundtrip_err_K']:.2e}", "K", "must be ~0")
 
     hdr("SIZE  (PATCH P14: intrinsic, from Lefebvre Sec. 4.3 -- not fill-the-casing)")
@@ -88,21 +85,21 @@ def print_report(res, inputs):
     row("outer liner OD (hot)", f"{res['outer_liner_od_hot_mm']:.2f}", "mm")
     row("outer liner OD (COLD BUILD)", f"{res['outer_liner_od_cold_mm']:.2f}", "mm",
         "PATCH P2: diameter, not radius")
-    row("outer liner ID", f"{res['outer_liner_id_mm']:.2f}", "mm")
+    row("outer liner ID (cold)", f"{res['outer_liner_id_cold_mm']:.2f}", "mm")
     row("inner liner OD (COLD BUILD)", f"{res['inner_liner_od_cold_mm']:.2f}", "mm")
-    row("inner liner ID", f"{res['inner_liner_id_mm']:.2f}", "mm")
+    row("inner liner ID (cold)", f"{res['inner_liner_id_cold_mm']:.2f}", "mm")
     row("combustion annulus gap", f"{res['combustion_gap_mm']:.2f}", "mm")
     row("mean combustion diameter", f"{res['D_mean_comb_mm']:.2f}", "mm")
-    row("chamber length", f"{res['chamber_length_mm']:.2f}", "mm",
+    row("chamber length (hot)", f"{res['chamber_length_mm']:.2f}", "mm",
         f"L/D {res['chamber_L_over_D']:.2f}, driven by {res['length_driver']}")
-    row("liner metal temperature", f"{res['liner_wall_temp_K']:.0f}", "K")
+    row("assumed liner metal temperature", f"{res['liner_wall_temp_K']:.0f}", "K")
 
-    hdr("ANNULI  (PATCH P5: inner velocity SOLVED, not asserted)")
+    hdr("ANNULI - RATED FROM FROZEN GEOMETRY")
     row("outer annulus velocity", f"{res['v_outer_annulus']:.1f}", "m/s")
-    row("inner annulus velocity", f"{res['v_inner_converged_m_s']:.1f}", "m/s", "solved")
+    row("inner annulus velocity", f"{res['v_inner_converged_m_s']:.1f}", "m/s", "continuity on actual geometry")
     row("path dP outer / inner", f"{res['dP_outer_path_Pa']:.0f} / {res['dP_inner_path_Pa']:.0f}", "Pa")
-    row("balance residual", f"{res['split_solver_residual_Pa']:.1f}", "Pa",
-        "converged" if res['split_converged'] else "NOT CONVERGED")
+    row("outer branch mass residual", f"{res['outer_air_balance_error_kg_s']:.2e}", "kg/s")
+    row("inner branch mass residual", f"{res['inner_air_balance_error_kg_s']:.2e}", "kg/s")
 
     hdr("AIR BUDGET")
     for lbl, k in [("film cooling", 'm_film_cooling'), ("primary", 'split_primary'),
@@ -111,14 +108,13 @@ def print_report(res, inputs):
     row("primary zone phi", f"{res['phi_primary_actual']:.2f}", "",
         "PATCH P11: this is an INPUT echoed back")
 
-    hdr("HOLES  (PATCH P10: dP verified against the areas it produced)")
+    hdr("HOLES - HOT MODEL DIMENSIONS, LOCAL PRESSURE BUDGET")
     print(f"  {'zone':<12}{'outer qty':>10}{'outer dia':>12}{'inner qty':>10}{'inner dia':>12}")
     for z, q, d, qi, di in [("primary", 'pri_out_qty', 'pri_out_mm', 'pri_in_qty', 'pri_in_mm'),
                             ("secondary", 'sec_out_qty', 'sec_out_mm', 'sec_in_qty', 'sec_in_mm'),
                             ("dilution", 'dil_out_qty', 'dil_out_mm', 'dil_in_qty', 'dil_in_mm')]:
         print(f"  {z:<12}{res[q]:>10d}{res[d]:>11.2f}mm{res[qi]:>10d}{res[di]:>11.2f}mm")
-    row("dP target vs implied", f"{res['dP_target_frac']*100:.2f} / {res['dP_implied_frac']*100:.2f}", "%",
-        f"{res['dP_closure_err_pct']:+.1f}%")
+    row("local hole head outer / inner", f"{res['dP_outer_holes_Pa']:.0f} / {res['dP_inner_holes_Pa']:.0f}", "Pa")
     row("hole coefficient K", f"{res['hole_K_coefficient']:.1f}", "",
         "Lefebvre: >=6" if res['hole_K_ok'] else "BELOW Lefebvre minimum of 6")
 
@@ -145,9 +141,9 @@ def print_report(res, inputs):
     row("radiation", f"{res['stab_q_rad_kW_m2']:.0f}", "kW/m2")
     row("TOTAL (Lefebvre + rad)", f"{res['stab_q_dome_kW_m2']:.0f}", "kW/m2")
     print(f"\n  Three published methods disagree by ~{res['stab_q_conv_martin_kW_m2']/res['stab_q_conv_lefebvre_kW_m2']:.0f}x")
-    print("  on this geometry. Do not quote one without saying which. See PATCHES.md P7.")
+    print("  on this geometry. Do not quote one without saying which. See docs/model-review.md.")
 
-    print(f"\n  outer loop converged in {res['outer_loop_iters']} passes\n")
+    print("\n  Single sizing pass. Pressure loss, stability, thermal and buckling evidence remain open.\n")
 
 
 if __name__ == "__main__":

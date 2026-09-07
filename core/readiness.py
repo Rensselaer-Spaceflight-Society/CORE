@@ -17,8 +17,11 @@ REQUIRED = (
 
 def design_fingerprint(root):
     root = Path(root)
-    paths = sorted(p for folder in ('core','modules','config') for p in (root/folder).rglob('*')
-                   if p.suffix in ('.py','.yaml') and p.name != 'readiness.yaml')
+    paths = [p for folder in ('core','modules','config','scripts') for p in (root/folder).rglob('*')
+             if p.suffix in ('.py','.yaml') and p.name != 'readiness.yaml']
+    paths += [root/name for name in ('run.py','V22_CombustionChamberDesign.py',
+              'RPM_Sweep_OffDesign.py','requirements.txt') if (root/name).is_file()]
+    paths = sorted(paths)
     h = hashlib.sha256()
     for p in paths:
         h.update(p.relative_to(root).as_posix().encode())

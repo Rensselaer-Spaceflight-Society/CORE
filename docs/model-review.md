@@ -51,7 +51,7 @@ Run `python run.py --report-only` for current values; the generated report is au
 
 ## Release evidence
 
-`config/readiness.yaml` contains ten required evidence categories. Every category starts `pending`. Each reviewed entry must reference an in-repository artifact, its SHA-256, reviewer and review date. The top-level fingerprint covers current core/module/config inputs, excluding the readiness record itself. Any covered change makes the evidence record stale.
+`config/readiness.yaml` contains ten required evidence categories. Every category starts `pending`. Each reviewed entry must reference an in-repository artifact, its SHA-256, reviewer and review date. The top-level fingerprint covers core/module/config/script inputs, entry points and requirements, excluding the readiness record itself. Any covered change makes the evidence record stale.
 
 Use `python run.py --report-only` to obtain the current fingerprint in `out/readiness.json`; populate the evidence record only after actual review. `python run.py --release-check` requires all numerical limits and complete current records. This checks completeness and identity, **not authenticity or technical adequacy**. Human engineering, Safety and shop approval still governs each released part. Fixtures/coupons can have a separately scoped review; they do not inherit an engine release.
 
