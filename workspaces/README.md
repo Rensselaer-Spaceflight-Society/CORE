@@ -20,6 +20,12 @@ Only roles and task codes appear in these workspaces. The meeting facilitator ke
 2. Your team's page above.
 3. [DP-2 candidate and review](../docs/project/dp2-review.md). Read the short candidate table first; the detailed review is for leads and follow-on work.
 
+## A guided version of your card, in Python
+
+Every task code also has a small Python worksheet: [start here](python/README.md). It explains what your component does, gives you the few words you need and one worked example, and provides labelled places to type in what you find. It will not crash before you fill anything in and it will not invent a number for you.
+
+You do not need to know Python, and you do not need it installed to take part - `--form` prints a paper version, and [HOW-TO-RUN.md](python/HOW-TO-RUN.md) covers the routes that need no install and no account. The worksheets are optional; the card is still the authority on your assignment.
+
 ```mermaid
 flowchart TD
     A[Start here] --> B[Choose your team]
@@ -41,4 +47,4 @@ Findings need: task code, date, source, what you learned, what is still unknown,
 
 ## Navigation after today
 
-[Shared interfaces](coordination/interfaces.md) · [Decisions](coordination/decisions.md) · [Budget and quote priorities](../docs/project/budget-cap.md) · [Engineering workflow](../docs/workflow.md)
+[Python worksheets](python/README.md) · [Shared interfaces](coordination/interfaces.md) · [Decisions](coordination/decisions.md) · [Budget and quote priorities](../docs/project/budget-cap.md) · [Engineering workflow](../docs/workflow.md)

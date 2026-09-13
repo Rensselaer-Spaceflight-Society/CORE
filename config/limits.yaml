@@ -3,8 +3,8 @@
 #
 # Every module asserts against this file. CI fails the build if any limit is
 # violated, and a pull request that edits this file requires the Safety
-# Director's review. This is what "Ben can stop anything" looks like in code:
-# it is not a meeting, it is a failing test.
+# Director's review. This is what "the Safety Director can stop anything"
+# looks like in code: it is not a meeting, it is a failing test.
 #
 # Each limit needs a one-line justification. A limit nobody can defend is a
 # limit that gets quietly relaxed at 2am in week 11.

@@ -4,6 +4,8 @@
 
 **Time:** 30 minutes, up to 45 with help. **Review role:** Combustion & Systems lead; Safety lead reviews hazards. No prior experience required; ask for a five-minute worked example before starting.
 
+**Guided Python worksheet:** [c7_start_trade.py](../python/combustion-systems/c7_start_trade.py) - the same task with the background explained, one worked example and labelled places to type what you find. Optional. [How to run and submit it](../python/HOW-TO-RUN.md); no install needed to take part.
+
 ## Do this today
 
 Make a small gas-assisted versus direct-kerosene comparison: extra parts, power needs, known cost/source and two questions. Finish this standalone note even if later availability is uncertain.
@@ -30,4 +32,4 @@ No ignition demonstration, fuel presentation or pressure-bottle handling today. 
 - Next small step agreed with the lead:
 - Review outcome and date: Not reviewed
 
-Link a finding issue here if you prefer the issue form. Use the task code; keep personal details in the private roster. This record is learning evidence, not hardware approval.
+The worksheet prints this block filled in, ready to paste. Or link a finding issue here if you prefer the issue form. Use the task code; keep personal details in the private roster. This record is learning evidence, not hardware approval.
