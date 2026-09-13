@@ -1,6 +1,6 @@
 # Start here: your first CORE meeting
 
-**Our mission:** learn how to build a reverse-flow microjet that runs and self-sustains. Performance is secondary. Our cash ceiling is **$5,000**. December 2026 means starting approved parts, not promising an engine run.
+**Our mission:** learn how to build a reverse-flow microjet that runs and self-sustains. Performance is secondary. December 2026 means starting approved parts, not promising an engine run.
 
 You do not need to know Git, Python, CAD or turbine theory before this meeting. Your lead will give you a task code. Open your team below, then that code. Spend 30–45 minutes learning one small thing and recording it in the card's Findings section.
 
