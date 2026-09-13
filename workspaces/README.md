@@ -25,8 +25,8 @@ flowchart TD
     A[Start here] --> B[Choose your team]
     B --> C[Open your task code]
     C --> D[Read and sketch for 30 minutes]
-    D --> E[Record one finding and one question]
-    E --> F[Lead reviews and agrees next step]
+    D --> E[1 finding + 1 Q]
+    E --> F[Lead reviews results]
 ```
 
 ## Record a finding without installing anything
