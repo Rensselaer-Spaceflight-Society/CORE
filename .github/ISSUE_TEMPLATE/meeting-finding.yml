@@ -1,0 +1,34 @@
+name: First-meeting finding
+description: A short learning result or question; no Git or coding experience needed
+title: "[Meeting 1] TASK-CODE: short finding"
+body:
+  - type: markdown
+    attributes:
+      value: "Use your task code, not your name. One source, one finding and one question are enough. Your GitHub account identity is still visible. A lead will help review and file the result."
+  - type: input
+    id: task
+    attributes:
+      label: Task code
+      placeholder: T1, C3, S2, or T5/SAFE1
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source or file revision
+      placeholder: Paste a link, or write NOT FOUND
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: What did you learn?
+      description: Three sentences, a small table or a sketch. Label numbers with units and assumptions.
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: What is still unknown, and what small next step would help?
+    validations:
+      required: true

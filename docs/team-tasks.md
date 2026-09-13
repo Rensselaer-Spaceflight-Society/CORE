@@ -1,5 +1,7 @@
 # Team task backlog · September 2026
 
+**September 13 update:** this is the longer-term engineering backlog. New members should begin with the bounded [first-meeting task cards](../workspaces/README.md). Do not assign the full backlog as meeting-one homework. [DP-2](project/dp2-review.md) and the [$5,000 cap](project/budget-cap.md) are the current planning discussion; the executable seed remains the earlier baseline pending review.
+
 All primary owners and independent reviewers below need to be **accepted by named team members**. Module role codes are placeholders. Track the work against the [semester reviews](fall-2026.md) and [live GitHub milestones](https://github.com/Rensselaer-Spaceflight-Society/CORE/milestones). The linked issues are the live work records; this table summarizes their initial scope.
 
 | Task | Review | Deliverable and acceptance evidence |
