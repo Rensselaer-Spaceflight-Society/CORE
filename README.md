@@ -6,7 +6,7 @@ CORE (Compact Operational Research Engine) is an RSS student project. Design a s
 
 ## Start here
 
-**New to CORE? Start with the [first-meeting workspace](workspaces/README.md).** Pick your sub-team and task code; each card has a small introductory task and a place to record findings. No coding or Git installation is required for the first meeting.
+**New to CORE? Start with the [first-meeting workspace](workspaces/README.md).** Pick your sub-team and task code; each card has a small introductory task and a place to record findings. No coding or Git installation is required for the first meeting. Each card also has an optional [guided Python worksheet](workspaces/python/README.md) that teaches the topic and collects your findings; it needs no experience, and no install to take part.
 
 The team's current direction is **self-sustaining operation first, with a $5,000 cash ceiling**. [DP-2 is a candidate under review](docs/project/dp2-review.md); the runnable seed below still represents the earlier 250 N baseline. See the [budget review](docs/project/budget-cap.md) before procurement.
 
@@ -64,6 +64,7 @@ The release check additionally requires current reviewed evidence in `config/rea
 | Folder / file | Purpose |
 |---|---|
 | `workspaces/` | Team start pages, introductory task cards and reviewed findings |
+| `workspaces/python/` | Beginner Python worksheets, one per task code. Teaching only: they import no engine module, read no configuration and set no design value |
 | `docs/project/` | DP-2 review, budget cap and reproducible screening arithmetic |
 | `config/seed.yaml` | Chosen design point and provisional assumptions |
 | `config/limits.yaml` | Existing screening thresholds; changes require Safety review |

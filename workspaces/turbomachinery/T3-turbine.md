@@ -4,6 +4,8 @@
 
 **Time:** 30 minutes, up to 45 with help. **Review role:** Turbomachinery lead. No prior experience required; ask for a five-minute worked example before starting.
 
+**Guided Python worksheet:** [t3_velocity_triangle.py](../python/turbomachinery/t3_velocity_triangle.py) - the same task with the background explained, one worked example and labelled places to type what you find. Optional. [How to run and submit it](../python/HOW-TO-RUN.md); no install needed to take part.
+
 ## Do this today
 
 Ask the lead to draw one mean-radius triangle. Label blade speed U, absolute velocity V and relative velocity W. Write what turbine work supplies in your own words.
@@ -30,4 +32,4 @@ No independent stage design, twist, throat sizing or choking verdict today. The 
 - Next small step agreed with the lead:
 - Review outcome and date: Not reviewed
 
-Link a finding issue here if you prefer the issue form. Use the task code; keep personal details in the private roster. This record is learning evidence, not hardware approval.
+The worksheet prints this block filled in, ready to paste. Or link a finding issue here if you prefer the issue form. Use the task code; keep personal details in the private roster. This record is learning evidence, not hardware approval.

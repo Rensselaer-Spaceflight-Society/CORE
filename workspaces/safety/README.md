@@ -6,7 +6,7 @@
 
 ## First meeting
 
-- Review the shared [T5 / SAFE1 rotor-energy card](../turbomachinery/T5-rotor-energy.md). It is one output by the dual-role participant, not two workloads.
+- Review the shared [T5 / SAFE1 rotor-energy card](../turbomachinery/T5-rotor-energy.md). It is one output by the dual-role participant, not two workloads. Its [guided Python worksheet](../python/turbomachinery/t5_rotor_energy.py) works through stored rotor energy and asks for two facts a containment review would still need.
 - Ask each team for one uncertainty or possible failure and record it below.
 - Explain the difference between a paper exercise, a supervised bench activity and an approved engine/rotor test.
 - Identify the responsible institutional/shop authority and questions about the approval process. The Safety lead handles contacts; members do not need to discover or negotiate the process alone today.

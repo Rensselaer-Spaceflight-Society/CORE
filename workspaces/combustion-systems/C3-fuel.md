@@ -4,6 +4,8 @@
 
 **Time:** 30 minutes, up to 45 with help. **Review role:** Combustion & Systems lead. No prior experience required; ask for a five-minute worked example before starting.
 
+**Guided Python worksheet:** [c3_fuel_blocks.py](../python/combustion-systems/c3_fuel_blocks.py) - the same task with the background explained, one worked example and labelled places to type what you find. Optional. [How to run and submit it](../python/HOW-TO-RUN.md); no install needed to take part.
+
 ## Do this today
 
 On paper draw tank, filter, pump/drive, shutoff and manifold. Mark where pressure and flow need to be known. Label 29 kg/h as a provisional capacity allowance, not a pump specification.
@@ -30,4 +32,4 @@ No fuel handling or powered pump tests today. Do not use liquid-fuel pressure to
 - Next small step agreed with the lead:
 - Review outcome and date: Not reviewed
 
-Link a finding issue here if you prefer the issue form. Use the task code; keep personal details in the private roster. This record is learning evidence, not hardware approval.
+The worksheet prints this block filled in, ready to paste. Or link a finding issue here if you prefer the issue form. Use the task code; keep personal details in the private roster. This record is learning evidence, not hardware approval.

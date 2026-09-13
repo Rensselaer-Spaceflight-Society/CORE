@@ -25,6 +25,8 @@
 
 ## Practical GitHub use
 
+Each task code has an optional [guided Python worksheet](../python/README.md); it prints a ready-to-paste findings block, so a member can hand back a filled file, a pasted block, or a printed form. [Review guidance for leads](../python/LEAD-REVIEW.md) covers what to check before any of it reaches a shared record.
+
 For meeting one, keep GitHub as the reviewed record, not a software lesson. Let members submit a short finding issue or paper/shared-doc note. Leads summarize it in the matching card. People comfortable with GitHub can propose edits directly through pull requests. An account may be needed for an issue, and write access is needed for some editing flows; neither is assumed to have been granted to everyone. Do not spend the meeting troubleshooting access.
 
 If most members already use a shared document/CAD platform, keep live collaboration there with the same task-code headings, then post the reviewed snapshot/link here. This repository stores decisions and traceable findings; large models and private supplier communications should remain in their appropriate systems.

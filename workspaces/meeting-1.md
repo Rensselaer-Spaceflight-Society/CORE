@@ -11,6 +11,8 @@
 | 55–65 | Each sub-team shares one finding and one unknown | Identify handoffs, not final designs |
 | 65–75 | Leads review notes and agree one next step per card | Small follow-up with reviewer and date |
 
+Participants who want a guided version of their card can use the optional [Python worksheets](python/README.md) during the 25-55 minute block. They teach the topic, carry one worked example each and print a ready-to-paste findings block. Nobody needs Python installed to take part: `--form` produces a paper version, and leads can hand out a bundle instead of a repository.
+
 ## What makes this an engine?
 
 The compressor raises air pressure and consumes shaft power. The diffuser slows the air before the combustor. Fuel burns in the combustor, raising gas temperature while some pressure is lost. Guide vanes direct hot gas into the turbine. The turbine extracts shaft power to drive the compressor. The remaining gas leaves through the nozzle.
