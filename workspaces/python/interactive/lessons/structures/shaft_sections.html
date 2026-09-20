@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CORE — S4-BEND: bending, torsion and three I's</title>
+<style>
+body{margin:0;background:#102431;color:#eef5f7;font:17px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1020px;margin:auto;padding:40px 26px 70px}
+.eyebrow{color:#69dfcc;letter-spacing:2px;font-size:13px;text-transform:uppercase}
+h1{font-size:clamp(27px,4.4vw,44px);line-height:1.15;margin:14px 0 6px}
+h2{font-size:23px;margin:44px 0 6px}
+p{max-width:760px;color:#c0d1dc}
+figure{margin:22px 0;background:#18303d;border:1px solid #44616e;border-radius:12px;padding:18px 16px}
+figcaption{font-size:14px;color:#9fb6c3;margin-top:12px}
+svg{display:block;width:100%;height:auto}
+.note{border-left:4px solid #e4b962;padding:6px 20px;margin:26px 0;background:#1b2d33}
+.warn{border-left:4px solid #e4796b;padding:6px 20px;margin:26px 0;background:#2c2226}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #44616e;padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#1d3644;color:#69dfcc;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+code{background:#0c1a23;padding:1px 6px;border-radius:4px;font-size:15px;color:#bfe9e0}
+td.u{color:#e4b962;white-space:nowrap;font-weight:600}
+</style>
+<main>
+<div class="eyebrow">CORE / S4-BEND / Track A</div>
+<h1>Two loads, three I's,<br>and only one of them has mass in it.</h1>
+<p>A reference for the lesson running in your terminal. Nothing here is an allowable or an
+approval. Go back to the terminal to record your answers.</p>
+
+<h2>1. Bending: the neutral axis, and y</h2>
+<figure>
+<svg viewBox="0 0 660 316" role="img" aria-label="A shaft on two bearings with a wheel overhung at each end. The bending stress distribution across the section is shown as a triangle that is zero at the neutral axis and largest at the outer fibre, with y measured from the neutral axis.">
+  <defs>
+    <marker id="w2" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#eef5f7"/></marker>
+    <marker id="t2" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#69dfcc"/></marker>
+    <marker id="r2" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#e4796b"/></marker>
+  </defs>
+
+  <text x="14" y="22" fill="#9fb6c3" font-size="13" letter-spacing="1.5">OVERHUNG ROTOR — SIDE VIEW</text>
+
+  <!-- shaft -->
+  <rect x="80" y="86" width="400" height="22" fill="#54798c" stroke="#a9c6d4"/>
+  <!-- wheels -->
+  <rect x="62" y="62" width="20" height="70" fill="#3c5f70" stroke="#a9c6d4"/>
+  <rect x="478" y="62" width="20" height="70" fill="#3c5f70" stroke="#a9c6d4"/>
+  <text x="72" y="52" fill="#a9c6d4" font-size="13" text-anchor="middle">wheel</text>
+  <text x="488" y="52" fill="#a9c6d4" font-size="13" text-anchor="middle">wheel</text>
+  <!-- bearings -->
+  <path d="M170 108 l-14 22 h28 z" fill="#69dfcc"/>
+  <path d="M390 108 l-14 22 h28 z" fill="#69dfcc"/>
+  <text x="170" y="148" fill="#69dfcc" font-size="13" text-anchor="middle">bearing</text>
+  <text x="390" y="148" fill="#69dfcc" font-size="13" text-anchor="middle">bearing</text>
+  <!-- neutral axis -->
+  <line x1="40" y1="97" x2="530" y2="97" stroke="#e4b962" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <text x="40" y="78" fill="#e4b962" font-size="13">neutral axis</text>
+  <!-- overhang dimension -->
+  <line x1="72" y1="172" x2="170" y2="172" stroke="#a9c6d4" stroke-width="1.3"
+        marker-start="url(#w2)" marker-end="url(#w2)"/>
+  <text x="121" y="190" fill="#a9c6d4" font-size="13" text-anchor="middle">overhang</text>
+  <line x1="170" y1="206" x2="390" y2="206" stroke="#a9c6d4" stroke-width="1.3"
+        marker-start="url(#w2)" marker-end="url(#w2)"/>
+  <text x="280" y="224" fill="#a9c6d4" font-size="13" text-anchor="middle">bearing span L</text>
+  <text x="280" y="246" fill="#9fb6c3" font-size="12.5" text-anchor="middle">deflection goes as L³ — span is a bigger lever than diameter</text>
+
+  <!-- section with bending stress triangle -->
+  <text x="570" y="22" fill="#9fb6c3" font-size="13" text-anchor="middle">SECTION</text>
+  <circle cx="570" cy="97" r="42" fill="#0c1a23" stroke="#a9c6d4" stroke-width="1.5"/>
+  <line x1="522" y1="97" x2="618" y2="97" stroke="#e4b962" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <path d="M570 97 L614 97 L570 55 z" fill="#69dfcc" opacity="0.45"/>
+  <path d="M570 97 L526 97 L570 139 z" fill="#e4796b" opacity="0.45"/>
+  <line x1="586" y1="97" x2="586" y2="70" stroke="#eef5f7" stroke-width="1.6" marker-end="url(#w2)"/>
+  <text x="594" y="66" fill="#eef5f7" font-size="13">y</text>
+  <text x="570" y="164" fill="#69dfcc" font-size="12.5" text-anchor="middle">tension one side,</text>
+  <text x="570" y="180" fill="#e4796b" font-size="12.5" text-anchor="middle">compression the other</text>
+  <text x="570" y="202" fill="#9fb6c3" font-size="12.5" text-anchor="middle">σ = M·y/I</text>
+  <text x="570" y="222" fill="#9fb6c3" font-size="12.5" text-anchor="middle">zero at the axis,</text>
+  <text x="570" y="238" fill="#9fb6c3" font-size="12.5" text-anchor="middle">largest at the surface</text>
+
+  <text x="14" y="276" fill="#9fb6c3" font-size="13">A rotating shaft swaps that tension side for the compression side every half turn.</text>
+  <text x="14" y="292" fill="#9fb6c3" font-size="13">At 66,000 rpm that is 1,100 fully reversed cycles every second —</text>
+  <text x="14" y="308" fill="#9fb6c3" font-size="13">a fatigue question, not a static one.</text>
+</svg>
+<figcaption>An overhung rotor is <em>not</em> a simply supported beam with a central load. The
+formula you reach for has to match the picture you drew.</figcaption>
+</figure>
+
+<h2>2. Three quantities, one letter</h2>
+<table>
+<tr><th>Name</th><th>Symbol &amp; units</th><th>Round section</th><th>Where it appears</th></tr>
+<tr><td>Second moment of <strong>area</strong></td><td class="u">I &nbsp; m⁴</td>
+    <td><code>π·d⁴/64</code></td>
+    <td>Bending stress <code>σ = M·y/I</code> and deflection. Pure geometry — resistance to bending.</td></tr>
+<tr><td><strong>Polar</strong> second moment of area</td><td class="u">J &nbsp; m⁴</td>
+    <td><code>π·d⁴/32 = 2I</code></td>
+    <td>Torsional shear <code>τ = T·r/J</code>. Pure geometry — resistance to twist. Circular sections only.</td></tr>
+<tr><td><strong>Mass</strong> moment of inertia</td><td class="u">I &nbsp; kg·m²</td>
+    <td><code>m·r²/2</code></td>
+    <td>Rotor energy <code>½·I·ω²</code> and angular acceleration. Involves <em>mass</em>. Never in
+    <code>M·y/I</code> or <code>T·r/J</code>.</td></tr>
+</table>
+<div class="note"><strong>The units are the check.</strong>
+<p>m⁴ and kg·m² are not the same kind of thing. If something in m⁴ turns up inside an energy
+calculation, or something in kg·m² turns up inside a stress calculation, stop — you have picked up
+the wrong quantity, and no amount of careful arithmetic afterwards will fix it.</p>
+<p>For an 8 mm solid shaft: I = 2.011 × 10⁻¹⁰ m⁴, J = 4.021 × 10⁻¹⁰ m⁴. The DP-2 screen's rotor
+mass moment of inertia is a different number in different units entirely, and it is what produces
+the 5.087 kJ of stored energy quoted in the review.</p></div>
+
+<h2>3. What actually sizes this shaft</h2>
+<figure>
+<svg viewBox="0 0 660 230" role="img" aria-label="Bar chart comparing the shaft diameter required by torsion, about 3.6 millimetres, with the candidate 8 millimetre journal set by the bearing bore; and the torsional shear stress of about 26 MPa against the 280 MPa value carried in the seed configuration file.">
+  <text x="14" y="22" fill="#9fb6c3" font-size="13" letter-spacing="1.5">CANDIDATE SHAFT — DP-2 SCREEN POINT</text>
+
+  <text x="14" y="58" fill="#c0d1dc" font-size="14">Diameter needed by torsion alone</text>
+  <rect x="300" y="44" width="60" height="20" fill="#69dfcc"/>
+  <text x="368" y="59" fill="#69dfcc" font-size="14">≈ 3.6 mm</text>
+
+  <text x="14" y="92" fill="#c0d1dc" font-size="14">Candidate journal (bearing bore)</text>
+  <rect x="300" y="78" width="133" height="20" fill="#e4b962"/>
+  <text x="441" y="93" fill="#e4b962" font-size="14">8 mm — this governs</text>
+
+  <line x1="300" y1="112" x2="620" y2="112" stroke="#44616e"/>
+
+  <text x="14" y="142" fill="#c0d1dc" font-size="14">Torsional shear at the 8 mm journal</text>
+  <rect x="300" y="128" width="29" height="20" fill="#69dfcc"/>
+  <text x="337" y="143" fill="#69dfcc" font-size="14">≈ 26 MPa</text>
+
+  <text x="14" y="176" fill="#c0d1dc" font-size="14">seed.yaml tau_allow_shaft_Pa</text>
+  <rect x="300" y="162" width="310" height="20" fill="#7a4f52"/>
+  <text x="300" y="202" fill="#e4796b" font-size="13.5">280 MPa — a modelling input, not an allowable</text>
+
+  <text x="14" y="226" fill="#9fb6c3" font-size="13">Torsion is not the constraint on this shaft.</text>
+</svg>
+<figcaption>So a comfortable torsion number says nothing about bending, critical speed, bearing capability at 528,000&nbsp;DN, fits or fatigue. Values from <code>docs/project/checks/dp2_screen.py</code> (18.07 kW at 66,000 rpm →
+about 2.61 N·m) and <code>config/seed.yaml</code>. <code>modules/m30_shaft.py</code> takes
+<code>max(d_from_torsion, d_bearing_bore)</code>, which is why the bearing wins.</figcaption>
+</figure>
+
+<div class="warn"><strong>A config comment is not a material certificate.</strong>
+<p><code>tau_allow_shaft_Pa: 280.0e6 # 4340 steel, allowable shear</code> is a number chosen so the
+model runs. It names no temper, no heat treatment, no temperature, no surface finish, no fatigue
+basis and no factor of safety. Quoting it back does not turn it into an allowable — and an ultimate
+tensile strength, or a room-temperature handbook value, is not one either.</p></div>
+
+<div class="warn"><strong>Stress margin does not buy speed margin.</strong>
+<p><code>docs/model-review.md</code> reports a preliminary bending critical speed near 23,400 rpm
+for the <em>earlier baseline</em>, with startup crossing it and about 10% separation from the
+proposed continuous range against the 20% criterion in <code>config/limits.yaml</code>. That is a
+stiffness-and-mass problem. Those baseline numbers are not DP-2 results and must not be presented
+as such.</p></div>
+
+<p style="margin-top:38px;color:#9fb6c3;font-size:15px">Everything here is elastic, static,
+plain-section screening. Stress concentration at steps, keyways, circlip grooves and cross-holes;
+fatigue; combined bending and torsion; buckling; and temperature-dependent properties are all
+outside it. Finishing this lesson approves nothing.</p>
+</main></html>
