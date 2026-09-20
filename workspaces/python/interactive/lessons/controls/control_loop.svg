@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">CORE controls learning loop</title>
+  <desc id="desc">A safe, synthetic control-loop diagram showing the controller, command, plant, sensors and safety interlock.</desc>
+  <style>
+    .bg { fill:#f5f7fa; }
+    .title { font:700 28px system-ui,sans-serif; fill:#172c40; }
+    .sub { font:16px system-ui,sans-serif; fill:#385066; }
+    .box { stroke:#172c40; stroke-width:2; rx:14; }
+    .control { fill:#d8eee8; }
+    .plant { fill:#ffe7bd; }
+    .measure { fill:#dce7f7; }
+    .safety { fill:#f5d6d6; }
+    .label { font:700 18px system-ui,sans-serif; fill:#172c40; text-anchor:middle; }
+    .small { font:14px system-ui,sans-serif; fill:#243b53; text-anchor:middle; }
+    .arrow { stroke:#006758; stroke-width:3; fill:none; marker-end:url(#arrow); }
+    .dashed { stroke:#a33a3a; stroke-width:3; stroke-dasharray:9 7; fill:none; marker-end:url(#redarrow); }
+    .note { fill:#fff; stroke:#9fb3c8; stroke-width:1.5; rx:10; }
+    .notetext { font:15px system-ui,sans-serif; fill:#243b53; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#006758"/></marker>
+    <marker id="redarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a33a3a"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="690"/>
+  <text class="title" x="55" y="58">C4 controls: name the arrows before building blocks</text>
+  <text class="sub" x="55" y="88">Synthetic learning loop only · no fuel, ignition, starter or live actuator</text>
+
+  <rect class="box control" x="65" y="195" width="205" height="120"/>
+  <text class="label" x="167" y="232">TARGET / MODE</text>
+  <text class="small" x="167" y="260">operator request</text>
+  <text class="small" x="167" y="282">state: STARTING or RUNNING</text>
+
+  <rect class="box control" x="340" y="175" width="220" height="160"/>
+  <text class="label" x="450" y="213">CONTROLLER</text>
+  <text class="small" x="450" y="244">permissives + state machine</text>
+  <text class="small" x="450" y="268">error → synthetic command</text>
+  <text class="small" x="450" y="292">timer and fault branches</text>
+
+  <rect class="box plant" x="640" y="175" width="235" height="160"/>
+  <text class="label" x="757" y="213">PLANT MODEL</text>
+  <text class="small" x="757" y="244">first-order teaching block</text>
+  <text class="small" x="757" y="268">command → synthetic RPM</text>
+  <text class="small" x="757" y="292">not a turbine or combustor solve</text>
+
+  <rect class="box measure" x="955" y="175" width="180" height="160"/>
+  <text class="label" x="1045" y="213">SENSORS</text>
+  <text class="small" x="1045" y="244">RPM / EGT / pressure</text>
+  <text class="small" x="1045" y="268">units + validity flag</text>
+  <text class="small" x="1045" y="292">lag and noise are TBD</text>
+
+  <path class="arrow" d="M270 255 H340"/>
+  <text class="small" x="305" y="237">mode + target</text>
+  <path class="arrow" d="M560 255 H640"/>
+  <text class="small" x="600" y="237">command, 0..1</text>
+  <path class="arrow" d="M875 255 H955"/>
+  <text class="small" x="915" y="237">synthetic states</text>
+  <path class="arrow" d="M1045 335 V410 H167 V315"/>
+  <text class="small" x="620" y="402">measured feedback + validity (agree units with C5/C6)</text>
+
+  <rect class="box safety" x="340" y="455" width="220" height="105"/>
+  <text class="label" x="450" y="492">SAFETY INTERLOCK</text>
+  <text class="small" x="450" y="520">invalid signal / timeout</text>
+  <text class="small" x="450" y="542">→ FAULT and safe command</text>
+  <path class="dashed" d="M1045 335 V455 H560"/>
+
+  <rect class="note" x="65" y="600" width="1070" height="54"/>
+  <text class="notetext" x="85" y="623">Ask before tuning: What evidence allows each state transition? Which signal is invalid when it disappears?</text>
+  <text class="notetext" x="85" y="644">Do not fill in speed, temperature or timer limits until Safety and the component leads supply reviewed evidence.</text>
+</svg>

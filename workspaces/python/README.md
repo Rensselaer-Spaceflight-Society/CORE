@@ -1,6 +1,6 @@
 # Python worksheets: start here
 
-**Looking for questions you can answer while the script runs? Use the [new guided launcher](interactive/README.md).** It saves and resumes individual research records. START1 is available now; the topic agents will add their lessons using the [shared author contract](interactive/CONTRACT.md). The 14 worksheets below are the original edit-and-run format and remain usable; they do not automatically save answers.
+**Looking for questions you can answer while the script runs? Use the [new guided launcher](interactive/README.md).** It saves and resumes individual research records. START1 and the C4 controls lesson are available now; additional topic lessons can follow the [shared author contract](interactive/CONTRACT.md). The 14 worksheets below are the original edit-and-run format and remain usable; they do not automatically save answers.
 
 [Back to the first-meeting workspace](../README.md) · [How to run and submit one](HOW-TO-RUN.md) · [Guidance for leads](LEAD-REVIEW.md)
 
@@ -32,6 +32,16 @@ Every worksheet runs before you touch it. It will not crash, and it will not inv
 | C7 | [`combustion-systems/c7_start_trade.py`](combustion-systems/c7_start_trade.py) | Compare two starting methods, and price the electricity | [C7](../combustion-systems/C7-start-options.md) |
 
 The task card is the authority on what is in and out of scope for your assignment. The worksheet teaches the topic and collects your answers. If the two ever disagree, the card wins — and tell your lead, because one of them needs fixing.
+
+For the newer saved-record activity, run the guided C4 lesson:
+
+```bash
+python workspaces/python/interactive/launch.py --lesson C4 --slot P01
+```
+
+It covers the signal contract, state-machine evidence and a synthetic first-order
+plant model before anyone opens Simulink. The original C4 worksheet remains a
+useful paper-only fallback.
 
 ## Three things worth knowing before you start
 
