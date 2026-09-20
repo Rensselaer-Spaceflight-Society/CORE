@@ -1,0 +1,8 @@
+{
+  "target": {"value": "FICTIONAL DEMO: an imaginary sensor purchase"},
+  "finding": {"value": "FICTIONAL DEMO: the sample catalog describes a digital output. This is not an actual part.", "basis": "example", "source": "Invented catalog for demonstrating this software", "source_revision": "Demo 1", "uncertainty": "Not real hardware evidence"},
+  "price": {"value": 10, "basis": "example", "source": "Invented one-item quote", "uncertainty": "Not a vendor price"},
+  "shipping": {"value": 3, "basis": "example", "source": "Same invented one-item quote", "uncertainty": "Tax and duties excluded; not a vendor price"},
+  "lead_question": {"value": "FICTIONAL DEMO: which real part should we investigate?"},
+  "next_step": {"value": "Replace this demonstration with an actual sourced investigation in a new session."}
+}

@@ -1,5 +1,7 @@
 # How to run a worksheet, save it, and send it back
 
+**For the new interactive/autosaving lessons, use [Guided setup](interactive/SETUP.md).** The instructions below apply to the original worksheets, which print results and require editing the YOUR ANSWERS block.
+
 [Worksheets start page](README.md) · [First-meeting workspace](../README.md)
 
 Four steps: get the file, run it, fill it in, send it back. None of them needs previous experience, and the last one has a route that needs no GitHub account at all.

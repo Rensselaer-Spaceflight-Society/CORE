@@ -1,5 +1,7 @@
 # Start here: your first CORE meeting
 
+**After the first meeting:** use the [guided research launcher](python/interactive/README.md) for questions, saved progress and individual submissions. START1 is ready; topic-specific guided lessons are being developed. The original meeting cards below remain reference material.
+
 **Our mission:** learn how to build a reverse-flow microjet that runs and self-sustains. Performance is secondary. December 2026 target to manufacture parts - Spring 2027 is assembly and testing.
 
 You do not need to know Git, Python, CAD or turbine theory before this meeting. Your lead will give you a task code. Open your team below, then that code. Spend 30–45 minutes learning one small thing and recording it in the card's Findings section.
