@@ -82,8 +82,8 @@ the same shape. The lessons are complete and correct without it.
   blockers — unchanged, because no engineering input was touched.
 - Unrelated: a fresh clone shows `legacy/v5/V5_CombustionChamber_Design.py` and
   `legacy/v5/test_combustor.py` as modified because of CRLF→LF normalisation under
-  `.gitattributes`. Pre-existing, not caused by this work, and deliberately not
-  included in this branch.
+  `.gitattributes`. Pre-existing and not caused by this work, so it is deliberately
+  not in this branch; it is handled separately on `chore/remove-legacy-v5`.
 
 ## Handoff beyond the platform
 
