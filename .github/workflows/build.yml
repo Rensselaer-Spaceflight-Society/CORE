@@ -29,6 +29,10 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -r requirements.txt
       - run: python -m pytest --junitxml=out/tests.xml
+      - name: Check original worksheet compatibility
+        run: python workspaces/python/check_worksheets.py
+      - name: Package guided learning materials
+        run: python workspaces/python/interactive/make_bundle.py
       - run: python scripts/generate_dependencies.py --check
       - name: Generate preliminary engineering report
         run: python run.py --report-only

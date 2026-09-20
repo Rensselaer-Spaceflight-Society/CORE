@@ -1,5 +1,7 @@
 # Python worksheets: start here
 
+**Looking for questions you can answer while the script runs? Use the [new guided launcher](interactive/README.md).** It saves and resumes individual research records. START1 is available now; the topic agents will add their lessons using the [shared author contract](interactive/CONTRACT.md). The 14 worksheets below are the original edit-and-run format and remain usable; they do not automatically save answers.
+
 [Back to the first-meeting workspace](../README.md) · [How to run and submit one](HOW-TO-RUN.md) · [Guidance for leads](LEAD-REVIEW.md)
 
 Each task code has one small Python file. It teaches you what your component does, explains the few words you need, shows one worked example, and gives you clearly marked places to write down what you found.

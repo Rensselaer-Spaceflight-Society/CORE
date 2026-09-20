@@ -1,5 +1,7 @@
 # Reviewing a worksheet before its findings go anywhere
 
+**For guided lessons with saved JSON findings, use the [new lead guide](interactive/LEAD-GUIDE.md).** Its review report reads data without executing student code. The rules below describe the original edit-and-run format.
+
 [Worksheets start page](README.md) · [Coordination](../coordination/README.md) · [Engineering workflow](../../docs/workflow.md)
 
 A filled worksheet is one person's afternoon of learning, with sources attached. It is not evidence about the engine until somebody with the relevant technical role has read it and said what it is worth. This page is that step, kept short.
@@ -14,7 +16,7 @@ A filled worksheet is one person's afternoon of learning, with sources attached.
 
 ## The six-point check on a returned worksheet
 
-1. **Does it run?** `python <the worksheet>`. If a student edited outside the answers block, or a lead is unsure what changed, `python workspaces/python/check_worksheets.py` re-checks every guarantee: no crash on defaults, ASCII output, no engine-model import, no file writing, unknowns still reported as unknown.
+1. **Inspect the changes before running an edited script.** The old checker runs Python files and uses simple text checks; it is not a sandbox and cannot guarantee that an unfamiliar script is harmless. Compare changes with the trusted template first. For routine findings, prefer the new data-only export. Once the code is understood, `python workspaces/python/check_worksheets.py` checks expected worksheet behavior.
 2. **Is every number's origin visible?** Value, units, source, uncertainty. A number with no source is a claim, not a finding. Send it back kindly; this is the habit the whole exercise is teaching.
 3. **Are `EXAMPLE`, `CANDIDATE` and `REPO CHECK` still separate?** The commonest honest mistake is carrying an illustrative figure — an invented liner diameter, a sample loss coefficient, a made-up turbine power — forward as if it described CORE. Check especially T2, C2, C5 and C7, where the arithmetic deliberately runs on numbers the student invented.
 4. **Is `NOT FOUND` recorded as a result rather than left blank?** An explicit NOT FOUND tells you where to point effort next. A blank tells you nothing. Both are fine outcomes for a first meeting; only one is useful.
@@ -35,7 +37,7 @@ Record the review outcome and date on the card. "Reviewed, source confirmed, rec
 
 ## What a worksheet never does
 
-- It does not change a design input. No worksheet imports `core/` or `modules/`, reads `config/`, or writes a file. The checker enforces all three.
+- The original trusted templates do not change design inputs. They do not import the engine model, read configuration or write files. The checker is a regression aid, not a security boundary for edited code.
 - It does not produce an approved engineering result. Merging a pull request that fills in a worksheet records that a student did the work; it approves nothing.
 - It does not migrate DP-2 into the model. `config/seed.yaml` still holds the earlier 250 N baseline, deliberately. Moving to DP-2 is a lead-reviewed migration that has to reconcile fixed wheel geometry, chosen mass flow, the thrust-driven M01 interface and every dependent dimension — see the [DP-2 review](../../docs/project/dp2-review.md#candidate-everyone-can-discuss).
 - It does not authorise hardware. Nothing here releases a part, clears a test, or permits fuel, ignition, machining or rotor operation. Those need the applicable engineering and Safety review and the relevant shop or institutional authority — see [`docs/model-review.md`](../../docs/model-review.md#release-evidence).
