@@ -1,6 +1,6 @@
 # Python worksheets: start here
 
-**Looking for questions you can answer while the script runs? Use the [new guided launcher](interactive/README.md).** It saves and resumes individual research records. START1 and the C4 controls lesson are available now; additional topic lessons can follow the [shared author contract](interactive/CONTRACT.md). The 14 worksheets below are the original edit-and-run format and remain usable; they do not automatically save answers.
+**Looking for questions you can answer while the script runs? Use the [new guided launcher](interactive/README.md).** It saves and resumes individual research records. START1, the C4 controls lesson and the C8-ELEC electrical lesson are available now; additional topic lessons can follow the [shared author contract](interactive/CONTRACT.md). The 14 worksheets below are the original edit-and-run format and remain usable; they do not automatically save answers.
 
 [Back to the first-meeting workspace](../README.md) · [How to run and submit one](HOW-TO-RUN.md) · [Guidance for leads](LEAD-REVIEW.md)
 
@@ -42,6 +42,15 @@ python workspaces/python/interactive/launch.py --lesson C4 --slot P01
 It covers the signal contract, state-machine evidence and a synthetic first-order
 plant model before anyone opens Simulink. The original C4 worksheet remains a
 useful paper-only fallback.
+
+For the electrical team's first useful result, run:
+
+```bash
+python workspaces/python/interactive/launch.py --lesson C8-ELEC --slot P01
+```
+
+It produces a power tree, I/O table, failure walkthrough and drawing-only
+bring-up checklist. Ratings and powered tests remain review questions.
 
 ## Three things worth knowing before you start
 

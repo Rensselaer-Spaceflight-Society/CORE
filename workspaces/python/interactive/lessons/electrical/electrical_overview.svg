@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 770" role="img" aria-labelledby="title desc">
+  <title id="title">CORE electrical system learning schematic</title>
+  <desc id="desc">A staged electrical overview separating power, measurement, command and safety inhibit paths.</desc>
+  <style>
+    .bg{fill:#f5f7fa}.title{font:700 28px system-ui,sans-serif;fill:#172c40}.sub{font:16px system-ui,sans-serif;fill:#385066}
+    .box{stroke:#172c40;stroke-width:2;rx:12}.power{fill:#dce7f7}.measure{fill:#d8eee8}.command{fill:#ffe7bd}.safe{fill:#f5d6d6}.logic{fill:#ebe0f6}
+    .label{font:700 16px system-ui,sans-serif;fill:#172c40;text-anchor:middle}.small{font:13px system-ui,sans-serif;fill:#243b53;text-anchor:middle}
+    .p{stroke:#2b6cb0;stroke-width:4;fill:none;marker-end:url(#blue)}.m{stroke:#16866f;stroke-width:3;fill:none;marker-end:url(#green)}
+    .c{stroke:#b7791f;stroke-width:3;fill:none;marker-end:url(#gold)}.s{stroke:#a33a3a;stroke-width:4;stroke-dasharray:9 7;fill:none;marker-end:url(#red)}
+    .note{fill:#fff;stroke:#9fb3c8;stroke-width:1.5;rx:10}.notetext{font:14px system-ui,sans-serif;fill:#243b53}
+  </style>
+  <defs>
+    <marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2b6cb0"/></marker>
+    <marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#16866f"/></marker>
+    <marker id="gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b7791f"/></marker>
+    <marker id="red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a33a3a"/></marker>
+  </defs>
+  <rect class="bg" width="1280" height="770"/>
+  <text class="title" x="50" y="52">C8-ELEC · power, measurement and command paths</text>
+  <text class="sub" x="50" y="81">Learning schematic only · ratings, connectors and energized tests remain TBD and require review</text>
+
+  <rect class="box power" x="55" y="165" width="170" height="82"/><text class="label" x="140" y="198">BATTERY / CHARGER</text><text class="small" x="140" y="222">chemistry + voltage range TBD</text>
+  <rect class="box safe" x="280" y="145" width="175" height="122"/><text class="label" x="367" y="180">MAIN PROTECTION</text><text class="small" x="367" y="204">disconnect + fuse question</text><text class="small" x="367" y="226">emergency inhibit input</text><text class="small" x="367" y="248">ratings TBD</text>
+
+  <rect class="box power" x="510" y="105" width="190" height="78"/><text class="label" x="605" y="138">STARTER BRANCH</text><text class="small" x="605" y="162">driver / return / peak TBD</text>
+  <rect class="box power" x="510" y="215" width="190" height="78"/><text class="label" x="605" y="248">PUMP BRANCH</text><text class="small" x="605" y="272">driver / return / peak TBD</text>
+  <rect class="box logic" x="510" y="325" width="190" height="92"/><text class="label" x="605" y="358">REGULATED LOGIC</text><text class="small" x="605" y="382">MCU + sensor supply</text><text class="small" x="605" y="402">voltage/current TBD</text>
+  <rect class="box command" x="760" y="325" width="190" height="92"/><text class="label" x="855" y="358">MICROCONTROLLER</text><text class="small" x="855" y="382">state + data logging</text><text class="small" x="855" y="402">no direct load drive</text>
+
+  <rect class="box measure" x="1015" y="110" width="205" height="82"/><text class="label" x="1117" y="143">RPM SENSOR</text><text class="small" x="1117" y="167">Hall/gear idea · interface TBD</text>
+  <rect class="box measure" x="1015" y="220" width="205" height="82"/><text class="label" x="1117" y="253">EGT + CONDITIONER</text><text class="small" x="1117" y="277">type/range/output TBD</text>
+  <rect class="box safe" x="1015" y="335" width="205" height="82"/><text class="label" x="1117" y="368">EMERGENCY INHIBIT</text><text class="small" x="1117" y="392">independent path to loads</text>
+  <rect class="box command" x="510" y="445" width="190" height="72"/><text class="label" x="605" y="475">OPTIONAL OUTPUTS</text><text class="small" x="605" y="497">ignition / fuel shutoff</text>
+  <rect class="box logic" x="760" y="445" width="190" height="72"/><text class="label" x="855" y="475">DATA LOGGING</text><text class="small" x="855" y="497">communications / records</text>
+  <rect class="box measure" x="1015" y="445" width="205" height="72"/><text class="label" x="1117" y="475">V / I MONITOR</text><text class="small" x="1117" y="497">source and range TBD</text>
+
+  <path class="p" d="M225 206H280"/><path class="p" d="M455 190H480V144H510"/><path class="p" d="M480 190V254H510"/><path class="p" d="M455 225H480V371H510"/>
+  <text class="small" x="252" y="186">protected supply</text><text class="small" x="485" y="127">high current</text><text class="small" x="485" y="239">high current</text><text class="small" x="485" y="360">regulated</text>
+  <path class="p" d="M605 183V205"/><path class="p" d="M605 293V325"/>
+  <text class="small" x="630" y="203">returns documented</text>
+
+  <path class="m" d="M1015 151H950V360"/><path class="m" d="M1015 261H950V382"/><text class="small" x="976" y="132">measurement</text>
+  <path class="c" d="M760 350H700V144"/><path class="c" d="M760 382H700V254"/>
+  <text class="small" x="733" y="137">start command</text><text class="small" x="733" y="246">pump command</text>
+  <path class="c" d="M855 417V445"/><path class="m" d="M1015 481H950"/>
+  <path class="s" d="M1015 376H950V455H300V267"/><text class="small" x="655" y="448">hardware inhibit / safe state question</text>
+
+  <rect class="note" x="55" y="550" width="1165" height="165"/>
+  <text class="notetext" x="78" y="578">Review each connection with four questions:</text>
+  <text class="notetext" x="95" y="603">1. What is the source and destination?</text>
+  <text class="notetext" x="95" y="627">2. What are the signal or load units, voltage/current range and return?</text>
+  <text class="notetext" x="95" y="651">3. What protects it from a short, transient, reset or stuck output?</text>
+  <text class="notetext" x="95" y="675">4. What evidence is still missing before a powered test can be approved?</text>
+  <text class="notetext" x="78" y="701">Also identify connectors, high-current returns and protective earth/chassis. Blue = power · green = measurement · gold = command · red dashed = safety inhibit. Editable SVG source.</text>
+</svg>
