@@ -107,34 +107,32 @@ the wrong quantity, and no amount of careful arithmetic afterwards will fix it.<
 mass moment of inertia is a different number in different units entirely, and it is what produces
 the 5.087 kJ of stored energy quoted in the review.</p></div>
 
-<h2>3. What actually sizes this shaft</h2>
+<h2>3. What sizes this shaft &mdash; and which baseline it came from</h2>
 <figure>
-<svg viewBox="0 0 660 230" role="img" aria-label="Bar chart comparing the shaft diameter required by torsion, about 3.6 millimetres, with the candidate 8 millimetre journal set by the bearing bore; and the torsional shear stress of about 26 MPa against the 280 MPa value carried in the seed configuration file.">
-  <text x="14" y="22" fill="#9fb6c3" font-size="13" letter-spacing="1.5">CANDIDATE SHAFT — DP-2 SCREEN POINT</text>
+<svg viewBox="0 0 660 266" role="img" aria-label="Bar chart of shaft diameter. Torsion alone needs about 3.6 millimetres. The DP-2 candidate journal is 8 millimetres and the earlier seed baseline carries a 15 millimetre bearing bore; both exceed the torsion requirement, so the bearing bore sets the diameter in either case.">
+  <text x="14" y="22" fill="#9fb6c3" font-size="13" letter-spacing="1.5">WHAT SETS THE SHAFT DIAMETER</text>
 
-  <text x="14" y="58" fill="#c0d1dc" font-size="14">Diameter needed by torsion alone</text>
-  <rect x="300" y="44" width="60" height="20" fill="#69dfcc"/>
-  <text x="368" y="59" fill="#69dfcc" font-size="14">≈ 3.6 mm</text>
+  <text x="14" y="58" fill="#c0d1dc" font-size="14">Needed by torsion alone</text>
+  <rect x="300" y="44" width="58" height="20" fill="#69dfcc"/>
+  <text x="366" y="59" fill="#69dfcc" font-size="14">&#8776; 3.6 mm</text>
 
-  <text x="14" y="92" fill="#c0d1dc" font-size="14">Candidate journal (bearing bore)</text>
-  <rect x="300" y="78" width="133" height="20" fill="#e4b962"/>
-  <text x="441" y="93" fill="#e4b962" font-size="14">8 mm — this governs</text>
+  <text x="14" y="92" fill="#c0d1dc" font-size="14">DP-2 candidate journal</text>
+  <rect x="300" y="78" width="128" height="20" fill="#e4b962"/>
+  <text x="436" y="93" fill="#e4b962" font-size="14">8 mm &#8212; dp2-review.md</text>
 
-  <line x1="300" y1="112" x2="620" y2="112" stroke="#44616e"/>
+  <text x="14" y="126" fill="#c0d1dc" font-size="14">seed.yaml d_bearing_bore_m</text>
+  <rect x="300" y="112" width="240" height="20" fill="#a86fa0"/>
+  <text x="548" y="127" fill="#a86fa0" font-size="14">15 mm</text>
+  <text x="300" y="148" fill="#a86fa0" font-size="12.5">&#8212; the earlier 250 N / PR 3.2 baseline, not DP-2</text>
 
-  <text x="14" y="142" fill="#c0d1dc" font-size="14">Torsional shear at the 8 mm journal</text>
-  <rect x="300" y="128" width="29" height="20" fill="#69dfcc"/>
-  <text x="337" y="143" fill="#69dfcc" font-size="14">≈ 26 MPa</text>
+  <line x1="300" y1="166" x2="620" y2="166" stroke="#44616e"/>
 
-  <text x="14" y="176" fill="#c0d1dc" font-size="14">seed.yaml tau_allow_shaft_Pa</text>
-  <rect x="300" y="162" width="310" height="20" fill="#7a4f52"/>
-  <text x="300" y="202" fill="#e4796b" font-size="13.5">280 MPa — a modelling input, not an allowable</text>
-
-  <text x="14" y="226" fill="#9fb6c3" font-size="13">Torsion is not the constraint on this shaft.</text>
+  <text x="14" y="192" fill="#eef5f7" font-size="14">Both bearing bores are larger than 3.6 mm, so</text>
+  <text x="14" y="212" fill="#eef5f7" font-size="14">max(d_from_torsion, d_bearing_bore) never picks torsion.</text>
+  <text x="14" y="238" fill="#e4796b" font-size="13">Which bore you use moves the shear stress from &#8776; 26 MPa (8 mm)</text>
+  <text x="14" y="256" fill="#e4796b" font-size="13">to &#8776; 4 MPa (15 mm). Say which design point yours came from.</text>
 </svg>
-<figcaption>So a comfortable torsion number says nothing about bending, critical speed, bearing capability at 528,000&nbsp;DN, fits or fatigue. Values from <code>docs/project/checks/dp2_screen.py</code> (18.07 kW at 66,000 rpm →
-about 2.61 N·m) and <code>config/seed.yaml</code>. <code>modules/m30_shaft.py</code> takes
-<code>max(d_from_torsion, d_bearing_bore)</code>, which is why the bearing wins.</figcaption>
+<figcaption>Torque from <code>docs/project/checks/dp2_screen.py</code> (18.07 kW at 66,000 rpm &rarr; about 2.61 N&middot;m from compressor power, 2.67 N&middot;m from shaft power with <code>eta_mech_frac</code>&nbsp;=&nbsp;0.98), against the 280 MPa in <code>config/seed.yaml</code>. The structural point &mdash; <code>modules/m30_shaft.py</code> takes <code>max(d_from_torsion, d_bearing_bore)</code>, so the bearing wins &mdash; holds at either design point. The 8 mm and 15 mm bores do not: they belong to different ones and must not be mixed.</figcaption>
 </figure>
 
 <div class="warn"><strong>A config comment is not a material certificate.</strong>
@@ -142,6 +140,9 @@ about 2.61 N·m) and <code>config/seed.yaml</code>. <code>modules/m30_shaft.py</
 model runs. It names no temper, no heat treatment, no temperature, no surface finish, no fatigue
 basis and no factor of safety. Quoting it back does not turn it into an allowable — and an ultimate
 tensile strength, or a room-temperature handbook value, is not one either.</p></div>
+
+<div class="warn"><strong>Two bearing bores, two design points.</strong>
+<p><code>config/seed.yaml</code> carries <code>d_bearing_bore_m: 0.015</code> and is still the earlier 250&nbsp;N / PR&nbsp;3.2 baseline. DP-2 proposes an 8&nbsp;mm journal, which is where <code>docs/project/dp2-review.md</code> gets 8&nbsp;mm &times; 66,000&nbsp;rpm = 528,000&nbsp;DN. Taking DP-2&rsquo;s power and the seed baseline&rsquo;s geometry, or the reverse, produces a number that is true of neither engine &mdash; and the review says explicitly that existing baseline results cannot be presented as DP-2 results.</p></div>
 
 <div class="warn"><strong>Stress margin does not buy speed margin.</strong>
 <p><code>docs/model-review.md</code> reports a preliminary bending critical speed near 23,400 rpm

@@ -74,7 +74,8 @@ the CORE candidate engine:
 | Wall thickness | 1 mm | 1.5 mm |
 | Hoop stress, inner radius | **200 MPa** | **≈ 3.10 MPa** |
 
-A factor of about 65. The candidate figures come from
+A factor of about 64 (both on the inner radius; 64.3 if both are taken on the
+mid-wall radius). The candidate figures come from
 [`docs/project/checks/dp2_screen.py`](../../../docs/project/checks/dp2_screen.py)
 (compressor delivery P3 = 163.51 kPa absolute against 101.325 kPa ambient) and the
 casing envelope proposed in [`docs/project/dp2-review.md`](../../../docs/project/dp2-review.md).

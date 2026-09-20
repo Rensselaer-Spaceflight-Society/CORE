@@ -158,7 +158,7 @@ tie bolts or the shaft carry the end load, the axial number does not belong to t
   <circle cx="597" cy="60" r="5" fill="#e4b962" stroke="#102431" stroke-width="2"/>
   <text x="582" y="82" fill="#e4b962" font-size="13" font-weight="600">EXAMPLE</text>
   <text x="582" y="99" fill="#c0d1dc" font-size="12">2 MPa across Ø200 mm</text>
-  <text x="582" y="115" fill="#c0d1dc" font-size="12">t = 1 mm → 201 MPa</text>
+  <text x="582" y="115" fill="#c0d1dc" font-size="12">t = 1 mm → 201 MPa (mid-wall)</text>
   <text x="582" y="133" fill="#a08750" font-size="11.5">teaching loads from</text>
   <text x="582" y="147" fill="#a08750" font-size="11.5">object-example.py —</text>
   <text x="582" y="161" fill="#a08750" font-size="11.5">NOT CORE loads</text>
@@ -167,7 +167,7 @@ tie bolts or the shaft carry the end load, the axial number does not belong to t
   <circle cx="597" cy="192" r="5" fill="#69dfcc" stroke="#102431" stroke-width="2"/>
   <text x="582" y="214" fill="#69dfcc" font-size="13" font-weight="600">CANDIDATE</text>
   <text x="582" y="231" fill="#c0d1dc" font-size="12">62.2 kPa across Ø149.4 mm</text>
-  <text x="582" y="247" fill="#c0d1dc" font-size="12">t = 1.5 mm → 3.13 MPa</text>
+  <text x="582" y="247" fill="#c0d1dc" font-size="12">t = 1.5 mm → 3.13 MPa (mid-wall)</text>
   <text x="582" y="265" fill="#4f9e92" font-size="11.5">DP-2 prescribed cycle</text>
   <text x="582" y="279" fill="#4f9e92" font-size="11.5">screen — under review</text>
 
@@ -180,9 +180,12 @@ tie bolts or the shaft carry the end load, the axial number does not belong to t
   <text x="92" y="366" fill="#e4b962" font-size="12">Dotted line at 10.5 mm: the same r/t = 10 limit for the Ø200 mm example bore.</text>
   <text x="92" y="384" fill="#9fb6c3" font-size="12">Each bore has its own boundary, because the boundary depends on the radius.</text>
 </svg>
-<figcaption>Both lines are the same equation. They are separated by a factor of about 65 because
-the <em>loads</em> differ, not because one wall is better than the other. That gap is what an
-unlabelled number costs you.</figcaption>
+<figcaption>Both lines are the same equation, plotted on the mid-wall radius. They are
+separated by a factor of about 64 because the <em>loads</em> differ, not because one wall is
+better than the other. That gap is what an unlabelled number costs you. On the inner radius, as
+<code>object-example.py</code> writes it, the same two cases give 200&nbsp;MPa and
+3.10&nbsp;MPa &mdash; about 1% lower, which is the size of the thin-wall idealisation here and
+not a margin.</figcaption>
 </figure>
 
 <div class="note"><strong>Reading the plot.</strong>

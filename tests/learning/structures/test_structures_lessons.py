@@ -70,9 +70,12 @@ def test_every_step_has_a_readable_visual_that_exists(catalog):
             assert asset.is_file(), f"{lesson_id}/{step.id}: missing {step.visual}"
             assert asset.suffix.lower() in (".html", ".svg", ".png")
             text = asset.read_text(encoding="utf-8")
-            # Self-contained: no CDN, no network, no live server required.
-            for forbidden in ("http://", "https://cdn", "<script src=", "fetch("):
-                assert forbidden not in text, f"{asset.name} must not need the network"
+            # Self-contained: no network of any kind, and no script at all.
+            for forbidden in ("http://", "https://", "//cdn", "<script", "@import",
+                              "fetch(", "XMLHttpRequest", "srcset="):
+                assert forbidden not in text, (
+                    f"{asset.name} must render with no network and no script: found "
+                    f"{forbidden!r}")
 
 
 def test_numeric_questions_declare_units_and_evidence_questions_are_not_bypassed(catalog):
@@ -107,8 +110,49 @@ def test_comparison_keys_are_only_on_shared_physical_quantities(catalog):
     assert keyed, "expected at least one shared quantity for the reviewer to group"
     for key, entries in keyed.items():
         assert key.startswith("core."), f"{key} should be namespaced to the project"
-        assert len({units for _, _, units in entries}) == 1, (
-            f"{key} is reported in more than one unit; the reviewer does not convert")
+        # One question per key: the reviewer compares ACROSS learners, not across
+        # questions, so two questions sharing a key would group different quantities.
+        assert len(entries) == 1, f"{key} is used by more than one question: {entries}"
+        assert key.endswith("_" + entries[0][2]), (
+            f"{key} should end in its unit ({entries[0][2]}); the reviewer never converts")
+    # Every key belongs to the one part this lesson is scoped to.
+    assert all(k.startswith("core.casing.candidate.") for k in keyed), keyed
+
+
+def test_reviewer_actually_flags_a_disagreement_between_two_learners(tmp_path, catalog):
+    """The point of a comparison key: two people, two sources, one caught discrepancy."""
+    from review import comparisons, scan, select_latest
+
+    lesson = catalog["S3-STRESS"][0]
+    for slot, thickness in (("P01", 1.5), ("P02", 2.0)):
+        session = Session.create(lesson, slot, tmp_path / "drafts")
+        _fill(session, {
+            "p_internal_abs": _answer(DP2_P3_ABS_KPA),
+            "wall_id": _answer(DP2_CASING_ID_MM),
+            "wall_t": _answer(thickness),
+        })
+        export_session(session, tmp_path / "out")
+
+    records, errors = scan(tmp_path / "out")
+    assert not errors and len(records) == 2
+    messages = {m.split(" ")[0]: m for m in comparisons(select_latest(records)[0])}
+
+    thickness_msg = messages["core.casing.candidate.wall_thickness_mm"]
+    assert "Different reports" in thickness_msg
+    assert "1.5" in thickness_msg and "2.0" in thickness_msg
+
+    # Two learners copying the same file is explicitly NOT independent confirmation.
+    assert "not independent verification" in messages["core.casing.candidate.inner_diameter_mm"]
+
+
+def test_no_numeric_question_bypasses_its_evidence(catalog):
+    """CONTRACT.md: evidence=False is for reflection, not for engineering numbers."""
+    for lesson_id in LESSON_IDS:
+        lesson, _ = catalog[lesson_id]
+        for q in questions(lesson):
+            if q.kind in ("number", "integer"):
+                assert q.evidence, (
+                    f"{lesson_id}.{q.id} is a number recorded without a basis or source")
 
 
 # ------------------------------------------------- hand checks on the mechanics
@@ -190,7 +234,13 @@ def test_area_moment_and_mass_moment_are_different_quantities():
     mass = sm.mass_moment_inertia_solid_cylinder_kg_m2(0.2, 76.13)  # kg*m^2
     assert area == pytest.approx(1.6489e-6, rel=1e-3)
     assert mass == pytest.approx(1.4489e-4, rel=1e-3)
-    assert abs(math.log10(mass / area)) > 1  # different scale, different dimension
+    # They scale differently, which is the real distinction: the area moment is pure
+    # geometry going as d^4 and ignores mass entirely; the mass moment goes as m*d^2.
+    assert sm.second_moment_area_solid_round_m4(2 * 76.13) / area == pytest.approx(16.0, rel=1e-9)
+    assert sm.mass_moment_inertia_solid_cylinder_kg_m2(0.2, 2 * 76.13) / mass == pytest.approx(
+        4.0, rel=1e-9)
+    assert sm.mass_moment_inertia_solid_cylinder_kg_m2(0.4, 76.13) / mass == pytest.approx(
+        2.0, rel=1e-9)
 
 
 def test_torsion_matches_16T_over_pi_d_cubed_and_the_m30_relation():
@@ -213,6 +263,20 @@ def test_bending_stress_against_hand_calculation():
     # Sign of the moment does not change the magnitude of the stress.
     assert sm.bending_stress_solid_round_pa(-10.0, 10.0) == pytest.approx(
         sm.bending_stress_solid_round_pa(10.0, 10.0), rel=1e-15)
+
+
+def test_bending_refuses_a_y_that_is_not_on_the_section():
+    """M*y/I is linear in y, so a wrong datum or unit returns a confident wrong number."""
+    ok = sm.bending_stress_round_pa(10.0, 4.0, 8.0, 0.0)
+    assert ok == pytest.approx(sm.bending_stress_solid_round_pa(10.0, 8.0), rel=1e-12)
+    with pytest.raises(ValueError, match="outside a 8 mm section"):
+        sm.bending_stress_round_pa(10.0, 50.0, 8.0, 0.0)      # mm/cm slip, or wrong datum
+    with pytest.raises(ValueError, match="outside a 8 mm section"):
+        sm.bending_stress_round_pa(10.0, 4.001, 8.0, 0.0)     # just past the surface
+    with pytest.raises(ValueError, match="inside the 6 mm bore"):
+        sm.bending_stress_round_pa(10.0, 2.0, 8.0, 6.0)       # no material in the bore
+    # A tube's outer fibre is still fine.
+    assert sm.bending_stress_round_pa(10.0, 4.0, 8.0, 6.0) > ok
 
 
 def test_deflection_formula_and_its_cube_law():
@@ -275,9 +339,29 @@ def test_non_finite_inputs_are_refused_everywhere(bad):
 
 
 def test_booleans_are_not_accepted_as_numbers():
-    with pytest.raises(ValueError):
-        sm.hoop_stress_pa(True, AMBIENT_KPA, DP2_CASING_ID_MM, DP2_CASING_T_MM)
-    with pytest.raises(ValueError):
+    """True is 1 in Python. A bool must never silently become a pressure or a load."""
+    # _positive callers. Note the external pressure is 0 here, so a missing bool guard
+    # would give a plausible 50 kPa answer rather than tripping the buckling branch.
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.hoop_stress_pa(True, 0.0, DP2_CASING_ID_MM, DP2_CASING_T_MM)
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.second_moment_area_solid_round_m4(True)
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.mass_moment_inertia_solid_cylinder_kg_m2(True, 76.13)
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.cash_stock_cost_usd(True, 0.0)
+    # _finite callers: moment, torque, tolerances, load and nominal clearance.
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.bending_stress_pa(True, 5.0, 1e-8)
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.torsional_shear_pa(True, 4.0, 1e-8)
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.stack_tolerance_mm(True, False)
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.radial_clearance_after_stack_mm(True, 0.1)
+    with pytest.raises(ValueError, match="must be a number"):
+        sm.midspan_deflection_simple_central_load_m(True, 200.0, 205.0, 1e-8)
+    with pytest.raises(ValueError, match="Coupon count must be a number"):
         sm.coupon_stock_area_mm2(50.0, 25.0, True, 20.0)
 
 
@@ -520,7 +604,7 @@ def _cli(*args):
 
 @pytest.mark.parametrize("script", ["pressure_wall.py", "beam_and_shaft.py",
                                     "fabrication_coupon.py"])
-def test_help_and_preview_run_without_writing_anything(tmp_path, script):
+def test_help_and_preview_run_without_writing_anything(script):
     before = sorted(p.name for p in (REPO / "out").glob("*")) if (REPO / "out").exists() else []
 
     assert _cli(script, "--help").returncode == 0
@@ -531,8 +615,6 @@ def test_help_and_preview_run_without_writing_anything(tmp_path, script):
 
     after = sorted(p.name for p in (REPO / "out").glob("*")) if (REPO / "out").exists() else []
     assert before == after, "--help/--preview must not create anything under out/"
-    # And nothing landed in the temporary directory either.
-    assert not list(tmp_path.iterdir())
 
 
 def test_noninteractive_run_without_answers_refuses_rather_than_guessing():

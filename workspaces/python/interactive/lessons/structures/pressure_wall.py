@@ -28,9 +28,11 @@ def build_lesson():
         review_role="Structures lead (Safety for any running or pressurised hardware)",
         minutes="30-45",
         prerequisites=(
-            "Ask your lead which wall you are analysing. This lesson is written "
-            "around the CORE candidate outer casing; another wall is fine if the "
-            "lead says so, but then say which one in your first answer.",
+            "This lesson is about ONE specific part: the CORE candidate outer "
+            "casing. Everyone works that same wall, so your recorded geometry and "
+            "pressure can be compared against everyone else's - which is how a "
+            "stale drawing revision gets caught. If your lead wants a different "
+            "wall analysed, do that as a separate second pass afterwards.",
             "Paper and a pencil. The first deliverable is a sketch, not a number.",
             "No hardware, no pressure test, no purchase. Nothing rotates or is "
             "pressurised for this lesson.",
@@ -76,11 +78,13 @@ def build_lesson():
                 (
                     Question(
                         "wall_component",
-                        "Which wall are you analysing? Name the part and where it starts and stops.",
+                        "Which section of the candidate casing are you analysing? Say "
+                        "where it starts and where it stops.",
                         evidence=False,
                         hint="For example: 'the CORE candidate outer casing cylinder, "
-                             "between the compressor backplate and the turbine end "
-                             "flange'. If your lead gave you a different part, say so here.",
+                             "between the compressor backplate and the turbine end flange'. "
+                             "Name the plain cylindrical run you are treating, not the whole "
+                             "engine.",
                     ),
                     Question(
                         "load_path",
@@ -240,7 +244,7 @@ def build_lesson():
                 "teaching loads chosen to make the arithmetic clear; they are NOT "
                 "CORE loads. The CORE CANDIDATE casing - 62.2 kPa across a "
                 "149.4 mm bore with a 1.5 mm wall - comes out near 3.1 MPa. The "
-                "two differ by a factor of about 65. A number with no label is "
+                "two differ by a factor of about 64. A number with no label is "
                 "how the wrong one of those ends up in somebody's drawing.\n\n"
                 "You will also see two hoop results below, one on the mid-wall "
                 "radius and one on the inner radius. Kelly Sec. 7.3 says either "
@@ -252,10 +256,13 @@ def build_lesson():
                     Question(
                         "hand_hoop_mpa",
                         "Your OWN hand-worked hoop stress, from your recorded numbers",
-                        kind="number", units="MPa", evidence=False,
-                        minimum=0, maximum=1.0e6,
+                        kind="number", units="MPa", minimum=0, maximum=1.0e6,
                         hint="Convert to metres and Pa first, then divide by 1e6 at the end. "
-                             "Write your working on the paper with the sketch.",
+                             "Write your working on the paper with the sketch. Use basis "
+                             "'student' - this is your arithmetic, not a sourced value - with "
+                             "source 'own hand calculation from the ledger above'. In "
+                             "'uncertainty', say which radius convention you used and that "
+                             "this is an arithmetic check, not evidence about the part.",
                     ),
                     Question(
                         "unit_cancellation",
@@ -273,8 +280,9 @@ def build_lesson():
                 "the thickness. That is only nearly true when the wall is thin "
                 "compared with the radius. The Air Force Stress Analysis Manual "
                 "Sec. 8.3.1 draws the line at r/t greater than ten. Kelly Sec. "
-                "7.3 puts the same rule another way: below about a tenth of the "
-                "radius, the through-thickness variation is under about 5%. "
+                "7.3 puts the same rule in its author's words: below about a "
+                "tenth of the radius, the actual stress \"will vary by less than "
+                "about 5%\" through the thickness. "
                 "Inside that region the formula is a good screen. Outside it you "
                 "need the thick-wall (Lame) solution and a different conversation.\n\n"
                 "Even INSIDE that region, look at what this screen still does not "
@@ -377,8 +385,8 @@ def build_lesson():
                 units="dimensionless",
                 method="r_over_t = ((ID + t)/2) / t with ID and t in mm. Thin-wall membrane "
                        "theory is applicable above 10 per AFFDL Stress Analysis Manual "
-                       "Sec. 8.3.1; Kelly Sec. 7.3 gives the same rule as under ~5% "
-                       "through-thickness variation.",
+                       "Sec. 8.3.1; Kelly Sec. 7.3 states the same rule as the stress "
+                       "varying by less than about 5% through the thickness.",
                 version="1",
                 limitations="Applicability screen for the FORMULA only. It says nothing about "
                             "whether the wall is strong enough, and nothing about buckling, "

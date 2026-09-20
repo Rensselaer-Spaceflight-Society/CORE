@@ -211,6 +211,34 @@ def bending_stress_solid_round_pa(moment_nm, diameter_mm):
                              second_moment_area_solid_round_m4(diameter_mm))
 
 
+def bending_stress_round_pa(moment_nm, y_mm, outer_diameter_mm, inner_diameter_mm):
+    """sigma = M*y/I for a round section, with y checked against that section.
+
+    M*y/I is linear in y, so it will happily return a number for a y that is
+    nowhere near the part - quote y in the wrong units, or measure it from the
+    outside of a flange instead of the neutral axis, and the formula does not
+    object. It should: there is no material outside the wall or inside the bore,
+    so there is no stress to report there.
+    """
+    do = _positive("Outer diameter", outer_diameter_mm)
+    di = _positive("Inner diameter", inner_diameter_mm, allow_zero=True)
+    y = _positive("Distance from the neutral axis", y_mm)
+    if y > do / 2.0:
+        raise ValueError(
+            f"y = {y:g} mm is outside a {do:g} mm section, so there is no material "
+            "there. y is measured from the NEUTRAL AXIS - the centreline of a "
+            "symmetric round section - and reaches its largest useful value, "
+            f"{do / 2.0:g} mm, at the outer surface. Check your datum and your units."
+        )
+    if di > 0 and y < di / 2.0:
+        raise ValueError(
+            f"y = {y:g} mm falls inside the {di:g} mm bore, where there is no "
+            "material. For a tube the stress you want is usually at the outer "
+            f"surface, y = {do / 2.0:g} mm."
+        )
+    return bending_stress_pa(moment_nm, y, second_moment_area_tube_m4(do, di))
+
+
 def torsional_shear_pa(torque_nm, radius_mm, polar_moment_m4):
     """tau = T*r/J, elastic, round section, no stress concentration."""
     t = _finite("Torque", torque_nm)

@@ -208,17 +208,42 @@ def build_lesson():
                 "stress.\n\n"
                 "Read that module. It does something worth noticing:\n\n"
                 "    d_shaft = max(d_from_torsion, d_bearing_bore)\n\n"
-                "At the DP-2 candidate point the compressor absorbs about 18.07 kW "
-                "at 66,000 rpm, which is about 2.61 N*m of shaft torque. Against "
-                "the seed file's 280 MPa allowable shear that needs only about "
-                "3.6 mm of shaft. The candidate journal is 8 mm - set by the "
-                "BEARING BORE, not by torsion at all. The actual shear stress in "
-                "that 8 mm journal is around 26 MPa.\n\n"
-                "A ratio like that is not reassurance. It means torsion is simply "
-                "not the thing that decides this shaft, and a comfortable torsion "
-                "number tells you nothing about the things that do: bending, "
-                "critical speed, bearing capability at 528,000 DN, fits, and "
-                "fatigue at stress risers.\n\n"
+                "Work the torsion side out. At the DP-2 candidate point the "
+                "compressor absorbs about 18.07 kW at 66,000 rpm. Torque is power "
+                "divided by angular speed, and omega = 2*pi*66000/60 = 6,912 rad/s, "
+                "so that is about 2.61 N*m. Be precise about which power you "
+                "divided: m30_shaft.py uses SHAFT power, dividing compressor power "
+                "by eta_mech_frac (0.98 in config/seed.yaml), which gives about "
+                "2.67 N*m instead. A 2% difference changes no conclusion here, but "
+                "knowing which number you used is the difference between a result "
+                "and a rumour.\n\n"
+                "Either torque, against the seed file's 280 MPa allowable shear, "
+                "needs only about 3.6 mm of shaft. So `max()` never picks the "
+                "torsion branch, and the shaft diameter is set by the BEARING BORE. "
+                "That is the structural insight, and it holds whichever design "
+                "point you are in.\n\n"
+                "NOW BE CAREFUL, because this is where people go wrong. There are "
+                "two different bearing bores in this repository and they belong to "
+                "two different design points:\n\n"
+                "  * config/seed.yaml has d_bearing_bore_m = 0.015, that is 15 mm\n"
+                "    (its comment notes the KJ66 uses an 8 mm ISO 608). seed.yaml\n"
+                "    is still the EARLIER 250 N / PR 3.2 baseline.\n"
+                "  * DP-2 proposes an 8 mm journal - that is where the 8 mm x\n"
+                "    66,000 rpm = 528,000 DN figure in docs/project/dp2-review.md\n"
+                "    comes from, with a 608-class bearing.\n\n"
+                "Run the numbers both ways and the shear stress is about 26 MPa in "
+                "an 8 mm journal and about 4 MPa in a 15 mm one - a factor of more "
+                "than six, purely from which document you took the bore out of. "
+                "dp2-review.md says plainly that existing baseline results cannot "
+                "be presented as DP-2 results. Mixing DP-2's power into the seed "
+                "baseline's geometry, or the reverse, produces a number that is not "
+                "true of either engine. Say which design point every input came "
+                "from, and do not mix them.\n\n"
+                "Whichever bore you use, the conclusion is the same and it is not "
+                "reassurance: torsion is simply not the thing that decides this "
+                "shaft. A comfortable torsion number tells you nothing about the "
+                "things that do - bending, critical speed, bearing capability at "
+                "528,000 DN, fits, and fatigue at stress risers.\n\n"
                 "And about that 280 MPa. It is a line in config/seed.yaml commented "
                 "'4340 steel, allowable shear'. That is a modelling input chosen to "
                 "make the model run. It is not a material certificate, it names no "
@@ -230,10 +255,12 @@ def build_lesson():
                         "shaft_torque",
                         "Design-point torque on this shaft",
                         kind="number", units="N*m", minimum=-1.0e9, maximum=1.0e9,
-                        comparison_key="core.shaft.candidate.design_torque_Nm",
                         hint="Either read it from m30_shaft.py's output, or work it out as "
-                             "power/omega yourself and say which you did. Deriving it "
-                             "independently is worth more than copying it.",
+                             "power/omega yourself and say which you did. State in "
+                             "'assumptions' whether you used compressor power or shaft power, "
+                             "and which design point the power came from. These are genuinely "
+                             "different numbers, so this answer is not grouped across "
+                             "learners for comparison.",
                     ),
                     Question(
                         "tau_allow_basis",
@@ -390,12 +417,14 @@ def build_lesson():
             Calculation(
                 "bending_sigma", "Bending stress at your chosen point",
                 ("bending_moment", "y_distance", "outer_d", "inner_d"),
-                lambda bending_moment, y_distance, outer_d, inner_d: sm.bending_stress_pa(
-                    bending_moment, y_distance, _i_section(outer_d, inner_d)) / MPA,
+                lambda bending_moment, y_distance, outer_d, inner_d: sm.bending_stress_round_pa(
+                    bending_moment, y_distance, outer_d, inner_d) / MPA,
                 units="MPa",
                 method="sigma = |M|*y/I with M in N*m, y in mm converted to m and "
                        "I = pi*(do^4 - di^4)/64. Magnitude only; one side of the section is "
-                       "in tension and the other in compression.",
+                       "in tension and the other in compression. y is rejected if it falls "
+                       "outside the section (y > do/2) or inside the bore (y < di/2), because "
+                       "there is no material there to carry a stress.",
                 version="1",
                 limitations="Elastic, static, plain prismatic section, no stress "
                             "concentration, no combined torsion, no fatigue, no temperature "
