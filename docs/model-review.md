@@ -2,6 +2,11 @@
 
 The reverse-flow architecture has engineering precedent; CORE's particular engine is **not yet validated**. Corrections below improve internal consistency. None substitutes for component tests, supplier limits, material/process qualification or independent review.
 
+The September 26 standalone [DP-2 combustor update](combustor-dp2.md) adds inlet
+recovery, optional inner-annulus K sizing, independent dilution rows and liner
+walls, and visible spacing/scoop diagnostics. Its retained 4% loss assumption
+differs from the archived DP-2 cycle screen's 6%; the engine seed is unchanged.
+
 ## Fix ledger
 
 | Finding | Code change | Verification / remaining limit |

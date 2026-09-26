@@ -43,7 +43,7 @@ class MicroJetCombustor:
         self.DESIGN_PARAMS = {
             'target_annulus_vel':       35.0,
             'target_inner_annulus_vel': None,
-            'target_tube_liq_vel':      3.0,
+            'target_inner_hole_K':      None,  # optional minimum; legacy area split if omitted
             'target_vap_mix_vel':       85.0,
             'vap_pitch_mm':             50.0,
             'target_pressure_drop':     0.04,
@@ -74,6 +74,7 @@ class MicroJetCombustor:
             'primary_air_vaporizer_fraction': 0.12,
             'allowed_vaporizer_counts': [6, 8, 12],
             'vap_scoop_target_vel_m_s': 22.0,
+            'vap_scoop_approach_target_m_s': 35.0,  # advisory design preference, not a validated limit
             'vap_scoop_cd':             0.72,
             'film_row_pitch_mm':        38.0,
             'film_hole_dia_mm':         1.20,
@@ -85,6 +86,8 @@ class MicroJetCombustor:
             'fuel_dP_target_bar':       0.60,
             'sec_holes_per_vap':        2,
             'dil_holes_per_vap':        4,
+            'dil_holes_per_vap_inner':  None,
+            'dil_holes_per_vap_outer':  None,
             'phi_primary_target':       1.6,
             'phi_secondary_target':     0.60,
             # ===== PATCH P2 =====
@@ -98,11 +101,14 @@ class MicroJetCombustor:
             # Jet impingement geometry, needed by the Martin correlation.
             'dome_jet_standoff_ratio':  4.0,    # H/D
             'dome_jet_radius_ratio':    4.0,    # r/D
-            # ===== PATCH P4/P5 =====
-            'outer_loop_max_iter':      40,
-            'outer_loop_tol':           1e-6,
-            'outer_loop_relax':         0.50,
         }
+        # Standalone presets can override the same choices as pipeline callers.
+        self.DESIGN_PARAMS.update({k: inputs[k] for k in self.DESIGN_PARAMS if k in inputs})
+        obsolete = {'target_tube_liq_vel', 'outer_loop_max_iter',
+                    'outer_loop_tol', 'outer_loop_relax'} & inputs.keys()
+        if obsolete:
+            raise CombustorError(f"Unused legacy settings: {', '.join(sorted(obsolete))}; "
+                                 "the current model uses one assumed-efficiency sizing pass")
 
         self.FUEL = {
             "LHV":        43.0e6,
@@ -130,6 +136,12 @@ class MicroJetCombustor:
 
     # =======================================================================
     def thermodynamics(self):
+        recovery = self.inputs.get('inlet_pressure_recovery', 1.0)
+        thermo.efficiency(inlet_pressure_recovery=recovery)
+        supplied = ('inlet_total_pressure_Pa' in self.inputs,
+                    'inlet_total_temperature_K' in self.inputs)
+        if supplied[0] != supplied[1]:
+            raise CombustorError('supply both inlet total pressure and temperature')
         if 'inlet_total_pressure_Pa' in self.inputs:
             P2 = self.inputs['inlet_total_pressure_Pa']
             T2 = self.inputs['inlet_total_temperature_K']
@@ -139,7 +151,7 @@ class MicroJetCombustor:
             PR = self.inputs['pressure_ratio']
             eta = self.inputs['compressor_efficiency']
             thermo.efficiency(compressor_efficiency=eta)
-            P2 = P_amb * PR
+            P2 = P_amb * recovery * PR
             Ts = thermo.isentropic_temperature(T_amb, PR, R=self.R)
             T2 = thermo.temperature(gas.h_air(T_amb)+(gas.h_air(Ts)-gas.h_air(T_amb))/eta)
         thermo.positive(P2=P2)
@@ -148,6 +160,8 @@ class MicroJetCombustor:
         self.res['P2_Pa'] = P2
         self.res['T2_K'] = T2
         self.res['rho2'] = P2 / (self.R * T2)
+        self.res['inlet_pressure_recovery'] = recovery
+        self.res['inlet_state_supplied'] = supplied[0]
 
     # =======================================================================
     def mass_flow_and_fuel(self, eta_comb=None):
@@ -260,33 +274,99 @@ class MicroJetCombustor:
         self.res['T_primary_zone_clamped'] = T_pri_raw > 1950.0
 
     # =======================================================================
+    def _wall_thicknesses(self):
+        """Casing/tunnel envelope walls; liner wall is a hot-model dimension.
+
+        The legacy wall_thickness_mm remains the fallback for existing callers.
+        """
+        legacy = self.inputs.get('wall_thickness_mm')
+        casing = self.inputs.get('casing_wall_thickness_mm', legacy)
+        liner = self.inputs.get('liner_wall_thickness_mm', legacy)
+        tunnel = self.inputs.get('shaft_tunnel_wall_thickness_mm', casing)
+        for name, value in [('casing', casing), ('liner', liner), ('shaft_tunnel', tunnel)]:
+            if value is None or not math.isfinite(value) or value <= 0:
+                raise CombustorError(f'{name} wall thickness must be finite and positive')
+        return casing / 1000, liner / 1000, tunnel / 1000
+
+    def _annulus_state(self, do, di, mdot, length, minor_K):
+        """Shared lumped path rating used by sizing and the final geometry check."""
+        area = math.pi * (do**2 - di**2) / 4
+        dh = do - di
+        thermo.positive(area=area, hydraulic_diameter=dh, branch_flow=mdot)
+        rho = self.res['rho2']
+        velocity = mdot / (rho * area)
+        reynolds = rho * velocity * dh / 1.85e-5
+        friction = 64 / reynolds if reynolds < 2300 else 0.316 / reynolds**0.25
+        loss = (friction * length / dh + minor_K) * rho * velocity**2 / 2
+        pt = self.res['P2_Pa'] - loss
+        if pt <= 0:
+            raise CombustorError('annulus path exhausts inlet total pressure')
+        ts, ps = thermo.static(self.res['T2_K'], pt, velocity, R=self.R)
+        return area, velocity, loss, ts, ps
+
+    def _inner_area_for_K(self, nominal_area, liner_area, mdot, tunnel_od, wall):
+        """Enlarge the inner feed independently of flame-tube/reference area.
+
+        Target K is local static hole head / inlet-density annulus dynamic head.
+        It is a design constraint, not a prediction of measured Cd or total loss.
+        """
+        target = self.DESIGN_PARAMS['target_inner_hole_K']
+        through = self.res['mdot_air'] + self.res['mdot_fuel']
+        tbulk = (self.res['T2_K'] + self.inputs['target_tit_k']) / 2
+        rhobulk = self.res['P2_Pa'] / (self.R * tbulk)
+        min_length = through / (rhobulk * liner_area) * self.DESIGN_PARAMS['tau_min_s']
+        _, _, pexit = thermo.area_state(through, liner_area, self.inputs['target_tit_k'],
+            self.res['P2_Pa'] * (1-self.DESIGN_PARAMS['target_pressure_drop']),
+            self.res['FAR'], self.R)
+
+        def residual(area):
+            inner_id = math.sqrt(tunnel_od**2 + 4*area/math.pi)
+            inner_od = inner_id + 2*wall
+            outer_id = math.sqrt(inner_od**2 + 4*liner_area/math.pi)
+            length = max(min_length, (inner_od+outer_id)/2*self.DESIGN_PARAMS['L_D_min'])
+            _, velocity, _, _, ps = self._annulus_state(
+                inner_id, tunnel_od, mdot, length, self.DESIGN_PARAMS['K_entrance'])
+            return (ps-pexit)/(0.5*self.res['rho2']*velocity**2) - target
+
+        lo = nominal_area
+        if residual(lo) >= 0:
+            return lo
+        hi = lo * 2
+        for _ in range(60):
+            if residual(hi) >= 0:
+                break
+            hi *= 2
+        else:
+            raise CombustorError('could not bracket inner annulus hole-K target')
+        for _ in range(60):
+            mid = (lo+hi)/2
+            if residual(mid) >= 0:
+                hi = mid
+            else:
+                lo = mid
+            if hi-lo <= hi*1e-10:
+                return hi  # feasible side of the bracket
+        raise CombustorError('inner annulus hole-K sizing did not converge')
+
     def mechanical_geometry(self, f_outer_feed=None, v_inner_override=None):
-        wall_m = self.inputs['wall_thickness_mm'] / 1000.0
+        casing_wall, wall_m, tunnel_wall = self._wall_thicknesses()
         od_casing = self.inputs['casing_od_inch'] * 0.0254
-        id_casing = od_casing - 2 * wall_m
+        id_casing = od_casing - 2 * casing_wall
         od_tunnel = self.inputs['shaft_tunnel_od_inch'] * 0.0254
-        id_tunnel = od_tunnel - 2 * wall_m
+        id_tunnel = od_tunnel - 2 * tunnel_wall
+        if not 0 < id_tunnel < od_tunnel < id_casing:
+            raise CombustorError('casing/tunnel walls leave no valid flow envelope')
+        self.res.update(casing_wall_thickness_mm=casing_wall*1000,
+                        liner_wall_thickness_mm=wall_m*1000,
+                        shaft_tunnel_wall_thickness_mm=tunnel_wall*1000)
 
         rho2 = self.res['rho2']
         m_air = self.res['mdot_air']
         v_outer = self.DESIGN_PARAMS['target_annulus_vel']
-        _dp_inner = self.DESIGN_PARAMS.get('target_inner_annulus_vel')
-        # PATCH P5: the inner annulus velocity is now SOLVED by the pressure
-        # balance, not asserted. An explicit input still wins (so the KJ66
-        # preset's historical 20 m/s can be reproduced on demand), and the
-        # first pass falls back to matching the outer velocity.
-        v_inner = (v_inner_override
-                   or self.inputs.get('target_inner_annulus_vel')
-                   or (_dp_inner if _dp_inner is not None else None)
-                   or v_outer)
+        v_inner = (v_inner_override if v_inner_override is not None
+                   else self.DESIGN_PARAMS['target_inner_annulus_vel'])
         self.res['v_inner_target_used'] = v_inner
-
-        # ===== PATCH P5 =====
-        # V21 always sized the annuli with the nominal 0.60 and never revisited
-        # it, even though pressure_balance_split() went on to compute 0.516 for
-        # the 6-inch case and 0.371 for the KJ66 -- a 14% and 39% error in the
-        # areas that had already been fixed. f_outer now comes from the outer
-        # loop, which iterates the two to a fixed point.
+        # The branch split remains a chosen inlet mass allocation.
         if f_outer_feed is None:
             f_outer_feed = self.DESIGN_PARAMS['f_outer_feed']
 
@@ -320,6 +400,19 @@ class MicroJetCombustor:
         A_feed_total = A_ref - A_liner_flow        # both feed annuli together
         A_outer_feed = A_feed_total * f_outer_feed
         A_inner_feed = A_feed_total * (1.0 - f_outer_feed)
+        target_K = self.DESIGN_PARAMS['target_inner_hole_K']
+        if v_inner is not None and target_K is not None:
+            raise CombustorError('choose target_inner_annulus_vel OR target_inner_hole_K')
+        if v_inner is not None:
+            thermo.positive(target_inner_annulus_vel=v_inner)
+            A_inner_feed = m_air*(1-f_outer_feed)/(rho2*v_inner)
+        elif target_K is not None:
+            A_inner_feed = self._inner_area_for_K(
+                A_inner_feed, A_liner_flow, m_air*(1-f_outer_feed), od_tunnel, wall_m)
+        self.res['inner_annulus_sizing'] = ('hole-K minimum' if target_K is not None else
+                                          'velocity target' if v_inner is not None else
+                                          'legacy reference-area split')
+        self.res['inner_hole_K_target'] = target_K
 
         # -- stack outward from the shaft tunnel ----------------------------
         r_tunnel_od = od_tunnel / 2
@@ -335,7 +428,7 @@ class MicroJetCombustor:
 
         # the casing the combustor REQUIRES, as an output
         D_casing_id_req = 2 * r_casing_id_req
-        D_casing_od_req = D_casing_id_req + 2 * wall_m
+        D_casing_od_req = D_casing_id_req + 2 * casing_wall
         self.res['casing_id_required_mm'] = D_casing_id_req * 1000
         self.res['casing_od_required_mm'] = D_casing_od_req * 1000
 
@@ -355,13 +448,6 @@ class MicroJetCombustor:
         self.res['V_ref_m_s'] = V_ref
         self.res['A_liner_flow_m2'] = A_liner_flow
 
-        # velocity targets are now CHECKS, not sizing inputs
-        v_outer_check = (m_air * f_outer_feed) / (rho2 * A_outer_feed)
-        v_inner_check = (m_air * (1.0 - f_outer_feed)) / (rho2 * A_inner_feed)
-        self.res['v_outer_vs_target'] = v_outer_check / v_outer if v_outer else 0.0
-        self.res['v_inner_vs_target'] = v_inner_check / v_inner if v_inner else 0.0
-
-
         A_comb = math.pi * ((outer_liner_id / 2) ** 2 - (inner_liner_od / 2) ** 2)
         D_mean = (outer_liner_id + inner_liner_od) / 2
         combustion_gap = (outer_liner_id - inner_liner_od) / 2
@@ -375,9 +461,9 @@ class MicroJetCombustor:
                 f"liner span). Reduce shaft tunnel OD, increase casing OD, or thin the wall."
             )
 
-        tau_min = self.inputs.get('tau_min_s', self.DESIGN_PARAMS['tau_min_s'])
-        L_D_min = self.inputs.get('L_D_min', self.DESIGN_PARAMS['L_D_min'])
-        L_D_max = self.inputs.get('L_D_max', self.DESIGN_PARAMS['L_D_max'])
+        tau_min = self.DESIGN_PARAMS['tau_min_s']
+        L_D_min = self.DESIGN_PARAMS['L_D_min']
+        L_D_max = self.DESIGN_PARAMS['L_D_max']
 
         # ===== PATCH P3 =====
         # V21 sized the length from m_combustion_air (air only) but reported
@@ -430,6 +516,8 @@ class MicroJetCombustor:
         self.res['inner_annulus_gap_mm'] = (inner_liner_id - od_tunnel) / 2 * 1000
         self.res['v_outer_annulus'] = v_out_act
         self.res['v_inner_annulus'] = v_in_act
+        self.res['v_outer_vs_target'] = v_out_act / v_outer
+        self.res['v_inner_vs_target'] = v_in_act / v_inner if v_inner else None
         self.res['v_outer_post_vap'] = ((m_outer_entry - m_air_vap)
                                         / (rho2 * A_outer_feed)) if A_outer_feed > 0 else 0
         self.res['outer_liner_circumf_m'] = math.pi * outer_liner_id
@@ -574,6 +662,19 @@ class MicroJetCombustor:
         self.res['vap_exit_v_crimped'] = m_mix_per_tube/(rho_gas_exit*math.pi*(d_crimp_mm/1000)**2/4)
         self.res['vap_scoop_vel_actual'] = (m_air_vap/n_tubes)/(rho_ann*A_scoop)
         self.res['vap_scoop_dia_mm'] = math.sqrt(4 * A_scoop / math.pi) * 1000
+        approach = self.res['v_outer_annulus']
+        face_velocity = self.res['vap_scoop_vel_actual']
+        self.res['vap_scoop_approach_m_s'] = approach
+        self.res['vap_scoop_approach_target_m_s'] = self.DESIGN_PARAMS['vap_scoop_approach_target_m_s']
+        self.res['vap_scoop_approach_below_target'] = approach < self.DESIGN_PARAMS['vap_scoop_approach_target_m_s']
+        self.res['vap_scoop_face_target_m_s'] = self.DESIGN_PARAMS['vap_scoop_target_vel_m_s']
+        self.res['vap_scoop_face_vs_target'] = face_velocity / self.DESIGN_PARAMS['vap_scoop_target_vel_m_s']
+        # Streamtube area at approach speed, not a second static-pressure loss.
+        # Suction can accelerate the flow, so ratio > 1 is advisory, not failure.
+        capture_area = (m_air_vap/n_tubes)/(rho_ann*approach)
+        self.res['vap_scoop_capture_dia_mm'] = math.sqrt(4*capture_area/math.pi)*1000
+        self.res['vap_scoop_capture_area_ratio'] = capture_area/A_scoop
+        self.res['vap_scoop_capture_validated'] = False
 
         self.res['fuel_Re_tube'] = Re_tube
         self.res['fuel_dP_tube_Pa'] = dP_tube_Pa
@@ -596,15 +697,8 @@ class MicroJetCombustor:
         for branch, do, di, share, K in (
             ('outer',r['casing_id_mm'],r['outer_liner_od_mm'],f,self.DESIGN_PARAMS['K_turn']),
             ('inner',r['inner_liner_id_mm'],r['shaft_tunnel_od_mm'],1-f,self.DESIGN_PARAMS['K_entrance'])):
-            A = math.pi*(do**2-di**2)/4e6
-            Dh = (do-di)/1000
-            thermo.positive(area=A, hydraulic_diameter=Dh, branch_flow=m*share)
-            v = m*share/(rho*A)
-            Re = rho*v*Dh/1.85e-5
-            friction = 64/Re if Re < 2300 else 0.316/Re**0.25
-            loss = (friction*L/Dh+K)*rho*v*v/2
-            Pt = r['P2_Pa']-loss
-            Tstatic, Pstatic = thermo.static(r['T2_K'],Pt,v,R=self.R)
+            A, v, loss, Tstatic, Pstatic = self._annulus_state(
+                do/1000, di/1000, m*share, L, K)
             head = Pstatic-r['exit_P4_Pa']
             if head <= 0:
                 raise CombustorError(f"{branch} path has no positive liner injection pressure budget")
@@ -662,8 +756,7 @@ class MicroJetCombustor:
         self.res['CLP_V_primary_m3'] = V_primary
         self.res['CLP_V_total_m3'] = V_total
         self.res['tau_comb_ms'] = round(tau_ms, 3)
-        self.res['tau_target_ms'] = self.inputs.get(
-            'tau_min_s', self.DESIGN_PARAMS['tau_min_s']) * 1000.0
+        self.res['tau_target_ms'] = self.DESIGN_PARAMS['tau_min_s'] * 1000.0
         self.res['CLP_stable'] = False  # stability cannot be inferred from this proxy
         self.res['CLP_acceptable'] = CLP < 15.0
 
@@ -712,8 +805,14 @@ class MicroJetCombustor:
         n_pri_out = n_pri_in = n_vap * 2
         sec_m = max(1, int(self.DESIGN_PARAMS['sec_holes_per_vap']))
         n_sec_out = n_sec_in = n_vap * sec_m
-        dil_m = max(1, int(self.DESIGN_PARAMS['dil_holes_per_vap']))
-        n_dil_out = n_dil_in = n_vap * dil_m
+        def dilution_count(side):
+            multiple = self.DESIGN_PARAMS['dil_holes_per_vap_'+side]
+            if multiple is None:
+                multiple = self.DESIGN_PARAMS['dil_holes_per_vap']
+            if not math.isfinite(multiple) or multiple < 1 or int(multiple) != multiple:
+                raise CombustorError('dilution holes per vaporizer must be a positive integer')
+            return n_vap * int(multiple)
+        n_dil_out, n_dil_in = dilution_count('outer'), dilution_count('inner')
 
         d = {
             'pri_out': hole_dia(A_pri, f_outer, n_pri_out),
@@ -753,6 +852,10 @@ class MicroJetCombustor:
         self.res['hole_K_coefficient'] = min(Ks)
         self.res['hole_K_outer'],self.res['hole_K_inner'] = Ks
         self.res['hole_K_ok'] = min(Ks)>=6
+        target = self.DESIGN_PARAMS['target_inner_hole_K']
+        self.res['inner_hole_K_target_met'] = target is None or Ks[1] >= target*(1-1e-8)
+        if not self.res['inner_hole_K_target_met']:
+            raise CombustorError('final inner annulus misses its hole-K sizing target')
         self.res['hole_Cd_consistent_with_K'] = False  # requires calibrated Cd
         n_rows = sum(self.DESIGN_PARAMS['film_rows_'+z] for z in ('primary','secondary','dilution'))
         self.res['film_n_rows'] = n_rows
@@ -834,7 +937,7 @@ class MicroJetCombustor:
 
     # =======================================================================
     def liner_structural(self):
-        wall_m = self.inputs['wall_thickness_mm'] / 1000.0
+        wall_m = self.res['liner_wall_thickness_mm'] / 1000.0
         dP = self.res['P2_Pa'] * self.DESIGN_PARAMS['target_pressure_drop']
         r_o = (self.res['outer_liner_od_mm'] + self.res['outer_liner_id_mm']) / 4 / 1000
         r_i = (self.res['inner_liner_od_mm'] + self.res['inner_liner_id_mm']) / 4 / 1000
@@ -843,7 +946,7 @@ class MicroJetCombustor:
         pitch_i = self.res['inner_liner_circumf_m'] * 1000 / self.res['dil_in_qty']
         lig_o = pitch_o - self.res['dil_out_mm']
         lig_i = pitch_i - self.res['dil_in_mm']
-        lig_min = max(self.inputs['wall_thickness_mm'] * 2.0, 1.5)
+        lig_min = max(self.res['liner_wall_thickness_mm'] * 2.0, 1.5)
         self.res['sigma_hoop_outer_MPa'] = s_o
         self.res['sigma_hoop_inner_MPa'] = s_i
         self.res['sigma_allow_ss304_MPa'] = 65.0
@@ -855,6 +958,21 @@ class MicroJetCombustor:
         self.res['liner_in625_ok'] = s_o < 175.0 and s_i < 175.0
         self.res['ligament_outer_ok'] = lig_o >= lig_min
         self.res['ligament_inner_ok'] = lig_i >= lig_min
+        # Check every main-hole row in cold dimensions; historical dilution-only
+        # keys above remain hot-model compatibility values. Use the smaller
+        # face circumference of each liner as a conservative spacing screen.
+        scale = self.res['thermal_scale_ratio']
+        min_cold = max(2*self.res['liner_wall_thickness_mm']/scale, 1.5)
+        checks = {}
+        for side, short in [('outer', 'out'), ('inner', 'in')]:
+            circumference = math.pi*self.res[side+'_liner_id_cold_mm']
+            for zone in ('pri', 'sec', 'dil'):
+                key = zone+'_'+short
+                ligament = circumference/self.res[key+'_qty'] - self.res[key+'_mm']/scale
+                checks[key] = {'ligament_cold_mm': ligament, 'minimum_cold_mm': min_cold,
+                               'ok': ligament >= min_cold}
+        self.res['main_hole_ligaments'] = checks
+        self.res['main_hole_ligaments_ok'] = all(check['ok'] for check in checks.values())
 
     # =======================================================================
     def temperature_traverse_quality(self):
@@ -1044,7 +1162,8 @@ class MicroJetCombustor:
     # =======================================================================
     def run(self):
         self.res = {}
-        for key in ('casing_od_inch','shaft_tunnel_od_inch','wall_thickness_mm',
+        self._wall_thicknesses()
+        for key in ('casing_od_inch','shaft_tunnel_od_inch',
                     'pressure_ratio','compressor_efficiency','target_tit_k'):
             thermo.positive(**{key:self.inputs[key]})
         for key in ('film_cooling_fraction','primary_air_vaporizer_fraction',
@@ -1053,6 +1172,15 @@ class MicroJetCombustor:
             if not math.isfinite(value) or not 0 < value < 1:
                 raise CombustorError(f'{key} must be in (0,1) for this model')
         thermo.efficiency(Cd=self.DESIGN_PARAMS['discharge_coeff_hole'])
+        thermo.efficiency(scoop_Cd=self.DESIGN_PARAMS['vap_scoop_cd'])
+        for key in ('target_annulus_vel', 'vap_scoop_target_vel_m_s',
+                    'vap_scoop_approach_target_m_s', 'K_annular_ratio',
+                    'tau_min_s', 'L_D_min', 'L_D_max'):
+            thermo.positive(**{key: self.DESIGN_PARAMS[key]})
+        if self.DESIGN_PARAMS['L_D_max'] < self.DESIGN_PARAMS['L_D_min']:
+            raise CombustorError('L_D_max must be at least L_D_min')
+        if self.DESIGN_PARAMS['target_inner_hole_K'] is not None:
+            thermo.positive(target_inner_hole_K=self.DESIGN_PARAMS['target_inner_hole_K'])
         thermo.positive(phi_primary=self.DESIGN_PARAMS['phi_primary_target'],
                         phi_secondary=self.DESIGN_PARAMS['phi_secondary_target'])
         self.thermodynamics()
@@ -1075,6 +1203,7 @@ class MicroJetCombustor:
         self.res['manufacturing_released'] = False
         self.res['stability_validated'] = False
         self.res['thermal_validated'] = False
+        self.res['thermal_warning_basis'] = 'uncalibrated correlations; advisory, not acceptance criteria'
         self.res['outer_liner_buckling_validated'] = False
         self.res['patches_applied'] = ['2026-09 shared-state / fixed-geometry / pressure-budget audit']
         self.res['cad_geometry'] = self.get_cad_geometry()
@@ -1101,7 +1230,7 @@ class MicroJetCombustor:
                         "mean_comb_dia": r['D_mean_comb_mm'],
                         "L_over_D": r['chamber_L_over_D']},
             "casing": {"od": r['casing_od_mm'], "id": r['casing_id_mm'],
-                       "wall_thickness": self.inputs['wall_thickness_mm']},
+                       "wall_thickness": r['casing_wall_thickness_mm']},
             "shaft_tunnel": {"od": r['shaft_tunnel_od_mm'], "id": r['shaft_tunnel_id_mm']},
             "outer_liner": {"od": r['outer_liner_od_cold_mm'], "od_hot": r['outer_liner_od_hot_mm'],
                             "thermal_offset": r['outer_liner_thermal_offset_mm'],
@@ -1147,6 +1276,8 @@ class MicroJetCombustor:
         for side in ('outer','inner'):
             cad[side+'_liner']['id'] = r[side+'_liner_id_cold_mm']
             cad[side+'_liner']['length'] = r['chamber_length_cold_mm']
+            cad[side+'_liner']['wall_thickness'] = r['liner_wall_thickness_mm']/scale
+        cad['shaft_tunnel']['wall_thickness'] = r['shaft_tunnel_wall_thickness_mm']
         cad['overall']['chamber_length'] /= scale
         for key in cad['zone_lengths']: cad['zone_lengths'][key] /= scale
         for zone in ('primary','secondary','dilution'):

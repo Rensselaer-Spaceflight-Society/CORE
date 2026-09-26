@@ -324,6 +324,7 @@ def build_design_card(design_inputs: dict) -> dict:
             "fuel_LHV_J_kg": model.FUEL['LHV'],
             "ambient_pressure_Pa": design_inputs.get('ambient_pressure_Pa',P_AMB),
             "ambient_temperature_K": design_inputs.get('ambient_temperature_K',T_AMB),
+            "inlet_pressure_recovery": design_inputs.get('inlet_pressure_recovery',1.0),
             # Lefebvre theta normalisation factor (computed above).
             # theta_norm = CLP_linear_design / clp_theta_design, which makes
             # CLP_effective == CLP_linear exactly at the design point, then
@@ -378,7 +379,9 @@ def evaluate_off_design_point(
     thermo.positive(pr=pr,mdot_air=mdot_air)
     ambient_P = anchors.get('ambient_pressure_Pa',P_AMB)
     ambient_T = anchors.get('ambient_temperature_K',T_AMB)
-    P2 = ambient_P*pr
+    recovery = anchors.get('inlet_pressure_recovery', 1.0)
+    thermo.efficiency(inlet_pressure_recovery=recovery)
+    P2 = ambient_P*recovery*pr
     T2_iso = thermo.isentropic_temperature(ambient_T,pr,R=R_AIR)
     T2 = thermo.temperature(gas.h_air(ambient_T)+(gas.h_air(T2_iso)-gas.h_air(ambient_T))/eff_c)
     rho2    = P2 / (R_AIR * T2)
