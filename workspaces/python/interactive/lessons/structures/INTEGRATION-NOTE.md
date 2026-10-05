@@ -75,15 +75,16 @@ the same shape. The lessons are complete and correct without it.
 ## Notes for the integration pass
 
 - `make_bundle.py` picks the three lesson modules, the helper and the three visuals up
-  automatically (`.py` and `.html` are already in its suffix list). Verified: 27 entries
-  in the built ZIP, 7 of them from this domain.
+  automatically (`.py` and `.html` are already in its suffix list), and this note with
+  them. Verified: 8 entries in the built ZIP come from this domain.
 - No new dependency. Standard library only, Python 3.11–3.13.
-- `python run.py --report-only` still reports 15/16 limits satisfied and 11 evidence
-  blockers — unchanged, because no engineering input was touched.
-- Unrelated: a fresh clone shows `legacy/v5/V5_CombustionChamber_Design.py` and
-  `legacy/v5/test_combustor.py` as modified because of CRLF→LF normalisation under
-  `.gitattributes`. Pre-existing and not caused by this work, so it is deliberately
-  not in this branch; it is handled separately on `chore/remove-legacy-v5`.
+- The lessons change no engineering input, so `python run.py --report-only` is
+  unaffected by them.
+- Resolved: the CRLF→LF noise a fresh clone showed came from `legacy/v5/`, which was
+  removed from `main` on 2026-10-05.
+- The worked numbers are DP-2 and seed-baseline values, labelled as such. The PD-1
+  candidate merged into `main` on 2026-10-05 supersedes DP-2 for design work; see
+  [`workspaces/structures/README.md`](../../../../structures/README.md).
 
 ## Handoff beyond the platform
 

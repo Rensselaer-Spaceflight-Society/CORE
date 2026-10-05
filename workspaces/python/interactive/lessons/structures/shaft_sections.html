@@ -141,8 +141,8 @@ model runs. It names no temper, no heat treatment, no temperature, no surface fi
 basis and no factor of safety. Quoting it back does not turn it into an allowable — and an ultimate
 tensile strength, or a room-temperature handbook value, is not one either.</p></div>
 
-<div class="warn"><strong>Two bearing bores, two design points.</strong>
-<p><code>config/seed.yaml</code> carries <code>d_bearing_bore_m: 0.015</code> and is still the earlier 250&nbsp;N / PR&nbsp;3.2 baseline. DP-2 proposes an 8&nbsp;mm journal, which is where <code>docs/project/dp2-review.md</code> gets 8&nbsp;mm &times; 66,000&nbsp;rpm = 528,000&nbsp;DN. Taking DP-2&rsquo;s power and the seed baseline&rsquo;s geometry, or the reverse, produces a number that is true of neither engine &mdash; and the review says explicitly that existing baseline results cannot be presented as DP-2 results.</p></div>
+<div class="warn"><strong>Three bearing bores, three design points.</strong>
+<p><code>config/seed.yaml</code> carries <code>d_bearing_bore_m: 0.015</code> and is still the earlier 250&nbsp;N / PR&nbsp;3.2 baseline. DP-2 proposes an 8&nbsp;mm journal, which is where <code>docs/project/dp2-review.md</code> gets 8&nbsp;mm &times; 66,000&nbsp;rpm = 528,000&nbsp;DN. The PD-1 candidate now on <code>main</code> uses 10&nbsp;mm journals, set by the 9.99&nbsp;mm bore of the candidate JETMAX TW85 turbine wheel, with a 68,000&nbsp;rpm design point (<code>config/cases/pd1-jm85.yaml</code>, <code>docs/design/design-basis.md</code>). Taking one design point&rsquo;s power and another&rsquo;s geometry produces a number that is true of none of them &mdash; and the review says explicitly that existing baseline results cannot be presented as DP-2 results.</p></div>
 
 <div class="warn"><strong>Stress margin does not buy speed margin.</strong>
 <p><code>docs/model-review.md</code> reports a preliminary bending critical speed near 23,400 rpm

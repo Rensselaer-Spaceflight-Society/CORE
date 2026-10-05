@@ -31,6 +31,13 @@ python workspaces/python/interactive/lessons/structures/pressure_wall.py --previ
 read it without Python set up for saving. See
 [SETUP.md](../python/interactive/SETUP.md) for slots, saving and submission.
 
+**Which design point the numbers come from.** The worked values in these lessons are
+DP-2 and earlier seed-baseline figures, and each is labelled as such. The PD-1 candidate
+now on `main` supersedes DP-2 for design work: it keeps the 152.4 mm casing, sizes at
+68 krpm with P03 = 149.3 kPa, and uses 10 mm journals on 10 × 26 × 8 hybrid bearings
+([design basis](../../docs/design/design-basis.md)). Treat the lesson numbers as worked
+examples and take current values from the PD-1 records.
+
 Existing student code in [`object tests/`](object%20tests/) is preserved as written;
 [its README](object%20tests/README.md) explains what it teaches, the one unfinished
 expression in it, and why its 2 MPa example loads must stay separate from DP-2.
@@ -38,3 +45,5 @@ expression in it, and why its 2 MPa example loads must stay separate from DP-2.
 Two primary members cannot simultaneously own complete shaft, bearing, casing, inlet, nozzle and stand design. T4 helps with assembly inventory; T5 helps with energy questions. The lead retains the unassigned casing/nozzle/stand work and prioritizes it after the meeting.
 
 Each card includes its own Findings section. Keep notes there until they need a separate analysis artifact; add a linked subfolder only when there is actual work to store. Do not create a folder per person or duplicate CAD files. For a shared value use the [interface register](../coordination/interfaces.md).
+
+Topic subfolders so far: [Bearings](Bearings/bearings.md), [Shaft](Shaft/Shaft.md) and [Rotordynamics](Rotordynamics/Rotordynamics.md).
