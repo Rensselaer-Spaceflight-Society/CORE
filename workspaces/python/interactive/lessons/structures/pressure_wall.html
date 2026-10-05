@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CORE — S3-STRESS: one pressure wall</title>
+<style>
+body{margin:0;background:#102431;color:#eef5f7;font:17px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1020px;margin:auto;padding:40px 26px 70px}
+.eyebrow{color:#69dfcc;letter-spacing:2px;font-size:13px;text-transform:uppercase}
+h1{font-size:clamp(27px,4.4vw,44px);line-height:1.15;margin:14px 0 6px}
+h2{font-size:23px;margin:44px 0 6px}
+p{max-width:760px;color:#c0d1dc}
+figure{margin:22px 0;background:#18303d;border:1px solid #44616e;border-radius:12px;padding:18px 16px}
+figcaption{font-size:14px;color:#9fb6c3;margin-top:12px}
+svg{display:block;width:100%;height:auto}
+.note{border-left:4px solid #e4b962;padding:6px 20px;margin:26px 0;background:#1b2d33}
+.warn{border-left:4px solid #e4796b;padding:6px 20px;margin:26px 0;background:#2c2226}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #44616e;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#1d3644;color:#69dfcc;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+code{background:#0c1a23;padding:1px 6px;border-radius:4px;font-size:15px;color:#bfe9e0}
+.tag{display:inline-block;font-size:12px;letter-spacing:1px;padding:2px 8px;border-radius:99px}
+.ex{background:#4a3a1c;color:#f0cf8d;border:1px solid #8a6c2d}
+.cand{background:#1c3f4a;color:#8fd9e8;border:1px solid #2e6c7e}
+</style>
+<main>
+<div class="eyebrow">CORE / S3-STRESS / Track A</div>
+<h1>Draw the load first.<br>The algebra is bookkeeping.</h1>
+<p>A reference for the lesson running in your terminal. Nothing here is an approval, an
+allowable or a margin. Go back to the terminal to record your answers.</p>
+
+<h2>1. The free-body diagram</h2>
+<figure>
+<svg viewBox="0 0 660 430" role="img" aria-label="Section through a thin-walled cylinder. Internal absolute pressure pushes outward on both walls, external absolute pressure pushes inward, hoop stress runs around the circumference shown as into-page and out-of-page symbols, and axial stress runs along the wall between dashed end caps. Inner diameter and wall thickness are dimensioned.">
+  <defs>
+    <marker id="ti" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#69dfcc"/></marker>
+    <marker id="am" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#e4b962"/></marker>
+    <marker id="wh" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#eef5f7"/></marker>
+  </defs>
+
+  <text x="14" y="22" fill="#9fb6c3" font-size="13" letter-spacing="1.5">SECTION THROUGH THE WALL</text>
+
+  <!-- external pressure, top -->
+  <text x="330" y="46" fill="#e4b962" font-size="15" text-anchor="middle">p_o — outside, absolute</text>
+  <g stroke="#e4b962" stroke-width="2" marker-end="url(#am)">
+    <line x1="200" y1="56" x2="200" y2="94"/><line x1="265" y1="56" x2="265" y2="94"/>
+    <line x1="330" y1="56" x2="330" y2="94"/><line x1="395" y1="56" x2="395" y2="94"/>
+    <line x1="460" y1="56" x2="460" y2="94"/>
+  </g>
+
+  <!-- walls and dashed end caps -->
+  <rect x="130" y="100" width="400" height="18" fill="#54798c" stroke="#a9c6d4"/>
+  <rect x="130" y="302" width="400" height="18" fill="#54798c" stroke="#a9c6d4"/>
+  <rect x="130" y="100" width="18" height="220" fill="#37596a" stroke="#a9c6d4" stroke-dasharray="5 4"/>
+  <rect x="512" y="100" width="18" height="220" fill="#37596a" stroke="#a9c6d4" stroke-dasharray="5 4"/>
+
+  <!-- hoop stress markers: out of page on top wall, into page on bottom wall -->
+  <text x="174" y="92" fill="#eef5f7" font-size="15" text-anchor="middle">σ_h</text>
+  <circle cx="174" cy="109" r="7.5" fill="none" stroke="#eef5f7" stroke-width="2"/>
+  <circle cx="174" cy="109" r="2.2" fill="#eef5f7"/>
+  <circle cx="174" cy="311" r="7.5" fill="none" stroke="#eef5f7" stroke-width="2"/>
+  <line x1="169" y1="306" x2="179" y2="316" stroke="#eef5f7" stroke-width="2"/>
+  <line x1="179" y1="306" x2="169" y2="316" stroke="#eef5f7" stroke-width="2"/>
+  <text x="174" y="340" fill="#eef5f7" font-size="15" text-anchor="middle">σ_h</text>
+
+  <!-- axial stress along the top wall -->
+  <line x1="400" y1="109" x2="340" y2="109" stroke="#eef5f7" stroke-width="2.2" marker-end="url(#wh)"/>
+  <line x1="400" y1="109" x2="460" y2="109" stroke="#eef5f7" stroke-width="2.2" marker-end="url(#wh)"/>
+  <line x1="400" y1="134" x2="400" y2="119" stroke="#eef5f7" stroke-width="1.2"/>
+  <text x="400" y="150" fill="#eef5f7" font-size="15" text-anchor="middle">σ_a</text>
+
+  <!-- internal pressure, outward on both walls -->
+  <g stroke="#69dfcc" stroke-width="2" marker-end="url(#ti)">
+    <line x1="220" y1="198" x2="220" y2="126"/><line x1="290" y1="198" x2="290" y2="126"/>
+    <line x1="360" y1="198" x2="360" y2="126"/><line x1="430" y1="198" x2="430" y2="126"/>
+    <line x1="490" y1="198" x2="490" y2="126"/>
+    <line x1="220" y1="228" x2="220" y2="296"/><line x1="290" y1="228" x2="290" y2="296"/>
+    <line x1="360" y1="228" x2="360" y2="296"/><line x1="430" y1="228" x2="430" y2="296"/>
+    <line x1="490" y1="228" x2="490" y2="296"/>
+  </g>
+  <text x="330" y="219" fill="#69dfcc" font-size="15" text-anchor="middle">p_i — inside, absolute</text>
+
+  <!-- external pressure, bottom -->
+  <g stroke="#e4b962" stroke-width="2" marker-end="url(#am)">
+    <line x1="200" y1="364" x2="200" y2="326"/><line x1="265" y1="364" x2="265" y2="326"/>
+    <line x1="330" y1="364" x2="330" y2="326"/><line x1="395" y1="364" x2="395" y2="326"/>
+    <line x1="460" y1="364" x2="460" y2="326"/>
+  </g>
+  <text x="330" y="386" fill="#e4b962" font-size="15" text-anchor="middle">p_o — outside, absolute</text>
+
+  <!-- dimensions -->
+  <line x1="580" y1="118" x2="580" y2="302" stroke="#a9c6d4" stroke-width="1.4"
+        marker-start="url(#wh)" marker-end="url(#wh)"/>
+  <text x="594" y="215" fill="#a9c6d4" font-size="15">ID</text>
+  <line x1="552" y1="100" x2="552" y2="118" stroke="#a9c6d4" stroke-width="1.4"
+        marker-start="url(#wh)" marker-end="url(#wh)"/>
+  <text x="560" y="86" fill="#a9c6d4" font-size="15">t</text>
+
+  <text x="14" y="408" fill="#9fb6c3" font-size="13">
+    ⊙ out of the page, ⊗ into the page: hoop stress runs around the circumference.</text>
+  <text x="14" y="424" fill="#9fb6c3" font-size="13">
+    r in the formulae below is the mid-wall radius, (ID + t) / 2.</text>
+</svg>
+<figcaption><strong>The dashed end caps are a question, not a fact.</strong> σ_a exists only if
+those caps are closed <em>and</em> hang off this same wall. If the ends are open, or a flange,
+tie bolts or the shaft carry the end load, the axial number does not belong to this part.</figcaption>
+</figure>
+
+<table>
+<tr><th>Quantity</th><th>Formula</th><th>Assumption it rests on</th></tr>
+<tr><td>Hoop stress σ_h</td><td><code>(p_i − p_o) · r / t</code></td>
+    <td>Thin wall, uniform through thickness, plain cylinder, away from ends, holes and joints.</td></tr>
+<tr><td>Axial stress σ_a</td><td><code>(p_i − p_o) · r / (2t)</code></td>
+    <td>Closed ends, and the end load is reacted by <em>this</em> wall. Exactly half of σ_h.</td></tr>
+<tr><td>Applicability</td><td><code>r / t &gt; 10</code></td>
+    <td>AFFDL <em>Stress Analysis Manual</em>, Oct 1986, Sec. 8.3.1. Below this, the thick-wall
+    (Lamé) solution is needed instead.</td></tr>
+</table>
+
+<h2>2. The same formula, two completely different jobs</h2>
+<figure>
+<svg viewBox="0 0 760 400" role="img" aria-label="Log-log plot of hoop stress against wall thickness. The example case, 2 MPa across a 200 millimetre bore, reaches about 201 MPa at a 1 millimetre wall. The CORE candidate casing, 62.2 kPa across a 149.4 millimetre bore, reaches about 3.13 MPa at a 1.5 millimetre wall. A shaded band at the right marks thicknesses where the thin-wall criterion stops applying for the candidate bore.">
+  <rect x="92" y="40" width="468" height="260" fill="#0c1a23" stroke="#44616e"/>
+  <rect x="506.4" y="40" width="53.6" height="260" fill="#e4796b" opacity="0.18"/>
+  <line x1="506.4" y1="40" x2="506.4" y2="300" stroke="#e4796b" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <line x1="543.4" y1="40" x2="543.4" y2="300" stroke="#e4b962" stroke-width="1.4" stroke-dasharray="3 5"/>
+
+  <g stroke="#23404f" stroke-width="1">
+    <line x1="92" y1="235" x2="560" y2="235"/><line x1="92" y1="170" x2="560" y2="170"/>
+    <line x1="92" y1="105" x2="560" y2="105"/>
+  </g>
+  <g stroke="#1b3341" stroke-width="1">
+    <line x1="156.8" y1="40" x2="156.8" y2="300"/><line x1="244.7" y1="40" x2="244.7" y2="300"/>
+    <line x1="332.7" y1="40" x2="332.7" y2="300"/><line x1="448.9" y1="40" x2="448.9" y2="300"/>
+    <line x1="536.9" y1="40" x2="536.9" y2="300"/>
+  </g>
+
+  <g fill="#9fb6c3" font-size="12" text-anchor="end">
+    <text x="85" y="304">0.1</text><text x="85" y="239">1</text>
+    <text x="85" y="174">10</text><text x="85" y="109">100</text><text x="85" y="44">1000</text>
+  </g>
+  <text x="28" y="170" fill="#9fb6c3" font-size="13" transform="rotate(-90 28 170)" text-anchor="middle">hoop stress (MPa, log)</text>
+  <g fill="#9fb6c3" font-size="12" text-anchor="middle">
+    <text x="92" y="318">0.3</text><text x="156.8" y="318">0.5</text><text x="244.7" y="318">1</text>
+    <text x="332.7" y="318">2</text><text x="448.9" y="318">5</text><text x="536.9" y="318">10</text>
+  </g>
+  <text x="326" y="340" fill="#9fb6c3" font-size="13" text-anchor="middle">wall thickness t (mm, log)</text>
+
+  <polyline fill="none" stroke="#e4b962" stroke-width="2.6" points="92.0,51.4 101.8,53.6 111.5,55.7 121.3,57.9 131.0,60.1 140.8,62.2 150.5,64.4 160.2,66.6 170.0,68.7 179.8,70.9 189.5,73.0 199.2,75.2 209.0,77.4 218.8,79.5 228.5,81.7 238.2,83.9 248.0,86.0 257.8,88.2 267.5,90.3 277.2,92.5 287.0,94.6 296.8,96.8 306.5,98.9 316.2,101.1 326.0,103.2 335.8,105.4 345.5,107.5 355.2,109.7 365.0,111.8 374.8,114.0 384.5,116.1 394.2,118.2 404.0,120.4 413.8,122.5 423.5,124.6 433.2,126.8 443.0,128.9 452.8,131.0 462.5,133.1 472.2,135.2 482.0,137.3 491.8,139.4 501.5,141.5 511.2,143.6 521.0,145.7 530.8,147.8 540.5,149.8 550.2,151.9 560.0,153.9"/>
+  <circle cx="244.7" cy="85.3" r="5.5" fill="#e4b962" stroke="#102431" stroke-width="2"/>
+
+  <polyline fill="none" stroke="#69dfcc" stroke-width="2.6" points="92.0,157.6 101.8,159.8 111.5,161.9 121.3,164.1 131.0,166.3 140.8,168.4 150.5,170.6 160.2,172.7 170.0,174.9 179.8,177.1 189.5,179.2 199.2,181.4 209.0,183.5 218.8,185.7 228.5,187.9 238.2,190.0 248.0,192.2 257.8,194.3 267.5,196.5 277.2,198.6 287.0,200.8 296.8,202.9 306.5,205.1 316.2,207.2 326.0,209.4 335.8,211.5 345.5,213.6 355.2,215.8 365.0,217.9 374.8,220.1 384.5,222.2 394.2,224.3 404.0,226.4 413.8,228.5 423.5,230.7 433.2,232.8 443.0,234.9 452.8,237.0 462.5,239.1 472.2,241.2 482.0,243.2 491.8,245.3 501.5,247.4 511.2,249.4 521.0,251.5 530.8,253.5 540.5,255.6 550.2,257.6 560.0,259.6"/>
+  <circle cx="296.2" cy="202.8" r="5.5" fill="#69dfcc" stroke="#102431" stroke-width="2"/>
+
+  <!-- legend, clear of the plot -->
+  <line x1="582" y1="60" x2="612" y2="60" stroke="#e4b962" stroke-width="3"/>
+  <circle cx="597" cy="60" r="5" fill="#e4b962" stroke="#102431" stroke-width="2"/>
+  <text x="582" y="82" fill="#e4b962" font-size="13" font-weight="600">EXAMPLE</text>
+  <text x="582" y="99" fill="#c0d1dc" font-size="12">2 MPa across Ø200 mm</text>
+  <text x="582" y="115" fill="#c0d1dc" font-size="12">t = 1 mm → 201 MPa (mid-wall)</text>
+  <text x="582" y="133" fill="#a08750" font-size="11.5">teaching loads from</text>
+  <text x="582" y="147" fill="#a08750" font-size="11.5">object-example.py —</text>
+  <text x="582" y="161" fill="#a08750" font-size="11.5">NOT CORE loads</text>
+
+  <line x1="582" y1="192" x2="612" y2="192" stroke="#69dfcc" stroke-width="3"/>
+  <circle cx="597" cy="192" r="5" fill="#69dfcc" stroke="#102431" stroke-width="2"/>
+  <text x="582" y="214" fill="#69dfcc" font-size="13" font-weight="600">CANDIDATE</text>
+  <text x="582" y="231" fill="#c0d1dc" font-size="12">62.2 kPa across Ø149.4 mm</text>
+  <text x="582" y="247" fill="#c0d1dc" font-size="12">t = 1.5 mm → 3.13 MPa (mid-wall)</text>
+  <text x="582" y="265" fill="#4f9e92" font-size="11.5">DP-2 prescribed cycle</text>
+  <text x="582" y="279" fill="#4f9e92" font-size="11.5">screen — under review</text>
+
+  <rect x="582" y="300" width="30" height="13" fill="#e4796b" opacity="0.35" stroke="#e4796b" stroke-dasharray="4 3"/>
+  <text x="582" y="330" fill="#e4796b" font-size="12">r/t ≤ 10 for the</text>
+  <text x="582" y="344" fill="#e4796b" font-size="12">Ø149.4 mm bore:</text>
+  <text x="582" y="358" fill="#e4796b" font-size="12">screen no longer</text>
+  <text x="582" y="372" fill="#e4796b" font-size="12">applies</text>
+
+  <text x="92" y="366" fill="#e4b962" font-size="12">Dotted line at 10.5 mm: the same r/t = 10 limit for the Ø200 mm example bore.</text>
+  <text x="92" y="384" fill="#9fb6c3" font-size="12">Each bore has its own boundary, because the boundary depends on the radius.</text>
+</svg>
+<figcaption>Both lines are the same equation, plotted on the mid-wall radius. They are
+separated by a factor of about 64 because the <em>loads</em> differ, not because one wall is
+better than the other. That gap is what an unlabelled number costs you. On the inner radius, as
+<code>object-example.py</code> writes it, the same two cases give 200&nbsp;MPa and
+3.10&nbsp;MPa &mdash; about 1% lower, which is the size of the thin-wall idealisation here and
+not a margin.</figcaption>
+</figure>
+
+<div class="note"><strong>Reading the plot.</strong>
+<p>Stress goes as <code>1/t</code>, so halving the wall doubles the stress — a straight line of
+slope −1 on log–log axes. That also means thickness buys less and less: 1.5 mm to 3 mm halves the
+membrane stress, but 3 mm to 4.5 mm takes off only another third, while mass climbs and the sheet
+gets harder to roll and to weld without distortion.</p></div>
+
+<div class="warn"><strong>What this screen does not know.</strong>
+<p>Buckling under net external pressure or axial compression. Stress concentration at every hole,
+boss and penetration. Welds and the heat-affected zone beside them — and a girth joint carries only
+half the hoop stress, so the weak direction is not always the obvious one. Properties that fall
+with temperature. Fatigue over start–run–shutdown cycles. Fragment containment, which this has
+nothing whatever to do with.</p>
+<p>A small number here closes none of those. It means only that the membrane term is small.</p></div>
+
+<h2>3. Gas temperature is not wall temperature</h2>
+<p>The DP-2 candidate turbine inlet total temperature is about 1150&nbsp;K. That number describes
+<em>gas</em>. The metal sits somewhere else entirely, set by what heats it, what cools it and what
+it conducts into. In a reverse-flow layout the outer casing is on the cold side of the liner and is
+washed by compressor delivery air — much cooler than the flame, but &ldquo;much cooler&rdquo; is not
+a temperature, and a material allowable cannot be chosen from an adjective.</p>
+<p><code>docs/model-review.md</code> lists temperature-dependent material allowables as an open
+assumption, and <code>docs/project/dp2-review.md</code> item 7 makes the same point for the turbine:
+needing metal-temperature evidence is not the same as having permission to infer an allowable from
+gas temperature.</p>
+
+<p style="margin-top:38px;color:#9fb6c3;font-size:15px">
+<span class="tag ex">EXAMPLE</span> teaching only ·
+<span class="tag cand">CANDIDATE</span> proposed, under review · <strong>SOURCED</strong> documented ·
+<strong>MEASURED</strong> observed. None of those four words means approved. Finishing this lesson
+approves nothing; the structures lead, Safety and the shop authority own their own decisions.</p>
+</main></html>
