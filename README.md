@@ -6,7 +6,7 @@ CORE (Compact Operational Research Engine) is an RSS student project. Design a s
 
 ## Start here
 
-**New to CORE? Try the [guided research launcher](workspaces/python/interactive/README.md).** It explains a small idea, asks questions, saves your answers and lets you resume. START1 is the working introductory lesson; topic lessons are being developed separately. Python 3.11–3.13 is enough, with no extra packages or GitHub account required to learn. The [first-meeting workspace](workspaces/README.md) and [14 original edit-and-run worksheets](workspaces/python/README.md) remain available, including paper/lead-assisted options.
+**New to CORE? Try the [guided research launcher](workspaces/python/interactive/README.md).** It explains a small idea, asks questions, saves your answers and lets you resume. START1, the controls C4 lesson and the electrical C8-ELEC lesson are available now; additional topic lessons are being developed separately. Python 3.11–3.13 is enough, with no extra packages or GitHub account required to learn. The [first-meeting workspace](workspaces/README.md) and [14 original edit-and-run worksheets](workspaces/python/README.md) remain available, including paper/lead-assisted options.
 
 The team's current direction is **self-sustaining operation first, with a $5,000 cash ceiling**. [DP-2 is a candidate under review](docs/project/dp2-review.md); the runnable seed below still represents the earlier 250 N baseline. See the [budget review](docs/project/budget-cap.md) before procurement.
 

@@ -1,6 +1,6 @@
 # Start here: your first CORE meeting
 
-**After the first meeting:** use the [guided research launcher](python/interactive/README.md) for questions, saved progress and individual submissions. START1 is ready; topic-specific guided lessons are being developed. The original meeting cards below remain reference material.
+**After the first meeting:** use the [guided research launcher](python/interactive/README.md) for questions, saved progress and individual submissions. START1, C4 controls and C8-ELEC electrical are ready; additional topic-specific guided lessons are being developed. The original meeting cards below remain reference material.
 
 **Our mission:** learn how to build a reverse-flow microjet that runs and self-sustains. Performance is secondary. December 2026 target to manufacture parts - Spring 2027 is assembly and testing.
 
@@ -10,6 +10,7 @@ You do not need to know Git, Python, CAD or turbine theory before this meeting. 
 |---|---|---|
 | Turbomachinery | T1–T5 | [Turbomachinery](turbomachinery/README.md) |
 | Combustion & systems | C1–C7 | [Combustion & systems](combustion-systems/README.md) |
+| Electrical system | C8-ELEC | [Electrical](electrical/README.md) |
 | Structures | S1–S2 | [Structures](structures/README.md) |
 | Safety | SAFE1, paired with T5 | [Safety](safety/README.md) |
 | Chief engineer / coordination | Coordination lead | [Coordination](coordination/README.md) |

@@ -4,7 +4,9 @@
 
 **Time:** 30 minutes, up to 45 with help. **Review role:** Combustion & Systems lead; Safety lead reviews fault concepts. No prior experience required; ask for a five-minute worked example before starting.
 
-**Guided Python worksheet:** [c4_controller_states.py](../python/combustion-systems/c4_controller_states.py) - the same task with the background explained, one worked example and labelled places to type what you find. Optional. [How to run and submit it](../python/HOW-TO-RUN.md); no install needed to take part.
+**Guided saved-record lesson:** [C4 control-system lesson](../python/interactive/lessons/controls/README.md) - a beginner-friendly signal contract, state-machine and synthetic plant walkthrough with a local diagram. Run it with `python workspaces/python/interactive/launch.py --lesson C4 --slot P01`. It does not connect to hardware or choose thresholds.
+
+**Paper-only fallback:** [c4_controller_states.py](../python/combustion-systems/c4_controller_states.py) - the original task with the background explained, one worked example and labelled places to type what you find. [How to run and submit it](../python/HOW-TO-RUN.md); no install needed to take part.
 
 ## Do this today
 

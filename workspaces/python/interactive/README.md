@@ -8,11 +8,13 @@ py -3.13 workspaces/python/interactive/launch.py
 
 On macOS/Linux use `python3` instead of `py -3.13`. Python 3.11–3.13 works; no extra packages are needed. Keep the whole folder together.
 
-**START1 is the working introductory lesson.** The seven topic packages are being built separately; they are not installed yet. The [14 existing edit-and-run worksheets](../README.md#find-your-task-code) remain available.
+**START1 is the working introductory lesson.** C4 prepares the controls team to agree signals and a safe state concept before opening Simulink. C8-ELEC prepares the electrical team to document power, measurement, command and inhibit paths. The remaining topic packages are being built separately. The [14 existing edit-and-run worksheets](../README.md#find-your-task-code) remain available.
 
 | Task | Direct launch file | What you produce |
 |---|---|---|
 | START1 | `lessons/orientation/start_here.py` (inside this folder) | One sourced finding, a question for the lead and a next step; optional cost arithmetic |
+| C4 | `lessons/controls/c4_control_system.py` (inside this folder) | Signal contract, five-state safety concept and a reproducible synthetic plant response |
+| C8-ELEC | `lessons/electrical/c8_electrical_system.py` (inside this folder) | Power tree, I/O table, failure walkthrough and non-energized bring-up checklist |
 
 Use your lead's assigned slot, such as P01; keep names out of public records. GitHub commits still show the contributor's normal account identity.
 
