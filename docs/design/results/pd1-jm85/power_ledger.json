@@ -1,0 +1,12 @@
+{
+  "N_rpm": 68000,
+  "P_compressor_W": 9136.788511846262,
+  "P_turbine_W": 9254.421568385922,
+  "P_bearings_W": 98.36756952717683,
+  "P_windage_W": 19.265487012769775,
+  "P_accessory_W": 0.0,
+  "P_starter_W": 0.0,
+  "P_net_W": -2.864339876396116e-10,
+  "residual_frac": -3.134952585016463e-14,
+  "note": "Mechanical losses explicit (bearing friction + disc windage); no mechanical efficiency applied."
+}

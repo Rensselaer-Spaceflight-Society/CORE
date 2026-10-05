@@ -1,0 +1,1386 @@
+[
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "inducer_hub_diameter",
+    "value": null,
+    "unit": "mm",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Measure on the part; needed for inducer flow area and relative Mach."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "inducer_hub_diameter_assumed",
+    "value": 19.0,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      16.0,
+      22.0
+    ],
+    "note": "Hub/tip ~0.33 typical of turbocharger inducers; used only for inducer Mach/area until measured."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "overall_axial_length",
+    "value": null,
+    "unit": "mm",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Measure; sets impeller-to-shroud stack. Envelope assumption in assembly record."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "backface_to_nose_length_envelope",
+    "value": 32.0,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      28.0,
+      36.0
+    ],
+    "note": "Layout envelope for a 76 mm turbocharger wheel; replace by measurement."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "hub_boss_diameter_envelope",
+    "value": 14.0,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      12.0,
+      17.0
+    ],
+    "note": "Backface hub/nut seating diameter envelope; measure."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "mass_estimate",
+    "value": 0.075,
+    "unit": "kg",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      0.06,
+      0.095
+    ],
+    "note": "Forged aluminium 76 mm wheel; weigh the part."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "polar_inertia_estimate",
+    "value": 3.2e-05,
+    "unit": "kg_m2",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      2.4e-05,
+      4.2e-05
+    ],
+    "note": "0.3 m R^2 hub-heavy wheel approximation (R = 38 mm); replace by CAD/measurement."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "diametral_inertia_estimate",
+    "value": 2.2e-05,
+    "unit": "kg_m2",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      1.6e-05,
+      3e-05
+    ],
+    "note": "Approximately 0.7 Ip for a wheel ~0.4 D long; replace by CAD."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "cg_from_backface_estimate",
+    "value": 9.0,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      7.0,
+      12.0
+    ],
+    "note": "Axial CG measured from the backface toward the nose; measure."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "material",
+    "value": null,
+    "unit": "-",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Listing says forged aluminium; alloy/temper (commonly 2618-T61 class) not stated."
+  },
+  {
+    "role": "compressor",
+    "component": "compressor_wheel",
+    "parameter": "maximum_speed",
+    "value": null,
+    "unit": "rpm",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Garrett map shows a 144,956 corrected-rpm max line for the stock wheel; no rating for the billet wheel."
+  },
+  {
+    "role": "compressor_map",
+    "component": "gt3076r_map",
+    "parameter": "reference_temperature",
+    "value": 302.78,
+    "unit": "K",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      288.15,
+      302.78
+    ],
+    "note": "545 R per secondary source; alternative 288.15 K evaluated as a sensitivity case."
+  },
+  {
+    "role": "compressor_map",
+    "component": "gt3076r_map",
+    "parameter": "reference_pressure",
+    "value": 96174.0,
+    "unit": "Pa",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      96174.0,
+      101325.0
+    ],
+    "note": "28.4 inHg = 13.9487 psia per secondary source; alternative 101,325 Pa as a sensitivity case."
+  },
+  {
+    "role": "compressor_map",
+    "component": "gt3076r_map",
+    "parameter": "substitution_flow_uncertainty",
+    "value": 0.05,
+    "unit": "-",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": "Fractional flow uncertainty for applying the stock-wheel map to the 11+0 billet wheel with CORE's diffuser; no data."
+  },
+  {
+    "role": "compressor_map",
+    "component": "gt3076r_map",
+    "parameter": "substitution_efficiency_deficit",
+    "value": 0.04,
+    "unit": "-",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      -0.02,
+      0.04
+    ],
+    "note": "Adverse efficiency offset used in robustness cases (billet blade set, vaned diffuser + reverse turn instead of Garrett housing)."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "blade_count_estimate",
+    "value": 30,
+    "unit": "count",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      28,
+      32
+    ],
+    "note": "Counted from the schematic plan view (angular profile ~29.5 pitches); count on the part."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "blade_mass_assumed",
+    "value": 0.86,
+    "unit": "g",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      0.6,
+      1.2
+    ],
+    "note": "15 mm span x ~7.2 mm2 mean section (1.3 mm max thickness, 35 deg stagger) x 8000 kg/m3."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "blade_root_area_assumed",
+    "value": 9.0,
+    "unit": "mm2",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      6.0,
+      12.0
+    ],
+    "note": "Root section area for the centrifugal screen; measure a sectioned or scanned blade."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "blade_cg_radius_assumed",
+    "value": 34.4,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      33.5,
+      35.5
+    ],
+    "note": "Linear taper (tip/root 0.6) centroid from 27.5 mm rim."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "rotor_exit_relative_angle",
+    "value": -58.0,
+    "unit": "deg",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      -65.0,
+      -50.0
+    ],
+    "note": "Mean-line relative exit flow angle from axial (negative opposite rotation). Typical small-turbine value; NOT measured. Determines rotor throat and work."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "rotor_throat_area",
+    "value": null,
+    "unit": "mm2",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Measure throat opening o at hub/mid/tip on several passages; A = N o h. Highest-value turbine measurement."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "rotor_inlet_metal_angle",
+    "value": null,
+    "unit": "deg",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Measure from section; incidence loss is modelled relative to an assumed design incidence."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "tip_clearance_design",
+    "value": 0.35,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      0.2,
+      0.5
+    ],
+    "note": "Cold radial clearance to the finished NGV shroud; set by shroud machining; hot value from clearance stack."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "alloy",
+    "value": null,
+    "unit": "-",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Supplier states vacuum investment casting with chemical analysis and sample bar per batch; alloy (commonly Inconel 713LC class) and heat treatment not published."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "density_assumed",
+    "value": 8000.0,
+    "unit": "kg_m3",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      7900.0,
+      8200.0
+    ],
+    "note": "Nickel casting alloy class; replace with certified alloy."
+  },
+  {
+    "role": "turbine",
+    "component": "turbine_rotor",
+    "parameter": "maximum_speed",
+    "value": null,
+    "unit": "rpm",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "No speed rating published. Needed from supplier or a disc/blade strength and life analysis."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "hub_through_bore_finished",
+    "value": null,
+    "unit": "mm",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Define how the NGV blank centre web is machined to clear the rear carrier/shaft, and verify remaining support material. Do not use the 48 mm pocket as a finished through-bore specification."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "vane_tip_diameter",
+    "value": 87.0,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      85.5,
+      88.0
+    ],
+    "note": "Outer-ring inside diameter at the vanes is not dimensioned; inferred from the 92 mm ring OD and drawing proportion."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "vane_axial_chord",
+    "value": 12.0,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      11.0,
+      13.0
+    ],
+    "note": "From the 11/13 mm features of the section view; interpretation uncertain."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "vane_count_estimate",
+    "value": 20,
+    "unit": "count",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      18,
+      22
+    ],
+    "note": "Counted from the schematic plan view; count on the casting."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "exit_flow_angle",
+    "value": 65.0,
+    "unit": "deg",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      58.0,
+      72.0
+    ],
+    "note": "Mean-line exit flow angle from axial. Typical small-turbine NGV value; NOT measured. With the annulus it sets the throat area by the cosine rule."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "throat_area",
+    "value": null,
+    "unit": "mm2",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Measure throat opening at hub/mid/tip on all passages (pin gauges or optical); A = sum(o h). Highest-value measurement for matching."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "material",
+    "value": null,
+    "unit": "-",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "'High-temperature alloy steel' only; grade, creep and oxidation data unknown."
+  },
+  {
+    "role": "ngv",
+    "component": "ngv_ring",
+    "parameter": "mass_estimate",
+    "value": 0.21,
+    "unit": "kg",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      0.15,
+      0.3
+    ],
+    "note": "Finished ring envelope estimate; weigh."
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "ball_material_note",
+    "value": null,
+    "unit": "-",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Si3N4 per listing; ring steel"
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "limiting_speed",
+    "value": null,
+    "unit": "rpm",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Required: supplier limiting speed for the chosen lubrication (fuel/oil mist) at the preload; >= 1.2 x 80,000 rpm requested."
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "radial_stiffness_preloaded",
+    "value": 15.0,
+    "unit": "N_um",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      5.0,
+      40.0
+    ],
+    "note": "Light spring preload; depends on contact angle"
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "housing_stiffness",
+    "value": 50.0,
+    "unit": "N_um",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      20.0,
+      150.0
+    ],
+    "note": "Aluminium carrier + 316 tunnel/backplate path in series with the bearing."
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "support_damping",
+    "value": 150.0,
+    "unit": "N_s_m",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      50.0,
+      2000.0
+    ],
+    "note": "Viscous damping; dry metal mounting ~50-300; an O-ring/squeeze-film mount could give ~500-2000 (design option)."
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "friction_f0",
+    "value": 1.7,
+    "unit": "-",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      1.0,
+      2.5
+    ],
+    "note": "SKF/Palmgren viscous friction factor for angular-contact bearings"
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "lubricant_viscosity",
+    "value": 8.0,
+    "unit": "cSt",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      2.0,
+      15.0
+    ],
+    "note": "Operating kinematic viscosity; kerosene + 5 % turbine oil mixture lubrication is near the low end."
+  },
+  {
+    "role": "bearings",
+    "component": "bearings",
+    "parameter": "list_price_each",
+    "value": null,
+    "unit": "USD",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Budget allowance USD 150 each (R04) is not a quote."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "s4140_E",
+    "value": 205.0,
+    "unit": "GPa",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": "Typical alloy steel modulus at room temperature."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "s4140_rho",
+    "value": 7850.0,
+    "unit": "kg_m3",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "s4140_alpha",
+    "value": 1.23e-05,
+    "unit": "per_K",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      1.15e-05,
+      1.35e-05
+    ],
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "s4140_yield_RT",
+    "value": 655.0,
+    "unit": "MPa",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      600.0,
+      760.0
+    ],
+    "note": "Prehardened/QT 4140 is commonly ~95-110 ksi yield; confirm with the bar certificate."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "s4140_endurance_RT",
+    "value": 400.0,
+    "unit": "MPa",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      330.0,
+      450.0
+    ],
+    "note": "Polished rotating-bending endurance before surface/size/reliability factors."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ss316_E_RT",
+    "value": 193.0,
+    "unit": "GPa",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ss316_E_900K",
+    "value": 160.0,
+    "unit": "GPa",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      150.0,
+      170.0
+    ],
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ss316_rho",
+    "value": 8000.0,
+    "unit": "kg_m3",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ss316_alpha_mean_to_900K",
+    "value": 1.8e-05,
+    "unit": "per_K",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      1.7e-05,
+      1.88e-05
+    ],
+    "note": "Mean coefficient 293-900 K; the combustor library's 16e-6 seed is a room-temperature-range value."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ss316_yield_RT",
+    "value": 205.0,
+    "unit": "MPa",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": "Typical minimum for annealed 316 sheet (316L ~170 MPa)."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ss316_yield_900K",
+    "value": 125.0,
+    "unit": "MPa",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      100.0,
+      145.0
+    ],
+    "note": "Short-time; creep governs sustained loading above roughly 800 K."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "al6061_E",
+    "value": 69.0,
+    "unit": "GPa",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "al6061_rho",
+    "value": 2700.0,
+    "unit": "kg_m3",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "al6061_alpha",
+    "value": 2.36e-05,
+    "unit": "per_K",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "al6061_yield_RT",
+    "value": 276.0,
+    "unit": "MPa",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": "Drops sharply above ~420 K; keep housings cool."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ni_cast_alpha_mean_to_1000K",
+    "value": 1.4e-05,
+    "unit": "per_K",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      1.3e-05,
+      1.5e-05
+    ],
+    "note": "Typical for Inconel 713-class castings; JETMAX alloy not published."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ni_cast_E_1000K",
+    "value": 165.0,
+    "unit": "GPa",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      150.0,
+      180.0
+    ],
+    "note": ""
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "ngv_alpha_mean",
+    "value": 1.6e-05,
+    "unit": "per_K",
+    "basis": "assumption",
+    "source": null,
+    "range": [
+      1.3e-05,
+      1.9e-05
+    ],
+    "note": "Wide range spans ferritic/martensitic to austenitic heat-resisting steels."
+  },
+  {
+    "role": "materials",
+    "component": "materials",
+    "parameter": "c932_alpha",
+    "value": 1.8e-05,
+    "unit": "per_K",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": ""
+  },
+  {
+    "role": "assembly",
+    "component": "assembly_pd1",
+    "parameter": "shaft_comp_seat_d",
+    "value": 6.0,
+    "unit": "mm",
+    "basis": "assumption",
+    "source": null,
+    "range": null,
+    "note": "Structural envelope only. Finished seat must be set from the measured 5.99 mm-class bore and an approved fit."
+  },
+  {
+    "role": "assembly",
+    "component": "assembly_pd1",
+    "parameter": "rear_carrier_material_note",
+    "value": null,
+    "unit": "-",
+    "basis": "unresolved",
+    "source": null,
+    "range": null,
+    "note": "Rear carrier runs hot near the NGV hub; PD-1 assumes a stainless or alloy-steel carrier, not 6061 (budget R08 assumed aluminium)."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "comb_loss_design",
+    "value": 0.025,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "duct_loss_design",
+    "value": 0.02,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "inlet_loss_ref",
+    "value": 0.01,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "inlet_Q_ref_kg_s",
+    "value": 0.2,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "leak_frac",
+    "value": 0.02,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "jetpipe_loss",
+    "value": 0.01,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "nozzle_Cd",
+    "value": 0.97,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "nozzle_Cv",
+    "value": 0.97,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "eta_b",
+    "value": 0.96,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "LHV_J_kg",
+    "value": 43000000.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "T04_screen_max_K",
+    "value": 1150.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.engine",
+    "parameter": "windage_Cm",
+    "value": 0.004,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.combustor",
+    "parameter": "tau_min_s",
+    "value": 0.0014,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.combustor",
+    "parameter": "target_inner_hole_K",
+    "value": 6.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.combustor",
+    "parameter": "dil_holes_per_vap_inner",
+    "value": 3,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.combustor",
+    "parameter": "dil_holes_per_vap_outer",
+    "value": 4,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.combustor",
+    "parameter": "sec_holes_per_vap",
+    "value": 2,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.combustor",
+    "parameter": "liner_material",
+    "value": "316SS",
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.combustor",
+    "parameter": "liner_alpha_per_K",
+    "value": 1.8e-05,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "vaneless_ratio",
+    "value": 1.08,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "exit_diameter_m",
+    "value": 0.126,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "vane_count",
+    "value": 19,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "channel_width_m",
+    "value": 0.006,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "exit_width_growth",
+    "value": 1.5,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "throat_mach_target",
+    "value": 0.7,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "cp_vaned_assumed",
+    "value": 0.6,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.diffuser",
+    "parameter": "turn_K",
+    "value": 0.5,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.rotor_support",
+    "parameter": "mount",
+    "value": "soft_elastomer",
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.rotor_support",
+    "parameter": "k_support_N_m",
+    "value": 2000000.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.rotor_support",
+    "parameter": "c_support_N_s_m",
+    "value": 1000.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.rotor_support",
+    "parameter": "unbalance_grade_G_mm_s",
+    "value": 2.5,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "N_operating_min_rpm",
+    "value": 56000.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "N_operating_max_rpm",
+    "value": 68000.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "phi_pz_ratio",
+    "value": 1.6,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "phi_sz_ratio",
+    "value": 0.6,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "film_cool_frac",
+    "value": 0.12,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "vap_air_frac",
+    "value": 0.12,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "f_outer_feed_frac",
+    "value": 0.6,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "liner_area_frac",
+    "value": 0.45,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "K_annular_ratio",
+    "value": 20.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "Cd_hole_ratio",
+    "value": 0.6,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "vap_pitch_m",
+    "value": 0.05,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "v_annulus_outer_m_s",
+    "value": 35.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "L_D_min_ratio",
+    "value": 0.7,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "L_D_max_ratio",
+    "value": 2.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "liner_wall_temp_frac",
+    "value": 0.72,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "d_bearing_bore_m",
+    "value": 0.01,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "rho_fuel_kg_m3",
+    "value": 800.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "v_fuel_line_m_s",
+    "value": 1.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "L_fuel_line_m",
+    "value": 1.5,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "dP_injector_Pa",
+    "value": 60000.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "fuel_minor_K_ratio",
+    "value": 5.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  },
+  {
+    "role": "case",
+    "component": "pd1-jm85.seed_overrides",
+    "parameter": "dP_fuel_filter_Pa",
+    "value": 10000.0,
+    "unit": null,
+    "basis": "case input (assumption or design choice)",
+    "source": "config/cases/pd1-jm85.yaml",
+    "range": null,
+    "note": "Set in the case file; see the comment there for its basis."
+  }
+]

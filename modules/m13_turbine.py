@@ -13,6 +13,11 @@ not the same thing, and the solver cares only about the second.
 
 CROSS-CHECK AGAINST KJ66: 66 mm tip, 44 mm hub, 11 mm blade, 23 blades,
 117,000 rpm -> mean diameter 55 mm, U_mean = 337 m/s.
+
+FIXED PURCHASED WHEEL (turbine_fixed_wheel_flag = 1): diameters, blade count,
+mass/inertia and the blade-section estimates come from the component record and
+are never rescaled to the cycle. Delivered work comes from the fixed-geometry
+rating in core/turbine_rating.py (imported through M01), not from psi/phi here.
 """
 
 import math
@@ -32,6 +37,9 @@ from core import gas, thermo
         "rho_turb_kg_m3", "aspect_ratio_turb_ratio", "solidity_turb_ratio",
         "tip_clear_frac", "reaction_turb_ratio", "blade_taper_factor_ratio",
     ],
+    optional_reads=["turbine_fixed_wheel_flag", "D_turb_tip_fixed_m", "D_turb_hub_fixed_m",
+                    "n_blades_turb_fixed_count", "m_turb_fixed_kg", "I_turb_fixed_kg_m2", "m_blade_fixed_kg",
+                    "A_blade_root_fixed_m2", "r_blade_cg_fixed_m", "t_tip_clear_fixed_m"],
     writes=[
         "D_turb_tip_m", "D_turb_hub_m", "D_turb_mean_m", "h_blade_m",
         "n_blades_turb_count", "U_turb_mean_m_s", "A_annulus_turb_m2",
@@ -40,6 +48,8 @@ from core import gas, thermo
     ],
 )
 def m13_turbine(s):
+    if "turbine_fixed_wheel_flag" in s and s["turbine_fixed_wheel_flag"]:
+        return _fixed_wheel(s)
     omega = gas.rpm_to_rad_s(s["N_rpm"])
     mdot_hot = s["mdot_kg_s"] * (1.0 + s["FAR_ratio"])
 
@@ -103,4 +113,21 @@ def m13_turbine(s):
         "t_tip_clear_m": s["tip_clear_frac"] * h,
         "m_turb_kg": m,
         "I_turb_kg_m2": I,
+    }
+
+
+def _fixed_wheel(s):
+    omega = gas.rpm_to_rad_s(s["N_rpm"])
+    Dt, Dh = s["D_turb_tip_fixed_m"], s["D_turb_hub_fixed_m"]
+    thermo.positive(D_tip=Dt, D_hub=Dh)
+    if Dh >= Dt:
+        raise ValueError("fixed turbine hub must be smaller than tip")
+    Dm = 0.5 * (Dt + Dh)
+    return {
+        "m_blade_kg": s["m_blade_fixed_kg"], "r_blade_cg_m": s["r_blade_cg_fixed_m"],
+        "A_blade_root_m2": s["A_blade_root_fixed_m2"], "U_turb_tip_m_s": omega * Dt / 2,
+        "D_turb_tip_m": Dt, "D_turb_hub_m": Dh, "D_turb_mean_m": Dm, "h_blade_m": 0.5 * (Dt - Dh),
+        "n_blades_turb_count": float(s["n_blades_turb_fixed_count"]), "U_turb_mean_m_s": omega * Dm / 2,
+        "A_annulus_turb_m2": math.pi / 4 * (Dt * Dt - Dh * Dh), "t_tip_clear_m": s["t_tip_clear_fixed_m"],
+        "m_turb_kg": s["m_turb_fixed_kg"], "I_turb_kg_m2": s["I_turb_fixed_kg_m2"],
     }

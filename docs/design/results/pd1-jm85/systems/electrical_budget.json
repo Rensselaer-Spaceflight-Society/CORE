@@ -1,0 +1,82 @@
+{
+  "loads": [
+    {
+      "load": "fuel pump (JetCat-class, assumed)",
+      "bus": "12 V",
+      "current_A": 3.0,
+      "duty": "continuous",
+      "basis": "assumption"
+    },
+    {
+      "load": "fuel shutoff solenoid (NC)",
+      "bus": "12 V",
+      "current_A": 0.6,
+      "duty": "continuous",
+      "basis": "assumption"
+    },
+    {
+      "load": "ignition module + plug",
+      "bus": "12 V",
+      "current_A": 2.0,
+      "duty": "start only",
+      "basis": "assumption"
+    },
+    {
+      "load": "starter motor via ESC (peak at 30 krpm bound)",
+      "bus": "3S LiPo 11.1 V",
+      "current_A": 142.11582692052627,
+      "duty": "start only (<10 s)",
+      "basis": "calculated bound / 75 % motor efficiency"
+    },
+    {
+      "load": "microcontroller + logger + ADC + TC interfaces",
+      "bus": "5 V",
+      "current_A": 0.35,
+      "duty": "continuous",
+      "basis": "assumption"
+    },
+    {
+      "load": "pressure transmitters (2 x 4-20 mA class)",
+      "bus": "24 V",
+      "current_A": 0.05,
+      "duty": "continuous",
+      "basis": "assumption"
+    },
+    {
+      "load": "interlock relay coils (2)",
+      "bus": "24 V",
+      "current_A": 0.08,
+      "duty": "continuous",
+      "basis": "assumption"
+    }
+  ],
+  "continuous_current_by_bus_A": {
+    "12 V": 3.6,
+    "5 V": 0.35,
+    "24 V": 0.13
+  },
+  "checks": [
+    {
+      "name": "12 V continuous load vs 5 A buck converter (E16)",
+      "status": "pass",
+      "value": 3.6,
+      "limit": 4.0,
+      "margin": 0.09999999999999998,
+      "unit": "A",
+      "criterion": "<= 4.0",
+      "basis": "assumption",
+      "reason": "80 % derating of a 5 A converter"
+    },
+    {
+      "name": "starter peak current vs 2200 mAh 3S LiPo at 30C (66 A)",
+      "status": "fail",
+      "value": 142.11582692052627,
+      "limit": 66.0,
+      "margin": -1.1532701048564586,
+      "unit": "A",
+      "criterion": "<= 66.0",
+      "basis": "assumption",
+      "reason": "battery C-rating not verified"
+    }
+  ]
+}

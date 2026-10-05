@@ -18,6 +18,14 @@ D2_m is the single most-read number this module produces. The diffuser, the
 casing and the whole axial stack-up all wait on it.
 
 CROSS-CHECK AGAINST KJ66: 66 mm exducer at 117,000 rpm gives U2 = 404 m/s.
+
+FIXED PURCHASED WHEEL (compressor_fixed_wheel_flag = 1): the wheel dimensions
+come from the component record (D2/D1s/D1h/b2/mass seeds) and are NOT changed.
+The Euler/slip relations then run in reverse as DIAGNOSTICS: the tangential
+exit velocity the cycle work implies, the implied work coefficient dh/U2^2 and
+exit flow angle, and the inducer relative Mach from continuity on the actual
+inducer. A work coefficient above the Stanitz slip value means the cycle asks
+more of the wheel than its blade count supports at this speed.
 """
 
 import math
@@ -37,14 +45,18 @@ from core import gas, thermo
         "cp_cold_J_kgK", "gamma_cold_ratio", "R_gas_J_kgK",
         "power_input_factor_ratio", "rho_imp_kg_m3",
     ],
+    optional_reads=["compressor_fixed_wheel_flag", "D2_fixed_m", "D1s_fixed_m", "D1h_fixed_m",
+                    "b2_fixed_m", "m_imp_fixed_kg", "Z_imp_fixed_count"],
     writes=[
         "U2_m_s", "D2_m", "D1s_m", "D1h_m", "b2_m", "sigma_slip_ratio",
         "Cm2_m_s", "Ctheta2_m_s", "alpha2_deg", "M2_abs_ratio",
-        "M1s_rel_ratio", "rho03_kg_m3", "m_imp_kg",
+        "M1s_rel_ratio", "rho03_kg_m3", "m_imp_kg", "work_coeff_c_ratio",
     ],
     notes="Stanitz slip. Inducer sized to a target shroud relative flow angle.",
 )
 def m10_compressor(s):
+    if "compressor_fixed_wheel_flag" in s and s["compressor_fixed_wheel_flag"]:
+        return _fixed_wheel(s)
     cp = s["cp_cold_J_kgK"]
     g = s["gamma_cold_ratio"]
     R = s["R_gas_J_kgK"]
@@ -127,4 +139,58 @@ def m10_compressor(s):
         "M1s_rel_ratio": M1s_rel,
         "rho03_kg_m3": rho2,
         "m_imp_kg": m_imp,
+        "work_coeff_c_ratio": dh / (U2 * U2),
+    }
+
+
+def _fixed_wheel(s):
+    R = s["R_gas_J_kgK"]
+    omega = gas.rpm_to_rad_s(s["N_rpm"])
+    D2, D1s, D1h, b2 = s["D2_fixed_m"], s["D1s_fixed_m"], s["D1h_fixed_m"], s["b2_fixed_m"]
+    thermo.positive(D2=D2, D1s=D1s, D1h=D1h, b2=b2)
+    if not D1h < D1s < D2:
+        raise ValueError("fixed wheel needs hub < inducer < exducer diameters")
+    mdot = s["mdot_kg_s"]
+    U2 = omega * D2 / 2.0
+    Z = s["Z_imp_fixed_count"] if "Z_imp_fixed_count" in s else s["Z_imp_count"]
+    sigma = gas.stanitz_slip(Z)
+    # The air's total-enthalpy rise is the whole shaft work: blade (Euler) work times the
+    # power input factor (disc friction/recirculation also end up in the gas), so the
+    # blade work is dh0 / PIF. (The legacy sizing branch above multiplies instead; that
+    # inflates its D2 by ~PIF and is left for the team because it moves the baseline.)
+    dh = (gas.h_air(s["T03_K"]) - gas.h_air(s["T02_K"])) / s["power_input_factor_ratio"]
+    Ctheta2 = dh / U2                       # Euler, no inlet swirl
+    # exit meridional velocity from continuity at the actual exit width (iterate density)
+    Cm2 = 0.3 * U2
+    for _ in range(60):
+        C2 = math.hypot(Cm2, Ctheta2)
+        T2s, P2s = thermo.static(s["T03_K"], s["P03_Pa"], C2, R=R)
+        rho2 = gas.density(P2s, T2s, R)
+        Cm2_new = mdot / (rho2 * math.pi * D2 * b2 * (1.0 - s["blockage_frac"]))
+        if abs(Cm2_new - Cm2) < 1e-9:
+            break
+        Cm2 = Cm2_new
+    else:
+        raise ValueError("fixed-wheel exit continuity did not converge")
+    C2 = math.hypot(Cm2, Ctheta2)
+    alpha2 = math.degrees(math.atan2(Ctheta2, Cm2))
+    M2 = gas.mach(C2, T2s, thermo.gamma(T2s, R=R), R)
+    # inducer: axial velocity from continuity on the actual annulus, relative Mach at shroud
+    A1 = math.pi / 4 * (D1s ** 2 - D1h ** 2) * (1.0 - s["blockage_frac"])
+    Cx = 50.0
+    for _ in range(60):
+        T1, P1 = thermo.static(s["T02_K"], s["P02_Pa"], Cx, R=R)
+        Cx_new = mdot / (gas.density(P1, T1, R) * A1)
+        if abs(Cx_new - Cx) < 1e-9:
+            break
+        Cx = Cx_new
+    else:
+        raise ValueError("fixed-wheel inducer continuity did not converge")
+    U1s = omega * D1s / 2.0
+    M1s_rel = gas.mach(math.hypot(Cx, U1s), T1, thermo.gamma(T1, R=R), R)
+    return {
+        "U2_m_s": U2, "D2_m": D2, "D1s_m": D1s, "D1h_m": D1h, "b2_m": b2,
+        "sigma_slip_ratio": sigma, "Cm2_m_s": Cm2, "Ctheta2_m_s": Ctheta2, "alpha2_deg": alpha2,
+        "M2_abs_ratio": M2, "M1s_rel_ratio": M1s_rel, "rho03_kg_m3": rho2,
+        "m_imp_kg": s["m_imp_fixed_kg"], "work_coeff_c_ratio": dh / (U2 * U2),
     }

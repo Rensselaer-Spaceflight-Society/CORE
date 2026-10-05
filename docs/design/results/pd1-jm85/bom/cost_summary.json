@@ -1,0 +1,327 @@
+{
+  "workbook_reproduction": {
+    "direct": 5402.0,
+    "freight": 200.0,
+    "tax": 450,
+    "reserve": 550,
+    "total": 6602.0
+  },
+  "target_usd": 5500.0,
+  "ceiling_usd": 6000.0,
+  "scenarios": {
+    "nominal": {
+      "direct": 5527.0,
+      "freight": 200.0,
+      "tax": 450,
+      "reserve": 575,
+      "total": 6752.0
+    },
+    "adverse": {
+      "direct": 6532.0,
+      "freight": 270.0,
+      "tax": 550,
+      "reserve": 675,
+      "total": 8027.0
+    },
+    "tax_exempt_only": {
+      "direct": 5527.0,
+      "freight": 200.0,
+      "tax": 0,
+      "reserve": 575,
+      "total": 6302.0
+    },
+    "all_conditional_options": {
+      "direct": 4747.0,
+      "freight": 200.0,
+      "tax": 0,
+      "reserve": 475,
+      "total": 5422.0
+    },
+    "options": [
+      {
+        "id": "SV1",
+        "description": "Tax-exempt purchasing through the university",
+        "rows": [],
+        "direct_or_tax_saving_usd": 450,
+        "confirmed": false,
+        "consequence": "None on the design.",
+        "dependency": "Confirmed exemption and purchasing channel."
+      },
+      {
+        "id": "SV2",
+        "description": "Borrow drills, end mills, extinguishers, safety glasses, pin gauges",
+        "rows": [
+          "H12",
+          "H13",
+          "T05",
+          "T10",
+          "N04"
+        ],
+        "direct_or_tax_saving_usd": 245.0,
+        "confirmed": false,
+        "consequence": "Tool condition/calibration not controlled by CORE.",
+        "dependency": "Confirmed loan."
+      },
+      {
+        "id": "SV3",
+        "description": "Nest the exhaust nozzle on the C01 sheet remainder",
+        "rows": [
+          "I03"
+        ],
+        "direct_or_tax_saving_usd": 65.0,
+        "confirmed": false,
+        "consequence": "Uses the strip otherwise left for a spare liner set (nesting check in run output).",
+        "dependency": "Shop nesting confirmation."
+      },
+      {
+        "id": "SV4",
+        "description": "Ratiometric 0-30/0-60 psi sensors instead of 4-20 mA transmitters",
+        "rows": [
+          "E04"
+        ],
+        "direct_or_tax_saving_usd": 230.0,
+        "confirmed": false,
+        "consequence": "Lower accuracy (~1-2 % FS) and 5 V ratiometric wiring; adequate for trending/protection, weaker as performance evidence.",
+        "dependency": "Signal-conditioning review."
+      },
+      {
+        "id": "SV5",
+        "description": "Test on campus at an approved site (no travel)",
+        "rows": [
+          "V01"
+        ],
+        "direct_or_tax_saving_usd": 200.0,
+        "confirmed": false,
+        "consequence": "None if a reviewed site exists.",
+        "dependency": "Site and containment approval."
+      },
+      {
+        "id": "SV6",
+        "description": "Defer thrust measurement (load cell + ADC)",
+        "rows": [
+          "E09",
+          "E10"
+        ],
+        "direct_or_tax_saving_usd": 40.0,
+        "confirmed": false,
+        "consequence": "No thrust evidence (thrust is secondary to self-sustain).",
+        "dependency": "Team decision."
+      }
+    ],
+    "route SV1+SV5+SV4": {
+      "direct": 5097.0,
+      "freight": 200.0,
+      "tax": 0,
+      "reserve": 525,
+      "total": 5822.0
+    },
+    "route SV1+SV5+SV4+SV2+SV3": {
+      "direct": 4787.0,
+      "freight": 200.0,
+      "tax": 0,
+      "reserve": 500,
+      "total": 5487.0
+    }
+  },
+  "sheet_nesting": {
+    "sheet_mm": [
+      609.6,
+      609.6
+    ],
+    "fits": true,
+    "parts": [
+      {
+        "part": "casing rear cover blank",
+        "w_mm": 158.4,
+        "h_mm": 158.4,
+        "shelf": 0
+      },
+      {
+        "part": "casing wrap",
+        "w_mm": 483.99093320301364,
+        "h_mm": 149.62471788625388,
+        "shelf": 1
+      },
+      {
+        "part": "dome annulus blank",
+        "w_mm": 114.94583111789278,
+        "h_mm": 114.94583111789278,
+        "shelf": 0
+      },
+      {
+        "part": "outer liner wrap",
+        "w_mm": 333.41386675766745,
+        "h_mm": 95.78871788625389,
+        "shelf": 0
+      },
+      {
+        "part": "inner liner wrap",
+        "w_mm": 238.20698054484305,
+        "h_mm": 95.78871788625389,
+        "shelf": 2
+      },
+      {
+        "part": "outer transition cone (developed)",
+        "w_mm": 333.41386675766745,
+        "h_mm": 35,
+        "shelf": 2
+      },
+      {
+        "part": "inner transition cone (developed)",
+        "w_mm": 238.20698054484305,
+        "h_mm": 35,
+        "shelf": 3
+      }
+    ],
+    "height_used_mm": 438.8134357725078,
+    "remainder_strip_mm": [
+      609.6,
+      170.78656422749225
+    ],
+    "note": "Simple shelf packing with 10 mm seam/kerf allowance; shop nesting may do better. Nozzle (I03) and a spare liner set would need the remainder strip."
+  },
+  "spend_status": {
+    "paid_usd": null,
+    "committed_usd": null,
+    "note": "No spend-to-date or inventory record was supplied; every line is FORECAST. Totals are not a cash position."
+  },
+  "fx_assumption": {
+    "usd_per_chf": 1.25,
+    "payment_fee_frac": 0.08,
+    "note": "Assumed conversion for list-price-based estimates only; not a quote, rate not verified on the access date."
+  },
+  "optional_not_in_totals": [
+    {
+      "row_id": "O01",
+      "part": "Spare bearing pair",
+      "nominal_usd": 300,
+      "reason": "First-run bearing damage is plausible; recommended if funds allow."
+    },
+    {
+      "row_id": "O02",
+      "part": "Second nozzle (50 mm exit)",
+      "nominal_usd": 0,
+      "reason": "Can be cut from C01 remainder; trims T04/thrust after throat measurement."
+    }
+  ],
+  "gaps": {
+    "nominal": {
+      "vs_target": 1252.0,
+      "vs_ceiling": 752.0
+    },
+    "adverse": {
+      "vs_target": 2527.0,
+      "vs_ceiling": 2027.0
+    },
+    "tax_exempt_only": {
+      "vs_target": 802.0,
+      "vs_ceiling": 302.0
+    },
+    "all_conditional_options": {
+      "vs_target": -78.0,
+      "vs_ceiling": -578.0
+    },
+    "route SV1+SV5+SV4": {
+      "vs_target": 322.0,
+      "vs_ceiling": -178.0
+    },
+    "route SV1+SV5+SV4+SV2+SV3": {
+      "vs_target": -13.0,
+      "vs_ceiling": -513.0
+    }
+  },
+  "open_exposures": [
+    {
+      "row_id": "R02",
+      "part": "Purchased turbine wheel",
+      "nominal": 500,
+      "adverse": 650,
+      "basis": "Quote needed"
+    },
+    {
+      "row_id": "R03",
+      "part": "Nozzle-guide-vane ring",
+      "nominal": 400,
+      "adverse": 450,
+      "basis": "Quote needed"
+    },
+    {
+      "row_id": "R04",
+      "part": "High-speed turbine bearings",
+      "nominal": 150,
+      "adverse": 250,
+      "basis": "Quote needed"
+    },
+    {
+      "row_id": "S01",
+      "part": "Turbine interface finishing",
+      "nominal": 125.0,
+      "adverse": 125,
+      "basis": "Quote needed"
+    },
+    {
+      "row_id": "S02",
+      "part": "Post-finishing rotor inspection",
+      "nominal": 125.0,
+      "adverse": 125.0,
+      "basis": "Quote needed"
+    },
+    {
+      "row_id": "S03",
+      "part": "Assembled rotor balancing",
+      "nominal": 200.0,
+      "adverse": 300,
+      "basis": "Quote needed"
+    },
+    {
+      "row_id": "S04",
+      "part": "Balancing adapter / fixture",
+      "nominal": 75.0,
+      "adverse": 150,
+      "basis": "Quote needed"
+    },
+    {
+      "row_id": "N01",
+      "part": "Rear bearing carrier stock",
+      "nominal": 30,
+      "adverse": 45,
+      "basis": "Estimate"
+    },
+    {
+      "row_id": "N02",
+      "part": "Elastomer bearing-mount O-rings",
+      "nominal": 20,
+      "adverse": 35,
+      "basis": "Estimate"
+    },
+    {
+      "row_id": "N03",
+      "part": "Hot-section fasteners",
+      "nominal": 40,
+      "adverse": 60,
+      "basis": "Estimate"
+    },
+    {
+      "row_id": "N04",
+      "part": "Pin-gauge set",
+      "nominal": 60,
+      "adverse": 90,
+      "basis": "Estimate"
+    },
+    {
+      "row_id": "N05",
+      "part": "Small carbide end mills",
+      "nominal": 40,
+      "adverse": 60,
+      "basis": "Estimate"
+    },
+    {
+      "row_id": "N06",
+      "part": "Dye-penetrant kit",
+      "nominal": 40,
+      "adverse": 60,
+      "basis": "Estimate"
+    }
+  ],
+  "note": "All lines forecast. Free campus machining/welding and a reviewed shared test site are assumed in kind (workbook basis) and are not confirmed."
+}

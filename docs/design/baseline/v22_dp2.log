@@ -1,0 +1,129 @@
+
+  preset: DP-2 / 6-inch
+
+========================================================================
+   REVERSE-FLOW ANNULAR MICRO-JET COMBUSTOR  --  V22 (patched)
+   PRELIMINARY - NOT FOR MANUFACTURE; see docs/model-review.md
+========================================================================
+
+------------------------------------------------------------------------
+  INLET
+------------------------------------------------------------------------
+  pressure ratio                              1.63  
+  inlet pressure recovery                    0.990     [applied before compressor]
+  P03 (legacy result key P2)                163.51  kPa
+  T03 (legacy result key T2)                 348.1  K
+  air mass flow                              300.0  g/s
+
+------------------------------------------------------------------------
+  FUEL  (PATCH P1: real enthalpy balance, fuel mass in products)
+------------------------------------------------------------------------
+  fuel flow                                  6.588  g/s
+  fuel flow                                  23.72  kg/h
+  fuel-air ratio                           0.02196  
+  overall phi                               0.3228  
+  combustion efficiency                     0.9600     [assumed input, not CLP prediction]
+  TIT round-trip error                   -3.14e-10  K   [must be ~0]
+
+------------------------------------------------------------------------
+  SIZE  (PATCH P14: intrinsic, from Lefebvre Sec. 4.3 -- not fill-the-casing)
+------------------------------------------------------------------------
+  reference area A_ref                        9170  mm2
+  reference velocity                          20.0  m/s
+  assumed total pressure loss                 4.00  %   [prescribed, not predicted]
+  casing OD REQUIRED                         130.3  mm
+  casing OD given                            152.4  mm
+  radial fit margin                           11.0  mm/side
+
+------------------------------------------------------------------------
+  GEOMETRY
+------------------------------------------------------------------------
+  casing / liner wall                  1.50 / 1.50  mm   [liner is hot-model thickness]
+  shaft tunnel OD (assumed)                  50.80  mm
+  outer liner OD (hot)                      117.62  mm
+  outer liner OD (COLD BUILD)               116.48  mm   [PATCH P2: diameter, not radius]
+  outer liner ID (cold)                     113.50  mm
+  inner liner OD (COLD BUILD)                72.99  mm
+  inner liner ID (cold)                      70.02  mm
+  combustion annulus gap                     20.46  mm
+  mean combustion diameter                   94.17  mm
+  chamber length (hot)                      133.23  mm   [L/D 1.41, driven by residence time]
+  assumed liner metal temperature              910  K
+
+------------------------------------------------------------------------
+  ANNULI - RATED FROM FROZEN GEOMETRY
+------------------------------------------------------------------------
+  Inner annulus sizing: hole-K minimum
+  outer annulus velocity                      16.5  m/s
+  inner annulus velocity                      38.6  m/s   [continuity on actual geometry]
+  path dP outer / inner                  243 / 769  Pa
+  outer branch mass residual              0.00e+00  kg/s
+  inner branch mass residual             -1.39e-17  kg/s
+
+------------------------------------------------------------------------
+  AIR BUDGET
+------------------------------------------------------------------------
+  film cooling                                36.0  g/s   [12.0%]
+  primary                                     60.5  g/s   [20.2%]
+  secondary                                  100.9  g/s   [33.6%]
+  dilution                                   102.6  g/s   [34.2%]
+  primary zone phi                            1.60     [PATCH P11: this is an INPUT echoed back]
+
+------------------------------------------------------------------------
+  HOLES - HOT MODEL DIMENSIONS, LOCAL PRESSURE BUDGET
+------------------------------------------------------------------------
+  zone         outer qty   outer dia inner qty   inner dia
+  primary             16       5.03mm        16       4.39mm
+  secondary           16       6.92mm        16       6.04mm
+  dilution            32       4.94mm        24       4.98mm
+  local hole head outer / inner        8828 / 7314  Pa
+  hole K outer / inner                39.60 / 6.00     [screen >=6 met]
+  inner hole K target                         6.00  
+  Main-hole ligaments (cold; same-row spacing screen):
+  pri_out                                    17.31  mm   [OK; minimum 2.97 mm]
+  sec_out                                    15.43  mm   [OK; minimum 2.97 mm]
+  dil_out                                     6.26  mm   [OK; minimum 2.97 mm]
+  pri_in                                      9.40  mm   [OK; minimum 2.97 mm]
+  sec_in                                      7.76  mm   [OK; minimum 2.97 mm]
+  dil_in                                      4.24  mm   [OK; minimum 2.97 mm]
+
+------------------------------------------------------------------------
+  VAPORIZERS
+------------------------------------------------------------------------
+  count                                          8     [n_raw 7.20]
+  tube OD / ID                         8.14 / 6.94  mm
+  crimp orifice                               6.66  mm
+  scoop inlet                                 4.35  mm
+  scoop approach / face speed          16.5 / 37.4  m/s
+  approach advisory target                    35.0  m/s   [below target]
+  face speed / chosen target           37.4 / 22.0  m/s
+  capture area / scoop area                   2.27     [streamtube estimate; capture not validated]
+  Approach targets are advisory; pressure-driven face speed can exceed approach speed.
+  fuel per tube                              0.823  g/s
+
+------------------------------------------------------------------------
+  CHECKS
+------------------------------------------------------------------------
+  residence time                              2.00  ms   [target 2.00 -- PATCH P3]
+  combustion loading CLP                      7.58  
+  J primary                                   14.2     [band 5-80]
+  dilution penetration                       0.425  x H   [single-jet form gave 0.532 -- PATCH P6]
+  liner hoop stress                            0.3  MPa
+
+------------------------------------------------------------------------
+  DOME HEAT FLUX  --  LOW CONFIDENCE, PATCH P7
+------------------------------------------------------------------------
+  Lefebvre Sec. 8.5 (reported)                 149  kW/m2
+  Martin 1977 impingement                      811  kW/m2
+  V21 original (flat plate)                    930  kW/m2
+  radiation                                    169  kW/m2
+  TOTAL (Lefebvre + rad)                       318  kW/m2
+  vaporizer wall inner / outer         1374 / 1381  K   [uncalibrated thermal estimate]
+  primary estimate raw / capped        2441 / 1950  K   [cap active]
+  Thermal flags are advisory correlations, not acceptance criteria or measured temperatures.
+
+  Three published methods disagree by ~5x
+  on this geometry. Do not quote one without saying which. See docs/model-review.md.
+
+  Single sizing pass. Pressure loss, stability, thermal and buckling evidence remain open.
+

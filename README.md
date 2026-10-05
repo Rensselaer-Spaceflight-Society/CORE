@@ -15,6 +15,8 @@ The team's current direction is **self-sustaining operation first, with a $5,000
 3. Pick an [issue](https://github.com/Rensselaer-Spaceflight-Society/CORE/issues), record a primary owner and independent reviewer, and work on a branch.
 4. Assign work from the [team task backlog](docs/team-tasks.md). Use the [fall timeline](docs/fall-2026.md) and [model review](docs/model-review.md) to identify the next evidence needed.
 
+For the overnight integration pass, start with the [engineering handoff packet](docs/overnight-handoff/00-START-HERE.md). It contains the copy-paste dispatch, the component task sequence, current source/budget context, and the required morning outputs. The handoff uses the current planning instruction of a **$5,500 target and $6,000 maximum cash ceiling**; this is separate from the older budget notes retained in the repository's history.
+
 ## How the engine works
 
 ```mermaid

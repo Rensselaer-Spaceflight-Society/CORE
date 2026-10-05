@@ -58,7 +58,17 @@ rho_imp_kg_m3:            2810.0   # 7075-T6
 
 # ============================ diffuser ======================================
 diff_radius_ratio:        1.45     # D3/D2 for a vaned radial diffuser
-diff_diffusion_ratio:     2.20     # C2/C3
+# Vaned channel diffuser (core/diffuser.py). Leading edge at D3 = ratio x D2,
+# throat sized for a Mach target, straight channel to the exit diameter above.
+# No separate diffuser loss is subtracted: the map/efficiency covers the stage.
+diff_vaneless_ratio:      1.08     # vane leading-edge diameter / impeller exit diameter
+diff_vanes_design_count:  17       # vane count (previously hard-coded in M11)
+diff_width_ratio:         1.00     # diffuser channel width / impeller exit width
+diff_throat_mach_ratio:   0.70     # design throat Mach number
+diff_exit_turning_deg:    12.0     # channel exit flow angle reduction toward radial
+diff_cp_assumed_ratio:    0.60     # assumed static-pressure recovery (reported, not used in the ledger)
+diff_turn_K_ratio:        1.00     # 90-deg turn/deswirl loss in exit dynamic heads (estimate)
+diff_exit_width_growth_ratio: 1.00 # channel axial width at exit / at throat (1 = parallel walls)
 
 # ============================ combustor =====================================
 # These drive core/combustor.py, the patched port of V21. See PATCHES.md.

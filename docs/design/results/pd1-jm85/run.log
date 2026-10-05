@@ -1,0 +1,11 @@
+case pd1-jm85 mode fixed_geometry_rating fingerprint 4a7560bfca632a9c5e8919ca4fc2aeb45bb00d915bdbc21b6befe9cb8f559074
+design point matched in 21.9 s: beta 0.6616, T04 848.02 K, residuals 2.84e-12 / -3.13e-14
+operating line (11 speeds) in 21.7 s
+module pipeline in 11.5 s
+rotor dynamics in 136.1 s
+CAD bundle: 186 parameters, 23 interfaces; read-back validated
+figures: cross_section, compressor_map_operating_line, campbell, unbalance_response, operating_line
+systems: pump 16.3 L/h at 1.57 bar(d); starter bound 1183 W at 30 krpm
+budget: workbook reproduced 6602; PD-1 nominal 6752, adverse 8027, tax-exempt only 6302, all conditional 5422 USD; C01 nesting fits=True
+robustness: 93 case-speed points, 2 fail a screen, 81 unresolved (model outside its validity domain); 955 s
+completed in 1161.4 s

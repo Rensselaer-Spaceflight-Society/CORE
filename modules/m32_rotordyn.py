@@ -14,10 +14,19 @@ proper Campbell diagram, which is STRUCT-2's Gate D deliverable.
 Gyroscopic effects split each mode into forward and backward whirl and make the
 criticals speed-dependent -- ignored here, which is why the margin requirement
 in limits.yaml is 20% rather than something tighter.
+
+ASSEMBLY MODE (assembly_mode_flag = 1, candidate set): the lumped model is
+replaced by the finite-element supported rotor of core/rotor_fe.py built from the
+same stepped-shaft stack as M29 (Rayleigh beam elements, gyroscopic discs,
+isotropic supports with damping). Forward-whirl synchronous critical speeds are
+found up to 1.5 x the maximum operating speed. Separation uses the same
+normalisation as the lumped model (distance to the steady range / its upper end)
+taken over ALL criticals found. Support stiffness/damping remain assumptions.
 """
 
 import math
 from core.module import module
+from core import assembly
 
 
 @module(
@@ -29,11 +38,15 @@ from core.module import module
         "d_shaft_m", "L_bear_span_m", "m_turb_kg", "m_imp_kg", "m_shaft_kg",
         "k_bearing_N_m", "E_shaft_Pa", "N_rpm", "N_operating_min_rpm", "N_operating_max_rpm",
     ],
-    writes=["N_crit1_rpm", "N_crit_margin_frac", "critical_crossed_flag"],
+    optional_reads=["assembly_mode_flag"] + assembly.STACK_READS,
+    writes=["N_crit1_rpm", "N_crit_margin_frac", "critical_crossed_flag",
+            "N_crit2_rpm", "N_crit3_rpm", "n_crit_found_count", "n_crit_in_range_count"],
     notes="STUB: undamped lumped model, no gyroscopics. Replace with an NX or "
           "Ansys rotordynamics model before Gate D.",
 )
 def m32_rotordyn(s):
+    if "assembly_mode_flag" in s and s["assembly_mode_flag"]:
+        return _fe(s)
     d = s["d_shaft_m"]
     L = s["L_bear_span_m"]
     I = math.pi * d ** 4 / 64.0
@@ -57,4 +70,25 @@ def m32_rotordyn(s):
     margin = max(low-N_crit,N_crit-high,0)/high
     crossed = 0 < N_crit <= high
 
-    return {"N_crit1_rpm": N_crit, "N_crit_margin_frac": margin, "critical_crossed_flag": crossed}
+    return {"N_crit1_rpm": N_crit, "N_crit_margin_frac": margin, "critical_crossed_flag": crossed,
+            "N_crit2_rpm": N_crit, "N_crit3_rpm": N_crit, "n_crit_found_count": 1.0,
+            "n_crit_in_range_count": 1.0 if low <= N_crit <= high else 0.0}
+
+
+def _fe(s):
+    low, high = s['N_operating_min_rpm'], s['N_operating_max_rpm']
+    if not 0 < low <= s['N_rpm'] <= high:
+        raise ValueError('operating speed interval must contain the design speed')
+    st = assembly.build_stack(assembly.params_from_state(s))
+    model = assembly.rotor_model(st, max_element_length=0.006)
+    bound = 1.5 * high
+    crits = [c['N_crit_rpm'] for c in model.critical_speeds(bound, n_modes=4, n_grid=30)]
+    if crits:
+        sep = min(max(low - c, c - high, 0.0) / high for c in crits)
+    else:
+        sep = (bound - high) / high
+    padded = (crits + [bound] * 3)[:3]
+    return {"N_crit1_rpm": padded[0], "N_crit2_rpm": padded[1], "N_crit3_rpm": padded[2],
+            "N_crit_margin_frac": sep, "critical_crossed_flag": any(c < low for c in crits),
+            "n_crit_found_count": float(len(crits)),
+            "n_crit_in_range_count": float(sum(low <= c <= high for c in crits))}

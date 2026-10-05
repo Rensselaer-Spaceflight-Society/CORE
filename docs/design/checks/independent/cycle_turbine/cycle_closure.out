@@ -1,0 +1,112 @@
+== Fork-A cycle closure on docs/design/results/pd1-jm85
+-- inputs: case file vs echo in design_point.json
+input comb_loss_design                                     indep=0.025            repo=0.025            diff=  +0.0000 % PASS 
+input duct_loss_design                                     indep=0.02             repo=0.02             diff=  +0.0000 % PASS 
+input inlet_loss_ref                                       indep=0.01             repo=0.01             diff=  +0.0000 % PASS 
+input inlet_Q_ref_kg_s                                     indep=0.2              repo=0.2              diff=  +0.0000 % PASS 
+input leak_frac                                            indep=0.02             repo=0.02             diff=  +0.0000 % PASS 
+input jetpipe_loss                                         indep=0.01             repo=0.01             diff=  +0.0000 % PASS 
+input nozzle_Cd                                            indep=0.97             repo=0.97             diff=  +0.0000 % PASS 
+input nozzle_Cv                                            indep=0.97             repo=0.97             diff=  +0.0000 % PASS 
+input eta_b                                                indep=0.96             repo=0.96             diff=  +0.0000 % PASS 
+input LHV_J_kg                                             indep=43000000         repo=43000000         diff=  +0.0000 % PASS 
+input T04_screen_max_K                                     indep=1150             repo=1150             diff=  +0.0000 % PASS 
+input windage_Cm                                           indep=0.004            repo=0.004            diff=  +0.0000 % PASS 
+map reference T [K] / P [Pa] (record)                      value=302.78 / 96174.0 INFO 545 R = 302.78 K; 28.4 inHg = 96,174 Pa (secondary source, per record)
+A8 = pi/4 * 0.054^2 [m2]                                   indep=0.002290221      repo=0.002290221      diff=  +0.0000 % PASS 
+input bearing front bore_mm (record vs echo)               indep=10               repo=10               diff=  +0.0000 % PASS 
+input bearing front od_mm (record vs echo)                 indep=26               repo=26               diff=  -0.0000 % PASS 
+input bearing front f0 (record vs echo)                    indep=1.7              repo=1.7              diff=  +0.0000 % PASS 
+input bearing front nu_cSt (record vs echo)                indep=8                repo=8                diff=  +0.0000 % PASS 
+input bearing front preload_N (record vs echo)             indep=40               repo=40               diff=  +0.0000 % PASS 
+input bearing front mu_load (code default, not in record)  value=0.0015           INFO 
+input bearing rear bore_mm (record vs echo)                indep=10               repo=10               diff=  +0.0000 % PASS 
+input bearing rear od_mm (record vs echo)                  indep=26               repo=26               diff=  -0.0000 % PASS 
+input bearing rear f0 (record vs echo)                     indep=1.7              repo=1.7              diff=  +0.0000 % PASS 
+input bearing rear nu_cSt (record vs echo)                 indep=8                repo=8                diff=  +0.0000 % PASS 
+input bearing rear preload_N (record vs echo)              indep=40               repo=40               diff=  +0.0000 % PASS 
+input bearing rear mu_load (code default, not in record)   value=0.0015           INFO 
+
+-- design point 68000 rpm
+Q_corr                                                     indep=0.18767798       repo=0.18767798       diff=  +0.0000 % PASS 
+N_corr                                                     indep=69704.881        repo=69704.881        diff=  +0.0000 % PASS 
+P2 (inlet loss)                                            indep=100432.76        repo=100432.76        diff=  +0.0000 % PASS 
+P03 = P2 PR                                                indep=149290.02        repo=149290.02        diff=  +0.0000 % PASS 
+compressor w                                               indep=45478.725        repo=45478.725        diff=  -0.0000 % PASS 
+T03                                                        indep=333.43851        repo=333.43851        diff=  -0.0000 % PASS 
+P_compressor = m w                                         indep=9136.7885        repo=9136.7885        diff=  -0.0000 % PASS 
+P031                                                       indep=146304.22        repo=146304.22        diff=  +0.0000 % PASS 
+P04                                                        indep=142646.62        repo=142646.62        diff=  +0.0000 % PASS 
+P41 = P04 (no mixing loss)                                 indep=142646.62        repo=142646.62        diff=  +0.0000 % PASS 
+FAR combustor                                              indep=0.013443723      repo=0.013443723      diff=  -0.0000 % PASS 
+fuel flow [kg/s]                                           indep=0.0026468597     repo=0.0026468597     diff=  -0.0000 % PASS 
+fuel flow [kg/h]                                           indep=9.5286949        repo=9.5286949        diff=  -0.0000 % PASS 
+m_comb = m (1 - leak)                                      indep=0.19688443       repo=0.19688443       diff=  +0.0000 % PASS 
+m_leak                                                     indep=0.0040180496     repo=0.0040180496     diff=  +0.0000 % PASS 
+m_turbine = m_air + m_fuel                                 indep=0.20354934       repo=0.20354934       diff=  -0.0000 % PASS 
+FAR mixed                                                  indep=0.013174848      repo=0.013174848      diff=  -0.0000 % PASS 
+T41 adiabatic mixing                                       indep=838.45994        repo=838.45994        diff=  -0.0000 % PASS 
+P_turbine = m_t (h41 - h05)                                indep=9254.4216        repo=9254.4216        diff=  -0.0000 % PASS 
+P_bearings (SKF)                                           indep=98.36757         repo=98.36757         diff=  +0.0000 % PASS 
+P_windage (disc)                                           indep=19.265487        repo=19.265487        diff=  +0.0000 % PASS 
+shaft balance P_t - P_c - P_mech, / P_c                    indep=8.4880575e-12    repo=0                diff=     +inf % PASS (absolute)
+P07 = P05 (1 - jp) - q_swirl                               indep=111547.3         repo=111547.3         diff=  +0.0000 % PASS 
+nozzle choked flag                                         indep=0                repo=0                diff=  +0.0000 % PASS 
+V8 [m/s] (unchoked, Cv on velocity)                        indep=202.23146        repo=202.23146        diff=  +0.0000 % PASS 
+T8 static                                                  indep=779.08924        repo=779.08924        diff=  -0.0000 % PASS 
+nozzle mass flow Cd A rho8 V8                              indep=0.20354934       repo=0.20354934       diff=  +0.0000 % PASS 
+mass residual (m_noz - m_t)/m_t                            indep=4.9136596e-12    repo=0                diff=     +inf % PASS (absolute)
+thrust = m V8 + A8 (P8 - P0)                               indep=41.164079        repo=41.164079        diff=  +0.0000 % PASS 
+NPR = P07/P0                                               indep=1.1008862        repo=1.1008862        diff=  +0.0000 % PASS critical 1.8626 -> unchoked
+ledger inlet loss frac                                     indep=0.0088057557     repo=0.0088057557     diff=  -0.0000 % PASS 
+ledger duct (turn/deswirl) loss frac                       indep=0.019999998      repo=0.019999998      diff=  +0.0000 % PASS 
+ledger combustor loss frac                                 indep=0.024999998      repo=0.024999998      diff=  +0.0000 % PASS 
+
+-- pressure_ledger.csv vs station table (each loss exactly once)
+ledger 0-2 bellmouth + screen + starter strut              indep=0.0088057557     repo=0.0088057557     diff=  +0.0000 % PASS 
+ledger 2-3 compressor stage incl. its diffuse              value=no entry         INFO map pressure ratio/efficiency (no separate diffuser loss: double count
+ledger 3-31 90 deg turn + deswirl into annuli              indep=0.019999998      repo=0.019999998      diff=  -0.0000 % PASS 
+ledger 31-4 combustor (annuli, holes, liner)               indep=0.024999998      repo=0.024999998      diff=  -0.0000 % PASS 
+ledger 4-41 tunnel leakage re-entry ahead of N             indep=0                repo=0                diff=  +0.0000 % PASS 
+ledger 41-5 turbine stage (expansion, not a lo             value=no entry         INFO rated expansion P5/P41 = 0.7946; its losses (Soderberg, tip leakage, i
+ledger 5-7 jet pipe + dissipated exit swirl                indep=0.015888182      repo=0.015888182      diff=  +0.0000 % PASS 
+ledger 7-8 convergent nozzle                               value=no entry         INFO Cv 0.97, Cd 0.97; choked=False
+pressure chain P0 -> P07 (product of segments)             indep=111547.3         repo=111547.3         diff=  +0.0000 % PASS 
+jet-pipe segment = 0.010 + q_swirl/P05                     indep=0.015888182      repo=0.015888182      diff=  -0.0000 % PASS 
+station 4 flow = m_comb + m_fuel                           indep=0.19953129       repo=0.19953129       diff=  +0.0000 % PASS 
+station 41 flow = station 4 + leak                         indep=0.20354934       repo=0.20354934       diff=  +0.0000 % PASS 
+station 31 flow = m_air - leak (combustor feed)            indep=0.19688443       repo=0.19688443       diff=  +0.0000 % PASS 
+
+-- operating line: worst relative difference per quantity over all matched speeds
+OL Q_corr                                                   worst rel diff 0.000e+00 at 55000 rpm PASS
+OL N_corr                                                   worst rel diff 0.000e+00 at 55000 rpm PASS
+OL P2 (inlet loss)                                          worst rel diff 0.000e+00 at 55000 rpm PASS
+OL P03 = P2 PR                                              worst rel diff 0.000e+00 at 55000 rpm PASS
+OL compressor w                                             worst rel diff 1.306e-11 at 62000 rpm PASS
+OL T03                                                      worst rel diff 2.276e-12 at 62000 rpm PASS
+OL P_compressor = m w                                       worst rel diff 1.306e-11 at 62000 rpm PASS
+OL P031                                                     worst rel diff 0.000e+00 at 55000 rpm PASS
+OL P04                                                      worst rel diff 0.000e+00 at 55000 rpm PASS
+OL P41 = P04 (no mixing loss)                               worst rel diff 0.000e+00 at 55000 rpm PASS
+OL FAR combustor                                            worst rel diff 8.019e-13 at 72000 rpm PASS
+OL fuel flow [kg/s]                                         worst rel diff 8.019e-13 at 72000 rpm PASS
+OL fuel flow [kg/h]                                         worst rel diff 8.018e-13 at 72000 rpm PASS
+OL m_comb = m (1 - leak)                                    worst rel diff 0.000e+00 at 55000 rpm PASS
+OL m_leak                                                   worst rel diff 0.000e+00 at 55000 rpm PASS
+OL m_turbine = m_air + m_fuel                               worst rel diff 1.051e-14 at 72000 rpm PASS
+OL FAR mixed                                                worst rel diff 8.018e-13 at 72000 rpm PASS
+OL T41 adiabatic mixing                                     worst rel diff 4.071e-16 at 66000 rpm PASS
+OL P_turbine = m_t (h41 - h05)                              worst rel diff 2.209e-14 at 72000 rpm PASS
+OL P_bearings (SKF)                                         worst rel diff 2.631e-16 at 72000 rpm PASS
+OL P_windage (disc)                                         worst rel diff 0.000e+00 at 55000 rpm PASS
+OL shaft balance P_t - P_c - P_mech, / P_c                  worst abs diff 1.094e-11 at 62000 rpm PASS
+OL P07 = P05 (1 - jp) - q_swirl                             worst rel diff 0.000e+00 at 55000 rpm PASS
+OL nozzle choked flag                                       worst rel diff 0.000e+00 at 55000 rpm PASS
+OL V8 [m/s] (unchoked, Cv on velocity)                      worst rel diff 9.152e-12 at 56000 rpm PASS
+OL T8 static                                                worst rel diff 7.182e-13 at 80000 rpm PASS
+OL nozzle mass flow Cd A rho8 V8                            worst rel diff 9.508e-12 at 56000 rpm PASS
+OL mass residual (m_noz - m_t)/m_t                          worst abs diff 8.812e-12 at 56000 rpm PASS
+OL thrust = m V8 + A8 (P8 - P0)                             worst rel diff 1.866e-11 at 56000 rpm PASS
+OL speeds checked: [55000, 56000, 58000, 60000, 62000, 64000, 66000, 68000, 72000, 76000, 80000]
+
+All comparisons within tolerance.

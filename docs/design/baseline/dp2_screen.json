@@ -1,0 +1,72 @@
+{
+  "scope": "Screen only: power balance imposed, no compressor/turbine map matching.",
+  "arithmetic": {
+    "tip_speed_m_s": 263.08639358957004,
+    "fuel_from_claimed_FAR_kg_h": 22.896,
+    "uncorrected_flow_lb_min": 39.683207193277966,
+    "energy_J": 5087.386284585521,
+    "energy_at_120_percent_J": 7325.836249803147,
+    "bearing_DN": 528000,
+    "G2p5_eccentricity_um": 0.3617157797543076,
+    "turbine_annulus_mm2": 3828.0542103440653,
+    "low_budget_with_15_percent": 3524.7499999999995,
+    "high_budget_with_15_percent": 7049.499999999999,
+    "midpoint_with_15_percent": 5287.125
+  },
+  "fixed_PR_screen": {
+    "T3_K": 348.09788496506826,
+    "P3_kPa": 163.5081525,
+    "T5_K": 1099.171705616459,
+    "P5_kPa": 120.84548090432583,
+    "compressor_kW": 18.071814498105255,
+    "FAR": 0.021959779308127616,
+    "fuel_kg_h": 23.716561652777827,
+    "velocity_m_s": 319.9806453578978,
+    "thrust_N": 98.10220491384884,
+    "nozzle_diameter_mm": 60.400456971451845,
+    "nozzle_choked": false,
+    "zero_head_loss_percent": 21.18406142517941
+  },
+  "fixed_PR_lower_efficiency_screen": {
+    "T3_K": 360.0460298475582,
+    "P3_kPa": 163.5081525,
+    "T5_K": 1088.9272770635444,
+    "P5_kPa": 111.05809546345549,
+    "compressor_kW": 21.686177397726308,
+    "FAR": 0.02165585724596225,
+    "fuel_kg_h": 23.38832582563923,
+    "velocity_m_s": 230.97758807111506,
+    "thrust_N": 70.79388172361993,
+    "nozzle_diameter_mm": 71.43754133661322,
+    "nozzle_choked": false,
+    "zero_head_loss_percent": 14.238129510026354
+  },
+  "fixed_work_nominal_screen": {
+    "T3_K": 348.15804106308406,
+    "P3_kPa": 163.5831953639808,
+    "T5_K": 1099.120228457764,
+    "P5_kPa": 120.87077145292345,
+    "compressor_kW": 18.09,
+    "FAR": 0.021958250130112017,
+    "fuel_kg_h": 23.714910140520978,
+    "velocity_m_s": 320.15902092602454,
+    "thrust_N": 98.156745836679,
+    "nozzle_diameter_mm": 60.3807046692297,
+    "nozzle_choked": false,
+    "zero_head_loss_percent": 21.200552577679165
+  },
+  "fixed_work_lower_efficiency_screen": {
+    "T3_K": 348.15804106308406,
+    "P3_kPa": 151.47422106116386,
+    "T5_K": 1099.120228457764,
+    "P5_kPa": 108.78620401808912,
+    "compressor_kW": 18.09,
+    "FAR": 0.021958250130112017,
+    "fuel_kg_h": 23.714910140520978,
+    "velocity_m_s": 204.5016122495181,
+    "thrust_N": 62.69763294099126,
+    "nozzle_diameter_mm": 76.46964702982002,
+    "nozzle_choked": false,
+    "zero_head_loss_percent": 12.447078322392391
+  }
+}

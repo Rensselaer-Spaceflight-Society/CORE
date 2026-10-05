@@ -1,0 +1,9 @@
+rotor aft growth (shaft fb_c -> wheel centre)              independent  2.0574e-04  repository  2.0574e-04  diff  0.000 %  PASS
+NGV aft growth (casing casing_front -> NGV TE)             independent  1.5138e-04  repository  1.5138e-04  diff  0.000 %  PASS
+NGV-rotor gap change (positive = opens)                    independent  5.4359e-05  repository  5.4359e-05  diff  0.000 %  PASS
+rear bearing float demand                                  independent  2.3931e-05  repository  2.3931e-05  diff  0.000 %  PASS
+
+stack-faithful gap change: rotor LE 2.000e-04 + backplate 1.620e-05 - (casing 1.519e-04 + cover 1.658e-06 + NGV return -1.503e-05) = +78 um (repository +54 um)
+rear-bearing float if BC-02 is held at the NGV and grows forward to the bearing: 123 um (repository 24 um; spring travel 500 um). The carrier support path is open (R9).
+sign: shaft grows aft more than the cool casing locates the NGV -> the gap OPENS; a hotter casing than shaft would close it.
+FAILS: none

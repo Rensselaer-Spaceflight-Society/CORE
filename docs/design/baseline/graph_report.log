@@ -1,0 +1,76 @@
+
+EXECUTION ORDER
+============================================================
+  1. m01_cycle
+  2. m10_compressor
+  3. m11_diffuser
+  4. m13_turbine
+  5. m12_ngv
+  6. m40_nozzle
+  7. [iterate to convergence: m30_shaft, m34_casing, m20_combustor]
+  8. m24_combustor_checks
+  9. m31_bearings
+ 10. m32_rotordyn
+ 11. m33_turb_stress
+ 12. m50_fuel
+
+COUPLED GROUPS (genuine circular dependencies)
+  m30_shaft <-> m34_casing <-> m20_combustor
+
+
+STATION TABLE
+====================================================
+station                     T0 [K]        P0 [kPa]
+0  ambient                   288.1           101.3
+2  compressor inlet          288.1           100.3
+3  compressor exit           436.8           321.0
+4  turbine inlet            1150.0           301.7
+5  turbine exit             1022.0           166.1
+
+HEADLINE
+====================================================
+thrust target                      250  N
+thrust sizing closure              250  N
+air mass flow                    0.484  kg/s
+fuel flow                       0.0093  kg/s
+spool speed                     66,000  rpm
+impeller diameter               0.1251  m
+impeller tip speed            432.3744  m/s
+turbine tip diameter            0.1081  m
+turbine blade height            0.0194  m
+NGV throat area                 0.0016  m2
+nozzle exit diameter            0.0565  m
+nozzle choked                        0  0/1
+engine outer diameter           0.1844  m
+engine length                   0.4139  m
+dry mass                        3.2579  kg
+
+Thrust closure checks internal consistency; mass flow is sized from the target.
+
+thrust closure: 0.000% (OK)
+
+SAFETY LIMITS (config/limits.yaml)
+========================================================================
+ok    turbine tip speed                     373.6868 <=          450
+ok    turbine inlet temperature                1,150 <=        1,200
+ok    impeller tip speed                    432.3744 <=          520
+ok    inducer shroud relative Mach            0.8556 <=          0.9
+ok    blade stress speed screening            1.5315 >=          1.5
+ok    turbine AN^2                          2.36e+07 <=        6e+07
+ok    bearing DN                             9.9e+05 <=      1.6e+06
+ok    combustor liner wall temperature        910.04 <=        1,150
+FAIL  critical speed separation               0.1003 >=          0.2
+ok    combustor dome heat flux             5.806e+05 <=        6e+05
+ok    primary jet momentum ratio (low)       13.2412 >=            5
+ok    primary jet momentum ratio (high)      13.2412 <=           80
+ok    dilution jet penetration                0.6491 <=         0.75
+ok    combustor residence time                0.0014 >=       0.0012
+ok    liner hole pressure-drop coefficient      9.0021 >=            6
+ok    combustor clearance in the casing       0.0358 >=        0.002
+========================================================================
+15/16 limits satisfied
+
+wrote out/station_table.csv, out/cad_dims.json, out/cad_dims.csv (35 CAD parameters)
+
+PRELIMINARY - NOT FOR MANUFACTURE
+11 evidence blockers; critical crossed on startup: True

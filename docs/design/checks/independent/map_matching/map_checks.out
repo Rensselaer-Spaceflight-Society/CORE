@@ -1,0 +1,65 @@
+== 1. reference conditions and correction direction
+T_ref record vs 545 R                                            indep=        302.78 repo=       302.778   +0.0007%  PASS  
+P_ref record vs 28.4 inHg                                        indep=         96174 repo=       96173.4   +0.0006%  PASS  
+N_corr = N/sqrt(T2/Tref) at 68 krpm (T2 = T0, adiabatic inlet)   indep=       69704.9 repo=       69704.9   +0.0000%  PASS  
+Q_corr = mdot sqrt(T2/Tref)/(P2/Pref) with P2 after inlet loss   indep=      0.187678 repo=      0.187678   +0.0000%  PASS  
+  same with P0 (would be wrong station): Q_corr                  indep=      0.186025 repo=      0.187678   -0.8806%  PASS  informative: station choice moves Q by the inlet loss
+inlet loss 0.01 (Q/0.20)^2 at design                             indep=    0.00880576 repo=    0.00880576   -0.0000%  PASS  
+P03 = P2 * PR                                                    indep=        149290 repo=        149290   +0.0000%  PASS  
+== 2. beta-line interpolation reproduced from the CSV (own code)
+68 krpm DP Q_corr at reported beta 0.661594                      indep=      0.187678 repo=      0.187678   +0.0000%  PASS  
+68 krpm DP PR                                                    indep=       1.48647 repo=       1.48647   +0.0000%  PASS  
+68 krpm DP eta_c                                                 indep=      0.763422 repo=      0.763422   +0.0000%  PASS  
+68 krpm DP mdot (actual)                                         indep=      0.200902 repo=      0.200902   +0.0000%  PASS  
+68 krpm DP T03 (own isentrope, quadrature entropy)               indep=       333.439 repo=       333.439   -0.0000%  PASS  
+68 krpm DP specific work w_c                                     indep=       45478.7 repo=       45478.7   -0.0000%  PASS  
+68 krpm DP compressor power mdot*w                               indep=       9136.79 repo=       9136.79   -0.0000%  PASS  
+68 krpm DP SM_flow = 1 - Q_surge/Q (const N_corr)                indep=      0.579828 repo=      0.579828   +0.0000%  PASS  
+68 krpm DP SM_pr = (PRs/PR)(Q/Qs) - 1                            indep=       1.55031 repo=       1.55031   +0.0000%  PASS  
+    68 krpm DP: N_corr 69,705 between digitized lines 55,864 and 70,724 (weight on upper 0.931); beta 0.6616 inside [0,1]
+    68 krpm DP: alt interpolation along=linear across=linear: Q +0.000 %, PR -0.066 %, eta -0.0008
+    68 krpm DP: alt interpolation along=pchip  across=n2    : Q +0.000 %, PR -0.108 %, eta +0.0000
+56 krpm Q_corr at reported beta 0.631125                         indep=      0.147178 repo=      0.147178   +0.0000%  PASS  
+56 krpm PR                                                       indep=       1.31758 repo=       1.31758   +0.0000%  PASS  
+56 krpm eta_c                                                    indep=      0.746602 repo=      0.746602   +0.0000%  PASS  
+56 krpm mdot (actual)                                            indep=      0.158088 repo=      0.158088   +0.0000%  PASS  
+56 krpm T03 (own isentrope, quadrature entropy)                  indep=       319.828 repo=       319.828   -0.0000%  PASS  
+56 krpm specific work w_c                                        indep=       31792.8 repo=       31792.8   -0.0000%  PASS  
+56 krpm compressor power mdot*w                                  indep=       5026.05 repo=       5026.05   -0.0000%  PASS  
+56 krpm SM_flow = 1 - Q_surge/Q (const N_corr)                   indep=      0.575182 repo=      0.575182   +0.0000%  PASS  
+56 krpm SM_pr = (PRs/PR)(Q/Qs) - 1                               indep=       1.47602 repo=       1.47602   +0.0000%  PASS  
+    56 krpm: N_corr 57,404 between digitized lines 55,864 and 70,724 (weight on upper 0.104); beta 0.6311 inside [0,1]
+    56 krpm: alt interpolation along=linear across=linear: Q +0.000 %, PR -0.010 %, eta -0.0013
+    56 krpm: alt interpolation along=pchip  across=n2    : Q +0.000 %, PR -0.179 %, eta +0.0000
+== 2b. domain limits (no extrapolation)
+    T0 288.15 K: lowest digitized line 55,864 corrected = 54,498 rpm physical; highest 144,956 = 141,411 rpm physical
+    T0 308.15 K: lowest digitized line 55,864 corrected = 56,357 rpm physical; highest 144,956 = 146,236 rpm physical
+    T0 268.15 K: lowest digitized line 55,864 corrected = 52,572 rpm physical; highest 144,956 = 136,415 rpm physical
+lowest line, physical rpm at 288.15 K ("~54.5 krpm")             indep=       54497.6 repo=         54500   -0.0043%  PASS  
+    56 krpm on a 308.15 K day -> N_corr 55,510 < 55,864: off-map (True) -> robustness "unresolved" rows at 56 krpm hot day / combined adverse are consistent
+    point(55863.0, 0.5): rejected (expected)
+    point(144957.0, 0.5): rejected (expected)
+    point(60000, -0.01): rejected (expected)
+    point(60000, 1.01): rejected (expected)
+== 3. DP-2 point (0.30 kg/s, PR 1.63, 66 krpm) against the map
+DP-2 corrected flow                                              indep=       0.28059 repo=       0.28059   +0.0000%  PASS  
+    66 krpm (N_corr 67,655): choke end Q 0.2356 kg/s corr = 0.2519 kg/s physical at PR 1.285; DP-2 needs 0.2806 kg/s corr -> beta > 1 (off map)
+66 krpm choke-end physical flow ("~0.25 kg/s")                   indep=      0.251854 repo=          0.25   +0.7416%  PASS  
+66 krpm choke-end PR ("~1.29")                                   indep=       1.28517 repo=          1.29   -0.3747%  PASS  
+code says off map at 66 krpm                                     indep=             1 repo=             1   +0.0000%  PASS  
+    0.30 kg/s first on a speed line at 77,645 rpm (PR there 1.406); PR 1.63 reached at 0.30 kg/s at 83,792 rpm (code grid answer: 85,000 rpm)
+speed for 0.30 kg/s @ PR 1.63 ("first near 85 krpm")             indep=         83792 repo=         85000   -1.4212%  PASS  code uses a 2.5 krpm grid
+  PR at 0.30 kg/s, 80000 rpm                                     indep=       1.48807 repo=       1.48807   +0.0000%  PASS  
+  PR at 0.30 kg/s, 82500 rpm                                     indep=       1.57973 repo=       1.57973   -0.0000%  PASS  
+  PR at 0.30 kg/s, 85000 rpm                                     indep=       1.68227 repo=       1.68227   -0.0000%  PASS  
+  PR at 0.30 kg/s, 87500 rpm                                     indep=       1.78753 repo=       1.78753   -0.0000%  PASS  
+== 3b. work-coefficient argument (DP-2, 76.13 mm exducer, 66 krpm, eta_c 0.72 prescribed)
+U2 at 66 krpm, D2 76.13 mm                                       indep=       263.086 repo=       263.086   +0.0000%  PASS  
+code value = blade (Euler) coefficient dh0 / (PIF U2^2)          indep=      0.836855 repo=      0.836855   +0.0000%  PASS  
+Stanitz slip, Z = 11 (1 - 0.63 pi/Z)                             indep=      0.820072 repo=      0.820072   +0.0000%  PASS  
+    actual total-enthalpy coefficient dh0/U2^2 = 0.8703
+    Euler (blade) coefficient with the conventional power-input factor (dh0 = PIF * Euler): 0.8369   (the pre-fix code reported 1.04 x dh0/U2^2 = 0.9051: PIF applied in the opposite direction)
+    Stanitz sigma: Z=11 -> 0.8201; Z=12 (stock 6+6 counted fully) -> 0.8351; Z=6 (full blades only) -> 0.6701; any backsweep lowers the achievable value further
+    required Euler coefficient falls to sigma(11) = 0.820 at eta_c = 0.735 (radial blades, no inlet swirl): the slip argument depends on the assumed 0.72
+
+FAILS: none

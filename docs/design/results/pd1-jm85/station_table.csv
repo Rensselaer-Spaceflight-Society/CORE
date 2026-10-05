@@ -1,0 +1,11 @@
+station,description,T_total_K,P_total_Pa,T_static_K,P_static_Pa,mass_flow_kg_s,source
+0,ambient (static = total),288.15,101325.0,,,0.0,case ambient
+2,compressor face (after bellmouth/screen),288.15,100432.75680683633,,,0.2009024792341672,inlet loss model
+3,"compressor stage exit (map plane, diffuser exit)",333.4385098985649,149290.02182227714,,,0.2009024792341672,compressor map
+31,combustor inlet (after turn/deswirl),333.4385098985649,146304.22165951668,,,0.19688442964948386,duct loss model
+4,combustor exit / liner discharge,848.0155183640301,142646.61638423783,,,0.1995312893476373,prescribed-loss scaling
+41,NGV inlet (after tunnel-leak re-entry),838.4599391391133,142646.61638423783,,,0.20354933893232066,adiabatic mixing
+45,"NGV exit / rotor inlet (static, mean line)",,,808.2292618840079,121849.75907108469,0.20354933893232066,turbine rating
+5,turbine exit,797.5871382093237,113348.19247783117,788.8555801504067,108638.76417302075,0.20354933893232066,turbine rating
+7,nozzle inlet (after jet pipe/swirl),797.5871382093237,111547.29582251913,,,0.20354933893232066,jet-pipe loss model
+8,nozzle exit,,,779.0892408834907,101325.0,0.20354933893232066,thermo.nozzle

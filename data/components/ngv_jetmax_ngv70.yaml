@@ -1,0 +1,35 @@
+schema_version: 1
+record_type: component
+component_id: ngv_ring_ngv70
+part_ids: [NG-01B]
+title: JETMAX 70 mm nozzle guide vane, finished (alternative, UT160 pair)
+make_buy: buy
+budget_rows: [R03]
+software_owner: core/turbine_rating.py
+source_documents:
+  - id: jetmax-ngv70-finished
+    kind: supplier_drawing
+    url: https://www.jetmax.ch/media/pdf_en/nozzle_guide/ngv70finished_en.pdf
+    accessed: 2026-10-04
+    sha256: 65d863238080b5d8b2ff1b34d4117d6116b25b7fbe20f2c39303db96f2f431a7
+  - id: jetmax-ngv-page
+    kind: supplier_listing
+    url: https://www.jetmax.ch/en/nozzle_guide_vanes.htm
+    accessed: 2026-10-04
+    note: 70 mm finished CHF 305 / EUR 255.
+parameters:
+  vane_hub_diameter: {value: 41.6, unit: mm, basis: supplied, source: jetmax-ngv70-finished,
+                      note: Hub-ring outside diameter as dimensioned.}
+  outer_ring_od: {value: 72.3, unit: mm, basis: supplied, source: jetmax-ngv70-finished}
+  shroud_bore: {value: 70.3, unit: mm, basis: supplied, source: jetmax-ngv70-finished,
+                note: "Finished bore over the 70.0 mm wheel - 0.15 mm radial cold clearance as drawn."}
+  flange_od: {value: 84.0, unit: mm, basis: supplied, source: jetmax-ngv70-finished}
+  bolt_pcd: {value: 78.0, unit: mm, basis: supplied, source: jetmax-ngv70-finished}
+  bolt_count: {value: 12, unit: count, basis: supplied, source: jetmax-ngv70-finished, note: 12 x M3.}
+  overall_height: {value: 25.0, unit: mm, basis: supplied, source: jetmax-ngv70-finished}
+  vane_tip_diameter: {value: 70.3, unit: mm, basis: assumption, range: [69.5, 71.0]}
+  vane_axial_chord: {value: 8.0, unit: mm, basis: assumption, range: [7.0, 9.0]}
+  vane_count_estimate: {value: 15, unit: count, basis: assumption, range: [14, 17]}
+  exit_flow_angle: {value: 65.0, unit: deg, basis: assumption, range: [58.0, 72.0]}
+  throat_area: {value: null, unit: mm2, basis: unresolved}
+  list_price_finished: {value: 305.0, unit: CHF, basis: supplied, source: jetmax-ngv-page}

@@ -1,0 +1,19 @@
+inner T04 solve at beta 0.2876, n_grid 14: T04 683.12 K, r_mass -1.000e+00
+inner T04 solve at beta 0.2876, n_grid 30: T04 683.12 K, r_mass -1.000e+00
+inner T04 solve at beta 0.2876, n_grid 60: T04 683.12 K, r_mass -1.000e+00
+match_speed status: matched | reason: None | branches: [(True, '')]
+  T04   383.4 K: r_power -1.1534
+  T04   469.3 K: r_power -0.8946
+  T04   555.2 K: r_power -0.6001
+  T04   641.1 K: r_power -0.2377
+  T04   727.0 K: TurbineLimit
+  T04   812.9 K: TurbineLimit
+  T04   898.8 K: TurbineLimit
+  T04   984.7 K: TurbineLimit
+  T04  1070.5 K: TurbineLimit
+  T04  1156.4 K: TurbineLimit
+  T04  1242.3 K: TurbineLimit
+  T04  1328.2 K: TurbineLimit
+  T04  1414.1 K: TurbineLimit
+  T04  1500.0 K: TurbineLimit
+probe_inner_grid exit=0

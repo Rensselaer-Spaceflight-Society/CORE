@@ -1,0 +1,104 @@
+{
+  "assumed_temperatures_K": {
+    "rotor_relative_total": 813.734758813821,
+    "turbine_tip_metal": 783.734758813821,
+    "ngv_shroud": 762.706724753031,
+    "shaft_mean": 418.25723669101643,
+    "tunnel_mean": 505.9254622948945,
+    "casing": 353.4385098985649
+  },
+  "tip": {
+    "nominal": {
+      "cold_m": 0.00035,
+      "hot_m": 0.00036141534256947417,
+      "wheel_thermal_m": 0.0002919871814942235,
+      "wheel_centrifugal_m": 1.8628406426980428e-05,
+      "shroud_thermal_m": 0.0003220309304906781
+    },
+    "low_shroud_alpha": {
+      "cold_m": 0.00035,
+      "hot_m": 0.00030103454310247195,
+      "wheel_thermal_m": 0.0002919871814942235,
+      "wheel_centrifugal_m": 1.8628406426980428e-05,
+      "shroud_thermal_m": 0.00026165013102367595
+    },
+    "high_shroud_alpha": {
+      "cold_m": 0.00035,
+      "hot_m": 0.0004217961420364764,
+      "wheel_thermal_m": 0.0002919871814942235,
+      "wheel_centrifugal_m": 1.8628406426980428e-05,
+      "shroud_thermal_m": 0.00038241172995768033
+    },
+    "shutdown_bound": {
+      "cold_m": 0.00035,
+      "hot_m": 0.00011834090431380434,
+      "wheel_thermal_m": 0.0002919871814942235,
+      "wheel_centrifugal_m": 1.6765565784282387e-06,
+      "shroud_thermal_m": 6.20046423864561e-05
+    }
+  },
+  "axial": {
+    "rotor_aft_growth_m": 0.00020573829676242847,
+    "ngv_aft_growth_m": 0.0001513789409401375,
+    "ngv_rotor_gap_change_m": 5.435935582229098e-05,
+    "rear_bearing_float_m": 2.393124159912581e-05,
+    "tunnel_vs_casing_slip_m": 0.0002885669938589015
+  },
+  "checks": [
+    {
+      "name": "turbine tip clearance, steady hot (nominal alpha)",
+      "status": "pass",
+      "value": 0.00036141534256947417,
+      "limit": 5e-05,
+      "margin": 6.228306851389482,
+      "unit": "m",
+      "criterion": ">= 5e-05",
+      "basis": "calculated",
+      "reason": "assumed metal temperatures; centrifugal solid-disc growth"
+    },
+    {
+      "name": "turbine tip clearance, steady hot (low shroud alpha)",
+      "status": "pass",
+      "value": 0.00030103454310247195,
+      "limit": 5e-05,
+      "margin": 5.020690862049438,
+      "unit": "m",
+      "criterion": ">= 5e-05",
+      "basis": "calculated",
+      "reason": ""
+    },
+    {
+      "name": "turbine tip clearance, shutdown bound (cool shroud, hot wheel)",
+      "status": "pass",
+      "value": 0.00011834090431380434,
+      "limit": 0.0,
+      "margin": null,
+      "unit": "m",
+      "criterion": ">= 0.0",
+      "basis": "calculated",
+      "reason": "transient bound, not a transient analysis"
+    },
+    {
+      "name": "NGV-rotor axial gap after growth",
+      "status": "pass",
+      "value": 0.002054359355822291,
+      "limit": 0.0008,
+      "margin": 1.5679491947778637,
+      "unit": "m",
+      "criterion": ">= 0.0008",
+      "basis": "calculated",
+      "reason": ""
+    },
+    {
+      "name": "rear bearing float demand vs preload spring travel",
+      "status": "pass",
+      "value": 2.393124159912581e-05,
+      "limit": 0.0005,
+      "margin": 0.9521375168017483,
+      "unit": "m",
+      "criterion": "<= 0.0005",
+      "basis": "design",
+      "reason": "wave spring working travel assumed 0.5 mm"
+    }
+  ]
+}

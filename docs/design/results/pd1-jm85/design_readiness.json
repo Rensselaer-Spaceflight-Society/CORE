@@ -1,0 +1,124 @@
+{
+  "release_status": "PRELIMINARY - NOT FOR MANUFACTURE",
+  "hardware_ready": false,
+  "physical_self_sustain": "unverified",
+  "numerical_failures": [
+    "outer liner holes clear of weld seam at 0.00 deg",
+    "inner liner holes clear of weld seam at 0.00 deg",
+    "starter peak current vs 2200 mAh 3S LiPo at 30C (66 A)"
+  ],
+  "numerical_unknowns": [
+    "NGV hub through-bore for rear carrier",
+    "tunnel / rear carrier slip joint",
+    "turbine bore / journal assembly fit",
+    "compressor bore / seat finished fit",
+    "shaft end and turbine nut vs tailcone",
+    "shaft threaded ends: torque share, nut preload and thread Kt",
+    "steady self-sustaining match at every rated speed in range",
+    "turbine correlation validity over steady range",
+    "max T04 over steady range",
+    "min surge margin (flow) over steady range",
+    "max NGV flow fraction of choke over steady range",
+    "max rotor relative flow fraction of choke",
+    "self-sustain below lowest map speed line"
+  ],
+  "unresolved_record_parameters": [
+    {
+      "role": "compressor",
+      "parameter": "inducer_hub_diameter",
+      "note": "Measure on the part; needed for inducer flow area and relative Mach."
+    },
+    {
+      "role": "compressor",
+      "parameter": "material",
+      "note": "Listing says forged aluminium; alloy/temper (commonly 2618-T61 class) not stated."
+    },
+    {
+      "role": "compressor",
+      "parameter": "maximum_speed",
+      "note": "Garrett map shows a 144,956 corrected-rpm max line for the stock wheel; no rating for the billet wheel."
+    },
+    {
+      "role": "compressor",
+      "parameter": "overall_axial_length",
+      "note": "Measure; sets impeller-to-shroud stack. Envelope assumption in assembly record."
+    },
+    {
+      "role": "turbine",
+      "parameter": "alloy",
+      "note": "Supplier states vacuum investment casting with chemical analysis and sample bar per batch; alloy (commonly Inconel 713LC class) and heat treatment not published."
+    },
+    {
+      "role": "turbine",
+      "parameter": "maximum_speed",
+      "note": "No speed rating published. Needed from supplier or a disc/blade strength and life analysis."
+    },
+    {
+      "role": "turbine",
+      "parameter": "rotor_inlet_metal_angle",
+      "note": "Measure from section; incidence loss is modelled relative to an assumed design incidence."
+    },
+    {
+      "role": "turbine",
+      "parameter": "rotor_throat_area",
+      "note": "Measure throat opening o at hub/mid/tip on several passages; A = N o h. Highest-value turbine measurement."
+    },
+    {
+      "role": "ngv",
+      "parameter": "hub_through_bore_finished",
+      "note": "Define how the NGV blank centre web is machined to clear the rear carrier/shaft, and verify remaining support material. Do not use the 48 mm pocket as a finished through-bore specification."
+    },
+    {
+      "role": "ngv",
+      "parameter": "material",
+      "note": "'High-temperature alloy steel' only; grade, creep and oxidation data unknown."
+    },
+    {
+      "role": "ngv",
+      "parameter": "throat_area",
+      "note": "Measure throat opening at hub/mid/tip on all passages (pin gauges or optical); A = sum(o h). Highest-value measurement for matching."
+    },
+    {
+      "role": "bearings",
+      "parameter": "ball_material_note",
+      "note": "Si3N4 per listing; ring steel"
+    },
+    {
+      "role": "bearings",
+      "parameter": "limiting_speed",
+      "note": "Required: supplier limiting speed for the chosen lubrication (fuel/oil mist) at the preload; >= 1.2 x 80,000 rpm requested."
+    },
+    {
+      "role": "bearings",
+      "parameter": "list_price_each",
+      "note": "Budget allowance USD 150 each (R04) is not a quote."
+    },
+    {
+      "role": "assembly",
+      "parameter": "rear_carrier_material_note",
+      "note": "Rear carrier runs hot near the NGV hub; PD-1 assumes a stainless or alloy-steel carrier, not 6061 (budget R08 assumed aluminium)."
+    }
+  ],
+  "evidence_not_established_in_repository": [
+    "Actual compressor wheel/housing/diffuser map applicability and map reference conditions",
+    "Measured turbine and NGV throats, blade metal angles, orientation and rotation hand",
+    "Supplier rotor alloy, temperature/speed/life limits; disc/blade and fitted-hub stress assessment",
+    "Approved shaft/bearing/wheel fits and assembly sequence; NGV blank centre-web machining",
+    "Bearing speed/preload/lubrication data and measured support stiffness/damping versus temperature",
+    "Combustor stability, combustion efficiency, pressure loss and exit temperature distribution",
+    "Thermal analysis, transient clearances, seals/leakage and rear bearing/mount temperature",
+    "Starter torque-speed/current, battery/ESC selection and low-speed light-off/self-sustain evidence",
+    "CAD interference/assembly review, resolved liner seams, stock-size vaporizer rerating and diffuser vane curves",
+    "Delivered quotes and confirmed savings/loans/site access within the $6,000 all-in ceiling",
+    "Physical controls/interlocks, reviewed containment and a staged test plan",
+    "Team acceptance of the front-dome layout versus the originally described reverse-flow architecture"
+  ],
+  "robustness_status_counts": {
+    "feasible": 10,
+    "fails": 2,
+    "unresolved": 81
+  },
+  "budget_nominal_usd": 6752.0,
+  "budget_ceiling_usd": 6000.0,
+  "note": "Evidence items require engineering review; numerical passes do not close them. Feasible robustness points satisfy only the implemented model screens."
+}

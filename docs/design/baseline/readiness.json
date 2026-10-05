@@ -1,0 +1,37 @@
+{
+  "release_status": "PRELIMINARY - NOT FOR MANUFACTURE",
+  "design_fingerprint": "0f4a5cdf364fbb8a5a5c01d0f987f17f6ba94f0857cb3306ec81bcc1bab13171",
+  "failed_limits": [
+    {
+      "label": "critical speed separation",
+      "variable": "N_crit_margin_frac",
+      "value": 0.10025415114967538,
+      "operator": ">=",
+      "limit": 0.2
+    }
+  ],
+  "evidence_blockers": [
+    "Evidence does not cover the current design/code fingerprint",
+    "cycle_and_maps: review pending",
+    "combustor_pressure_and_stability: review pending",
+    "thermal_and_pattern_factor: review pending",
+    "liner_material_and_buckling: review pending",
+    "rotor_strength_and_life: review pending",
+    "rotordynamics_and_balance: review pending",
+    "bearings_lubrication_and_thrust: review pending",
+    "fuel_controls_and_shutdown: review pending",
+    "containment_and_test_site: review pending",
+    "drawings_tolerances_and_processes: review pending"
+  ],
+  "critical_crossed_during_startup": true,
+  "hole_counts": {
+    "n_film_outer_per_row_count": 33,
+    "n_film_inner_per_row_count": 25,
+    "n_film_rows_count": 4,
+    "n_vaporizers_count": 6.0,
+    "n_holes_pri_count": 12.0,
+    "n_holes_sec_count": 12.0,
+    "n_holes_dil_count": 24.0
+  },
+  "cad_note": "Liner cold dimensions at 293 K from prescribed uniform metal temperature; other component thermal fits unresolved."
+}

@@ -120,3 +120,36 @@ def orifice_flux(Pup, T, Pdown, Cd, R=287.05):
     efficiency(Cd=Cd)
     V, Ts, Ps, _ = nozzle(T,Pup,Pdown,R=R)
     return Cd*Ps/(R*Ts)*V
+
+
+def temperature_fast(h, far=0, tol=1e-10):
+    """Newton inversion of the same h_products(T) model; falls back to bisection.
+
+    Exists only for speed in iterative rating/matching. tests/test_matching.py
+    checks agreement with temperature() across the property interval.
+    """
+    t = min(max(300.0 + h / 1100.0, gas._T_MIN), gas._T_MAX)
+    for _ in range(30):
+        f = gas.h_products(t, far) - h
+        step = f / gas.cp_products(t, far)
+        t -= step
+        if not gas._T_MIN <= t <= gas._T_MAX:
+            break
+        if abs(step) < tol:
+            return t
+    return temperature(h, far)
+
+
+def isentropic_temperature_fast(T0, pressure_ratio, far=0, R=287.05, tol=1e-10):
+    """Newton inversion of entropy(T) = entropy(T0) + R ln(PR); bisection fallback."""
+    positive(pressure_ratio=pressure_ratio, R=R)
+    target = entropy(T0, far) + R * math.log(pressure_ratio)
+    t = T0 * pressure_ratio ** (R / gas.cp_products(T0, far))
+    for _ in range(30):
+        if not gas._T_MIN <= t <= gas._T_MAX:
+            break
+        step = (entropy(t, far) - target) / (gas.cp_products(t, far) / t)
+        t -= step
+        if abs(step) < tol and gas._T_MIN <= t <= gas._T_MAX:
+            return t
+    return isentropic_temperature(T0, pressure_ratio, far, R)

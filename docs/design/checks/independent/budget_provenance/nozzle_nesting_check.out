@@ -1,0 +1,6 @@
+nozzle shell: r 42.85 -> 27.00 mm over 80.0 mm, half-angle 11.21 deg (nozzle.json 11.21)
+  developed sector 70.0 deg, bounding box 252.8 x 106.7 mm (+10 mm allowance: 262.8 x 116.7)
+tailcone: r 27.5 mm over 40.0 mm, developed sector 204 deg, box 97.1 x 58.6 mm (+10: 107.1 x 68.6)
+C01 remainder strip from run: 609.6 x 170.8 mm
+main nozzle shell + tailcone side by side in the strip | True | - | - | PASS
+spare liner set needs about 572 x 131 mm; liner set AND nozzle in the strip | False | - | - | INFO (doc: "not both")

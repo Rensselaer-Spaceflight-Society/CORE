@@ -1,0 +1,89 @@
+schema_version: 1
+case_id: pd1-jm85
+mode: fixed_geometry_rating
+title: PD-1 candidate - GT3076R-class compressor, JETMAX 85 mm turbine + NGV, DP-2 casing
+description: >
+  Preliminary-design candidate 1. Purchased compressor wheel and purchased JETMAX 85 mm
+  turbine wheel/NGV casting are held fixed. The engine operating point is solved by
+  fixed-geometry matching (core/engine_match.py) with zero starter torque; it is then
+  imported explicitly into the module pipeline (M01 cycle_imported_point_flag = 1). The combustor
+  is sized at the provisional design speed with a prescribed 2.5 % loss and rated
+  off-design with flow-function scaling. Turbine blade/vane angles are assumptions until
+  the throat areas are measured.
+module_set: candidate
+seed_base: config/seed.yaml
+ambient: {T0_K: 288.15, P0_Pa: 101325.0}
+components:
+  compressor: data/components/compressor_gt3076r_56trim.yaml
+  compressor_map: data/maps/gt3076r_compressor.yaml
+  turbine: data/components/turbine_jetmax_tw85.yaml
+  ngv: data/components/ngv_jetmax_ngv85.yaml
+  bearings: data/components/bearings_candidate.yaml
+  materials: data/components/materials.yaml
+  assembly: data/components/assembly_pd1.yaml
+operating:
+  design_speed_rpm: 68000          # maximum continuous; combustor sizing point (provisional)
+  nominal_speed_rpm: 66000         # DP-2 calculation speed, first-run target
+  steady_range_rpm: [56000, 68000] # lowest map-supported speed to max continuous
+  rating_speeds_rpm: [55000, 56000, 58000, 60000, 62000, 64000, 66000, 68000, 72000, 76000, 80000]
+engine:
+  comb_loss_design: 0.025          # sizing basis at the design point; 4 % and 6 % (V22 / DP-2 screen) compared in run outputs and robustness
+  duct_loss_design: 0.020          # turn/deswirl into the annuli; >= M11 estimate (K 0.5 x exit head = 1.6 %), assumption
+  inlet_loss_ref: 0.01             # bellmouth + screen + starter struts at Q_ref (assumption)
+  inlet_Q_ref_kg_s: 0.20
+  leak_frac: 0.02                  # tunnel cooling/leakage air re-entering ahead of the NGV (assumption)
+  jetpipe_loss: 0.01
+  nozzle_Cd: 0.97
+  nozzle_Cv: 0.97
+  eta_b: 0.96
+  LHV_J_kg: 43.0e+6
+  T04_screen_max_K: 1150.0         # DP-2 candidate TIT; not a material allowable
+  windage_Cm: 0.004
+turbine_overrides: {}
+combustor:
+  tau_min_s: 0.0014               # seed basis (KJ66 practice, limits.yaml floor 1.2 ms); 2.0 ms compared
+  target_inner_hole_K: 6.0
+  dil_holes_per_vap_inner: 3
+  dil_holes_per_vap_outer: 4
+  sec_holes_per_vap: 2
+  liner_material: 316SS
+  liner_alpha_per_K: 18.0e-6       # mean 293-900 K for 316 (materials record); seed default 16e-6 is a low-temperature value
+seed_overrides:
+  N_operating_min_rpm: 56000.0
+  N_operating_max_rpm: 68000.0
+  phi_pz_ratio: 1.6
+  phi_sz_ratio: 0.6
+  film_cool_frac: 0.12
+  vap_air_frac: 0.12
+  f_outer_feed_frac: 0.60
+  liner_area_frac: 0.45
+  K_annular_ratio: 20.0
+  Cd_hole_ratio: 0.60
+  vap_pitch_m: 0.050
+  v_annulus_outer_m_s: 35.0
+  L_D_min_ratio: 0.70
+  L_D_max_ratio: 2.00
+  liner_wall_temp_frac: 0.72
+  d_bearing_bore_m: 0.010
+  rho_fuel_kg_m3: 800.0
+  v_fuel_line_m_s: 1.0
+  L_fuel_line_m: 1.5
+  dP_injector_Pa: 60000.0          # vaporizer needle/feed drop (C3 fuel card basis 0.6 bar); not the vaporizer air budget
+  fuel_minor_K_ratio: 5.0
+  dP_fuel_filter_Pa: 10000.0
+diffuser:
+  vaneless_ratio: 1.08             # vane leading edge D / extended exducer tip D
+  exit_diameter_m: 0.126          # leaves 11.7 mm radially for the turn into the outer annulus
+  vane_count: 19                   # coprime with 11 impeller blades
+  channel_width_m: 0.0060
+  exit_width_growth: 1.5           # axial width 6 -> 9 mm from throat to exit (AR ~3, 2theta ~10 deg)
+  throat_mach_target: 0.70
+  cp_vaned_assumed: 0.60
+  turn_K: 0.5                      # 90-deg bend with axial deswirl vanes (assumption; 1.0 without vanes)
+rotor_support:
+  mount: soft_elastomer            # decision: damped elastomer (O-ring) carriers at both bearings
+  k_support_N_m: 2.0e+6            # effective radial stiffness per support (assumption; range 0.5-5 N/um)
+  c_support_N_s_m: 1000.0          # damping per support (assumption; range 300-3000)
+  unbalance_grade_G_mm_s: 2.5
+outputs:
+  sensitivity_speed_rpm: 66000

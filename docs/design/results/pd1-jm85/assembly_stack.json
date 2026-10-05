@@ -1,0 +1,632 @@
+{
+  "frame": "x aft positive from compressor wheel backface (cold); r radial; theta 0 at top, clockwise viewed from front",
+  "stations_m": {
+    "cw_backface": 0.0,
+    "cw_nose": -0.032,
+    "shaft_front": -0.04,
+    "comp_nut_front": -0.038,
+    "diffuser_floor": -0.00236,
+    "diffuser_cover": -0.00836,
+    "backplate_rear": 0.01,
+    "fb_front": 0.004999999999999999,
+    "fb_rear": 0.013,
+    "fb_c": 0.009,
+    "dome": 0.018000000000000002,
+    "liner_end": 0.10378871788625389,
+    "ngv_front": 0.11878871788625389,
+    "rotor_le": 0.13878871788625388,
+    "ngv_te": 0.13678871788625388,
+    "ngv_le": 0.12478871788625388,
+    "rotor_te": 0.1462887178862539,
+    "tw_c": 0.14253871788625389,
+    "boss_front": 0.13078871788625387,
+    "boss_rear": 0.14978871788625386,
+    "rs_front": 0.12678871788625387,
+    "rb_rear": 0.12678871788625387,
+    "rb_front": 0.11878871788625386,
+    "rb_c": 0.12278871788625387,
+    "shaft_rear": 0.15978871788625387,
+    "ngv_ring_rear": 0.1527887178862539,
+    "casing_front": -0.00236,
+    "ngv_flange_front": 0.13878871788625388,
+    "casing_rear_cover": 0.13726471788625388,
+    "nozzle_entry": 0.1527887178862539,
+    "nozzle_exit": 0.23278871788625388,
+    "inlet_lip": -0.065,
+    "cw_cg": -0.009000000000000001
+  },
+  "parts": [
+    {
+      "id": "IN-01",
+      "name": "Inlet bellmouth + screen",
+      "x0": -0.065,
+      "x1": -0.04,
+      "r_in": 0.02852,
+      "r_out": 0.04852,
+      "make": "make",
+      "material": "6061 sheet / 304 mesh",
+      "rotating": false
+    },
+    {
+      "id": "CH-01",
+      "name": "Compressor housing (inducer shroud + diffuser cover)",
+      "x0": -0.04,
+      "x1": -0.00836,
+      "r_in": 0.02852,
+      "r_out": 0.0762,
+      "make": "make",
+      "material": "6061-T6 block",
+      "rotating": false
+    },
+    {
+      "id": "CW-01",
+      "name": "Compressor wheel",
+      "x0": -0.032,
+      "x1": 0.0,
+      "r_in": 0.003,
+      "r_out": 0.03961,
+      "make": "buy",
+      "material": "forged Al (grade unconfirmed)",
+      "rotating": true
+    },
+    {
+      "id": "DF-01",
+      "name": "Diffuser / backplate",
+      "x0": -0.00836,
+      "x1": 0.01,
+      "r_in": 0.006600000000000001,
+      "r_out": 0.0745,
+      "make": "make",
+      "material": "6061-T651 plate",
+      "rotating": false
+    },
+    {
+      "id": "BC-01",
+      "name": "Front bearing sleeve (soft mount) in backplate pocket",
+      "x0": 0.003999999999999999,
+      "x1": 0.016,
+      "r_in": 0.013000000000000001,
+      "r_out": 0.023749,
+      "make": "make",
+      "material": "6061-T6 bar",
+      "rotating": false
+    },
+    {
+      "id": "BR-01",
+      "name": "Front bearing (locating)",
+      "x0": 0.004999999999999999,
+      "x1": 0.013,
+      "r_in": 0.005,
+      "r_out": 0.013000000000000001,
+      "make": "buy",
+      "material": "hybrid angular contact",
+      "rotating": false
+    },
+    {
+      "id": "SH-01",
+      "name": "Stepped shaft",
+      "x0": -0.04,
+      "x1": 0.15978871788625387,
+      "r_in": 0.0,
+      "r_out": 0.006500000000000001,
+      "make": "make",
+      "material": "4140 prehard",
+      "rotating": true
+    },
+    {
+      "id": "TU-01",
+      "name": "Shaft tunnel",
+      "x0": 0.01,
+      "x1": 0.11778871788625389,
+      "r_in": 0.023749,
+      "r_out": 0.0254,
+      "make": "make",
+      "material": "316 tube",
+      "rotating": false
+    },
+    {
+      "id": "BC-02",
+      "name": "Rear bearing carrier (hot)",
+      "x0": 0.11478871788625386,
+      "x1": 0.13678871788625388,
+      "r_in": 0.013000000000000001,
+      "r_out": 0.024,
+      "make": "make",
+      "material": "stainless/alloy steel",
+      "rotating": false
+    },
+    {
+      "id": "BR-02",
+      "name": "Rear bearing (floating, spring preload)",
+      "x0": 0.11878871788625386,
+      "x1": 0.12678871788625387,
+      "r_in": 0.005,
+      "r_out": 0.013000000000000001,
+      "make": "buy",
+      "material": "hybrid angular contact",
+      "rotating": false
+    },
+    {
+      "id": "CB-01",
+      "name": "Combustor dome",
+      "x0": 0.018000000000000002,
+      "x1": 0.019524000000000003,
+      "r_in": 0.03479626900178776,
+      "r_out": 0.05147291555894639,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    },
+    {
+      "id": "CB-02",
+      "name": "Outer liner (cylinder)",
+      "x0": 0.018000000000000002,
+      "x1": 0.10378871788625389,
+      "r_in": 0.0499489155589464,
+      "r_out": 0.05147291555894639,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    },
+    {
+      "id": "CB-03",
+      "name": "Inner liner (cylinder)",
+      "x0": 0.018000000000000002,
+      "x1": 0.10378871788625389,
+      "r_in": 0.03479626900178776,
+      "r_out": 0.03632026900178777,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    },
+    {
+      "id": "CB-04",
+      "name": "Outer discharge transition (cone)",
+      "x0": 0.10378871788625389,
+      "x1": 0.11878871788625389,
+      "r_in": 0.043500000000000004,
+      "r_out": 0.05147291555894639,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    },
+    {
+      "id": "CB-05",
+      "name": "Inner discharge transition (cone)",
+      "x0": 0.10378871788625389,
+      "x1": 0.11878871788625389,
+      "r_in": 0.0277,
+      "r_out": 0.03479626900178776,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    },
+    {
+      "id": "NG-01",
+      "name": "NGV ring (finished casting)",
+      "x0": 0.11878871788625389,
+      "x1": 0.1527887178862539,
+      "r_in": 0.024,
+      "r_out": 0.052000000000000005,
+      "make": "buy+finish",
+      "material": "cast heat-resisting steel",
+      "rotating": false
+    },
+    {
+      "id": "TR-01",
+      "name": "Turbine wheel",
+      "x0": 0.13078871788625387,
+      "x1": 0.14978871788625386,
+      "r_in": 0.005,
+      "r_out": 0.0425,
+      "make": "buy",
+      "material": "cast Ni alloy (unconfirmed)",
+      "rotating": true
+    },
+    {
+      "id": "CS-01",
+      "name": "Outer casing",
+      "x0": -0.00236,
+      "x1": 0.13726471788625388,
+      "r_in": 0.074676,
+      "r_out": 0.0762,
+      "make": "make",
+      "material": "316 sheet, rolled + seam weld",
+      "rotating": false
+    },
+    {
+      "id": "CS-02",
+      "name": "Casing rear cover (bolted to NGV flange front face)",
+      "x0": 0.13726471788625388,
+      "x1": 0.13878871788625388,
+      "r_in": 0.0465,
+      "r_out": 0.0762,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    },
+    {
+      "id": "EX-01",
+      "name": "Exhaust nozzle",
+      "x0": 0.1527887178862539,
+      "x1": 0.23278871788625388,
+      "r_in": 0.027,
+      "r_out": 0.046000000000000006,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    },
+    {
+      "id": "EX-02",
+      "name": "Tailcone",
+      "x0": 0.1527887178862539,
+      "x1": 0.1927887178862539,
+      "r_in": 0.0,
+      "r_out": 0.0275,
+      "make": "make",
+      "material": "316 sheet",
+      "rotating": false
+    }
+  ],
+  "shaft_sections": [
+    {
+      "name": "front thread M6 (minor dia)",
+      "z0_m": -0.04,
+      "length_m": 0.008,
+      "od_m": 0.0051
+    },
+    {
+      "name": "compressor seat",
+      "z0_m": -0.032,
+      "length_m": 0.032,
+      "od_m": 0.006
+    },
+    {
+      "name": "seal-sleeve seat",
+      "z0_m": 0.0,
+      "length_m": 0.004999999999999999,
+      "od_m": 0.006
+    },
+    {
+      "name": "front journal",
+      "z0_m": 0.004999999999999999,
+      "length_m": 0.008,
+      "od_m": 0.01
+    },
+    {
+      "name": "body",
+      "z0_m": 0.013,
+      "length_m": 0.10578871788625387,
+      "od_m": 0.013000000000000001
+    },
+    {
+      "name": "rear journal",
+      "z0_m": 0.11878871788625386,
+      "length_m": 0.008000000000000007,
+      "od_m": 0.01
+    },
+    {
+      "name": "rear spacer seat",
+      "z0_m": 0.12678871788625387,
+      "length_m": 0.0040000000000000036,
+      "od_m": 0.01
+    },
+    {
+      "name": "turbine seat",
+      "z0_m": 0.13078871788625387,
+      "length_m": 0.01899999999999999,
+      "od_m": 0.01
+    },
+    {
+      "name": "rear thread M8 (minor dia)",
+      "z0_m": 0.14978871788625386,
+      "length_m": 0.010000000000000009,
+      "od_m": 0.0068
+    }
+  ],
+  "rotating_masses": [
+    {
+      "name": "compressor wheel",
+      "x_m": -0.009000000000000001,
+      "mass_kg": 0.075,
+      "Ip_kg_m2": 3.2e-05,
+      "Id_kg_m2": 2.2e-05
+    },
+    {
+      "name": "compressor nut",
+      "x_m": -0.034999999999999996,
+      "mass_kg": 0.0023675042237452687,
+      "Ip_kg_m2": 0.0,
+      "Id_kg_m2": 0.0
+    },
+    {
+      "name": "front seal sleeve",
+      "x_m": 0.0024999999999999996,
+      "mass_kg": 0.00409997476247553,
+      "Ip_kg_m2": 0.0,
+      "Id_kg_m2": 0.0
+    },
+    {
+      "name": "front bearing inner ring + balls (share)",
+      "x_m": 0.009,
+      "mass_kg": 0.006392261404112225,
+      "Ip_kg_m2": 0.0,
+      "Id_kg_m2": 0.0
+    },
+    {
+      "name": "rear bearing inner ring + balls (share)",
+      "x_m": 0.12278871788625387,
+      "mass_kg": 0.006392261404112225,
+      "Ip_kg_m2": 0.0,
+      "Id_kg_m2": 0.0
+    },
+    {
+      "name": "rear spacer",
+      "x_m": 0.12878871788625387,
+      "mass_kg": 0.0020284085666984193,
+      "Ip_kg_m2": 0.0,
+      "Id_kg_m2": 0.0
+    },
+    {
+      "name": "turbine wheel",
+      "x_m": 0.14253871788625389,
+      "mass_kg": 0.17,
+      "Ip_kg_m2": 8.4e-05,
+      "Id_kg_m2": 4.3e-05
+    },
+    {
+      "name": "turbine nut",
+      "x_m": 0.15328871788625387,
+      "mass_kg": 0.004531551053262427,
+      "Ip_kg_m2": 0.0,
+      "Id_kg_m2": 0.0
+    }
+  ],
+  "bearings": [
+    {
+      "name": "front bearing",
+      "x_m": 0.009,
+      "k_N_m": 2000000.0,
+      "c_N_s_m": 1000.0
+    },
+    {
+      "name": "rear bearing",
+      "x_m": 0.12278871788625387,
+      "k_N_m": 2000000.0,
+      "c_N_s_m": 1000.0
+    }
+  ],
+  "summary": {
+    "bearing_span_m": 0.11378871788625387,
+    "comp_overhang_m": 0.018000000000000002,
+    "turb_overhang_m": 0.019750000000000018,
+    "shaft_length_m": 0.19978871788625388,
+    "engine_length_m": 0.2977887178862539,
+    "shaft_mass_kg": 0.14661739918125813,
+    "rotor_mass_kg": 0.41742936059566427,
+    "rotor_cg_x_m": 0.08490252097810942,
+    "rotor_Ip_kg_m2": 0.00011868669890258497
+  },
+  "checks": [
+    {
+      "name": "rear spacer length positive",
+      "status": "pass",
+      "value": 0.0040000000000000036,
+      "limit": 0.002,
+      "margin": 1.0000000000000018,
+      "unit": "m",
+      "criterion": ">= 0.002",
+      "basis": "design",
+      "reason": "turbine boss to rear bearing spacer"
+    },
+    {
+      "name": "front seal sleeve length (labyrinth, >= 4 mm)",
+      "status": "pass",
+      "value": 0.004999999999999999,
+      "limit": 0.004,
+      "margin": 0.24999999999999978,
+      "unit": "m",
+      "criterion": ">= 0.004",
+      "basis": "design",
+      "reason": "room for a 3-tooth labyrinth between wheel backface and front bearing"
+    },
+    {
+      "name": "rear bearing ahead of turbine boss",
+      "status": "pass",
+      "value": 0.12678871788625387,
+      "limit": 0.13078871788625387,
+      "margin": 0.030583677741063096,
+      "unit": "m",
+      "criterion": "<= 0.13078871788625387",
+      "basis": "design",
+      "reason": ""
+    },
+    {
+      "name": "outer liner OD inside casing ID (radial gap)",
+      "status": "pass",
+      "value": 0.023203084441053616,
+      "limit": 0.004,
+      "margin": 4.800771110263404,
+      "unit": "m",
+      "criterion": ">= 0.004",
+      "basis": "calculated",
+      "reason": "outer annulus must exist (cold)"
+    },
+    {
+      "name": "inner liner ID outside tunnel OD (radial gap)",
+      "status": "pass",
+      "value": 0.009396269001787763,
+      "limit": 0.003,
+      "margin": 2.1320896672625875,
+      "unit": "m",
+      "criterion": ">= 0.003",
+      "basis": "calculated",
+      "reason": "inner annulus must exist (cold)"
+    },
+    {
+      "name": "NGV flange inside casing ID",
+      "status": "pass",
+      "value": 0.10400000000000001,
+      "limit": 0.149352,
+      "margin": 0.30365847126252077,
+      "unit": "m",
+      "criterion": "<= 0.149352",
+      "basis": "supplied",
+      "reason": ""
+    },
+    {
+      "name": "diffuser exit inside casing ID",
+      "status": "pass",
+      "value": 0.126,
+      "limit": 0.143352,
+      "margin": 0.12104470115519843,
+      "unit": "m",
+      "criterion": "<= 0.143352",
+      "basis": "design",
+      "reason": ""
+    },
+    {
+      "name": "rear carrier OD inside NGV hub pocket envelope",
+      "status": "pass",
+      "value": 0.036000000000000004,
+      "limit": 0.048,
+      "margin": 0.24999999999999992,
+      "unit": "m",
+      "criterion": "<= 0.048",
+      "basis": "design",
+      "reason": "bearing OD + 5 mm carrier wall each side inside the 48.0 mm blind pocket"
+    },
+    {
+      "name": "NGV hub through-bore for rear carrier",
+      "status": "unknown",
+      "value": null,
+      "limit": null,
+      "margin": null,
+      "unit": "m",
+      "criterion": "finished through-bore and retained web support",
+      "basis": "unresolved",
+      "reason": "Supplier drawing shows a blind 48 mm pocket and central web. Define the finished through-bore, remaining web/support material, and machining access before treating the rear carrier path as fit."
+    },
+    {
+      "name": "tunnel / rear carrier slip joint",
+      "status": "unknown",
+      "value": 0.0002510000000000012,
+      "limit": 0.0,
+      "margin": null,
+      "unit": "m",
+      "criterion": "<= 0 (or a defined joint)",
+      "basis": "unresolved",
+      "reason": "TU-01 (ID 47.50 mm) and the BC-02 envelope (OD 48.00 mm) overlap 3.0 mm axially; the sliding joint is not defined and depends on the NGV hub decision"
+    },
+    {
+      "name": "shaft body shoulder >= bearing abutment min",
+      "status": "pass",
+      "value": 0.013000000000000001,
+      "limit": 0.0125,
+      "margin": 0.040000000000000036,
+      "unit": "m",
+      "criterion": ">= 0.0125",
+      "basis": "assumption",
+      "reason": "typical catalog da_min for 7000 size; replace with supplier value"
+    },
+    {
+      "name": "turbine bore / journal assembly fit",
+      "status": "unknown",
+      "value": -9.999999999999593e-06,
+      "limit": null,
+      "margin": null,
+      "unit": "m",
+      "criterion": "approved clearance/interference interval",
+      "basis": "unresolved",
+      "reason": "Nominal bore minus seat (negative = interference). A 9.990 mm wheel bore does not slide freely onto a 10.00 mm seat. Measured tolerances, assembly method (thermal), fit and hub stress need review."
+    },
+    {
+      "name": "compressor bore / seat finished fit",
+      "status": "unknown",
+      "value": -9.999999999999593e-06,
+      "limit": null,
+      "margin": null,
+      "unit": "m",
+      "criterion": "approved clearance/interference interval",
+      "basis": "unresolved",
+      "reason": "Nominal 6.00 mm seat is an envelope, not a finished dimension for a 5.990 mm bore. Set the finished diameter from the measured wheel and approved fit."
+    },
+    {
+      "name": "journal nominal matches selected bearing bore",
+      "status": "pass",
+      "value": 0.0,
+      "limit": 1e-09,
+      "margin": 1.0,
+      "unit": "m",
+      "criterion": "<= 1e-09",
+      "basis": "design",
+      "reason": "nominal compatibility only; actual bearing fit remains unverified"
+    },
+    {
+      "name": "nozzle exit smaller than turbine exit annulus OD",
+      "status": "pass",
+      "value": 0.054,
+      "limit": 0.085,
+      "margin": 0.3647058823529412,
+      "unit": "m",
+      "criterion": "<= 0.085",
+      "basis": "design",
+      "reason": ""
+    },
+    {
+      "name": "rear cover inner edge clears NGV outer ring",
+      "status": "pass",
+      "value": 0.0005000000000000004,
+      "limit": 0.0004,
+      "margin": 0.25000000000000105,
+      "unit": "m",
+      "criterion": ">= 0.0004",
+      "basis": "supplied",
+      "reason": ""
+    },
+    {
+      "name": "NGV flange bolt holes: edge distance to cover inner edge",
+      "status": "pass",
+      "value": 0.0008000000000000021,
+      "limit": 0.0005,
+      "margin": 0.6000000000000042,
+      "unit": "m",
+      "criterion": ">= 0.0005",
+      "basis": "design",
+      "reason": "hot fasteners on the 6 mm flange land"
+    },
+    {
+      "name": "NGV flange bolt holes: edge distance to flange OD",
+      "status": "pass",
+      "value": 0.0013000000000000025,
+      "limit": 0.001,
+      "margin": 0.30000000000000254,
+      "unit": "m",
+      "criterion": ">= 0.001",
+      "basis": "design",
+      "reason": ""
+    },
+    {
+      "name": "nozzle starts at or behind the NGV casting rear face",
+      "status": "pass",
+      "value": 0.0,
+      "limit": 0.0,
+      "margin": null,
+      "unit": "m",
+      "criterion": ">= 0.0",
+      "basis": "design",
+      "reason": ""
+    },
+    {
+      "name": "shaft end and turbine nut vs tailcone",
+      "status": "unknown",
+      "value": 0.0069999999999999785,
+      "limit": 0.0,
+      "margin": null,
+      "unit": "m",
+      "criterion": "<= 0 or a defined hollow tailcone clearance",
+      "basis": "unresolved",
+      "reason": "shaft end and turbine nut reach 7.0 mm past the tailcone base plane; the tailcone must be an open hollow shell with a running clearance, which is not defined"
+    }
+  ]
+}

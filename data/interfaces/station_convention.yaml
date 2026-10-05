@@ -1,0 +1,40 @@
+schema_version: 1
+record_type: station_convention
+title: PD-1 station numbering, total/static convention and loss boundaries
+frame:
+  axis: x along the engine centreline, positive aft (gas-flow direction)
+  origin: compressor wheel backface plane, cold, as assembled
+  radial: r from the axis
+  angular_zero: top dead centre
+  angular_positive: clockwise viewed from the front (looking aft)
+  reference_temperature_K: 293.0
+conventions:
+  pressure: absolute unless the name says gauge; totals are P0x, statics are named *_static
+  temperature: totals T0x; statics *_static; metal temperatures are named separately and never equal to gas totals
+  flow: corrected compressor flow uses the map reference (545 R / 28.4 inHg, secondary source); everything else is physical
+  hot_cold: CAD dimensions cold at 293 K; hot values are derived with stated metal temperatures
+stations:
+  - {id: '0', plane: ambient, quantities: [T0, P0], note: total = static}
+  - {id: '2', plane: compressor face after bellmouth/screen/starter struts, quantities: [T02, P02], loss_upstream: inlet}
+  - {id: '3', plane: compressor stage exit = vaned diffuser exit (map plane), quantities: [T03, P03],
+     note: "Map PR/efficiency taken to cover wheel + diffuser to this plane; no separate diffuser loss"}
+  - {id: '31', plane: combustor inlet (after 90 deg turn and deswirl into the annuli), quantities: [T03, P031],
+     loss_upstream: duct (turn/deswirl)}
+  - {id: '4', plane: liner discharge (combustor exit), quantities: [T04, P04], loss_upstream: combustor (prescribed basis, FF^2 scaled),
+     note: "T04 is combustor-exit total temperature (TIT basis); air bypassing through the tunnel is not in it"}
+  - {id: '41', plane: NGV inlet after tunnel-leak re-entry, quantities: [T41, P41], note: adiabatic mixing; P41 = P04}
+  - {id: '45', plane: NGV exit / rotor inlet (mean line, static), quantities: [T1_static, P1_static, C1, alpha1]}
+  - {id: '5', plane: turbine exit, quantities: [T05, P05, T5_static, P5_static, swirl]}
+  - {id: '7', plane: nozzle inlet after jet pipe, quantities: [T07, P07], loss_upstream: jet pipe + dissipated exit swirl}
+  - {id: '8', plane: nozzle exit, quantities: [T8_static, P8_static, V8], note: choked or unchoked per thermo.nozzle}
+flows:
+  compressor_air: all air through station 2-3
+  tunnel_leakage: fraction of compressor air through the bearing tunnel, bypassing the combustor, re-entering at 41
+  combustor_air: compressor air less tunnel leakage; internal liner splits (primary/secondary/dilution/film/vaporizer) are NOT losses
+  fuel: added at station 31-4; lubrication fuel/oil mist (if used) bypasses the combustor
+powers:
+  compressor: m_air x w_c (map)
+  turbine: m_turbine x w_t (rated by core/turbine_rating.py from geometry)
+  mechanical: bearing friction (SKF/Palmgren estimate) + turbine disc windage; no separate mechanical efficiency
+  accessories: zero on the shaft (electric fuel pump; fuel/oil mist lubrication)
+  starter: zero in every steady match

@@ -1,0 +1,82 @@
+schema_version: 1
+record_type: component
+component_id: compressor_wheel
+part_ids: [CW-01]
+title: GT3076R-class 57/76 mm 56-trim compressor wheel (purchased)
+make_buy: buy
+budget_rows: [R01]
+software_owner: core/compressor_map.py, modules/m10_compressor.py (fixed-wheel mode)
+summary: >
+  Candidate wheel recorded in the October 2 budget (R01). The Kinugawa billet listing
+  supplies the dimensions below. Its blade set (11 full, 0 splitter) and extended
+  tapered exducer tip differ from the stock Garrett 452708-0001 cast wheel (6+6)
+  for which the published GT3076R map was measured, so that map is only a related
+  reference. The stock cast wheel is the better-documented alternative when obtainable.
+source_documents:
+  - id: kinugawa-billet-56trim
+    kind: supplier_listing
+    url: https://www.kinugawaturbo.com/products/billet-turbo-compressor-wheel-garrett-gt3076r-gt3037-57-76-mm-trim-56-11-0
+    accessed: 2026-10-04
+    note: "Listing states USD 139.00 and 'sold out' on the access date; free domestic shipping over USD 70."
+  - id: garrett-gt3076r-page
+    kind: manufacturer_product_page
+    url: https://www.garrettmotion.com/racing-and-performance/performance-catalog/turbo/gt3076r/
+    accessed: 2026-10-04
+    note: Inducer 57 mm, exducer 76 mm, trim 56; compressor map image linked from this page.
+  - id: dp2-review
+    kind: internal
+    url: docs/project/dp2-review.md
+parameters:
+  inducer_diameter: {value: 57.04, unit: mm, basis: supplied, source: kinugawa-billet-56trim}
+  exducer_diameter: {value: 76.13, unit: mm, basis: supplied, source: kinugawa-billet-56trim,
+                     note: "Nominal exducer. Listing also gives an 'extended tapered tip' of 79.22 mm."}
+  exducer_extended_tip_diameter: {value: 79.22, unit: mm, basis: supplied, source: kinugawa-billet-56trim,
+                     note: "Interpretation of 'extended tapered tip exducer' (hub-side tip) needs inspection of the part."}
+  exducer_tip_height: {value: 5.75, unit: mm, basis: supplied, source: kinugawa-billet-56trim,
+                     note: "Listed 'tip height'; taken as blade height b2 at the exducer."}
+  super_back_height: {value: 2.36, unit: mm, basis: supplied, source: kinugawa-billet-56trim}
+  bore_diameter: {value: 5.99, unit: mm, basis: supplied, source: kinugawa-billet-56trim,
+                     note: Matches the 6 mm wheel-seat concept in interface IF-04.}
+  full_blade_count: {value: 11, unit: count, basis: supplied, source: kinugawa-billet-56trim}
+  splitter_blade_count: {value: 0, unit: count, basis: supplied, source: kinugawa-billet-56trim}
+  stock_wheel_full_blade_count: {value: 6, unit: count, basis: supplied, source: kinugawa-billet-56trim,
+                     note: "Listing: 'Stock 6+6' — the wheel the Garrett map represents."}
+  inducer_hub_diameter: {value: null, unit: mm, basis: unresolved,
+                     note: Measure on the part; needed for inducer flow area and relative Mach.}
+  inducer_hub_diameter_assumed: {value: 19.0, unit: mm, basis: assumption, range: [16.0, 22.0],
+                     note: "Hub/tip ~0.33 typical of turbocharger inducers; used only for inducer Mach/area until measured."}
+  overall_axial_length: {value: null, unit: mm, basis: unresolved,
+                     note: Measure; sets impeller-to-shroud stack. Envelope assumption in assembly record.}
+  backface_to_nose_length_envelope: {value: 32.0, unit: mm, basis: assumption, range: [28.0, 36.0],
+                     note: "Layout envelope for a 76 mm turbocharger wheel; replace by measurement."}
+  hub_boss_diameter_envelope: {value: 14.0, unit: mm, basis: assumption, range: [12.0, 17.0],
+                     note: Backface hub/nut seating diameter envelope; measure.}
+  mass_estimate: {value: 0.075, unit: kg, basis: assumption, range: [0.060, 0.095],
+                     note: "Forged aluminium 76 mm wheel; weigh the part."}
+  polar_inertia_estimate: {value: 3.2e-5, unit: kg_m2, basis: assumption, range: [2.4e-5, 4.2e-5],
+                     note: "0.3 m R^2 hub-heavy wheel approximation (R = 38 mm); replace by CAD/measurement."}
+  diametral_inertia_estimate: {value: 2.2e-5, unit: kg_m2, basis: assumption, range: [1.6e-5, 3.0e-5],
+                     note: "Approximately 0.7 Ip for a wheel ~0.4 D long; replace by CAD."}
+  cg_from_backface_estimate: {value: 9.0, unit: mm, basis: assumption, range: [7.0, 12.0],
+                     note: Axial CG measured from the backface toward the nose; measure.}
+  material: {value: null, unit: '-', basis: unresolved,
+                     note: "Listing says forged aluminium; alloy/temper (commonly 2618-T61 class) not stated."}
+  listed_price: {value: 139.0, unit: USD, basis: supplied, source: kinugawa-billet-56trim,
+                     note: List price, not a delivered quote; sold out on access date.}
+  max_listed_boost: {value: 5.0, unit: '-', basis: supplied, source: kinugawa-billet-56trim,
+                     note: "'5 bar / 70 psi' marketing rating; not a speed or burst limit."}
+  maximum_speed: {value: null, unit: rpm, basis: unresolved,
+                     note: "Garrett map shows a 144,956 corrected-rpm max line for the stock wheel; no rating for the billet wheel."}
+map:
+  file: data/maps/gt3076r_compressor.yaml
+  applicability: reference
+  note: >
+    The Garrett map is for the stock 6+6 cast wheel in Garrett's housing (vaneless diffuser + volute).
+    CORE uses a different wheel blade set and a vaned radial diffuser with a reverse turn.
+    Treat map flow, pressure ratio and efficiency as a related-wheel proxy with the
+    uncertainty bands in the map record.
+unknowns:
+  - Hub diameter at inducer, axial length, backface profile and nose length (inspect part).
+  - Wheel-specific characteristic (team rating, CFD or rig test) for the billet 11+0 wheel.
+  - Allowable speed/temperature for the actual alloy (supplier statement or analysis).
+  - Availability: billet listing sold out; obtain stock 452708-0001 price/availability as alternative.

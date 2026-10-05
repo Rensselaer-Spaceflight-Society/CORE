@@ -1,0 +1,7 @@
+pd1-jm85: snapshot of pd1-jm85/4a7560bfca63 -> docs/design/results/pd1-jm85
+intact copy (manifest excluded from its own hash check)    -> ACCEPTED (SUMMARY.md present, 39 files)
+tampered station_table.csv                                 -> REJECTED: pd1-jm85: output hash mismatch or untracked output: station_table.csv; rerun before snapshotting
+tampered manifest generated_files hash (candidate_checks)  -> REJECTED: pd1-jm85: output hash mismatch or untracked output: candidate_checks.json; rerun before snapshotting
+listed output deleted (robustness/robustness.json)         -> REJECTED: pd1-jm85: output listed in the manifest is missing: robustness/robustness.json; rerun before snapshotting
+stale run (fingerprint differs)                            -> REJECTED: pd1-jm85: latest run ffffffffffff is STALE (current design 4a7560bfca63); rerun python run_case.py pd1-jm85 first
+missing-listed-output rejected: True
