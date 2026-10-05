@@ -75,7 +75,6 @@ The release check additionally requires current reviewed evidence in `config/rea
 | `modules/` | One owner for each calculated engineering quantity |
 | `tests/` | Conservation checks and regression/failure tests |
 | `docs/` | Workflow, diagrams, limitations and semester plan |
-| `legacy/v5/` | Original GitHub V5 script, preserved as history |
 | `V22_CombustionChamberDesign.py` | Compatibility interface; current pipeline is `run.py` |
 | `RPM_Sweep_OffDesign.py` | Prescribed-point combustor screening, not matched engine off-design |
 
