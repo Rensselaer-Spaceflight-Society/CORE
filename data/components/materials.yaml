@@ -1,0 +1,50 @@
+schema_version: 1
+record_type: materials
+component_id: materials
+title: Material property basis for PD-1 screening calculations
+summary: >
+  Typical handbook-level values used for first-order checks. They are NOT component
+  allowables: certified mill/test data for the actual stock, the temperature/time of the
+  duty and the applicable fatigue/creep basis are still required. Values marked
+  assumption must be replaced by the material certificate or a cited datasheet before
+  any release review.
+source_documents:
+  - id: budget-oct02
+    kind: internal
+    url: ../outputs/core-budget-20261002-fbef9859/CORE_Itemized_Budget.xlsx
+    note: Stock grades named in the October 2 budget (4140 prehard, 316/316L 2B sheet, 6061-T651, C932 bronze).
+parameters:
+  # 4140 prehard (shaft, R05)
+  s4140_E: {value: 205.0, unit: GPa, basis: assumption, note: Typical alloy steel modulus at room temperature.}
+  s4140_rho: {value: 7850.0, unit: kg_m3, basis: assumption}
+  s4140_alpha: {value: 12.3e-6, unit: per_K, basis: assumption, range: [11.5e-6, 13.5e-6]}
+  s4140_yield_RT: {value: 655.0, unit: MPa, basis: assumption, range: [600.0, 760.0],
+                   note: "Prehardened/QT 4140 is commonly ~95-110 ksi yield; confirm with the bar certificate."}
+  s4140_endurance_RT: {value: 400.0, unit: MPa, basis: assumption, range: [330.0, 450.0],
+                       note: Polished rotating-bending endurance before surface/size/reliability factors.}
+  # 316/316L annealed sheet (casing, liners, dome, C01; tunnel C02)
+  ss316_E_RT: {value: 193.0, unit: GPa, basis: assumption}
+  ss316_E_900K: {value: 160.0, unit: GPa, basis: assumption, range: [150.0, 170.0]}
+  ss316_rho: {value: 8000.0, unit: kg_m3, basis: assumption}
+  ss316_alpha_mean_to_900K: {value: 18.0e-6, unit: per_K, basis: assumption, range: [17.0e-6, 18.8e-6],
+                             note: "Mean coefficient 293-900 K; the combustor library's 16e-6 seed is a room-temperature-range value."}
+  ss316_yield_RT: {value: 205.0, unit: MPa, basis: assumption, note: "Typical minimum for annealed 316 sheet (316L ~170 MPa)."}
+  ss316_yield_900K: {value: 125.0, unit: MPa, basis: assumption, range: [100.0, 145.0],
+                     note: Short-time; creep governs sustained loading above roughly 800 K.}
+  # 6061-T6/T651 (compressor housing, diffuser/backplate, bearing carriers)
+  al6061_E: {value: 69.0, unit: GPa, basis: assumption}
+  al6061_rho: {value: 2700.0, unit: kg_m3, basis: assumption}
+  al6061_alpha: {value: 23.6e-6, unit: per_K, basis: assumption}
+  al6061_yield_RT: {value: 276.0, unit: MPa, basis: assumption, note: Drops sharply above ~420 K; keep housings cool.}
+  # Nickel casting alloy (turbine wheel; alloy unconfirmed)
+  ni_cast_alpha_mean_to_1000K: {value: 14.0e-6, unit: per_K, basis: assumption, range: [13.0e-6, 15.0e-6],
+                                note: "Typical for Inconel 713-class castings; JETMAX alloy not published."}
+  ni_cast_E_1000K: {value: 165.0, unit: GPa, basis: assumption, range: [150.0, 180.0]}
+  # NGV casting ('high-temperature alloy steel', grade unknown)
+  ngv_alpha_mean: {value: 16.0e-6, unit: per_K, basis: assumption, range: [13.0e-6, 19.0e-6],
+                   note: "Wide range spans ferritic/martensitic to austenitic heat-resisting steels."}
+  # Bronze C932 (labyrinth ring)
+  c932_alpha: {value: 18.0e-6, unit: per_K, basis: assumption}
+unknowns:
+  - Certified properties of every purchased stock lot and casting.
+  - Temperature-dependent fatigue and creep data for the liner, NGV and turbine alloys at the CORE duty.

@@ -11,6 +11,12 @@ decouples from the back pressure entirely. Unchoked, ambient pressure reaches
 back up into the turbine and the whole engine becomes altitude-sensitive. At a
 pressure ratio near 3 you will be choked; the KJ66, at 1.96 overall with a
 lossy combustor, is not.
+
+FIXED NOZZLE (nozzle_fixed_flag = 1): the exit area is the designed part's area
+(A8_fixed_m2), not sized to the flow. The nozzle-inlet total pressure is the
+imported jet-pipe exit value (op_P07_Pa), and the module reports the mass-flow
+residual between what that fixed area passes and the engine's hot flow. With an
+imported matched point this is a consistency check of the import, not new physics.
 """
 
 import math
@@ -27,9 +33,12 @@ from core import gas, thermo
         "mdot_kg_s", "FAR_ratio", "T05_K", "P05_Pa", "P00_Pa",
         "cp_hot_J_kgK", "gamma_hot_ratio", "R_gas_J_kgK", "Cv_nozzle_ratio",
     ],
-    writes=["A8_m2", "D8_m", "V8_m_s", "F_gross_N", "nozzle_choked_flag"],
+    optional_reads=["nozzle_fixed_flag", "A8_fixed_m2", "nozzle_Cd_ratio", "op_P07_Pa", "mdot_fuel_kg_s"],
+    writes=["A8_m2", "D8_m", "V8_m_s", "F_gross_N", "nozzle_choked_flag", "nozzle_mass_residual_ratio"],
 )
 def m40_nozzle(s):
+    if "nozzle_fixed_flag" in s and s["nozzle_fixed_flag"]:
+        return _fixed_nozzle(s)
     mdot_hot = s["mdot_kg_s"] * (1.0 + s["FAR_ratio"])
 
     V8, T8, P8, choked = thermo.nozzle(
@@ -47,4 +56,18 @@ def m40_nozzle(s):
         "V8_m_s": V8,
         "F_gross_N": F,
         "nozzle_choked_flag": 1.0 if choked else 0.0,
+        "nozzle_mass_residual_ratio": 0.0,   # sized to the flow in this mode, residual zero by construction
     }
+
+
+def _fixed_nozzle(s):
+    R = s["R_gas_J_kgK"]
+    mdot_hot = s["mdot_kg_s"] + s["mdot_fuel_kg_s"]
+    far = s["mdot_fuel_kg_s"] / s["mdot_kg_s"]
+    A8, Cd = s["A8_fixed_m2"], s["nozzle_Cd_ratio"]
+    V8, T8, P8, choked = thermo.nozzle(s["T05_K"], s["op_P07_Pa"], s["P00_Pa"], far, R, s["Cv_nozzle_ratio"])
+    m_cap = Cd * A8 * gas.density(P8, T8, R) * V8
+    F = mdot_hot * V8 + A8 * (P8 - s["P00_Pa"])
+    return {"A8_m2": A8, "D8_m": math.sqrt(4 * A8 / math.pi), "V8_m_s": V8, "F_gross_N": F,
+            "nozzle_choked_flag": 1.0 if choked else 0.0,
+            "nozzle_mass_residual_ratio": (m_cap - mdot_hot) / mdot_hot}

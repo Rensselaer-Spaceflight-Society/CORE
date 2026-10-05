@@ -1,0 +1,96 @@
+run folder: docs\design\results\pd1-jm85   steady range 56000-68000 rpm   E=2.05e+11 Pa rho=7850.0
+supports: [(9.0, 2000000.0, 1000.0), (122.789, 2000000.0, 1000.0)]
+run FE critical speeds: [18264.0, 19917.6, 88023.7]   separation 0.29447
+
+[A] mass properties (hand: solid cylinders + rigid discs)
+shaft mass [kg] vs SH01_MASS                                     indep=0.146617       repo=0.146617       diff=  +0.000% PASS 
+rotor mass [kg] vs ROT_MASS                                      indep=0.417429       repo=0.417429       diff=  +0.000% PASS 
+rotor CG x [mm] vs ROT_CG_X                                      indep=84.9025        repo=84.9025        diff=  -0.000% PASS 
+rotor polar inertia [kg m2] vs stack rotor_Ip_kg_m2              indep=0.000118687    repo=0.000118687    diff=  +0.000% PASS 
+rotor polar inertia [kg m2] vs ROT_IP (bundle, rounded)          indep=0.000118687    repo=0.000119       diff=  -0.263% PASS 
+bearing span [mm]                                                indep=113.789        repo=113.789        diff=  +0.000% PASS 
+    diametral inertia about CG (not exported by the run) It = 1.7578e-03 kg m2; Ip/It = 0.068
+  part mass [kg] compressor nut                                  indep=0.0023675      repo=0.0023675      diff=  +0.000% PASS 
+  part mass [kg] front seal sleeve                               indep=0.00409997     repo=0.00409997     diff=  -0.000% PASS 
+  part mass [kg] front bearing inner ring + balls (share)        indep=0.00639226     repo=0.00639226     diff=  -0.000% PASS 
+  part mass [kg] rear spacer                                     indep=0.00202841     repo=0.00202841     diff=  +0.000% PASS 
+  part mass [kg] turbine nut                                     indep=0.00453155     repo=0.00453155     diff=  +0.000% PASS 
+
+[V] method validation against closed-form cases
+TMM pinned-pinned uniform beam, mode 1 (non-rotating) [rpm]      indep=26720.1        repo=26757.2        diff=  -0.139% PASS 
+lumped beam pinned-pinned uniform beam, mode 1 [rpm]             indep=26720.1        repo=26757.2        diff=  -0.139% PASS 
+TMM overhung gyroscopic disc on cantilever, synchronous fwd [rpm] indep=26632.6        repo=26632.6        diff=  +0.000% PASS 
+
+[B] rigid two-DOF rotor (flexibility of the shaft ignored)
+rigid damped crossing 1 vs FE crossing 1 [rpm]                   indep=17078.5        repo=18264          diff=  -6.491% INFO 
+rigid damped crossing 2 vs FE crossing 2 [rpm]                   indep=18879.1        repo=19917.6        diff=  -5.214% INFO 
+    rigid UNDAMPED synchronous criticals: [23869, 33239] rpm
+    rigid modes at 2,040 rpm (freq rpm, whirl, zeta): [(16809, 'B', np.float64(0.858)), (16862, 'F', np.float64(0.858)), (18445, 'B', np.float64(0.612)), (18531, 'F', np.float64(0.612))]
+
+[C] own lumped-mass beam model, damped supports, gyroscopic (definition as run: damped fwd whirl = N)
+    h=3.0 mm  nodes=75  crossings=[18265.1, 19917.3, 87982.0]
+    h=1.5 mm  nodes=141  crossings=[18264.2, 19917.5, 88012.5]
+lumped-beam crossing 1 vs FE crossing 1 [rpm]                    indep=18264.2        repo=18264          diff=  +0.001% PASS 
+lumped-beam crossing 2 vs FE crossing 2 [rpm]                    indep=19917.5        repo=19917.6        diff=  -0.000% PASS 
+lumped-beam crossing 3 vs FE crossing 3 [rpm]                    indep=88012.5        repo=88023.7        diff=  -0.013% PASS 
+    modes at 2040 rpm: [(17782, 'B', np.float64(0.872)), (17882, 'F', np.float64(0.872)), (19779, 'B', np.float64(0.562)), (19803, 'F', np.float64(0.567)), (43186, 'B', np.float64(0.057)), (45045, 'F', np.float64(0.06)), (71271, 'B', np.float64(0.201)), (73882, 'F', np.float64(0.194))]
+    modes at 102000 rpm: [(17141, 'B', np.float64(0.287)), (17759, 'B', np.float64(0.854)), (17940, 'B', np.float64(0.019)), (19165, 'F', np.float64(0.856)), (20419, 'F', np.float64(0.62)), (33522, 'B', np.float64(0.497)), (92633, 'F', np.float64(0.036)), (132583, 'B', np.float64(0.002))]
+    run Campbell at 2040 rpm: [(17782, 'B', 0.872), (17882, 'F', 0.872), (19779, 'B', 0.562), (19803, 'F', 0.567), (43189, 'B', 0.057), (45048, 'F', 0.06), (71275, 'B', 0.201), (73886, 'F', 0.194)]
+damping ratio of crossing mode 1                                 indep=0.867977       repo=0.867984       diff=  -0.001% PASS 
+damping ratio of crossing mode 2                                 indep=0.584054       repo=0.584066       diff=  -0.002% PASS 
+damping ratio of crossing mode 3                                 indep=0.0428336      repo=0.0428132      diff=  +0.048% PASS 
+    UNDAMPED (c=0) lumped-beam (h=3 mm) synchronous criticals: [23230.5, 31768.8, 90947.9] rpm
+
+[D] Myklestad-Prohl transfer matrices, synchronous forward whirl, undamped supports
+    TMM synchronous undamped criticals: [23231.7, 31770.8, 90976.3]
+TMM first bending synchronous critical (UNDAMPED) vs FE mode 3 (damped c=1000) [rpm] indep=90976.3        repo=88023.7        diff=  +3.354% INFO 
+    (not like-for-like: the run crossing includes the assumed support damping; like-for-like damped value in [C])
+TMM vs own lumped-beam (c=0) bending critical [rpm]              indep=90976.3        repo=90947.9        diff=  +0.031% PASS 
+TMM rigid-mode undamped critical 1 vs lumped-beam c=0 [rpm]      indep=23231.7        repo=23230.5        diff=  +0.005% PASS 
+TMM rigid-mode undamped critical 2 vs lumped-beam c=0 [rpm]      indep=31770.8        repo=31768.8        diff=  +0.006% PASS 
+    TMM NON-ROTATING undamped natural frequencies: [22300, 30331, 49867, 79997] rpm
+    simple overhung estimate: overhang mass 0.0815 kg, flexibility 0.131 um/N -> 92370 rpm (non-rotating, rigid pinned bearings; compare with the zero-speed flexible mode, not the 88 krpm synchronous one)
+    same with the 2 N/um bearing compliance added: flexibility 0.814 um/N -> 37073 rpm. These single-mass estimates bracket the zero-speed flexible mode but cannot reproduce the gyroscopically stiffened synchronous value (expected accuracy no better than +/-50 %).
+
+[E] separation margin and support-stiffness sensitivity
+separation from own lumped-beam crossings (run definition)       indep=0.294301       repo=0.294466       diff=  -0.056% PASS 
+candidate check value vs rotordynamics.json                      indep=0.294466       repo=0.294466       diff=  +0.000% PASS 
+    run definition: sep = min_c max(N_low-Nc, Nc-N_high, 0)/N_high ; binding mode = 88012.49653589226 rpm
+    k=1.0 N/um  run=[8691, 87649]  own=[8692, 87607]
+  k=1 N/um crossing 1                                            indep=8692.15        repo=8691.15        diff=  +0.012% PASS 
+  k=1 N/um crossing 2                                            indep=87607.1        repo=87649          diff=  -0.048% PASS 
+    k=2.0 N/um  run=[18264, 19918, 88024]  own=[18265, 19917, 87982]
+  k=2 N/um crossing 1                                            indep=18265.1        repo=18264          diff=  +0.006% PASS 
+  k=2 N/um crossing 2                                            indep=19917.3        repo=19917.6        diff=  -0.001% PASS 
+  k=2 N/um crossing 3                                            indep=87982          repo=88023.7        diff=  -0.047% PASS 
+    k=5.0 N/um  run=[35067, 49662, 89306]  own=[35065, 49666, 89266]
+  k=5 N/um crossing 1                                            indep=35064.8        repo=35066.5        diff=  -0.005% PASS 
+  k=5 N/um crossing 2                                            indep=49666.1        repo=49661.9        diff=  +0.008% PASS 
+  k=5 N/um crossing 3                                            indep=89265.6        repo=89305.8        diff=  -0.045% PASS 
+    k=1 N/um, c=1000: modes at 9,000 rpm [(76, 'B', np.float64(1.0)), (610, 'F', np.float64(1.0)), (8669, 'B', np.float64(0.86)), (8693, 'F', np.float64(0.87))] (one rigid mode is critically damped, zeta ~1 with a damped frequency < 1 krpm, so it never meets N: that is why only two criticals are listed at 1 N/um)
+    c=    0 k=2.0 N/um: crossings [23231, 31769, 90948] rpm, separation 0.337
+    c=    0 k=3.0 N/um: crossings [28091, 38073, 91662] rpm, separation 0.264
+    c=    0 k=3.5 N/um: crossings [30154, 40686, 92035] rpm, separation 0.225
+    c=    0 k=4.0 N/um: crossings [32040, 43036, 92420] rpm, separation 0.191
+    -> separation falls below 0.20 at k* ~ 3.86 N/um (c = 0 N s/m; linear interpolation)
+    c= 1000 k=2.0 N/um: crossings [18265, 19917, 87982] rpm, separation 0.294
+    c= 1000 k=3.0 N/um: crossings [26344, 33201, 88380] rpm, separation 0.300
+    c= 1000 k=3.5 N/um: crossings [28892, 38275, 88589] rpm, separation 0.261
+    c= 1000 k=4.0 N/um: crossings [31156, 42582, 88806] rpm, separation 0.197
+    -> separation falls below 0.20 at k* ~ 3.98 N/um (c = 1000 N s/m; linear interpolation)
+
+[F] unbalance response (G2.5 at N_high, both wheels, in phase / opposed)
+eccentricity [m]                                                 indep=3.51077e-07    repo=3.51077e-07    diff=  +0.000% PASS 
+max turbine orbit <= 1.05 N_high [m]                             indep=3.40282e-07    repo=3.40287e-07    diff=  -0.002% PASS 
+candidate check value vs rotordynamics.json max                  indep=3.40287e-07    repo=3.40287e-07    diff=  +0.000% PASS 
+    run response in_phase: interior local maxima of max orbit = none; amplitude rises monotonically to 3.941e-06 m at 81600 rpm
+    run response opposed: interior local maxima = [(79900, 6.768904388476912e-07)]
+
+[G] sensitivity of the criticals and separation to the ASSUMED support damping (case range 300-3000 N s/m)
+    k=2 N/um c=   300 N s/m: crossings [23004, 31413, 90665] rpm  separation 0.333
+    k=2 N/um c=  3000 N s/m: crossings [80766] rpm  separation 0.188  < 0.20
+    k=2 N/um c=  2000 N s/m: crossings [83060] rpm  separation 0.221
+    (c=0 and c=1000 at k=2 N/um are the first rows of the threshold sweep above)
+
+SUMMARY: all like-for-like comparisons within tolerance
+rotor_independent exit=0

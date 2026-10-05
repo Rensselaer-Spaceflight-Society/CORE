@@ -1,0 +1,120 @@
+workbook formula G120 | '=SUM(G9:G118)' | '=SUM(G9:G118)' | - | PASS
+workbook formula G126 | '=CEILING((G120-G118+SUM(G122:G124))*$K$2,$K$5)' | '=CEILING((G120-G118+SUM(G122:G124))*$K$2,$K$5)' | - | PASS
+workbook formula G127 | '=CEILING(G120*$K$3,$K$5)' | '=CEILING(G120*$K$3,$K$5)' | - | PASS
+workbook formula G129 | '=SUM(G120,G122:G124,G126:G127)' | '=SUM(G120,G122:G124,G126:G127)' | - | PASS
+workbook formula G3 | '=G129' | '=G129' | - | PASS
+workbook formula G147 | '=SUM(G143:G146)' | '=SUM(G143:G146)' | - | PASS
+workbook formula G148 | '=G120-G147+SUM(G122:G124)+CEILING((G120-G147)*$K$3,$K$5)' | '=G120-G147+SUM(G122:G124)+CEILING((G120-G147)*$K$3,$K$5)' | - | PASS
+workbook direct (G120, rows 9-118 qty x unit) | 5402 | 5402 | 0.0 | PASS
+workbook freight (G122:G124) | 200 | 200 | 0.0 | PASS
+workbook tax (G126) | 450 | 450 | 0.0 | PASS
+workbook reserve (G127) | 550 | 550 | 0.0 | PASS
+workbook total (G129) | 6602 | 6602 | 0.0 | PASS
+workbook total (G3) | 6602 | 6602 | 0.0 | PASS
+workbook conditional reduction (G147 = H12+H13+T05+T10) | 185 | 185 | 0.0 | PASS
+workbook conditional total (G148, tax-exempt, reserve recalculated) | 5942 | 5942 | 0.0 | PASS
+workbook travel row (G126 subtracts G118) | 'V01' | 'V01' | - | PASS
+CSV row count = workbook rows 9-118 + 122-124 | 113 | 113 | 0.0 | PASS
+CSV fields equal workbook (IDs, sheet rows, qty, unit cost, totals, text) | 0 | 0 | 0.0 | PASS
+YAML tax rate = workbook K2 | 0.08 | 0.08 | 0.0 | PASS
+YAML reserve rate = workbook K3 | 0.1 | 0.1 | 0.0 | PASS
+YAML rounding = workbook K5 | 25 | 25 | 0.0 | PASS
+YAML travel row = workbook G118 row | 'V01' | 'V01' | - | PASS
+YAML source sha256 = workbook sha256 | '46364aee817148acb15f366ff8e93a2211180c8a21c673a699aa4795c5a1caef' | '46364aee817148acb15f366ff8e93a2211180c8a21c673a699aa4795c5a1caef' | - | PASS
+cost_summary workbook_reproduction.direct | 5402 | 5402.0 | 0.0 | PASS
+cost_summary workbook_reproduction.freight | 200 | 200.0 | 0.0 | PASS
+cost_summary workbook_reproduction.tax | 450 | 450 | 0.0 | PASS
+cost_summary workbook_reproduction.reserve | 550 | 550 | 0.0 | PASS
+cost_summary workbook_reproduction.total | 6602 | 6602.0 | 0.0 | PASS
+scenario nominal: direct | 5527.0 | 5527.0 | 0.0 | PASS
+scenario nominal: freight | 200.0 | 200.0 | 0.0 | PASS
+scenario nominal: tax | 450 | 450 | 0.0 | PASS
+scenario nominal: reserve | 575 | 575 | 0.0 | PASS
+scenario nominal: total | 6752.0 | 6752.0 | 0.0 | PASS
+scenario nominal: vs $5,500 | 1252.0 | 1252.0 | 0.0 | PASS
+scenario nominal: vs $6,000 | 752.0 | 752.0 | 0.0 | PASS
+scenario adverse: direct | 6532.0 | 6532.0 | 0.0 | PASS
+scenario adverse: freight | 270.0 | 270.0 | 0.0 | PASS
+scenario adverse: tax | 550 | 550 | 0.0 | PASS
+scenario adverse: reserve | 675 | 675 | 0.0 | PASS
+scenario adverse: total | 8027.0 | 8027.0 | 0.0 | PASS
+scenario adverse: vs $5,500 | 2527.0 | 2527.0 | 0.0 | PASS
+scenario adverse: vs $6,000 | 2027.0 | 2027.0 | 0.0 | PASS
+scenario tax_exempt_only: direct | 5527.0 | 5527.0 | 0.0 | PASS
+scenario tax_exempt_only: freight | 200.0 | 200.0 | 0.0 | PASS
+scenario tax_exempt_only: tax | 0.0 | 0 | 0.0 | PASS
+scenario tax_exempt_only: reserve | 575 | 575 | 0.0 | PASS
+scenario tax_exempt_only: total | 6302.0 | 6302.0 | 0.0 | PASS
+scenario tax_exempt_only: vs $5,500 | 802.0 | 802.0 | 0.0 | PASS
+scenario tax_exempt_only: vs $6,000 | 302.0 | 302.0 | 0.0 | PASS
+scenario all_conditional_options: direct | 4747.0 | 4747.0 | 0.0 | PASS
+scenario all_conditional_options: freight | 200.0 | 200.0 | 0.0 | PASS
+scenario all_conditional_options: tax | 0.0 | 0 | 0.0 | PASS
+scenario all_conditional_options: reserve | 475 | 475 | 0.0 | PASS
+scenario all_conditional_options: total | 5422.0 | 5422.0 | 0.0 | PASS
+scenario all_conditional_options: vs $5,500 | -78.0 | -78.0 | 0.0 | PASS
+scenario all_conditional_options: vs $6,000 | -578.0 | -578.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4: direct | 5097.0 | 5097.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4: freight | 200.0 | 200.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4: tax | 0.0 | 0 | 0.0 | PASS
+scenario route SV1+SV5+SV4: reserve | 525 | 525 | 0.0 | PASS
+scenario route SV1+SV5+SV4: total | 5822.0 | 5822.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4: vs $5,500 | 322.0 | 322.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4: vs $6,000 | -178.0 | -178.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4+SV2+SV3: direct | 4787.0 | 4787.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4+SV2+SV3: freight | 200.0 | 200.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4+SV2+SV3: tax | 0.0 | 0 | 0.0 | PASS
+scenario route SV1+SV5+SV4+SV2+SV3: reserve | 500 | 500 | 0.0 | PASS
+scenario route SV1+SV5+SV4+SV2+SV3: total | 5487.0 | 5487.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4+SV2+SV3: vs $5,500 | -13.0 | -13.0 | 0.0 | PASS
+scenario route SV1+SV5+SV4+SV2+SV3: vs $6,000 | -513.0 | -513.0 | 0.0 | PASS
+saving SV1 amount | 450 | 450 | 0.0 | PASS
+saving SV1 confirmed flag (must be False) | False | False | - | PASS
+saving SV2 amount | 245.0 | 245.0 | 0.0 | PASS
+saving SV2 confirmed flag (must be False) | False | False | - | PASS
+saving SV3 amount | 65.0 | 65.0 | 0.0 | PASS
+saving SV3 confirmed flag (must be False) | False | False | - | PASS
+saving SV4 amount | 230.0 | 230.0 | 0.0 | PASS
+saving SV4 confirmed flag (must be False) | False | False | - | PASS
+saving SV5 amount | 200.0 | 200.0 | 0.0 | PASS
+saving SV5 confirmed flag (must be False) | False | False | - | PASS
+saving SV6 amount | 40.0 | 40.0 | 0.0 | PASS
+saving SV6 confirmed flag (must be False) | False | False | - | PASS
+candidate_bom.csv rows (qty, nominal, adverse) = independent lines | 0 | 0 | 0.0 | PASS
+candidate_bom.csv row count | 119 | 119 | 0.0 | PASS
+lines with zero or negative nominal/adverse price (sponsor credit / unknown as zero) | 0 | 0 | 0.0 | PASS
+lines whose adverse price is below nominal | 0 | 0 | 0.0 | PASS
+open exposures list every "Quote needed" row | 'R02,R03,R04,S01,S02,S03,S04' | 'R02,R03,R04,S01,S02,S03,S04' | - | PASS
+rotor/billet-related lines | ['E01', 'R02'] | - | - | INFO (R01 is the compressor billet wheel; R02 the only turbine wheel)
+only one turbine-wheel purchase line | 1 | 1 | 0.0 | PASS
+R02 nominal = CHF 370 x 1.25 x 1.08 (rounded) | 500 | 500.0 | 0.0 | PASS
+R03 list conversion CHF 295 x 1.25 x 1.08 (stated USD 398) | 398 | 398 | 0.0 | PASS
+MORNING_REPORT sec4: "October 2 workbook" total and gaps | 1 | 1 | 0.0 | PASS
+MORNING_REPORT sec4: "PD-1 nominal" total and gaps | 1 | 1 | 0.0 | PASS
+MORNING_REPORT sec4: "PD-1 adverse" total and gaps | 1 | 1 | 0.0 | PASS
+MORNING_REPORT sec4: "Nominal, tax-exempt only" total and gaps | 1 | 1 | 0.0 | PASS
+MORNING_REPORT sec4: "route SV1+SV5+SV4," total and gaps | 1 | 1 | 0.0 | PASS
+MORNING_REPORT sec4: "Route SV1+SV5+SV4+SV2+SV3" total and gaps | 1 | 1 | 0.0 | PASS
+MORNING_REPORT sec4: "every conditional option" total and gaps | 1 | 1 | 0.0 | PASS
+manufacturing-and-budget sec1: "October 2 workbook baseline" total and gaps | 1 | 1 | 0.0 | PASS
+manufacturing-and-budget sec1: "PD-1 nominal (changes" total and gaps | 1 | 1 | 0.0 | PASS
+manufacturing-and-budget sec1: "PD-1 adverse" total and gaps | 1 | 1 | 0.0 | PASS
+manufacturing-and-budget sec1: "tax-exempt only" total and gaps | 1 | 1 | 0.0 | PASS
+manufacturing-and-budget sec1: "Route SV1+SV5+SV4 (" total and gaps | 1 | 1 | 0.0 | PASS
+manufacturing-and-budget sec1: "Route SV1+SV5+SV4+SV2+SV3" total and gaps | 1 | 1 | 0.0 | PASS
+manufacturing-and-budget sec1: "every conditional option" total and gaps | 1 | 1 | 0.0 | PASS
+SUMMARY cash table: "| nominal |" total | 1 | 1 | 0.0 | PASS
+SUMMARY cash table: "| adverse |" total | 1 | 1 | 0.0 | PASS
+SUMMARY cash table: "| tax_exempt_only |" total | 1 | 1 | 0.0 | PASS
+SUMMARY cash table: "| all_conditional_options |" total | 1 | 1 | 0.0 | PASS
+SUMMARY cash table: "| route SV1+SV5+SV4 |" total | 1 | 1 | 0.0 | PASS
+SUMMARY cash table: "| route SV1+SV5+SV4+SV2+SV3 |" total | 1 | 1 | 0.0 | PASS
+adverse-total delta assembled-core balancing (S03+S04) | 175 | - | - | INFO
+adverse-total delta turbine/NGV landed cost (R02+R03) | 200 | - | - | INFO
+adverse-total delta turbine freight (P03) | 70 | - | - | INFO
+adverse-total delta fuel pump (F01) | 70 | - | - | INFO
+MORNING_REPORT sec4 "Prices not yet in any total" | balancing (+175), turbine/NGV landed cost (+200), freight (+70) and pump (+70) ARE in the adverse total (8,027); only journal grinding, drawn outer-liner tube and a larger starter battery are in no total | - | - | FINDING
+journal grinding line present in any total (expected: none, stated as exposure) | 0 | 0 | 0.0 | PASS
+workbook sha256 unchanged by this script | '46364aee817148acb15f366ff8e93a2211180c8a21c673a699aa4795c5a1caef' | '46364aee817148acb15f366ff8e93a2211180c8a21c673a699aa4795c5a1caef' | - | PASS
+workbook sha256 46364aee817148acb15f366ff8e93a2211180c8a21c673a699aa4795c5a1caef
+0 numeric difference(s)

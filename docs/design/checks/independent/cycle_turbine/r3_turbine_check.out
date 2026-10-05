@@ -1,0 +1,101 @@
+== Fork-A turbine check on docs/design/results/pd1-jm85  (N = 68000 rpm, FAR_mix = 0.013175)
+-- geometry: component records vs geometry echoed in design_point.json
+geometry r_hub                                             indep=0.0275           repo=0.0275           diff=  +0.0000 % PASS 
+geometry r_tip                                             indep=0.0425           repo=0.0425           diff=  +0.0000 % PASS 
+geometry ngv_r_hub                                         indep=0.0277           repo=0.0277           diff=  +0.0000 % PASS 
+geometry ngv_r_tip                                         indep=0.0435           repo=0.0435           diff=  +0.0000 % PASS 
+geometry alpha1                                            indep=65               repo=65               diff=  +0.0000 % PASS 
+geometry beta2                                             indep=-58              repo=-58              diff=  -0.0000 % PASS 
+geometry bN                                                indep=0.012            repo=0.012            diff=  +0.0000 % PASS 
+geometry bR                                                indep=0.0075           repo=0.0075           diff=  +0.0000 % PASS 
+geometry n_ngv                                             indep=20               repo=20               diff=  +0.0000 % PASS 
+geometry n_rotor                                           indep=30               repo=30               diff=  +0.0000 % PASS 
+geometry clr                                               indep=0.00035          repo=0.00035          diff=  +0.0000 % PASS 
+geometry K_tip                                             indep=2                repo=2                diff=  +0.0000 % PASS 
+
+-- Part A: R3 residuals of the reported design-point turbine state
+A1 h01 - h02 (T41 -> T5 total) vs reported w [J/kg]        indep=45465.25         repo=45465.25         diff=  +0.0000 % PASS residual +0.0000 J/kg
+A2 Euler U(Ct1-Ct2) passage triangle [J/kg]                indep=47690.822        repo=47690.822        diff=  +0.0000 % PASS 
+A3 delivered w = w_Euler (1 - K_tip c/H) [J/kg]            indep=45465.25         repo=45465.25         diff=  +0.0000 % PASS 
+A4 Euler at mixed plane U(Ct1-Ct_mix) [J/kg]               indep=45465.25         repo=45465.25         diff=  +0.0000 % PASS 
+A5 mixed-plane energy h5 + C5^2/2 vs h05 [J/kg]            indep=524477.97        repo=524477.97        diff=  +0.0000 % PASS residual +0.0000 J/kg
+A6 exit continuity rho5 Cx5 A_annulus vs mdot [kg/s]       indep=0.20354934       repo=0.20354934       diff=  -0.0000 % PASS 
+A7 passage continuity rho2 W2 cos(b2) A_annulus [kg/s]     indep=0.20354934       repo=0.20354934       diff=  +0.0000 % PASS 
+A8 NGV continuity rho1 C1 cos(a1) A_ngv_exit [kg/s]        indep=0.20354934       repo=0.20354934       diff=  -0.0000 % PASS 
+A9 passage energy h2 + C2^2/2 vs h01 - w_Euler [J/kg]      indep=522252.4         repo=522252.4         diff=  -0.0000 % PASS residual -0.0000 J/kg
+A10 P05 = isentropic stagnation of mixed static state [Pa] indep=113348.19        repo=113348.19        diff=  +0.0000 % PASS 
+A11 eta_tt = w / (h01 - h(T05s)) own isentropic            indep=0.84624824       repo=0.84624824       diff=  +0.0000 % PASS 
+A12 T05 from energy balance h(T05) = h01 - w [K]           indep=797.58714        repo=797.58714        diff=  +0.0000 % PASS 
+A13 turbine power mdot w [W]                               indep=9254.4216        repo=9254.4216        diff=  +0.0000 % PASS 
+A14 psi = w/U^2                                            indep=0.73192812       repo=0.73192812       diff=  +0.0000 % PASS 
+A15 phi = Cx2/U (passage Cx)                               indep=0.51501185       repo=0.51501185       diff=  +0.0000 % PASS 
+A16 U at mean radius [m/s]                                 indep=249.23302        repo=249.23302        diff=  +0.0000 % PASS 
+A17 reaction (h1-h2)/(h01-h02,passage)                     indep=0.48697112       repo=0.48697112       diff=  +0.0000 % PASS 
+
+-- Part B: independent re-rating from the reported inlet state (T41, P41, mdot, N, FAR_mix)
+B U_mean_m_s                                               indep=249.23302        repo=249.23302        diff=  +0.0000 % PASS 
+B C1_m_s                                                   indep=259.47877        repo=259.47883        diff=  -0.0000 % PASS 
+B T1_K                                                     indep=808.22928        repo=808.22926        diff=  +0.0000 % PASS 
+B P1_Pa                                                    indep=121849.79        repo=121849.76        diff=  +0.0000 % PASS 
+B M1                                                       indep=0.46386065       repo=0.46386076       diff=  -0.0000 % PASS 
+B W1_m_s                                                   indep=110.55882        repo=110.55884        diff=  -0.0000 % PASS 
+B beta1_deg                                                indep=-7.3090257       repo=-7.3089959       diff=  +0.0004 % PASS 
+B M1_rel                                                   indep=0.19764194       repo=0.19764197       diff=  -0.0000 % PASS 
+B T2_K                                                     indep=787.26248        repo=787.26245        diff=  +0.0000 % PASS 
+B P2_Pa                                                    indep=108638.82        repo=108638.76        diff=  +0.0001 % PASS 
+B W2_m_s                                                   indep=242.2216         repo=242.22172        diff=  -0.0000 % PASS 
+B M2_rel                                                   indep=0.43840083       repo=0.43840106       diff=  -0.0001 % PASS 
+B C2_m_s                                                   indep=135.63081        repo=135.63084        diff=  -0.0000 % PASS 
+B M2                                                       indep=0.24548042       repo=0.24548048       diff=  -0.0000 % PASS 
+B alpha2_exit_swirl_deg                                    indep=18.848331        repo=18.848282        diff=  +0.0003 % PASS 
+B Cx2_m_s                                                  indep=128.35789        repo=128.35796        diff=  -0.0000 % PASS 
+B T02_passage_K                                            indep=795.57742        repo=795.57739        diff=  +0.0000 % PASS 
+B w_euler_J_kg                                             indep=47690.783        repo=47690.822        diff=  -0.0001 % PASS 
+B w_J_kg                                                   indep=45465.213        repo=45465.25         diff=  -0.0001 % PASS 
+B power_W                                                  indep=9254.414         repo=9254.4216        diff=  -0.0001 % PASS 
+B T02_K                                                    indep=797.58717        repo=797.58714        diff=  +0.0000 % PASS 
+B P02_Pa                                                   indep=113348.25        repo=113348.19        diff=  +0.0001 % PASS 
+B PR_tt                                                    indep=1.258481         repo=1.2584816        diff=  -0.0001 % PASS 
+B PR_ts                                                    indep=1.3130354        repo=1.3130361        diff=  -0.0001 % PASS 
+B eta_tt                                                   indep=0.84624943       repo=0.84624824       diff=  +0.0001 % PASS 
+B eta_ts                                                   indep=0.71827903       repo=0.71827824       diff=  +0.0001 % PASS 
+B psi                                                      indep=0.73192752       repo=0.73192812       diff=  -0.0001 % PASS 
+B phi                                                      indep=0.51501159       repo=0.51501185       diff=  -0.0000 % PASS 
+B reaction                                                 indep=0.48697095       repo=0.48697112       diff=  -0.0000 % PASS 
+B zeta_ngv                                                 indep=0.10404663       repo=0.10404783       diff=  -0.0012 % PASS 
+B zeta_rotor                                               indep=0.10256439       repo=0.1025656        diff=  -0.0012 % PASS 
+B Re_ngv                                                   indep=26831.74         repo=26830.501        diff=  +0.0046 % PASS 
+B Re_rotor                                                 indep=20024.771        repo=20023.846        diff=  +0.0046 % PASS 
+B ngv_flow_fraction_of_max                                 indep=0.73985051       repo=0.73985103       diff=  -0.0001 % PASS 
+B rotor_flow_fraction_of_max                               indep=0.70919342       repo=0.7091941        diff=  -0.0001 % PASS 
+B A_ngv_throat_m2                                          indep=0.0014936031     repo=0.0014936031     diff=  +0.0000 % PASS 
+B A_rotor_throat_m2                                        indep=0.00174803       repo=0.00174803       diff=  +0.0000 % PASS 
+B tip_work_factor                                          indep=0.95333333       repo=0.95333333       diff=  +0.0000 % PASS 
+B mixed_exit.T_static_K                                    indep=788.85562        repo=788.85558        diff=  +0.0000 % PASS 
+B mixed_exit.Cx_m_s                                        indep=128.61764        repo=128.61771        diff=  -0.0000 % PASS 
+B mixed_exit.Ct_m_s                                        indep=52.747124        repo=52.74703         diff=  +0.0002 % PASS 
+B mixed_exit.C_m_s                                         indep=139.01351        repo=139.01354        diff=  -0.0000 % PASS 
+B Soderberg NGV: zeta* + aspect (no Re)                    value=0.074884208      INFO x fRe 1.3894
+B Soderberg rotor: zeta* + aspect (no Re)                  value=0.068610167      INFO x fRe 1.4949; deflection 50.69 deg
+B energy residual passage plane [J/kg]                     value=1.3824319e-10    INFO 
+
+-- Part C: sensitivities (INFO; same inlet state and mass flow, no re-match)
+C Re-correction iterated to convergence: eta_tt            value=0.84625578       INFO one-update 0.846249; Re_N final 26839 vs first 26832; Re_R final 20029 vs first 20025
+C eta_tt with K_tip = 0 (no tip-leakage debit)             value=0.88043499       INFO K_tip 2 -> 0.8462: eta drop 0.0342 (3.88 % rel) vs work debit 4.67 %
+C eta_tt with Soderberg losses x1.5                        value=0.79764362       INFO w 47149 J/kg
+C eta_tt with Soderberg losses x2.0                        value=0.75413908       INFO w 49017 J/kg
+C eta_tt with Soderberg losses x3.0                        value=0.67887927       INFO w 53518 J/kg
+C pre-fix power-law viscosity: Re_ngv                      value=32448.248        INFO Sutherland (current) 26832
+C pre-fix power-law viscosity: Re_rotor                    value=24264.114        INFO Sutherland (current) 20025
+C pre-fix power-law viscosity: eta_tt                      value=0.85108175       INFO Sutherland (current) 0.8462
+C mu ratio Sutherland/pre-fix law at T1, T2                value=1.209, 1.212     INFO 
+
+-- Part D: pre-review run out/pd1-jm85/af33609c34b6 (pre-R3 logic)
+D pre-review: has mixed_exit block                         value=0                INFO 
+D pre-review: station 5 static T equals passage T2         value=1                INFO 
+D pre-review: h(T5s) + C2^2/2 - h(T05) [J/kg]              value=-2222.319        INFO = -(w_Euler - w) = -2222.3 J/kg expected if T05 debited but exit velocity/static state undebited
+D pre-review: reported P05 vs isentropic stagnation of passage state value=113177.49 vs 113189.18 Pa INFO (equal => P05 came from the undebited passage state while T05 used the debited work)
+D pre-review: h01 - h05 - w [J/kg]                         value=-5.8207661e-11   INFO 
+D pre-review: P05 from static T(h05 - C2^2/2) at P2 vs reported [Pa] value=113177.490 vs 113177.490 INFO implied static 786.176 K vs reported station-5 static 784.164 K
+
+All comparisons within tolerance.

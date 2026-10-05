@@ -2,10 +2,87 @@
 
 Diagnostics are published from this same geometry for M24 to convert/check.
 Efficiency is an explicit cycle input; CLP does not determine it.
+
+Inlet: the combustor's own air flow (mdot_comb_kg_s, which excludes tunnel
+leakage when an imported operating point is used) and its inlet total pressure
+P031_Pa (after any diffuser-to-combustor turn loss). Both equal mdot/P03 in the
+legacy modes, so baseline results are unchanged.
+
+Optional controls (absent -> legacy behaviour): separate liner and tunnel walls
+(liner wall is COLD stock; converted to the library's hot-model thickness here),
+liner material code, inner-annulus hole-K sizing target, and independent inner
+and outer dilution hole multiples. combustor_inputs(s) is the single builder of
+the library call; the CAD exporter uses it so exported rows match this geometry.
 """
 
 from core.module import module
 from core.combustor import MicroJetCombustor, CombustorError
+
+
+MATERIAL_CODES = {0: '316SS', 1: '304SS', 2: 'IN625', 3: 'IN718'}
+
+
+def combustor_inputs(s):
+    """Build the library input dict and design parameters from module state."""
+    material = MATERIAL_CODES[int(s["liner_material_code_count"])] if "liner_material_code_count" in s else '316SS'
+    T_wall = 293.0 + s["liner_wall_temp_frac"] * (s["T04_K"] - 293.0)
+    scale = 1.0 + s["alpha_liner_per_K"] * (T_wall - 293.0)
+    inputs = {
+        'casing_od_inch':        s["D_casing_out_m"] / 0.0254,
+        'shaft_tunnel_od_inch':  s["D_shaft_tunnel_m"] / 0.0254,
+        'wall_thickness_mm':     s["casing_wall_m"] * 1000.0,
+        'pressure_ratio':        s["PR_c_ratio"],
+        'compressor_efficiency': s["eta_c_isen"],
+        'mass_flow_air_kg_s':    s["mdot_comb_kg_s"],
+        'target_tit_k':          s["T04_K"],
+        'gas_constant_J_kgK': s['R_gas_J_kgK'],
+        'inlet_total_pressure_Pa': s['P031_Pa'],
+        'inlet_total_temperature_K': s['T03_K'],
+        'fuel_air_ratio': s['FAR_ratio'],
+        'mass_flow_fuel_kg_s': s['mdot_fuel_kg_s'],
+        'fuel_LHV_J_kg': s['LHV_fuel_J_kg'],
+        'combustion_efficiency': s['eta_b_frac'],
+        'liner_material':        material,
+        'tau_min_s':             s["tau_min_s"],
+        'L_D_min':               s["L_D_min_ratio"],
+        'L_D_max':               s["L_D_max_ratio"],
+    }
+    if "liner_wall_m" in s:
+        inputs['casing_wall_thickness_mm'] = s["casing_wall_m"] * 1000.0
+        inputs['liner_wall_thickness_mm'] = s["liner_wall_m"] * 1000.0 * scale   # hot-model convention
+    if "tunnel_wall_m" in s:
+        inputs['shaft_tunnel_wall_thickness_mm'] = s["tunnel_wall_m"] * 1000.0
+    params = {
+        'phi_primary_target':             s["phi_pz_ratio"],
+        'phi_secondary_target':           s["phi_sz_ratio"],
+        'film_cooling_fraction':          s["film_cool_frac"],
+        'primary_air_vaporizer_fraction': s["vap_air_frac"],
+        'target_annulus_vel':             s["v_annulus_outer_m_s"],
+        'vap_pitch_mm':                   s["vap_pitch_m"] * 1000.0,
+        'target_pressure_drop':           s["dP34_frac"],
+        'discharge_coeff_hole':           s["Cd_hole_ratio"],
+        'f_outer_feed':                   s["f_outer_feed_frac"],
+        'liner_wall_temp_frac':           s["liner_wall_temp_frac"],
+        'liner_area_frac':                s["liner_area_frac"],
+        'K_annular_ratio':                s["K_annular_ratio"],
+    }
+    if "inner_hole_K_target_ratio" in s:
+        params['target_inner_hole_K'] = s["inner_hole_K_target_ratio"]
+    if "dil_holes_per_vap_inner_count" in s:
+        params['dil_holes_per_vap_inner'] = int(s["dil_holes_per_vap_inner_count"])
+    if "dil_holes_per_vap_outer_count" in s:
+        params['dil_holes_per_vap_outer'] = int(s["dil_holes_per_vap_outer_count"])
+    if "sec_holes_per_vap_count" in s:
+        params['sec_holes_per_vap'] = int(s["sec_holes_per_vap_count"])
+    return inputs, params, material
+
+
+def run_library(s):
+    inputs, params, material = combustor_inputs(s)
+    m = MicroJetCombustor(inputs)
+    m.DESIGN_PARAMS.update(params)
+    m.MATERIALS[material]['alpha'] = s["alpha_liner_per_K"]
+    return m
 
 
 @module(
@@ -17,7 +94,7 @@ from core.combustor import MicroJetCombustor, CombustorError
         # from the cycle -- the combustor no longer computes its own
         # thermodynamics or fuel flow, which is what removes the risk of it
         # disagreeing with the rest of the engine about the gas
-        "mdot_kg_s", "T03_K", "P03_Pa", "T04_K", "FAR_ratio", "mdot_fuel_kg_s",
+        "T03_K", "T04_K", "FAR_ratio", "mdot_fuel_kg_s",
         "PR_c_ratio", "eta_c_isen", "LHV_fuel_J_kg", "eta_b_frac", "R_gas_J_kgK",
         # geometry envelope
         "D_casing_out_m", "D_shaft_tunnel_m", "casing_wall_m",
@@ -26,7 +103,10 @@ from core.combustor import MicroJetCombustor, CombustorError
         "v_annulus_outer_m_s", "vap_pitch_m", "tau_min_s", "L_D_min_ratio",
         "L_D_max_ratio", "dP34_frac", "Cd_hole_ratio", "f_outer_feed_frac",
         "liner_wall_temp_frac", "alpha_liner_per_K", "liner_area_frac", "K_annular_ratio",
+        "mdot_comb_kg_s", "P031_Pa",
     ],
+    optional_reads=["liner_wall_m", "tunnel_wall_m", "liner_material_code_count", "inner_hole_K_target_ratio",
+                    "dil_holes_per_vap_inner_count", "dil_holes_per_vap_outer_count", "sec_holes_per_vap_count"],
     writes=[
         "d_holes_pri_out_cold_m",
         "d_holes_pri_in_cold_m",
@@ -72,6 +152,8 @@ from core.combustor import MicroJetCombustor, CombustorError
         "v_annulus_inner_m_s", "D_liner_out_cold_m", "D_liner_in_cold_m",
         "eta_comb_predicted_frac", "T_liner_wall_K", "D_casing_req_m",
         "A_ref_m2", "V_ref_m_s", "casing_fit_margin_m",
+        "n_holes_dil_in_count", "hole_K_outer_ratio", "hole_K_inner_ratio", "main_hole_lig_min_m",
+        "liner_wall_cold_m", "vap_scoop_capture_ratio", "T_primary_raw_K", "T_vap_wall_inner_K",
     ],
     notes="Preliminary sizing; pressure loss, thermal and stability correlations need validation.",
 )
@@ -79,50 +161,14 @@ def m20_combustor(s):
     # The combustor library still takes casing dimensions in inches because
     # that is how its geometry checks were written and validated. Convert here
     # rather than in the physics, so the state stays strictly SI.
-    inputs = {
-        'casing_od_inch':        s["D_casing_out_m"] / 0.0254,
-        'shaft_tunnel_od_inch':  s["D_shaft_tunnel_m"] / 0.0254,
-        'wall_thickness_mm':     s["casing_wall_m"] * 1000.0,
-        'pressure_ratio':        s["PR_c_ratio"],
-        'compressor_efficiency': s["eta_c_isen"],
-        'mass_flow_air_kg_s':    s["mdot_kg_s"],
-        'target_tit_k':          s["T04_K"],
-        'gas_constant_J_kgK': s['R_gas_J_kgK'],
-        'inlet_total_pressure_Pa': s['P03_Pa'],
-        'inlet_total_temperature_K': s['T03_K'],
-        'fuel_air_ratio': s['FAR_ratio'],
-        'mass_flow_fuel_kg_s': s['mdot_fuel_kg_s'],
-        'fuel_LHV_J_kg': s['LHV_fuel_J_kg'],
-        'combustion_efficiency': s['eta_b_frac'],
-        'liner_material':        '316SS',
-        'tau_min_s':             s["tau_min_s"],
-        'L_D_min':               s["L_D_min_ratio"],
-        'L_D_max':               s["L_D_max_ratio"],
-    }
-
-    m = MicroJetCombustor(inputs)
-    m.DESIGN_PARAMS.update({
-        'phi_primary_target':             s["phi_pz_ratio"],
-        'phi_secondary_target':           s["phi_sz_ratio"],
-        'film_cooling_fraction':          s["film_cool_frac"],
-        'primary_air_vaporizer_fraction': s["vap_air_frac"],
-        'target_annulus_vel':             s["v_annulus_outer_m_s"],
-        'vap_pitch_mm':                   s["vap_pitch_m"] * 1000.0,
-        'target_pressure_drop':           s["dP34_frac"],
-        'discharge_coeff_hole':           s["Cd_hole_ratio"],
-        'f_outer_feed':                   s["f_outer_feed_frac"],
-        'liner_wall_temp_frac':           s["liner_wall_temp_frac"],
-        'liner_area_frac':                s["liner_area_frac"],
-        'K_annular_ratio':                s["K_annular_ratio"],
-    })
-    m.MATERIALS['316SS']['alpha'] = s["alpha_liner_per_K"]
+    m = run_library(s)
 
     try:
         r = m.run()
     except CombustorError as e:
         raise CombustorError(
             f"combustor sizing failed at the current design point: {e}\n"
-            f"  mdot = {s['mdot_kg_s']:.3f} kg/s, casing OD = {s['D_casing_out_m']*1000:.0f} mm, "
+            f"  combustor air = {s['mdot_comb_kg_s']:.3f} kg/s, casing OD = {s['D_casing_out_m']*1000:.0f} mm, "
             f"T04 = {s['T04_K']:.0f} K.\n"
             f"  The combustor is usually the first thing to become infeasible when the "
             f"engine is scaled -- it needs annulus area that the casing may not have."
@@ -199,4 +245,12 @@ def m20_combustor(s):
         "A_ref_m2":           r['A_ref_m2'],
         "V_ref_m_s":          r['V_ref_m_s'],
         "casing_fit_margin_m": r['casing_fit_margin_mm'] / 1000.0,
+        "n_holes_dil_in_count": float(r['dil_in_qty']),
+        "hole_K_outer_ratio": r['hole_K_outer'],
+        "hole_K_inner_ratio": r['hole_K_inner'],
+        "main_hole_lig_min_m": min(c['ligament_cold_mm'] for c in r['main_hole_ligaments'].values()) / 1000.0,
+        "liner_wall_cold_m": r['liner_wall_thickness_mm'] / 1000.0 / r['thermal_scale_ratio'],
+        "vap_scoop_capture_ratio": r['vap_scoop_capture_area_ratio'],
+        "T_primary_raw_K": r['T_primary_zone_raw'],
+        "T_vap_wall_inner_K": r['stab_T_vap_wall_inner_K'],
     }

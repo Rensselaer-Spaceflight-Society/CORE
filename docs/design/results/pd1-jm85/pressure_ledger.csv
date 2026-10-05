@@ -1,0 +1,9 @@
+segment,element,loss_frac,basis
+0-2,bellmouth + screen + starter struts,0.008805755669022086,"assumption: 1 % at reference corrected flow, scaled with flow squared"
+2-3,compressor stage incl. its diffuser,,map pressure ratio/efficiency (no separate diffuser loss: double count avoided)
+3-31,90 deg turn + deswirl into annuli,0.01999999816675567,"assumption 0.020 at design FF, scaled with FF squared"
+31-4,"combustor (annuli, holes, liner)",0.024999998180441626,"prescribed sizing basis 0.025 at design FF, scaled with FF squared"
+4-41,tunnel leakage re-entry ahead of NGV,0.0,adiabatic mixing; 0.020 of compressor air bypasses the combustor
+41-5,"turbine stage (expansion, not a loss)",,"rated expansion P5/P41 = 0.7946; its losses (Soderberg, tip leakage, incidence) are inside the rating"
+5-7,jet pipe + dissipated exit swirl,0.01588818150465221,0.010 fixed + swirl dynamic head 667 Pa
+7-8,convergent nozzle,,"Cv 0.97, Cd 0.97; choked=False"

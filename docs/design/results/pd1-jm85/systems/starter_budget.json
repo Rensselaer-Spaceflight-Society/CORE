@@ -1,0 +1,63 @@
+{
+  "basis": "compressor power scaled as N^3 from the lowest matched point (55000 rpm, 4718 W) - EXTRAPOLATION below the map, bounding estimate only; turbine windmilling and combustion assistance neglected; acceleration from rest in the stated time with the rotor polar inertia.",
+  "rotor_Ip_kg_m2": 0.00011868669890258497,
+  "accel_time_s": 3.0,
+  "rows": [
+    {
+      "N_rpm": 5000,
+      "compressor_motoring_W_bound": 3.5450588931221483,
+      "mechanical_W": 1.532999908784066,
+      "accel_torque_Nm": 0.020714736741732482,
+      "torque_required_Nm": 0.030413114657348667,
+      "power_required_W": 15.924269596718439
+    },
+    {
+      "N_rpm": 10000,
+      "compressor_motoring_W_bound": 28.360471144977186,
+      "mechanical_W": 4.519683722405858,
+      "accel_torque_Nm": 0.041429473483464964,
+      "torque_required_Nm": 0.07282770854409129,
+      "power_required_W": 76.26499804663193
+    },
+    {
+      "N_rpm": 15000,
+      "compressor_motoring_W_bound": 95.71659011429796,
+      "mechanical_W": 8.642086991770993,
+      "accel_torque_Nm": 0.062144210225197456,
+      "torque_required_Nm": 0.128581007489045,
+      "power_required_W": 201.97457425937898
+    },
+    {
+      "N_rpm": 20000,
+      "compressor_motoring_W_bound": 226.8837691598175,
+      "mechanical_W": 13.785250279821458,
+      "accel_torque_Nm": 0.08285894696692993,
+      "torque_required_Nm": 0.19776993924562392,
+      "power_required_W": 414.20839215663455
+    },
+    {
+      "N_rpm": 25000,
+      "compressor_motoring_W_bound": 443.1323616402684,
+      "mechanical_W": 19.888756170440107,
+      "accel_torque_Nm": 0.10357368370866242,
+      "torque_required_Nm": 0.2804347228818842,
+      "power_required_W": 734.176387681014
+    },
+    {
+      "N_rpm": 30000,
+      "compressor_motoring_W_bound": 765.7327209143837,
+      "mechanical_W": 26.917949585757427,
+      "accel_torque_Nm": 0.12428842045039491,
+      "torque_required_Nm": 0.37659696516080016,
+      "power_required_W": 1183.1142591133812
+    }
+  ],
+  "attachment": "rubber cone on the compressor nut through a one-way clutch; starter on a 3-strut bracket in the inlet (struts inside the inlet-loss allowance); disengages by overrun.",
+  "unresolved": [
+    "light-off speed",
+    "starter cut-out speed",
+    "self-sustain speed below 54.5 krpm",
+    "motoring power below the map",
+    "starter motor torque-speed curve"
+  ]
+}

@@ -1,0 +1,42 @@
+== P1. distant starts, local Newton-type solve (solve_from_guess), 68 krpm
+    start (0.02,    700 K): beta 0.661594, T04 848.0155 K
+    start (0.98,   1450 K): beta 0.661594, T04 848.0155 K
+    start (0.05,   1450 K): no convergence
+    start (0.95,    650 K): beta 0.661594, T04 848.0155 K
+    start (0.50,   1100 K): beta 0.661594, T04 848.0155 K
+    start (0.30,    500 K): beta 0.661594, T04 848.0155 K
+    start (0.80,    900 K): beta 0.661594, T04 848.0155 K
+    start (0.80,   1200 K): beta 0.661594, T04 848.0155 K
+    reported failed verify_point start (0.8, 1200 K) raises TurbineLimit: NGV throat choked: requested 0.2300 kg/s exceeds maximum 0.2199 kg/s for this inlet state
+== P2. global scan, n_scan = 41 (repository uses 11/21), 68000 rpm
+    status matched; converged branches 1; r_mass sign changes on the scan 1; beta with a power balance 28/41
+      branch beta 0.661594 T04 848.0155 K
+    scan failures: ['turbine work insufficient for T04 383-1500 K', 'turbine work insufficient for T04 384-1500 K', 'turbine work insufficient for T04 385-1500 K', 'turbine work insufficient for T04 386-1500 K', 'turbine work insufficient for T04 387-1500 K', 'turbine work insufficient for T04 389-1500 K', 'turbine work insufficient for T04 390-1500 K', 'turbine work insufficient for T04 391-1500 K', 'turbine work insufficient for T04 392-1500 K', 'turbine work insufficient for T04 394-1500 K', 'turbine work insufficient for T04 395-1500 K', 'turbine work insufficient for T04 396-1500 K', 'turbine work insufficient for T04 398-1500 K']
+== P2. global scan, n_scan = 41 (repository uses 11/21), 56000 rpm
+    status matched; converged branches 1; r_mass sign changes on the scan 1; beta with a power balance 30/41
+      branch beta 0.631125 T04 849.8072 K
+    scan failures: ['turbine work insufficient for T04 368-1500 K', 'turbine work insufficient for T04 369-1500 K', 'turbine work insufficient for T04 370-1500 K', 'turbine work insufficient for T04 371-1500 K', 'turbine work insufficient for T04 372-1500 K', 'turbine work insufficient for T04 373-1500 K', 'turbine work insufficient for T04 374-1500 K', 'turbine work insufficient for T04 375-1500 K', 'turbine work insufficient for T04 376-1500 K']
+== P3. power residual vs T04 at the design beta (fine grid): number of roots
+    94/120 feasible T04 points; power-residual roots 1; monotone increasing True; infeasible types ['TurbineLimit']; feasible T04 range 373-1254 K
+== P4. trend: nozzle area at 68 krpm (continuation from the design point)
+    A8 x 0.90: T04 894.60 K, beta 0.6262, thrust 45.35 N, mdot 0.1948
+    A8 x 0.95: T04 868.68 K, beta 0.6456, thrust 43.17 N, mdot 0.1981
+    A8 x 1.00: T04 848.02 K, beta 0.6616, thrust 41.16 N, mdot 0.2009
+    A8 x 1.05: T04 830.97 K, beta 0.6750, thrust 39.31 N, mdot 0.2032
+    A8 x 1.10: T04 816.60 K, beta 0.6864, thrust 37.61 N, mdot 0.2052
+    smaller nozzle -> higher T04: True; smaller nozzle -> lower beta: True
+== P5. what actually fails just beyond each reported single-parameter boundary (68 krpm)
+    NGV effective throat area (smallest feasible): boundary 0.000698953; inside 0.000719921: turbine model validity: Reynolds number outside Soderberg correction comfort range (T04 731 K); outside 0.000677984: NGV within 5 % of choke (T04 738 K); table says beyond: "NGV within 5 % of choke"
+    NGV effective throat area (largest feasible): boundary 0.0025059; inside 0.00243072: turbine model validity: Reynolds number outside Soderberg correction comfort range (T04 1124 K); outside 0.00258107: T04 1176 K > 1150 K screen (T04 1176 K); table says beyond: "T04 1150 K > 1150 K screen"
+    rotor relative throat area (smallest feasible): boundary 0.000722153; inside 0.000743818: feasible (T04 665 K); outside 0.000700489: rotor relative throat within 5 % of choke (T04 671 K); table says beyond: "rotor relative throat within 5 % of choke"
+    rotor relative throat area (largest feasible): boundary 0.002788; inside 0.00270436: turbine model validity: Reynolds number outside Soderberg correction comfort range (T04 1119 K); outside 0.00287164: T04 1184 K > 1150 K screen (T04 1184 K); table says beyond: "T04 1150 K > 1150 K screen"
+    turbine loss multiplier (largest feasible): boundary 5.80569; inside 5.63152: turbine model validity: Reynolds number outside Soderberg correction comfort range (T04 1135 K); outside 5.97987: T04 1166 K > 1150 K screen (T04 1166 K); table says beyond: "T04 1150 K > 1150 K screen"
+    compressor efficiency offset (most negative feasible): boundary -0.231546; inside -0.2246: turbine model validity: Reynolds number outside Soderberg correction comfort range (T04 1136 K); outside -0.238492: T04 1165 K > 1150 K screen (T04 1165 K); table says beyond: "T04 1150 K > 1150 K screen"
+    combustor loss at design FF (largest feasible): boundary 0.266596; inside 0.258598: turbine model validity: Reynolds number outside Soderberg correction comfort range (T04 1141 K); outside 0.274594: T04 1159 K > 1150 K screen (T04 1159 K); table says beyond: "T04 1150 K > 1150 K screen"
+== P6. smallest-NGV-throat edge: does the repository model have a root below the reported boundary?
+    A_ngv = 0.97 x boundary: standard scan (n_scan 11, inner grid 14) -> match; fine scan (41 x 60) roots: [(0.2965884731207248, 737.6880318381784, 0.9550062946757204, 'NGV within 5 % of choke')]
+    A_ngv = 0.94 x boundary: standard scan (n_scan 11, inner grid 14) -> match; fine scan (41 x 60) roots: [(0.2757071777424515, 742.7016581607988, 0.9598078526797024, 'NGV within 5 % of choke')]
+    A_ngv = 0.90 x boundary: standard scan (n_scan 11, inner grid 14) -> match; fine scan (41 x 60) roots: [(0.24652834777478386, 750.9231319432325, 0.9659425964186543, 'NGV within 5 % of choke')]
+
+elapsed 518 s; FAILS: none
+probe_matching exit=0

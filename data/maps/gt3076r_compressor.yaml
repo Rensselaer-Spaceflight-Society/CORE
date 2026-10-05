@@ -1,0 +1,67 @@
+schema_version: 1
+record_type: compressor_map
+component_id: gt3076r_map
+title: Garrett GT3076R compressor map (stock 56-trim 6+6 cast wheel), digitized
+data_file: data/maps/gt3076r_compressor_digitized.csv
+summary: >
+  Speed lines (corrected rpm) traced from Garrett's published map image with a
+  pixel-snapping tool calibrated on the chart grid (0-64 lb/min, PR 1.0-4.5).
+  Efficiency anchors are the crossings of the printed 60-77 % islands with each
+  speed line, plus the apparent peak-efficiency (dashed) locus and Garrett's
+  stated ~58 % choke convention at the right-hand end of each line.
+  This is a related-wheel reference for CORE's 11+0 billet wheel, not that wheel's map.
+source_documents:
+  - id: garrett-gt3076r-comp-map
+    kind: manufacturer_chart
+    url: https://www.garrettmotion.com/wp-content/uploads/2022/06/GT3076-Comp-Map-Kg-Sec-scaled.jpg
+    accessed: 2026-10-04
+    sha256: 370c9b314dafc76915162d15e25c93f75e66b2373e551d5072e64f7b753992df
+    redistribution: Manufacturer image; not stored in this repository. Digitized values only.
+  - id: garrett-turbo-tech-103
+    kind: manufacturer_guide
+    url: https://www.garrettmotion.com/wp-content/uploads/2019/10/GAM_Turbo-Tech-103_Expert-1.pdf
+    accessed: 2026-10-04
+    note: "'For Garrett maps, the choke line is typically defined by the point where the efficiency drops below 58%.' Reference conditions and pressure-ratio basis are not stated in this guide."
+  - id: corrected-flow-convention-secondary
+    kind: secondary_source
+    url: https://www.stealth316.com/2-3s-compflowmaps.htm
+    accessed: 2026-10-04
+    note: "Third-party page states Garrett (GT) maps use 545 R (85.31 F) and 28.4 inHg (13.9487 psi). Not confirmed by Garrett on the accessed pages."
+parameters:
+  reference_temperature: {value: 302.78, unit: K, basis: assumption, range: [288.15, 302.78],
+                          note: "545 R per secondary source; alternative 288.15 K evaluated as a sensitivity case."}
+  reference_pressure: {value: 96174.0, unit: Pa, basis: assumption, range: [96174.0, 101325.0],
+                       note: "28.4 inHg = 13.9487 psia per secondary source; alternative 101,325 Pa as a sensitivity case."}
+  lowest_speed_line: {value: 55864, unit: rpm, basis: reference, source: garrett-gt3076r-comp-map}
+  highest_speed_line: {value: 144956, unit: rpm, basis: reference, source: garrett-gt3076r-comp-map,
+                       note: Marked MAX RPM on the chart for the stock wheel.}
+  digitization_flow_uncertainty: {value: 0.3, unit: lb_min, basis: calculated,
+                                  note: "Grid calibration residual < 1 px; line snapping +/-2 px (~0.1 lb/min) plus visual seed error."}
+  digitization_pr_uncertainty: {value: 0.01, unit: '-', basis: calculated}
+  efficiency_uncertainty_detected: {value: 0.01, unit: '-', basis: calculated,
+                                    note: Contour crossings detected in pixels; interpolation between contours adds this.}
+  efficiency_uncertainty_estimated: {value: 0.02, unit: '-', basis: calculated,
+                                     note: Crossings hidden under labels, surge-end and peak values.}
+  efficiency_uncertainty_high_speed: {value: 0.03, unit: '-', basis: calculated,
+                                      note: "Speed lines >= 115,226 rpm: efficiency anchors are low-confidence visual estimates."}
+  substitution_flow_uncertainty: {value: 0.05, unit: '-', basis: assumption,
+                                  note: "Fractional flow uncertainty for applying the stock-wheel map to the 11+0 billet wheel with CORE's diffuser; no data."}
+  substitution_efficiency_deficit: {value: 0.04, unit: '-', basis: assumption, range: [-0.02, 0.04],
+                                    note: "Adverse efficiency offset used in robustness cases (billet blade set, vaned diffuser + reverse turn instead of Garrett housing)."}
+pressure_ratio_definition: >
+  Not stated by Garrett on the accessed pages. Garrett's selection article defines PR = P2c / P1c
+  (absolute outlet / absolute inlet). Treated here as total-to-total across the stage from
+  inlet flange to housing outlet; a total-to-static definition would understate the total
+  delivery pressure by the outlet dynamic head (small at volute outlet speeds).
+efficiency_definition: Isentropic efficiency as plotted; total-to-total vs total-to-static basis not stated.
+control_volume: >
+  Compressor inlet flange to compressor-housing outlet with Garrett's housing (vaneless diffuser
+  and volute). CORE replaces the housing with a vaned radial diffuser feeding a reverse turn into
+  the combustor annuli. The map pressure ratio and efficiency are applied to the CORE stage up to
+  the vaned-diffuser exit; the reverse turn/deswirl loss is counted separately in the pressure
+  ledger (see core/engine_match.py). The billet-wheel and housing substitution are covered by the
+  substitution uncertainties above, not by modifying the digitized data.
+domain_rules:
+  speed: Only corrected speeds between the lowest and highest digitized speed lines are interpolated; no extrapolation.
+  flow: Only points between the digitized surge end (beta = 0) and choke end (beta = 1) of each speed line are valid.
+  efficiency_confidence: "medium for 55,864-100,452 rpm, low above 100,452 rpm"

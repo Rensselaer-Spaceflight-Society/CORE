@@ -1,0 +1,51 @@
+supplied values with a resolvable source (url/path + access date): assembly_pd1.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): bearings_candidate.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): compressor_gt3076r_56trim.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): materials.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): ngv_jetmax_ngv70.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): ngv_jetmax_ngv85.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): turbine_jetmax_tw70.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): turbine_jetmax_tw85.yaml | 0 | 0 | - | PASS
+supplied values with a resolvable source (url/path + access date): gt3076r_compressor.yaml | 0 | 0 | - | PASS
+total supplied parameters checked | 51 | - | - | INFO
+source document compressor:kinugawa-billet-56trim | https://www.kinugawaturbo.com/products/billet-turbo-compressor-wheel-garrett-gt3076r-gt3037-57-76-mm-trim-56-11-0 | accessed 2026-10-04 | sha256 no | INFO
+source document compressor:garrett-gt3076r-page | https://www.garrettmotion.com/racing-and-performance/performance-catalog/turbo/gt3076r/ | accessed 2026-10-04 | sha256 no | INFO
+source document compressor:dp2-review | docs/project/dp2-review.md | accessed None | sha256 no | INFO
+source document turbine:jetmax-tw85-finished | https://www.jetmax.ch/media/pdf_en/turbine_wheels/tw85finished_en.pdf | accessed 2026-10-04 | sha256 yes | INFO
+source document turbine:jetmax-tw85-blank | https://www.jetmax.ch/media/pdf_en/turbine_wheels/tw85blank_en.pdf | accessed 2026-10-04 | sha256 yes | INFO
+source document turbine:jetmax-turbine-wheels-page | https://www.jetmax.ch/en/turbine_wheels.htm | accessed 2026-10-04 | sha256 no | INFO
+source document ngv:jetmax-ngv85-blank | https://www.jetmax.ch/media/pdf_en/nozzle_guide/ngv85blank_en.pdf | accessed 2026-10-04 | sha256 yes | INFO
+source document ngv:jetmax-ngv-page | https://www.jetmax.ch/en/nozzle_guide_vanes.htm | accessed 2026-10-04 | sha256 no | INFO
+source document bearings:monton-turbo-bearings | https://www.montonbearing.com/hkhtzc/wpfdjzc.html | accessed 2026-10-04 | sha256 no | INFO
+seed_provenance "record X.Y (tag)" labels agree with the record basis | 0 | 0 | - | PASS
+values labelled "component record (purchased part)" whose record basis is not supplied | 0 | 0 | - | PASS
+record-level assumption/unresolved parameters present in assumptions_register.json | 63 | 63 | missing=[] extra=[('pd1-jm85.combustor', 'dil_holes_per_vap_inner'), ('pd1-jm85.combustor', 'dil_holes_per_vap_outer'), ('pd1-jm85.combustor', 'liner_alpha_per_K'), ('pd1-jm85.combustor', 'liner_material'), ('pd1-jm85.combustor', 'sec_holes_per_vap'), ('pd1-jm85.combustor', 'target_inner_hole_K'), ('pd1-jm85.combustor', 'tau_min_s'), ('pd1-jm85.diffuser', 'channel_width_m'), ('pd1-jm85.diffuser', 'cp_vaned_assumed'), ('pd1-jm85.diffuser', 'exit_diameter_m'), ('pd1-jm85.diffuser', 'exit_width_growth'), ('pd1-jm85.diffuser', 'throat_mach_target'), ('pd1-jm85.diffuser', 'turn_K'), ('pd1-jm85.diffuser', 'vane_count'), ('pd1-jm85.diffuser', 'vaneless_ratio'), ('pd1-jm85.engine', 'LHV_J_kg'), ('pd1-jm85.engine', 'T04_screen_max_K'), ('pd1-jm85.engine', 'comb_loss_design'), ('pd1-jm85.engine', 'duct_loss_design'), ('pd1-jm85.engine', 'eta_b'), ('pd1-jm85.engine', 'inlet_Q_ref_kg_s'), ('pd1-jm85.engine', 'inlet_loss_ref'), ('pd1-jm85.engine', 'jetpipe_loss'), ('pd1-jm85.engine', 'leak_frac'), ('pd1-jm85.engine', 'nozzle_Cd'), ('pd1-jm85.engine', 'nozzle_Cv'), ('pd1-jm85.engine', 'windage_Cm'), ('pd1-jm85.rotor_support', 'c_support_N_s_m'), ('pd1-jm85.rotor_support', 'k_support_N_m'), ('pd1-jm85.rotor_support', 'mount'), ('pd1-jm85.rotor_support', 'unbalance_grade_G_mm_s'), ('pd1-jm85.seed_overrides', 'Cd_hole_ratio'), ('pd1-jm85.seed_overrides', 'K_annular_ratio'), ('pd1-jm85.seed_overrides', 'L_D_max_ratio'), ('pd1-jm85.seed_overrides', 'L_D_min_ratio'), ('pd1-jm85.seed_overrides', 'L_fuel_line_m'), ('pd1-jm85.seed_overrides', 'N_operating_max_rpm'), ('pd1-jm85.seed_overrides', 'N_operating_min_rpm'), ('pd1-jm85.seed_overrides', 'dP_fuel_filter_Pa'), ('pd1-jm85.seed_overrides', 'dP_injector_Pa'), ('pd1-jm85.seed_overrides', 'd_bearing_bore_m'), ('pd1-jm85.seed_overrides', 'f_outer_feed_frac'), ('pd1-jm85.seed_overrides', 'film_cool_frac'), ('pd1-jm85.seed_overrides', 'fuel_minor_K_ratio'), ('pd1-jm85.seed_overrides', 'liner_area_frac'), ('pd1-jm85.seed_overrides', 'liner_wall_temp_frac'), ('pd1-jm85.seed_overrides', 'phi_pz_ratio'), ('pd1-jm85.seed_overrides', 'phi_sz_ratio'), ('pd1-jm85.seed_overrides', 'rho_fuel_kg_m3'), ('pd1-jm85.seed_overrides', 'v_annulus_outer_m_s'), ('pd1-jm85.seed_overrides', 'v_fuel_line_m_s'), ('pd1-jm85.seed_overrides', 'vap_air_frac'), ('pd1-jm85.seed_overrides', 'vap_pitch_m')] | PASS
+case-level assumptions absent from assumptions_register.json | 0 of 19 (e.g. engine.comb_loss_design 0.025, leak_frac 0.02, duct_loss_design 0.02, inlet_loss_ref 0.01, jetpipe_loss 0.01, nozzle_Cd/Cv 0.97, eta_b 0.96, LHV 43 MJ/kg, windage_Cm 0.004, rotor_support k 2e6 N/m, c 1000 N s/m) plus 22 combustor/fuel seed_overrides | - | - | FINDING
+report visibility: NGV exit flow angle 65 deg (assumption) | found | MORNING_REPORT.md, component-reviews.md, design-basis.md, independent-verification.md | - | PASS
+report visibility: rotor exit relative angle -58 deg (assumption) | found | MORNING_REPORT.md, component-reviews.md, design-basis.md, independent-verification.md | - | PASS
+report visibility: NGV throat area unmeasured (unresolved) | found | MORNING_REPORT.md, PROGRESS.md, component-reviews.md, design-basis.md ... | - | PASS
+report visibility: rotor throat area unresolved | found | MORNING_REPORT.md, independent-verification.md | - | PASS
+report visibility: combustor loss 2.5 % (case) | found | MORNING_REPORT.md, PROGRESS.md, component-reviews.md, design-basis.md ... | - | PASS
+report visibility: turn/deswirl loss 2 % (case) | found | MORNING_REPORT.md, PROGRESS.md, design-basis.md, remaining-work.md | - | PASS
+report visibility: tunnel leakage 2 % (case) | found | MORNING_REPORT.md, design-basis.md | - | PASS
+report visibility: inlet loss 1 % (case) | found | MORNING_REPORT.md, design-basis.md | - | PASS
+report visibility: jet-pipe loss 1 % (case) | found | MORNING_REPORT.md, design-basis.md, independent-verification.md | - | PASS
+report visibility: nozzle Cd/Cv 0.97 (case) | found | MORNING_REPORT.md, design-basis.md, independent-verification.md, limits-and-correlations-audit.md | - | PASS
+report visibility: combustion efficiency 0.96 (case) | found | component-reviews.md, design-basis.md | - | PASS
+report visibility: fuel LHV 43 MJ/kg (case) | found | design-basis.md, independent-verification.md | - | PASS
+report visibility: windage coefficient Cm 0.004 (case) | found | design-basis.md, independent-verification.md | - | PASS
+report visibility: support stiffness 2 N/um and damping 1000 N s/m (case) | found | MORNING_REPORT.md, component-reviews.md, design-basis.md, independent-verification.md ... | - | PASS
+report visibility: map reference 545 R / 28.4 inHg (302.78 K / 96.17 kPa) | found | component-reviews.md, independent-verification.md, verification.md | - | PASS
+report visibility: related-wheel map proxy and efficiency deficit 0.04 | found | MORNING_REPORT.md, PROGRESS.md, design-basis.md, independent-verification.md ... | - | PASS
+report visibility: turbine blade count 30 (assumption) | found | MORNING_REPORT.md, component-reviews.md | - | PASS
+report visibility: NGV vane count 20 (assumption) | found | component-reviews.md, independent-verification.md, manufacturing-and-budget.md, remaining-work.md | - | PASS
+report visibility: turbine tip clearance 0.35 mm (design assumption) | found | component-reviews.md, independent-verification.md, interfaces.md | - | PASS
+report visibility: turbine alloy / rated speed unknown | found | component-reviews.md, design-basis.md, limits-and-correlations-audit.md, remaining-work.md | - | PASS
+report visibility: compressor wheel mass/inertia/CG estimates | found | MORNING_REPORT.md, component-reviews.md, independent-verification.md, remaining-work.md | - | PASS
+report visibility: compressor inducer hub 19 mm (assumption) | found | component-reviews.md, limits-and-correlations-audit.md | - | PASS
+report visibility: bearing friction / lubricant viscosity (assumption) | found | MORNING_REPORT.md, component-reviews.md, design-basis.md, independent-verification.md ... | - | PASS
+report visibility: compressor seat 6 mm envelope (assumption) | found | component-reviews.md, design-basis.md, independent-verification.md, interfaces.md ... | - | PASS
+report visibility: material properties handbook-level | found | remaining-work.md | - | PASS
+report visibility: FX 1.25 USD/CHF + 8 % fees (budget) | found | manufacturing-and-budget.md | - | PASS
+report visibility: T04 screen 1150 K is a candidate TIT, not an allowable | found | MORNING_REPORT.md, component-reviews.md, independent-verification.md, limits-and-correlations-audit.md | - | PASS
+0 difference(s)

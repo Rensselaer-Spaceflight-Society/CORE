@@ -1,0 +1,48 @@
+schema_version: 1
+case_id: dp2-prescribed
+mode: prescribed_flow_screen
+title: DP-2 prescribed-flow screen with the purchased compressor wheel held fixed (comparison)
+description: >
+  Reproduces the DP-2 cycle-screen inputs (0.30 kg/s, PR 1.63, 66,000 rpm, TIT 1150 K,
+  efficiencies 0.72 / 0.78 / 0.96 / 0.98, 6 % combustor loss, 1 % inlet loss) through the
+  module pipeline with M01 in prescribed-flow mode and M10 holding the purchased wheel
+  geometry. Turbine work is IMPOSED (design screen), so this case cannot show self-sustain.
+  The run also locates the prescribed point on the digitized proxy map and reports the
+  wheel work coefficient implied by PR 1.63 at 66,000 rpm.
+module_set: baseline
+seed_base: config/seed.yaml
+components:
+  compressor: data/components/compressor_gt3076r_56trim.yaml
+  compressor_map: data/maps/gt3076r_compressor.yaml
+prescribed:
+  mdot_kg_s: 0.30
+  D2_m: 0.07613
+  D1s_m: 0.05704
+  D1h_m: 0.019
+  b2_m: 0.00575
+  m_imp_kg: 0.075
+  Z_imp: 11
+seed_overrides:
+  N_rpm: 66000.0
+  PR_c_ratio: 1.63
+  T04_K: 1150.0
+  eta_c_isen: 0.72
+  eta_t_isen: 0.78
+  eta_b_frac: 0.96
+  eta_mech_frac: 0.98
+  dP34_frac: 0.06
+  dP02_frac: 0.01
+  Cv_nozzle_ratio: 0.97
+  LHV_fuel_J_kg: 43.0e+6
+  R_gas_J_kgK: 287.05
+  tau_min_s: 0.002
+  D_shaft_tunnel_m: 0.0508
+  casing_wall_m: 0.0015
+  N_operating_min_rpm: 59000.0
+  N_operating_max_rpm: 66000.0
+  d_bearing_bore_m: 0.008
+  # V22 DP-2 preset combustor options (docs/combustor-dp2.md)
+  inner_hole_K_target_ratio: 6.0
+  dil_holes_per_vap_inner_count: 3
+  dil_holes_per_vap_outer_count: 4
+  liner_area_frac: 0.66            # V22 preset uses the library default; the seed's 0.45 is the legacy-split value

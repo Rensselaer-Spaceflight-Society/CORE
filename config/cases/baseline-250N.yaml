@@ -1,0 +1,12 @@
+schema_version: 1
+case_id: baseline-250N
+mode: thrust_sizing
+title: Legacy 250 N thrust-sizing baseline (regression case)
+description: >
+  The original runnable baseline: airflow sized backward from a 250 N thrust target at
+  PR 3.2 and 66,000 rpm, wheels sized by Euler/mean-line relations. Kept unchanged for
+  regression; its critical-speed screen failure stays visible. Not the DP-2 or PD-1 engine.
+module_set: baseline
+seed_base: config/seed.yaml
+components: {}
+seed_overrides: {}

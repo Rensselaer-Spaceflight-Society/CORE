@@ -545,11 +545,6 @@ diff_radius_ratio:
   desc: Diffuser exit / impeller exit diameter
   owner: SEED
   frozen_at: B
-diff_diffusion_ratio:
-  unit: ratio
-  desc: Velocity ratio across the diffuser C2/C3
-  owner: SEED
-  frozen_at: B
 D_shaft_tunnel_m:
   unit: m
   desc: Shaft tunnel outer diameter. Floors the combustor bore.
@@ -1145,3 +1140,760 @@ n_film_rows_count:
   desc: Preliminary n_film_rows_count
   owner: m20_combustor
   frozen_at: review
+
+# ---- added for named cases / fixed-geometry candidate (October 2026 integration) ----
+mdot_comb_kg_s:
+  unit: kg_s
+  desc: "Combustor air flow (compressor air less tunnel leakage when an operating point is imported)"
+  owner: m01_cycle
+  frozen_at: candidate
+P031_Pa:
+  unit: Pa
+  desc: "Combustor inlet total pressure after the diffuser-to-combustor turn loss"
+  owner: m01_cycle
+  frozen_at: candidate
+cycle_prescribed_flow_flag:
+  unit: flag
+  desc: "M01 mode: 1 = airflow prescribed (design screen); thrust becomes an output"
+  owner: SEED
+  frozen_at: candidate
+mdot_prescribed_kg_s:
+  unit: kg_s
+  desc: "Prescribed compressor airflow for the prescribed-flow screen"
+  owner: SEED
+  frozen_at: candidate
+cycle_imported_point_flag:
+  unit: flag
+  desc: "M01 mode: 1 = station states imported from a fixed-geometry match (run_case.py)"
+  owner: SEED
+  frozen_at: candidate
+op_mdot_air_kg_s:
+  unit: kg_s
+  desc: "Imported matched point: compressor air flow"
+  owner: SEED
+  frozen_at: candidate
+op_mdot_comb_kg_s:
+  unit: kg_s
+  desc: "Imported matched point: combustor air flow"
+  owner: SEED
+  frozen_at: candidate
+op_mdot_fuel_kg_s:
+  unit: kg_s
+  desc: "Imported matched point: fuel flow"
+  owner: SEED
+  frozen_at: candidate
+op_P02_Pa:
+  unit: Pa
+  desc: "Imported matched point: compressor inlet total pressure"
+  owner: SEED
+  frozen_at: candidate
+op_T03_K:
+  unit: K
+  desc: "Imported matched point: compressor delivery total temperature"
+  owner: SEED
+  frozen_at: candidate
+op_P03_Pa:
+  unit: Pa
+  desc: "Imported matched point: compressor delivery total pressure"
+  owner: SEED
+  frozen_at: candidate
+op_P031_Pa:
+  unit: Pa
+  desc: "Imported matched point: combustor inlet total pressure"
+  owner: SEED
+  frozen_at: candidate
+op_P04_Pa:
+  unit: Pa
+  desc: "Imported matched point: combustor exit / NGV inlet total pressure"
+  owner: SEED
+  frozen_at: candidate
+op_T05_K:
+  unit: K
+  desc: "Imported matched point: turbine exit total temperature"
+  owner: SEED
+  frozen_at: candidate
+op_P05_Pa:
+  unit: Pa
+  desc: "Imported matched point: turbine exit total pressure"
+  owner: SEED
+  frozen_at: candidate
+op_P07_Pa:
+  unit: Pa
+  desc: "Imported matched point: nozzle inlet total pressure after jet pipe and swirl losses"
+  owner: SEED
+  frozen_at: candidate
+op_w_comp_J_kg:
+  unit: J_kg
+  desc: "Imported matched point: compressor specific work"
+  owner: SEED
+  frozen_at: candidate
+op_w_turb_J_kg:
+  unit: J_kg
+  desc: "Imported matched point: RATED turbine specific work per kg of turbine flow"
+  owner: SEED
+  frozen_at: candidate
+op_F_gross_N:
+  unit: N
+  desc: "Imported matched point: gross static thrust"
+  owner: SEED
+  frozen_at: candidate
+compressor_fixed_wheel_flag:
+  unit: flag
+  desc: "M10 mode: 1 = purchased wheel geometry held fixed"
+  owner: SEED
+  frozen_at: candidate
+D2_fixed_m:
+  unit: m
+  desc: "Purchased compressor exducer diameter (record)"
+  owner: SEED
+  frozen_at: candidate
+D1s_fixed_m:
+  unit: m
+  desc: "Purchased compressor inducer diameter (record)"
+  owner: SEED
+  frozen_at: candidate
+D1h_fixed_m:
+  unit: m
+  desc: "Compressor inducer hub diameter (assumption until measured)"
+  owner: SEED
+  frozen_at: candidate
+b2_fixed_m:
+  unit: m
+  desc: "Purchased compressor exit blade height (record)"
+  owner: SEED
+  frozen_at: candidate
+m_imp_fixed_kg:
+  unit: kg
+  desc: "Compressor wheel mass (estimate until weighed)"
+  owner: SEED
+  frozen_at: candidate
+Z_imp_fixed_count:
+  unit: count
+  desc: "Purchased compressor full-blade count"
+  owner: SEED
+  frozen_at: candidate
+work_coeff_c_ratio:
+  unit: ratio
+  desc: "Compressor work coefficient dh / U2^2 (diagnostic; fixed-wheel mode: blade work dh0/PIF, comparable with the slip factor)"
+  owner: m10_compressor
+  frozen_at: candidate
+diff_vaneless_ratio:
+  unit: ratio
+  desc: "Diffuser vane leading-edge diameter / impeller exit diameter"
+  owner: SEED
+  frozen_at: candidate
+diff_vanes_design_count:
+  unit: count
+  desc: "Diffuser vane count (design choice)"
+  owner: SEED
+  frozen_at: candidate
+diff_width_ratio:
+  unit: ratio
+  desc: "Diffuser channel width / impeller exit width"
+  owner: SEED
+  frozen_at: candidate
+diff_throat_mach_ratio:
+  unit: ratio
+  desc: "Diffuser design throat Mach number"
+  owner: SEED
+  frozen_at: candidate
+diff_exit_turning_deg:
+  unit: deg
+  desc: "Diffuser channel exit flow-angle reduction toward radial"
+  owner: SEED
+  frozen_at: candidate
+diff_cp_assumed_ratio:
+  unit: ratio
+  desc: "Assumed diffuser static-pressure recovery (reported only)"
+  owner: SEED
+  frozen_at: candidate
+diff_turn_K_ratio:
+  unit: ratio
+  desc: "Turn/deswirl loss coefficient on diffuser exit dynamic head"
+  owner: SEED
+  frozen_at: candidate
+D_diff_le_m:
+  unit: m
+  desc: "Diffuser vane leading-edge diameter"
+  owner: m11_diffuser
+  frozen_at: candidate
+b_diff_m:
+  unit: m
+  desc: "Diffuser channel axial width"
+  owner: m11_diffuser
+  frozen_at: candidate
+alpha_diff_le_deg:
+  unit: deg
+  desc: "Flow angle from radial at the vane leading edge"
+  owner: m11_diffuser
+  frozen_at: candidate
+diff_throat_width_m:
+  unit: m
+  desc: "Required throat opening per channel"
+  owner: m11_diffuser
+  frozen_at: candidate
+diff_throat_open_ratio:
+  unit: ratio
+  desc: "Required / available throat opening (above 1 means too small)"
+  owner: m11_diffuser
+  frozen_at: candidate
+diff_area_ratio:
+  unit: ratio
+  desc: "Channel exit / throat area ratio"
+  owner: m11_diffuser
+  frozen_at: candidate
+diff_divergence_deg:
+  unit: deg
+  desc: "Equivalent channel divergence angle 2 theta"
+  owner: m11_diffuser
+  frozen_at: candidate
+diff_exit_mach_ratio:
+  unit: ratio
+  desc: "Diffuser exit Mach number"
+  owner: m11_diffuser
+  frozen_at: candidate
+diff_turn_loss_frac:
+  unit: frac
+  desc: "Estimated turn/deswirl total-pressure loss fraction"
+  owner: m11_diffuser
+  frozen_at: candidate
+ngv_fixed_flag:
+  unit: flag
+  desc: "M12 mode: 1 = purchased NGV throat/angle held fixed"
+  owner: SEED
+  frozen_at: candidate
+A_throat_ngv_fixed_m2:
+  unit: m2
+  desc: "Purchased NGV effective throat area (assumption until measured)"
+  owner: SEED
+  frozen_at: candidate
+alpha_ngv_exit_fixed_deg:
+  unit: deg
+  desc: "Purchased NGV exit flow angle from axial (assumption until measured)"
+  owner: SEED
+  frozen_at: candidate
+n_vanes_ngv_fixed_count:
+  unit: count
+  desc: "Purchased NGV vane count (estimate until counted)"
+  owner: SEED
+  frozen_at: candidate
+turbine_fixed_wheel_flag:
+  unit: flag
+  desc: "M13 mode: 1 = purchased turbine wheel geometry held fixed"
+  owner: SEED
+  frozen_at: candidate
+D_turb_tip_fixed_m:
+  unit: m
+  desc: "Purchased turbine tip diameter (record)"
+  owner: SEED
+  frozen_at: candidate
+D_turb_hub_fixed_m:
+  unit: m
+  desc: "Purchased turbine hub diameter (record)"
+  owner: SEED
+  frozen_at: candidate
+n_blades_turb_fixed_count:
+  unit: count
+  desc: "Purchased turbine blade count (estimate until counted)"
+  owner: SEED
+  frozen_at: candidate
+m_turb_fixed_kg:
+  unit: kg
+  desc: "Turbine wheel mass (estimate until weighed)"
+  owner: SEED
+  frozen_at: candidate
+I_turb_fixed_kg_m2:
+  unit: kg_m2
+  desc: "Turbine wheel polar inertia (estimate)"
+  owner: SEED
+  frozen_at: candidate
+m_blade_fixed_kg:
+  unit: kg
+  desc: "Single turbine blade mass (section assumption)"
+  owner: SEED
+  frozen_at: candidate
+A_blade_root_fixed_m2:
+  unit: m2
+  desc: "Turbine blade root section area (assumption)"
+  owner: SEED
+  frozen_at: candidate
+r_blade_cg_fixed_m:
+  unit: m
+  desc: "Turbine blade centroid radius (assumption)"
+  owner: SEED
+  frozen_at: candidate
+t_tip_clear_fixed_m:
+  unit: m
+  desc: "Turbine cold radial tip clearance (design)"
+  owner: SEED
+  frozen_at: candidate
+liner_wall_m:
+  unit: m
+  desc: "Liner COLD stock thickness (converted to hot-model thickness in M20)"
+  owner: SEED
+  frozen_at: candidate
+tunnel_wall_m:
+  unit: m
+  desc: "Shaft tunnel wall thickness (stock)"
+  owner: SEED
+  frozen_at: candidate
+liner_material_code_count:
+  unit: count
+  desc: "Liner material code: 0 316SS, 1 304SS, 2 IN625, 3 IN718"
+  owner: SEED
+  frozen_at: candidate
+inner_hole_K_target_ratio:
+  unit: ratio
+  desc: "Inner-annulus hole-K sizing target (screening minimum)"
+  owner: SEED
+  frozen_at: candidate
+dil_holes_per_vap_inner_count:
+  unit: count
+  desc: "Inner-liner dilution holes per vaporizer"
+  owner: SEED
+  frozen_at: candidate
+dil_holes_per_vap_outer_count:
+  unit: count
+  desc: "Outer-liner dilution holes per vaporizer"
+  owner: SEED
+  frozen_at: candidate
+sec_holes_per_vap_count:
+  unit: count
+  desc: "Secondary holes per vaporizer per liner"
+  owner: SEED
+  frozen_at: candidate
+n_holes_dil_in_count:
+  unit: count
+  desc: "Inner-liner dilution hole count"
+  owner: m20_combustor
+  frozen_at: candidate
+hole_K_outer_ratio:
+  unit: ratio
+  desc: "Outer-branch hole pressure-drop coefficient"
+  owner: m20_combustor
+  frozen_at: candidate
+hole_K_inner_ratio:
+  unit: ratio
+  desc: "Inner-branch hole pressure-drop coefficient"
+  owner: m20_combustor
+  frozen_at: candidate
+main_hole_lig_min_m:
+  unit: m
+  desc: "Smallest same-row main-hole ligament, cold"
+  owner: m20_combustor
+  frozen_at: candidate
+liner_wall_cold_m:
+  unit: m
+  desc: "Liner wall thickness, cold"
+  owner: m20_combustor
+  frozen_at: candidate
+vap_scoop_capture_ratio:
+  unit: ratio
+  desc: "Vaporizer scoop streamtube capture / opening area (advisory)"
+  owner: m20_combustor
+  frozen_at: candidate
+T_primary_raw_K:
+  unit: K
+  desc: "Uncapped primary-zone temperature estimate (advisory)"
+  owner: m20_combustor
+  frozen_at: candidate
+T_vap_wall_inner_K:
+  unit: K
+  desc: "Vaporizer inner wall temperature estimate (uncalibrated)"
+  owner: m20_combustor
+  frozen_at: candidate
+x_front_bearing_m:
+  unit: m
+  desc: "Front bearing centre, x from compressor backface (aft positive)"
+  owner: m29_layout
+  frozen_at: candidate
+x_rear_bearing_m:
+  unit: m
+  desc: "Rear bearing centre"
+  owner: m29_layout
+  frozen_at: candidate
+x_turbine_disc_m:
+  unit: m
+  desc: "Turbine disc mid-plane"
+  owner: m29_layout
+  frozen_at: candidate
+x_compressor_cg_m:
+  unit: m
+  desc: "Compressor wheel centre of gravity"
+  owner: m29_layout
+  frozen_at: candidate
+x_ngv_le_m:
+  unit: m
+  desc: "NGV vane leading-edge plane"
+  owner: m29_layout
+  frozen_at: candidate
+x_nozzle_exit_m:
+  unit: m
+  desc: "Nozzle exit plane"
+  owner: m29_layout
+  frozen_at: candidate
+x_inlet_lip_m:
+  unit: m
+  desc: "Inlet bellmouth lip plane"
+  owner: m29_layout
+  frozen_at: candidate
+x_shaft_front_m:
+  unit: m
+  desc: "Shaft front end"
+  owner: m29_layout
+  frozen_at: candidate
+x_shaft_rear_m:
+  unit: m
+  desc: "Shaft rear end"
+  owner: m29_layout
+  frozen_at: candidate
+m_rotor_kg:
+  unit: kg
+  desc: "Rotating assembly mass"
+  owner: m29_layout
+  frozen_at: candidate
+x_rotor_cg_m:
+  unit: m
+  desc: "Rotating assembly centre of gravity"
+  owner: m29_layout
+  frozen_at: candidate
+Ip_rotor_kg_m2:
+  unit: kg_m2
+  desc: "Rotating assembly polar inertia"
+  owner: m29_layout
+  frozen_at: candidate
+m_shaft_stack_kg:
+  unit: kg
+  desc: "Stepped shaft mass"
+  owner: m29_layout
+  frozen_at: candidate
+stack_checks_failed_count:
+  unit: count
+  desc: "Number of failed geometric stack checks"
+  owner: m29_layout
+  frozen_at: candidate
+assembly_mode_flag:
+  unit: flag
+  desc: "M30/M32/M34 mode: 1 = explicit stack (M29) and FE rotor model"
+  owner: SEED
+  frozen_at: candidate
+casing_od_m:
+  unit: m
+  desc: "Designed outer casing OD (fixed)"
+  owner: SEED
+  frozen_at: candidate
+N_crit2_rpm:
+  unit: rpm
+  desc: "Second forward critical speed (search bound if absent)"
+  owner: m32_rotordyn
+  frozen_at: candidate
+N_crit3_rpm:
+  unit: rpm
+  desc: "Third forward critical speed (search bound if absent)"
+  owner: m32_rotordyn
+  frozen_at: candidate
+n_crit_found_count:
+  unit: count
+  desc: "Forward critical speeds found below 1.5 x max operating speed"
+  owner: m32_rotordyn
+  frozen_at: candidate
+n_crit_in_range_count:
+  unit: count
+  desc: "Critical speeds inside the steady operating range"
+  owner: m32_rotordyn
+  frozen_at: candidate
+nozzle_fixed_flag:
+  unit: flag
+  desc: "M40 mode: 1 = designed nozzle exit area held fixed"
+  owner: SEED
+  frozen_at: candidate
+A8_fixed_m2:
+  unit: m2
+  desc: "Designed nozzle exit area"
+  owner: SEED
+  frozen_at: candidate
+nozzle_Cd_ratio:
+  unit: ratio
+  desc: "Nozzle discharge coefficient"
+  owner: SEED
+  frozen_at: candidate
+nozzle_mass_residual_ratio:
+  unit: ratio
+  desc: "Fixed nozzle capacity minus hot flow, divided by hot flow"
+  owner: m40_nozzle
+  frozen_at: candidate
+cw_length_m:
+  unit: m
+  desc: "Assembly stack input cw_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+cw_super_back_m:
+  unit: m
+  desc: "Assembly stack input cw_super_back_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+cw_cg_from_backface_m:
+  unit: m
+  desc: "Assembly stack input cw_cg_from_backface_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+cw_Ip_kg_m2:
+  unit: kg_m2
+  desc: "Assembly stack input cw_Ip_kg_m2 (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+cw_Id_kg_m2:
+  unit: kg_m2
+  desc: "Assembly stack input cw_Id_kg_m2 (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+cw_D2_ext_m:
+  unit: m
+  desc: "Assembly stack input cw_D2_ext_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+front_thread_length_m:
+  unit: m
+  desc: "Assembly stack input front_thread_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+compressor_nut_length_m:
+  unit: m
+  desc: "Assembly stack input compressor_nut_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+backface_clearance_m:
+  unit: m
+  desc: "Assembly stack input backface_clearance_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+backplate_rear_face_x_m:
+  unit: m
+  desc: "Assembly stack input backplate_rear_face_x_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+backplate_od_m:
+  unit: m
+  desc: "Assembly stack input backplate_od_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+front_sleeve_od_m:
+  unit: m
+  desc: "Assembly stack input front_sleeve_od_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+front_bearing_gap_m:
+  unit: m
+  desc: "Assembly stack input front_bearing_gap_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+brg_width_m:
+  unit: m
+  desc: "Assembly stack input brg_width_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+brg_od_m:
+  unit: m
+  desc: "Assembly stack input brg_od_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+shaft_journal_d_m:
+  unit: m
+  desc: "Assembly stack input shaft_journal_d_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+shaft_body_d_m:
+  unit: m
+  desc: "Assembly stack input shaft_body_d_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+shaft_comp_seat_d_m:
+  unit: m
+  desc: "Assembly stack input shaft_comp_seat_d_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+shaft_rear_thread_d_m:
+  unit: m
+  desc: "Assembly stack input shaft_rear_thread_d_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+rear_thread_length_m:
+  unit: m
+  desc: "Assembly stack input rear_thread_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+turbine_nut_length_m:
+  unit: m
+  desc: "Assembly stack input turbine_nut_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+rear_spacer_length_m:
+  unit: m
+  desc: "Assembly stack input rear_spacer_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+rear_spacer_od_m:
+  unit: m
+  desc: "Assembly stack input rear_spacer_od_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+ngv_rotor_axial_gap_m:
+  unit: m
+  desc: "Assembly stack input ngv_rotor_axial_gap_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+plenum_gap_m:
+  unit: m
+  desc: "Assembly stack input plenum_gap_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+transition_length_m:
+  unit: m
+  desc: "Assembly stack input transition_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+ngv_axial_chord_m:
+  unit: m
+  desc: "Assembly stack input ngv_axial_chord_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+ngv_hub_d_m:
+  unit: m
+  desc: "Assembly stack input ngv_hub_d_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+ngv_hub_pocket_d_m:
+  unit: m
+  desc: "Assembly stack input: NGV blank hub pocket diameter (blind, centre web; record hub_ring_bore)"
+  owner: SEED
+  frozen_at: candidate
+cw_bore_d_m:
+  unit: m
+  desc: "Assembly stack input: purchased compressor wheel bore (record bore_diameter)"
+  owner: SEED
+  frozen_at: candidate
+tw_bore_d_m:
+  unit: m
+  desc: "Assembly stack input: purchased turbine wheel bore (record bore_diameter)"
+  owner: SEED
+  frozen_at: candidate
+ngv_tip_d_m:
+  unit: m
+  desc: "Assembly stack input ngv_tip_d_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+ngv_flange_od_m:
+  unit: m
+  desc: "Assembly stack input ngv_flange_od_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+ngv_overall_height_m:
+  unit: m
+  desc: "Assembly stack input ngv_overall_height_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+tw_rim_width_m:
+  unit: m
+  desc: "Assembly stack input tw_rim_width_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+tw_boss_d_m:
+  unit: m
+  desc: "Assembly stack input tw_boss_d_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+tw_boss_total_m:
+  unit: m
+  desc: "Assembly stack input tw_boss_total_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+tw_boss_side_a_m:
+  unit: m
+  desc: "Assembly stack input tw_boss_side_a_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+tw_Id_kg_m2:
+  unit: kg_m2
+  desc: "Assembly stack input tw_Id_kg_m2 (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+rear_cover_offset_m:
+  unit: m
+  desc: "Assembly stack input rear_cover_offset_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+nozzle_length_m:
+  unit: m
+  desc: "Assembly stack input nozzle_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+tailcone_length_m:
+  unit: m
+  desc: "Assembly stack input tailcone_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+bellmouth_length_m:
+  unit: m
+  desc: "Assembly stack input bellmouth_length_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+k_support_N_m:
+  unit: N_m
+  desc: "Assembly stack input k_support_N_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+c_support_N_s_m:
+  unit: N_s_m
+  desc: "Assembly stack input c_support_N_s_m (assembly_pd1 record or purchased-part record)"
+  owner: SEED
+  frozen_at: candidate
+front_bearing_recess_m:
+  unit: m
+  desc: "Front bearing pocket recess into the backplate hub (assembly_pd1)"
+  owner: SEED
+  frozen_at: candidate
+diff_exit_width_growth_ratio:
+  unit: ratio
+  desc: "Diffuser channel axial width at exit / at throat"
+  owner: SEED
+  frozen_at: candidate
+ngv_vane_ring_height_m:
+  unit: m
+  desc: "NGV casting vane-ring height ahead of the shroud/flange section (supplier drawing)"
+  owner: SEED
+  frozen_at: candidate
+ngv_outer_ring_od_m:
+  unit: m
+  desc: "NGV outer ring OD (supplier drawing)"
+  owner: SEED
+  frozen_at: candidate
+ngv_bolt_pcd_m:
+  unit: m
+  desc: "NGV flange bolt pitch-circle diameter (design)"
+  owner: SEED
+  frozen_at: candidate
+ngv_bolt_hole_d_m:
+  unit: m
+  desc: "NGV flange bolt hole diameter (design)"
+  owner: SEED
+  frozen_at: candidate
+op_ngv_M_ratio:
+  unit: ratio
+  desc: "Imported rated NGV exit Mach, including stage losses and mixed inlet"
+  owner: SEED
+  frozen_at: candidate
+op_ngv_T_K:
+  unit: K
+  desc: "Imported rated NGV exit static temperature"
+  owner: SEED
+  frozen_at: candidate
+op_ngv_P_Pa:
+  unit: Pa
+  desc: "Imported rated NGV exit static pressure"
+  owner: SEED
+  frozen_at: candidate
+op_shaft_comp_power_W:
+  unit: W
+  desc: "Rated power carried at compressor seat, including front bearing share"
+  owner: SEED
+  frozen_at: candidate

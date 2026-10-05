@@ -30,11 +30,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 
 
-def load_all_modules():
+def load_all_modules(module_set="baseline"):
+    """Registered modules of one named set (baseline graph by default)."""
     import modules
     for _, name, _ in pkgutil.iter_modules(modules.__path__):
         importlib.import_module(f"modules.{name}")
-    return list(REGISTERED.values())
+    if module_set is None:
+        return list(REGISTERED.values())
+    return [m for m in REGISTERED.values() if module_set in m.case_sets]
 
 
 def solve(trace=False):

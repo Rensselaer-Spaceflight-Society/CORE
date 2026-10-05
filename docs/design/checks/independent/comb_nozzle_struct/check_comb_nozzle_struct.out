@@ -1,0 +1,109 @@
+results folder: docs\design\results\pd1-jm85
+
+== 1. Nozzle and R7 thrust (design point) ==============================================================
+NPR = P07/P0                                                           |       1.10089 |       1.10089 |   +0.000% | PASS
+nozzle choked (own sonic search)                                       |             0 |             0 |         - | PASS
+V8 [m/s] (Cv applied to velocity)                                      |       202.231 |       202.231 |   +0.000% | PASS
+T8 static [K]                                                          |       779.089 |       779.089 |   -0.000% | PASS
+nozzle capacity Cd*A8*rho8*V8 [kg/s] vs turbine flow                   |      0.203549 |      0.203549 |   +0.000% | PASS
+gross thrust m*V8 + A8,geom*(P8-P0) [N]                                |       41.1641 |       41.1641 |   +0.000% | PASS
+pressure-thrust term A8*(P8-P0) [N] (unchoked -> 0)                    |             0 |             0 |         - | INFO  (exactly zero because P8 = P0 when unchoked)
+critical NPR with Cv=0.97 (reference)                                  |        1.9532 |        1.9532 |   +0.000% | INFO  (design NPR 1.1009 is far below it)
+operating line 55-80 krpm: max NPR (all unchoked -> R7 changes no PD-1 number) |       1.15476 |        1.9532 |  -40.878% | INFO  (any choked: False)
+nozzle outer-wall half angle [deg]                                     |       11.2066 |       11.2066 |   +0.000% | PASS
+nozzle exit area pi*r_ex^2 vs A8 used in the match [m2]                |    0.00229022 |    0.00229022 |   +0.000% | PASS
+nozzle exit diameter [m] (54 mm claimed)                               |         0.054 |         0.054 |   +0.000% | PASS
+minimum annular area located at the exit plane                         |             1 |          None |         - | PASS
+inlet annulus area [m2]                                                |    0.00339252 |    0.00339252 |   +0.000% | PASS
+max/inlet annulus area (diffusing tailcone section, info)              |       1.23184 |       1.23184 |   +0.000% | INFO  (annulus area rises 23 % before converging; no internal minimum)
+rescue nozzle: exit area / retained inlet annulus (>1 = not convergent) |       1.11402 |       1.11402 |   +0.000% | PASS  (code verdict: INVALID as a simple exit resize: retained inlet annulus is smaller than exit; redesign/rerate nozzle; model screen: turbine model validity: Reynolds number outside Soderberg correction comfort range)
+MORNING_REPORT states the Ø69 mm rescue is invalid as a simple resize  |             0 |       INVALID |         - | INFO  (False = report presents the rescue without the INVALID / model-validity qualification)
+M40 F_gross_N vs match thrust [N]                                      |       41.1641 |       41.1641 |   -0.000% | PASS
+M40 nozzle mass residual (|value| < 1e-9 expected)                     |             1 |          None |         - | PASS
+M40 inputs: T05 = T07, op_P07 = P07                                    |             1 |          None |         - | PASS
+source: engine_match uses Cd*A8 for flow, geometric A8 for pressure thrust |             1 |          None |         - | PASS
+source: M40 fixed mode uses Cd*A8 for flow, geometric A8 for pressure thrust |             1 |          None |         - | PASS
+
+== 2. Combustor (design point) =========================================================================
+liner volume A*L [m3]                                                  |   0.000323763 |   0.000323763 |   +0.000% | PASS
+bulk residence time, mean-T density [ms] (1.4 ms claimed)              |           1.4 |           1.4 |   +0.000% | PASS
+residence time at exit-temperature density [ms] (definition sensitivity) |      0.975239 |           1.4 |  -30.340% | INFO  (1.4 ms is a sizing input (length driver = residence time), not a prediction)
+basis comparison: combinations passing all existing screens            | [(0.025, 1.4), (0.025, 2.0)] | [(0.025, 1.4)] claimed 'only' |         - | INFO  (2.5 % is the only passing LOSS; 1.4 vs 2.0 ms both pass (1.4 ms chosen for a shorter span))
+outer pri hole area: geometric (hot) vs required from flux [mm2]       |       159.891 |       159.891 |   +0.000% | PASS
+outer sec hole area: geometric (hot) vs required from flux [mm2]       |       302.823 |       302.823 |   +0.000% | PASS
+outer dil hole area: geometric (hot) vs required from flux [mm2]       |       809.995 |       809.995 |   +0.000% | PASS
+inner pri hole area: geometric (hot) vs required from flux [mm2]       |       117.861 |       117.861 |   -0.000% | PASS
+inner sec hole area: geometric (hot) vs required from flux [mm2]       |       223.222 |       223.222 |   -0.000% | PASS
+inner dil hole area: geometric (hot) vs required from flux [mm2]       |       597.076 |       597.076 |   -0.000% | PASS
+film hole total area, both liners (hot) [mm2]                          |       306.647 |       306.647 |   +0.000% | PASS
+film hole total area vs film flow / branch flux [mm2]                  |       306.647 |       306.647 |   -0.000% | PASS
+outer branch capacity incl. film + vaporizers [kg/s]                   |      0.118131 |      0.118131 |   +0.000% | PASS
+inner branch capacity incl. film [kg/s]                                |     0.0787538 |     0.0787538 |   -0.000% | PASS
+outer hole flux: compressible / incompressible Cd*sqrt(2 rho dP)       |      0.977713 |             1 |   -2.229% | INFO  (holes sized with the compressible flux (about 2 % below the incompressible value))
+outer primary count in layout vs library                               |            16 |            16 |   +0.000% | PASS
+outer secondary count in layout vs library                             |            16 |            16 |   +0.000% | PASS
+outer dilution count in layout vs library                              |            32 |            32 |   +0.000% | PASS
+inner primary count in layout vs library                               |            16 |            16 |   +0.000% | PASS
+inner secondary count in layout vs library                             |            16 |            16 |   +0.000% | PASS
+inner dilution count in layout vs library                              |            24 |            24 |   +0.000% | PASS
+liner exit Mach (own: V4 / a4)                                         |      0.161235 |      0.161235 |   +0.000% | PASS
+momentum: P_dome,s - P_exit,s = rho4*u4^2 [Pa] vs outer hole dP        |       4902.16 |       6011.37 |  -18.452% | INFO  (code assumes uniform liner static = exit static (documented approximation))
+momentum-consistent P031->P04 loss for the as-sized holes (dome bound) |     0.0585066 |         0.025 | +134.027% | INFO  (upper estimate; prescribed basis 2.5 %)
+1-D liner: static above exit static at the pri row [Pa]                |       4864.74 |             0 |         - | INFO  (code assumes 0; outer hole dP 6011 Pa)
+1-D liner: static above exit static at the sec row [Pa]                |       4474.49 |             0 |         - | INFO  (code assumes 0; outer hole dP 6011 Pa)
+1-D liner: static above exit static at the dil row [Pa]                |       3359.69 |             0 |         - | INFO  (code assumes 0; outer hole dP 6011 Pa)
+1-D liner: extra annulus-to-liner dP to pass the design hole flow [Pa] |       3782.43 |             0 |         - | INFO
+1-D liner: momentum-consistent combustor loss with the as-sized holes  |     0.0508532 |         0.025 | +103.413% | INFO  (first-order; friction and reverse vaporizer momentum would add)
+dilution J outer (code definitions, T_gas 1200 K)                      |       5.41231 |       5.41231 |   -0.000% | PASS
+dilution J inner (code definitions, T_gas 1200 K)                      |       4.65406 |       4.65406 |   -0.000% | PASS
+dilution penetration Y/H outer (code definitions)                      |       0.61549 |       0.61549 |   +0.000% | PASS
+dilution penetration Y/H inner (code definitions) - screened value     |      0.669232 |      0.669232 |   -0.000% | PASS
+mainstream T ahead of dilution (energy balance) vs code constant [K]   |       1716.88 |          1200 |  +43.074% | INFO
+Y/H max(outer,inner) at T_gas 1200 K, code defs                        |      0.669232 |          0.75 |  -10.769% | INFO  (screen limit 0.75)
+Y/H max(outer,inner) at T_gas 1200 K, Lefebvre d_j=d*sqrt(Cd), U_j=sqrt(2dP/rho3) |      0.883297 |          0.75 |  +17.773% | INFO  (screen limit 0.75)
+Y/H max(outer,inner) at T_gas 1717 K, code defs                        |      0.559495 |          0.75 |  -25.401% | INFO  (screen limit 0.75)
+Y/H max(outer,inner) at T_gas 1717 K, Lefebvre d_j=d*sqrt(Cd), U_j=sqrt(2dP/rho3) |       0.73846 |          0.75 |   -1.539% | INFO  (screen limit 0.75)
+ligament minimum max(2 t_cold, 1.5 mm) [m]                             |      0.003048 |      0.003048 |   +0.000% | PASS
+outer liner minimum ligament, all pairs [m]                            |    0.00417096 |    0.00417096 |   +0.000% | PASS
+outer liner seam hits at 0.00 deg [count]                              |             2 |             2 |   +0.000% | PASS  (dilution@5.625deg d=5.64mm, dilution@354.375deg d=5.64mm)
+outer liner: no seam angle clears the 3 mm band (min hits over 0.05 deg scan >= 1) |             1 |          None |         - | PASS  (min 1 hit at 17.65 deg (seam through one dilution hole); the reported angle maximises edge clearance and gives 2 hits; failure is intrinsic to the pitch)
+outer liner: max achievable seam-to-main-hole edge clearance [m] vs 3 mm band |    0.00208548 |    0.00208548 |   +0.000% | PASS  (reported seam angle is (one of) the max-clearance positions)
+outer dilution arc pitch vs 2*(3 mm + r) needed for a clear band [m]   |    0.00980745 |     0.0116365 |  -15.718% | INFO
+inner liner minimum ligament, all pairs [m]                            |    0.00392069 |    0.00392069 |   +0.000% | PASS
+inner liner seam hits at 0.00 deg [count]                              |             2 |             2 |   +0.000% | PASS  (dilution@7.5deg d=5.59mm, dilution@352.5deg d=5.59mm)
+inner liner: no seam angle clears the 3 mm band (min hits over 0.05 deg scan >= 1) |             1 |          None |         - | PASS  (min 1 hit at 24.30 deg (seam through one dilution hole); the reported angle maximises edge clearance and gives 2 hits; failure is intrinsic to the pitch)
+inner liner: max achievable seam-to-main-hole edge clearance [m] vs 3 mm band |    0.00196034 |    0.00196034 |   +0.000% | PASS  (reported seam angle is (one of) the max-clearance positions)
+inner dilution arc pitch vs 2*(3 mm + r) needed for a clear band [m]   |    0.00950862 |     0.0115879 |  -17.944% | INFO
+
+== 3. Structures =======================================================================================
+torque at compressor seat (P_c + 0.5 P_brg)/omega [N m]                |       1.28999 |       1.28999 |   +0.000% | PASS
+torque leaving the turbine P_t/omega [N m] (rear sections)             |       1.29961 |       1.29961 |   +0.000% | INFO
+tau_nom = 16T/(pi d^3) on the 6 mm seat [Pa] (30.5 MPa claimed)        |   3.04161e+07 |   3.04161e+07 |   +0.000% | PASS
+bending moment m_c(e w^2 + 3g) * overhang [N m]                        |     0.0637637 |     0.0637637 |   +0.000% | PASS
+sigma_b nominal [Pa]                                                   |   3.00691e+06 |   3.00691e+06 |   +0.000% | PASS
+von Mises peak, Kt 2.0 bending / 1.6 torsion [Pa] (84.6 MPa)           |   8.45059e+07 |   8.45059e+07 |   +0.000% | PASS
+limit 0.5 x 4140 yield (materials.yaml) [Pa]                           |     3.275e+08 |     3.275e+08 |   +0.000% | PASS
+alternating bending sigma_b,peak [Pa] (6.0 MPa)                        |   6.01381e+06 |   6.01381e+06 |   +0.000% | PASS
+endurance limit 0.6 x 400 MPa [Pa]                                     |       2.4e+08 |       2.4e+08 |   +0.000% | PASS
+tau if full torque passed the front thread M6 (minor dia) [Pa]         |   4.95276e+07 |   3.04161e+07 |  +62.833% | INFO  (threads excluded from the check; nut clamp preload not modelled)
+tau if full torque passed the rear thread M8 (minor dia) [Pa]          |   2.10501e+07 |   3.04161e+07 |  -30.793% | INFO  (threads excluded from the check; nut clamp preload not modelled)
+buckling D = outer liner OD cold [m]                                   |      0.102946 |      0.102946 |   +0.000% | PASS
+buckling t = cold wall [m]                                             |      0.001524 |      0.001524 |   +0.000% | PASS
+p_cr elastic [Pa]                                                      |    1.5567e+07 |    1.5567e+07 |   +0.000% | PASS
+buckling margin p_cr*0.5 / external dP (1298 claimed)                  |        1294.8 |        1294.8 |   +0.000% | PASS
+E used (hard-coded 175 GPa) vs materials 316 E at 900 K / RT [Pa]      |      1.75e+11 |       1.6e+11 |   +9.375% | INFO  (materials.yaml: RT 193.0 GPa, 900 K 160.0 GPa)
+casing hoop (P3-P0) r_o / t [Pa]                                       |   2.39825e+06 |   2.39825e+06 |   +0.000% | PASS
+limit 0.3 x 316 yield [Pa]                                             |      6.15e+07 |      6.15e+07 |   +0.000% | PASS
+rotor relative total T [K]                                             |       813.735 |       813.735 |   +0.000% | PASS
+NGV shroud T = 0.85 T41 + 0.15 T3 [K]                                  |       762.707 |       762.707 |   +0.000% | PASS
+tip clearance hot, nominal [m]                                         |   0.000360724 |   0.000361415 |   -0.191% | PASS
+  centrifugal growth (disc + exact blade stretch), nominal [m]         |   1.93199e-05 |   1.86284e-05 |   +3.712% | PASS  (code blade term is an approximation of the same integral)
+tip clearance hot, low_shroud_alpha [m]                                |   0.000300343 |   0.000301035 |   -0.230% | PASS
+  centrifugal growth (disc + exact blade stretch), low_shroud_alpha [m] |   1.93199e-05 |   1.86284e-05 |   +3.712% | PASS  (code blade term is an approximation of the same integral)
+tip clearance hot, high_shroud_alpha [m]                               |   0.000421105 |   0.000421796 |   -0.164% | PASS
+  centrifugal growth (disc + exact blade stretch), high_shroud_alpha [m] |   1.93199e-05 |   1.86284e-05 |   +3.712% | PASS  (code blade term is an approximation of the same integral)
+tip clearance hot, shutdown_bound [m]                                  |   0.000118279 |   0.000118341 |   -0.053% | PASS
+  centrifugal growth (disc + exact blade stretch), shutdown_bound [m]  |   1.73879e-06 |   1.67656e-06 |   +3.712% | PASS  (code blade term is an approximation of the same integral)
+shutdown bound, worst corners (tip at T_rel, wheel alpha high, shroud alpha low) [m] |   6.66716e-05 |             0 |         - | INFO  (stays positive)
+
+unexplained differences: none

@@ -1,0 +1,15 @@
+T=  300 K  table 1.8460e-05  current mu_hot 1.8460e-05 (+0.0%)  pre-fix law 1.5068e-05 (-18.4%)
+T=  800 K  table 3.6980e-05  current mu_hot 3.6238e-05 (-2.0%)  pre-fix law 2.9939e-05 (-19.0%)
+T= 1000 K  table 4.2440e-05  current mu_hot 4.1522e-05 (-2.2%)  pre-fix law 3.5000e-05 (-17.5%)
+ N     Re_N(prefix) Re_R(prefix) Re_N(now) Re_R(now)  eta_tt prefix -> now   flags(now)
+ 55000     24667     18320      20420      15146   0.8427 -> 0.8376  ['Reynolds number outside Soderberg correction comfort range']
+ 56000     25325     18819      20961      15555   0.8434 -> 0.8384  ['Reynolds number outside Soderberg correction comfort range']
+ 58000     26609     19793      22017      16354   0.8448 -> 0.8398  ['Reynolds number outside Soderberg correction comfort range']
+ 60000     27849     20738      23038      17129   0.8461 -> 0.8411  ['Reynolds number outside Soderberg correction comfort range']
+ 62000     29049     21654      24027      17881   0.8474 -> 0.8425  ['Reynolds number outside Soderberg correction comfort range']
+ 64000     30214     22546      24987      18613   0.8487 -> 0.8438  ['Reynolds number outside Soderberg correction comfort range']
+ 66000     31346     23415      25920      19326   0.8499 -> 0.8450  ['Reynolds number outside Soderberg correction comfort range']
+ 68000     32448     24264      26831      20024   0.8511 -> 0.8462  []
+ 72000     34806     26094      28791      21536   0.8530 -> 0.8482  []
+ 76000     37086     27876      30695      23014   0.8547 -> 0.8501  []
+ 80000     39219     29555      32481      24409   0.8565 -> 0.8519  []

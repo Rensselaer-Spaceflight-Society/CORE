@@ -1,0 +1,61 @@
+schema_version: 1
+record_type: component
+component_id: ngv_ring
+part_ids: [NG-01]
+title: JETMAX 85 mm nozzle guide vane casting (blank; finished at CORE or by a specialist)
+make_buy: buy + finish
+budget_rows: [R03]
+software_owner: core/turbine_rating.py, modules/m12_ngv.py (fixed-throat mode)
+summary: >
+  Only a blank is listed for the 85 mm size. The blank drawing gives the hub ring,
+  outer ring and shroud/flange envelope; the finished bore, shroud diameter,
+  mounting features and vane throat are not published. The throat area is the
+  single most consequential unknown for engine matching.
+source_documents:
+  - id: jetmax-ngv85-blank
+    kind: supplier_drawing
+    url: https://www.jetmax.ch/media/pdf_en/nozzle_guide/ngv85blank_en.pdf
+    accessed: 2026-10-04
+    sha256: accc8866885e7a336a4dde62aa69478f8cd8c31a73822a3273db7fdbfbbbd765
+    redistribution: Supplier drawing; not stored in this repository.
+  - id: jetmax-ngv-page
+    kind: supplier_listing
+    url: https://www.jetmax.ch/en/nozzle_guide_vanes.htm
+    accessed: 2026-10-04
+    note: "Cast from high-temperature alloy steel, relatively easy to machine and heat-resistant up to 1,000 C (supplier wording). 85 mm blank CHF 295 / EUR 245. No finished 85 mm NGV listed."
+parameters:
+  vane_hub_diameter: {value: 55.4, unit: mm, basis: supplied, source: jetmax-ngv85-blank}
+  hub_ring_bore: {value: 48.0, unit: mm, basis: supplied, source: jetmax-ngv85-blank,
+                 note: "Blank drawing shows a blind hub pocket and a central web, NOT an open through bore. Carrier/shaft passage needs defined machining and structural review."}
+  hub_through_bore_finished: {value: null, unit: mm, basis: unresolved,
+                 note: "Define how the NGV blank centre web is machined to clear the rear carrier/shaft, and verify remaining support material. Do not use the 48 mm pocket as a finished through-bore specification."}
+  outer_ring_od: {value: 92.0, unit: mm, basis: supplied, source: jetmax-ngv85-blank}
+  flange_od: {value: 104.0, unit: mm, basis: supplied, source: jetmax-ngv85-blank}
+  shroud_bore_blank: {value: 85.0, unit: mm, basis: supplied, source: jetmax-ngv85-blank,
+                      note: As-cast bore below the vane ring; finish-machined to wheel tip plus clearance.}
+  overall_height_blank: {value: 34.0, unit: mm, basis: supplied, source: jetmax-ngv85-blank}
+  vane_ring_height_blank: {value: 20.0, unit: mm, basis: supplied, source: jetmax-ngv85-blank,
+                           note: "Vane ring ahead of the 14 mm shroud/flange section (85 mm bore, 104 mm flange) that surrounds the rotor."}
+  hub_ring_height: {value: 11.0, unit: mm, basis: supplied, source: jetmax-ngv85-blank}
+  vane_tip_diameter: {value: 87.0, unit: mm, basis: assumption, range: [85.5, 88.0],
+                      note: "Outer-ring inside diameter at the vanes is not dimensioned; inferred from the 92 mm ring OD and drawing proportion."}
+  vane_axial_chord: {value: 12.0, unit: mm, basis: assumption, range: [11.0, 13.0],
+                      note: "From the 11/13 mm features of the section view; interpretation uncertain."}
+  vane_count_estimate: {value: 20, unit: count, basis: assumption, range: [18, 22],
+                      note: Counted from the schematic plan view; count on the casting.}
+  exit_flow_angle: {value: 65.0, unit: deg, basis: assumption, range: [58.0, 72.0],
+                    note: "Mean-line exit flow angle from axial. Typical small-turbine NGV value; NOT measured. With the annulus it sets the throat area by the cosine rule."}
+  throat_area: {value: null, unit: mm2, basis: unresolved,
+                note: "Measure throat opening at hub/mid/tip on all passages (pin gauges or optical); A = sum(o h). Highest-value measurement for matching."}
+  material: {value: null, unit: '-', basis: unresolved,
+             note: "'High-temperature alloy steel' only; grade, creep and oxidation data unknown."}
+  max_service_temperature_claim: {value: 1273.0, unit: K, basis: supplied, source: jetmax-ngv-page,
+             note: "Supplier marketing statement (1,000 C); not an allowable for the CORE duty."}
+  mass_estimate: {value: 0.21, unit: kg, basis: assumption, range: [0.15, 0.30],
+                  note: Finished ring envelope estimate; weigh.}
+  list_price_blank: {value: 295.0, unit: CHF, basis: supplied, source: jetmax-ngv-page,
+                     note: Foreign list price; not a delivered USD quote.}
+unknowns:
+  - Throat area and exit metal angle (measure; or supplier data).
+  - Finished interface - shroud bore, locating diameter, flange bolt pattern (CORE design; see assembly record).
+  - Alloy and allowable temperature for the shroud/vane duty.

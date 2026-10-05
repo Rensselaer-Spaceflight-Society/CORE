@@ -96,7 +96,7 @@ def build_plan(specs, seeded):
     # edges: producer -> consumer
     deps = {m.name: set() for m in specs}
     for m in specs:
-        for r in m.reads:
+        for r in tuple(m.reads) + tuple(getattr(m, 'optional_reads', ())):
             p = producers.get(r)
             if p is not None:
                 deps[m.name].add(p.name)

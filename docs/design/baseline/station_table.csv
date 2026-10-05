@@ -1,0 +1,6 @@
+station,T0_K,P0_kPa
+0  ambient,288.15,101.325
+2  compressor inlet,288.15,100.312
+3  compressor exit,436.78,320.998
+4  turbine inlet,1150.00,301.738
+5  turbine exit,1021.98,166.144

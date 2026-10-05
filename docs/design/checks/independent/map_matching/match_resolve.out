@@ -1,0 +1,80 @@
+== A. global scan at the design speed (un-anchored FF guess 2.7e-5), all beta 0..1
+    roots found: 1 ; scan points with a power-balanced T04: 14/21 ; T04 roots per beta (max) 1
+== B. own anchoring of the loss flow functions (FF_design = FF31, FF_duct = FF3 at the design point)
+    anchoring iterations: 12
+FF_design (combustor-loss anchor)                                indep=   2.45732e-05 repo=   2.45732e-05   -0.0000%  PASS  
+FF_duct_design (turn-loss anchor)                                indep=   2.45732e-05 repo=   2.45732e-05   -0.0000%  PASS  
+DP beta                                                          indep=      0.661594 repo=      0.661594   -0.0000%  PASS  
+DP T04 [K]                                                       indep=       848.016 repo=       848.016   +0.0000%  PASS  
+DP inner T04 roots at solution beta (count)                      indep=             1 repo=             1   +0.0000%  PASS  
+DP air mass flow [kg/s]                                          indep=      0.200902 repo=      0.200902   -0.0000%  PASS  
+DP compressor PR                                                 indep=       1.48647 repo=       1.48647   +0.0000%  PASS  
+DP compressor eta                                                indep=      0.763422 repo=      0.763422   +0.0000%  PASS  
+DP T03 [K]                                                       indep=       333.439 repo=       333.439   +0.0000%  PASS  
+DP P04 [Pa]                                                      indep=        142647 repo=        142647   -0.0000%  PASS  
+DP T41 after leak re-entry [K]                                   indep=        838.46 repo=        838.46   +0.0000%  PASS  
+DP combustor loss fraction                                       indep=         0.025 repo=         0.025   +0.0000%  PASS  
+DP duct loss fraction                                            indep=          0.02 repo=          0.02   +0.0000%  PASS  
+DP fuel flow [kg/h]                                              indep=       9.52869 repo=       9.52869   +0.0000%  PASS  
+DP turbine mass flow [kg/s]                                      indep=      0.203549 repo=      0.203549   -0.0000%  PASS  
+DP U mean [m/s]                                                  indep=       249.233 repo=       249.233   +0.0000%  PASS  
+DP NGV exit C1 [m/s]                                             indep=       259.479 repo=       259.479   +0.0000%  PASS  
+DP rotor inlet rel. angle beta1 [deg]                            indep=        -7.309 repo=        -7.309   -0.0000%  PASS  
+DP rotor exit W2 [m/s]                                           indep=       242.222 repo=       242.222   +0.0000%  PASS  
+DP Euler work [J/kg]                                             indep=       47690.8 repo=       47690.8   +0.0000%  PASS  
+DP delivered work after tip debit [J/kg]                         indep=       45465.3 repo=       45465.2   +0.0000%  PASS  
+DP eta_tt                                                        indep=      0.846248 repo=      0.846248   -0.0000%  PASS  
+DP psi = w/U^2                                                   indep=      0.731928 repo=      0.731928   +0.0000%  PASS  
+DP phi = Cx2/U                                                   indep=      0.515012 repo=      0.515012   +0.0000%  PASS  
+DP reaction                                                      indep=      0.486971 repo=      0.486971   -0.0000%  PASS  
+DP Re NGV (own: final state)                                     indep=       26837.4 repo=       26830.5   +0.0257%  PASS  repo reports first-pass Re
+DP Re rotor (own: final state)                                   indep=       20028.5 repo=       20023.8   +0.0234%  PASS  repo reports first-pass Re
+DP NGV flow fraction of max                                      indep=      0.739851 repo=      0.739851   -0.0000%  PASS  
+DP rotor flow fraction of max                                    indep=      0.709194 repo=      0.709194   -0.0000%  PASS  
+DP T05 total [K]                                                 indep=       797.587 repo=       797.587   +0.0000%  PASS  
+DP P05 total [Pa]                                                indep=        113348 repo=        113348   -0.0000%  PASS  
+DP P07 [Pa]                                                      indep=        111547 repo=        111547   -0.0000%  PASS  
+DP nozzle NPR                                                    indep=       1.10089 repo=       1.10089   -0.0000%  PASS  
+DP V8 [m/s]                                                      indep=       202.231 repo=       202.231   +0.0000%  PASS  
+DP thrust [N]                                                    indep=       41.1641 repo=       41.1641   -0.0000%  PASS  
+DP compressor power [W]                                          indep=       9136.79 repo=       9136.79   -0.0000%  PASS  
+DP turbine power [W]                                             indep=       9254.42 repo=       9254.42   -0.0000%  PASS  
+DP bearing power [W]                                             indep=       98.3676 repo=       98.3676   +0.0000%  PASS  
+DP windage power [W]                                             indep=       19.2655 repo=       19.2655   -0.0000%  PASS  
+DP SM_flow                                                       indep=      0.579828 repo=      0.579828   -0.0000%  PASS  
+    own residuals at own root: r_mass 4.78e-13, r_power 1.19e-15; nozzle choked: False
+== C. repository design point inserted into the own residual equations
+own r_mass at repo (beta, T04)                                   indep=   4.58238e-11 repo=             0      +inf%  PASS  
+own r_power at repo (beta, T04)                                  indep=   7.83673e-12 repo=             0      +inf%  PASS  
+== D. Reynolds-correction iteration (one update as coded vs converged fixed point)
+DP T04 with converged Re correction                              indep=       848.013 repo=       848.016   -0.0003%  PASS  size of the single-update simplification
+== E. 56 krpm (lowest steady-range speed), anchored engine, global beta scan
+    roots at 56 krpm: 1
+56k beta                                                         indep=      0.631125 repo=      0.631125   -0.0000%  PASS  
+56k T04 [K]                                                      indep=       849.807 repo=       849.807   +0.0000%  PASS  
+56k air flow [kg/s]                                              indep=      0.158088 repo=      0.158088   -0.0000%  PASS  
+56k thrust [N]                                                   indep=       26.1715 repo=       26.1715   -0.0000%  PASS  
+56k fuel [kg/h]                                                  indep=       7.71578 repo=       7.71578   +0.0000%  PASS  
+56k Re rotor (own, final state)                                  indep=       15556.8 repo=         15555   +0.0116%  PASS  
+    56k flags (own): ['Re outside 2e4-1e6']; repo flags: ['Reynolds number outside Soderberg correction comfort range']
+== F. nozzle trim table points (fixed angle + nozzle diameter), own global scan
+trim a1=60 D=50 mm T04 [K]                                       indep=        1013.6 repo=        1013.6   +0.0000%  PASS  
+trim a1=60 D=50 mm thrust [N]                                    indep=       54.4538 repo=       54.4538   -0.0000%  PASS  
+trim a1=60 D=50 mm SM_flow                                       indep=      0.567049 repo=      0.567049   -0.0000%  PASS  
+trim a1=72 D=58 mm T04 [K]                                       indep=       725.752 repo=       725.752   +0.0000%  PASS  
+trim a1=72 D=58 mm thrust [N]                                    indep=       26.4929 repo=       26.4929   -0.0000%  PASS  
+trim a1=72 D=58 mm SM_flow                                       indep=       0.55022 repo=       0.55022   -0.0000%  PASS  
+trim a1=56 D=54 mm T04 [K]                                       indep=       982.325 repo=       982.325   +0.0000%  PASS  
+trim a1=56 D=54 mm thrust [N]                                    indep=        51.743 repo=        51.743   -0.0000%  PASS  
+trim a1=56 D=54 mm SM_flow                                       indep=      0.594763 repo=      0.594763   -0.0000%  PASS  
+== G. feasibility-window edges (NGV throat), own model + own screens vs the threshold table
+    NGV effective throat area (smallest feasible): inside 1.03 x 699.0 mm2 -> T04 731 K, NGV frac 0.945, Re rotor 15978; own screen: feasible
+    NGV effective throat area (smallest feasible): outside 0.97 x 699.0 mm2 -> T04 738 K, NGV frac 0.955, Re rotor 15160; own screen: NGV within 5 % of choke
+      table "failure_beyond": "NGV within 5 % of choke"  vs own just-outside: "NGV within 5 % of choke"  -> PASS; inside feasible: True
+    NGV effective throat area (largest feasible): inside 0.97 x 2505.9 mm2 -> T04 1124 K, NGV frac 0.559, Re rotor 17581; own screen: feasible
+    NGV effective throat area (largest feasible): outside 1.03 x 2505.9 mm2 -> T04 1176 K, NGV frac 0.538, Re rotor 17103; own screen: T04 screen
+      table "failure_beyond": "T04 1150 K > 1150 K screen"  vs own just-outside: "T04 screen"  -> PASS; inside feasible: True
+
+elapsed 184 s
+FAILS: none
+match_resolve exit=0

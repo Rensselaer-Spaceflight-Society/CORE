@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-04T21:25:04Z",
+  "python": "3.13.2",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "numpy": "2.3.1",
+  "scipy": "1.17.1",
+  "pyyaml": "6.0.3",
+  "argv": [
+    "run_case.py",
+    "dp2-prescribed"
+  ],
+  "git": {
+    "revision": "98c4167e4cc3783ffd015610af5c0e3084d5e5d9",
+    "branch": "feat/preliminary-design-integration",
+    "working_tree_dirty": true
+  }
+}

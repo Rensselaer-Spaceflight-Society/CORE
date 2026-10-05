@@ -106,6 +106,10 @@ def test_m20_uses_changed_cycle_conditions_and_fuel(state,monkeypatch):
     s=dict(state)
     s['T03_K'] += 12
     s['P03_Pa'] *= .95
+    # M20 reads the combustor's own inlet (P031, mdot_comb). M01 sets them equal to
+    # P03 / mdot in the legacy modes, so a consistent cycle change moves both.
+    s['P031_Pa'] = s['P03_Pa']
+    s['mdot_comb_kg_s'] = s['mdot_kg_s']
     s['eta_b_frac'] = .95
     s['LHV_fuel_J_kg'] = 42e6
     s['FAR_ratio'] = gas.far_for_T4(s['T03_K'],s['T04_K'],s['eta_b_frac'],s['LHV_fuel_J_kg'])
@@ -116,6 +120,15 @@ def test_m20_uses_changed_cycle_conditions_and_fuel(state,monkeypatch):
     assert observed['FAR'] == s['FAR_ratio']
     assert observed['mdot_fuel'] == s['mdot_fuel_kg_s']
     assert observed['eta_comb_used'] == .95
+    # With an imported fixed-geometry point the turn loss makes P031 < P03 and
+    # tunnel leakage makes mdot_comb < mdot: the combustor must follow its own inlet.
+    s['P031_Pa'] = s['P03_Pa'] * 0.985
+    s['mdot_comb_kg_s'] = s['mdot_kg_s'] * 0.98
+    s['mdot_fuel_kg_s'] = s['mdot_comb_kg_s'] * s['FAR_ratio']
+    observed.clear()
+    m20_combustor.spec.run(s)
+    assert observed['P2_Pa'] == s['P031_Pa']
+    assert observed['mdot_air'] == s['mdot_comb_kg_s']
 
 
 def test_rotor_range_distance_and_crossing_are_separate(state):

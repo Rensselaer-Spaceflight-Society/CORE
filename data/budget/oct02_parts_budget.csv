@@ -1,0 +1,114 @@
+row_id,sheet_row,part,specification,qty,unit,unit_cost_usd,line_total_usd,price_basis,evidence,source
+R01,9,Compressor wheel,GT3076R class; 57.04 / 76.13 mm,1,each,150,150,Benchmark,KINUGAWA lists USD 139.00. Final wheel/map/shaft matching remains open.,https://www.kinugawaturbo.com/products/billet-turbo-compressor-wheel-garrett-gt3076r-gt3037-57-76-mm-trim-56-11-0
+R02,10,Purchased turbine wheel,Cast nickel-alloy axial wheel; ~88 mm class,1,each,650,650,Quote needed,Purchased-wheel route selected by user. USD allowance; exact supplier/size unselected. JETMAX 85 mm comparator is CHF 370 / EUR 305 and is not a drop-in replacement for the nominal 88.2 mm rotor. No Inconel billet is charged.,https://jetmax.ch/en/turbine_wheels.htm
+R03,11,Nozzle-guide-vane ring,Purchased casting; matched to selected turbine,1,each,400,400,Quote needed,"JETMAX 85 mm blank comparator: CHF 295 / EUR 245. USD 400 is a planning allowance, not a conversion or quote; exact matching and campus finishing remain open. No separate vane stock is charged.",https://jetmax.ch/en/nozzle_guide_vanes.htm
+R04,12,High-speed turbine bearings,"8 mm bore × 22 mm OD × 7 mm wide, candidate",2,each,150,300,Quote needed,"MTSV708 manufacturer catalog confirms this envelope. USD 150 each is an estimate, not a vendor quote or 66,000 rpm approval. Confirm cage, preload, lubrication, loads and temperature.",https://www.montonbearing.com/hkhtzc/wpfdjzc.html
+R05,13,Shaft steel blank,"4140 prehard round, 1/2 in dia × 12 in long",1,bar,15,15,Benchmark,Published USD 11.99 per 12 in bar; rounded allowance. Grade/condition and final stepped shaft remain subject to design review.,https://www.onlinemetals.com/en/buy/alloy-steel/0-500-alloy-steel-round-bar-4140-cold-finished-heat-treated/pid/mp-00002423
+R06,14,Compressor-housing block,"6061 aluminum, 2 × 6 × 6 in",1,block,80,80,Estimate,Purchasing envelope for campus machining; final housing CAD and machining allowance to be checked.,Planning estimate; no vendor quote
+R07,15,Diffuser / backplate blanks,"6061-T651 plate, 1/2 × 8 × 8 in",2,plate,35,70,Benchmark,Published USD 29.90 per 8 × 8 in plate. One diffuser blank and one backplate blank; thickness is a budget assumption.,https://www.onlinemetals.com/en/buy/aluminum/0-5-aluminum-plate-6061-t651/pid/1250
+R08,16,Bearing-carrier blank,"6061 round bar, 2-1/2 in dia × 6 in long",1,bar,45,45,Estimate,Cut and machine two bearing carriers from one bar; final bore/span and fits TBD.,Planning estimate; no vendor quote
+R09,17,Bearing-spacer stock,"316 stainless round, 1/2 in dia × 12 in",1,bar,15,15,Estimate,"Stock for spacers and shims; dimensions are purchasing allowances, not finished dimensions.",Planning estimate; no vendor quote
+R10,18,Bearing preload springs,"Small wave springs, ~22 mm OD candidate",2,each,8,16,Estimate,Spring size/rate to follow the selected bearing arrangement.,Planning estimate; no vendor quote
+R11,19,Rotor retaining nuts,Precision shaft nuts; thread/hand TBD,2,each,8,16,Estimate,One per rotor-end interface; do not substitute generic M8 nuts without shaft drawing.,Planning estimate; no vendor quote
+R12,20,Cold-housing O-rings,"FKM; ten seals, final groove sizes TBD",1,10-pack,18,18,Estimate,Cold static seals only. Pack allowance explicitly excludes hot-gas sealing.,Planning estimate; no vendor quote
+R13,21,Bearing retaining rings,22 mm housing-bore candidate,1,10-pack,8,8,Estimate,Candidate size for housing retention; final drawing may change ring type.,Planning estimate; no vendor quote
+R14,22,Labyrinth / seal-ring blank,"C932 bronze round, 1-1/4 in dia × 3 in",1,bar,25,25,Estimate,Noncontact seal-ring stock allowance; final material and geometry TBD.,Planning estimate; no vendor quote
+S01,23,Turbine interface finishing,"Bore / hub / attachment finishing, one rotor",1,job,125,125,Quote needed,Supplier or specialist work on purchased wheel; scope governed by final interface drawing. Campus machining otherwise assumed free.,Planning estimate; no vendor quote
+S02,24,Post-finishing rotor inspection,One rotor; dimensional + dye-penetrant service,1,job,125,125,Quote needed,Separate from original casting inspection. USD allowance; required inspection method and acceptance criteria to be agreed with provider.,Planning estimate; no vendor quote
+S03,25,Assembled rotor balancing,One rotor assembly; report included in quote,1,job,200,200,Quote needed,G-Pop advertises standard work from USD 75 and VSR from USD 110; CORE is custom. This service allowance excludes the adapter line below.,https://www.gpopshop.com/balancing
+S04,26,Balancing adapter / fixture,One custom setup for CORE shaft,1,job,75,75,Quote needed,"G-Pop explicitly requires a quote when no existing adapter fits. This is an allowance, not a fixed offered price.",https://www.gpopshop.com/balancing
+C01,27,Casing / liner / dome sheet,"316/316L 2B sheet, 0.060 × 24 × 24 in",1,sheet,110,110,Benchmark,"Published USD 101.13. One common panel to nest casing, two liners and dome pieces; verify cut layout. 0.060 in = 1.524 mm versus model 1.5 mm nominal.",https://www.onlinemetals.com/en/buy/stainless-steel/0-06-stainless-sheet-316-316l-cold-roll-2b/pid/9861
+C02,28,Shaft-tunnel tube,"316 stainless, 2 in OD × 0.065 wall × 12 in",1,tube,35,35,Estimate,"2 in OD matches the retained tunnel envelope. Wall is a stock-price proxy, not the exact 1.5 mm model input.",Planning estimate; no vendor quote
+C03,29,Vaporizer tubing,"316L, 8 mm OD × 0.6 mm wall × 1 m",2,length,20,40,Estimate,For eight formed vaporizers. Model currently gives about 8.14 mm OD; 8 mm stock is a pricing proxy and requires geometry review. No finished tube dimensions asserted.,Planning estimate; no vendor quote
+C04,30,Fuel manifold metal tube,"316, 1/8 in OD × 0.020 wall × 36 in",1,length,20,20,Estimate,Metal manifold feed stock; final feed layout determines cuts and fittings.,Planning estimate; no vendor quote
+C05,31,Fuel needle / capillary tubing,"316, 1.5 mm OD × 0.2 mm wall × 1 m",2,length,15,30,Estimate,"Budget stock for eight fuel feeds, including cut losses; bore and injector design TBD.",Planning estimate; no vendor quote
+C06,32,TIG filler rod,"ER316L, 1/16 in dia, 1 lb pack",1,pack,25,25,Estimate,Welding consumable; campus welding labor assumed free.,Planning estimate; no vendor quote
+C07,33,Argon / purge gas refill share,One project share of shop cylinder refill,1,refill share,40,40,Estimate,Consumable gas only; existing shop cylinder and regulator assumed available.,Planning estimate; no vendor quote
+C08,34,Spark igniter,"Small M10-thread spark plug, candidate",1,each,25,25,Estimate,"Procurement placeholder; plug reach, mounting and ignition energy TBD.",Planning estimate; no vendor quote
+C09,35,Ignition power module,12 V CDI / spark driver,1,each,50,50,Estimate,Separate igniter driver; compatibility with plug and controller to be confirmed.,Planning estimate; no vendor quote
+C10,36,Ignition lead,"High-temperature insulated HT lead, 1 m",1,length,10,10,Estimate,Lead and terminal boot allowance.,Planning estimate; no vendor quote
+C11,37,Gasket sheet,"High-temperature gasket sheet, 1/32 × 12 × 12 in",1,sheet,15,15,Estimate,Static flange material; final grade and joint conditions TBD.,Planning estimate; no vendor quote
+F01,38,Fuel pump,JetCat V6 P60–P200 class pump,1,each,180,180,Benchmark,Chief RC lists USD 169.99. Check independent driver compatibility and required fuel flow/pressure.,https://www.chiefrc.com/collections/fuel-pumps
+F02,39,Automatic fuel shutoff valve,"Normally closed, 12 VDC, 1/8 in NPT",1,each,75,75,Estimate,Must be fuel-compatible at final flow/pressure; price is an allowance.,Planning estimate; no vendor quote
+F03,40,Manual fuel valve,"Fuel-compatible ball valve, 1/8 in NPT",1,each,25,25,Estimate,Separate manual isolation valve.,Planning estimate; no vendor quote
+F04,41,Bench fuel tank,2 L fuel-compatible tank with cap,1,each,25,25,Estimate,Capacity is for short commissioning runs; no claim of a full test duration.,Planning estimate; no vendor quote
+F05,42,Tank pickup / vent bulkheads,1/8 in hose-barb bulkhead,2,each,5,10,Estimate,One pickup and one vent fitting; tank compatibility TBD.,Planning estimate; no vendor quote
+F06,43,Flexible fuel tubing,"Tygon F-4040-A class, 1/8 in ID × 10 ft",1,coil,30,30,Estimate,Cold-side fuel hose; confirm OD with clamps and pressure rating.,Planning estimate; no vendor quote
+F07,44,Inline fuel filter,"Fuel-compatible, ~10 micron, 1/8 in barb",1,each,15,15,Estimate,Final filtration requirement set by pump/injector supplier.,Planning estimate; no vendor quote
+F08,45,Fuel hose adapters,1/8 in NPT to 1/8 in hose barb,6,each,4,24,Estimate,Provisional count; finalize against plumbing diagram.,Planning estimate; no vendor quote
+F09,46,Fuel-line tees,1/8 in hose-barb tee,2,each,4,8,Estimate,Budget fittings for feed / service branches.,Planning estimate; no vendor quote
+F10,47,Fuel check valve,"Fuel-compatible inline, 1/8 in barb",1,each,10,10,Estimate,Cracking pressure and final need to be confirmed.,Planning estimate; no vendor quote
+F11,48,Small fuel-hose clamps,For ~1/4 in OD hose; ten clamps,1,10-pack,8,8,Estimate,Size must match actual selected hose.,Planning estimate; no vendor quote
+F12,49,Test fuel,Kerosene / Jet-A grade TBD; US gallons,4,gal,15,60,Estimate,Retail allowance for initial commissioning fuel.,Planning estimate; no vendor quote
+F13,50,Turbine lubricant,"One quart, grade / mixing scheme TBD",1,bottle,30,30,Estimate,Consumable for approved bearing lubrication method.,Planning estimate; no vendor quote
+F14,51,Fuel-consumption scale,"10 kg capacity digital scale, 1 g resolution",1,each,25,25,Estimate,Bench fuel-mass tracking; verify accuracy before measurements.,Planning estimate; no vendor quote
+E01,52,Hot-section thermocouple,"K-type Inconel probe, 3 mm × 100 mm",1,each,100,100,Benchmark,"DwyerOmega M12KIN-M3-U-100-A is USD 98.37. Final location, rating and connector protection need confirmation.",https://www.dwyeromega.com/en-us/thermocouple-probes-with-mounting-threads-and-m12-connectors/M12probes/p/M12KIN-M3-U-100-A
+E02,53,Cool-section thermocouples,"K-type glass-braid bead probe, 1 m",2,each,10,20,Benchmark,Adafruit 270 is USD 9.95; for cooler locations within its published range.,https://www.adafruit.com/product/270
+E03,54,Thermocouple interface boards,"MAX31856 breakout, one per probe",3,each,20,60,Benchmark,Adafruit 3263 lists USD 17.50. Rounded budget price.,https://www.adafruit.com/product/3263
+E04,55,Pressure transmitters,ProSense PTD25 class; two pressure channels,2,each,175,350,Benchmark,"PTD25-10-0100H is USD 169, 0–100 psig / 0–10 V. Cost comparator; select appropriate final ranges and pressure tapping.",https://www.automationdirect.com/adc/shopping/catalog/process_control_-a-_measurement/pressure_sensors/pressure_transmitters/ptd25-10-0100h
+E05,56,ADC board,"ADS1115, 16-bit, four-channel breakout",1,each,15,15,Benchmark,Adafruit 1085 is USD 14.95. Sensor-voltage scaling components are included separately.,https://www.adafruit.com/product/1085
+E06,57,Microcontroller / logger,Adafruit Feather RP2040 Adalogger,1,each,15,15,Benchmark,Adafruit 5980 lists USD 14.95. Student-developed software; this is not a commercial turbine ECU.,https://www.adafruit.com/product/5980
+E07,58,Hall-effect sensor boards,ScoutMakes DRV5011 latching Hall breakout,2,each,6,12,Benchmark,Adafruit 6519 is USD 5.50. One development board and one spare; magnetic target and final engine RPM sensing arrangement remain unselected.,https://www.adafruit.com/product/6519
+E08,59,Handheld optical tachometer,"NEIKO 20713A, 2.5–99,999 rpm range",1,each,25,25,Benchmark,Manufacturer lists USD 23.99 including batteries and reflective tape. Bench cross-check tool; separate from installed RPM pickup and shutdown system.,https://neikotools.com/products/neiko-20713a-digital-tachometer-non-contact-laser-photo-2-5-99-999-rpm-accuracy
+E09,60,Thrust load cell,20 kg nominal strain-gauge beam cell,1,each,30,30,Estimate,Capacity is a budget assumption; fixture loads and calibration still require review.,Planning estimate; no vendor quote
+E10,61,Load-cell ADC,HX711 amplifier / interface board,1,each,10,10,Estimate,Separate readout electronics for the load cell.,Planning estimate; no vendor quote
+E11,62,Emergency-stop switch,"22 mm latching mushroom, NC contact block",1,each,15,15,Estimate,Hardware E-stop; final circuit architecture TBD.,Planning estimate; no vendor quote
+E12,63,Interlock relays with sockets,"24 VDC coil, DPDT, nominal 10 A contacts",2,each,12,24,Estimate,Contact/load suitability to be checked in circuit design.,Planning estimate; no vendor quote
+E13,64,Fuse holders and fuses,"Inline automotive holders, five-piece pack",1,pack,10,10,Estimate,Five fused branches; individual fuse sizes determined from load budget.,Planning estimate; no vendor quote
+E14,65,Fuel-pump motor driver,"12 V PWM motor driver, nominal 10 A class",1,each,35,35,Estimate,Select to match pump current and control interface.,Planning estimate; no vendor quote
+E15,66,24 V bench power supply,"24 VDC, 5 A regulated supply",1,each,40,40,Estimate,Pressure-transmitter / control supply allowance.,Planning estimate; no vendor quote
+E16,67,12 V regulator,"24-to-12 V buck converter, 5 A class",1,each,20,20,Estimate,Pump and auxiliary supply; final current/load compatibility TBD.,Planning estimate; no vendor quote
+E17,68,5 V regulator,"DC buck converter, 5 V / 3 A class",1,each,10,10,Estimate,Logic and sensor supply.,Planning estimate; no vendor quote
+E18,69,Starter motor,"12 V brushed DC starter motor, candidate",1,each,35,35,Estimate,Starting torque and speed requirements are not yet resolved; this is a price allowance.,Planning estimate; no vendor quote
+E19,70,Starter motor controller,"Brushed ESC / driver, 12 V / 30 A class",1,each,25,25,Estimate,Candidate rating; match selected motor and duty cycle.,Planning estimate; no vendor quote
+E20,71,Starter clutch / coupling,Small overrunning clutch and drive adapter,1,each,35,35,Estimate,One identifiable purchased coupling assembly; shaft interface pending.,Planning estimate; no vendor quote
+E21,72,Control enclosure,"ABS electrical enclosure, ~8 × 6 × 4 in",1,each,25,25,Estimate,"Size allowance for controller, terminals and relays.",Planning estimate; no vendor quote
+E22,73,Pressure-sensor cables,"M12 four-pin female cable, 2 m",2,each,12,24,Estimate,One per pressure transmitter; pinout and connector orientation TBD.,Planning estimate; no vendor quote
+E23,74,Thermocouple extension leads,"K-type extension / mating connector, 1 m",3,each,10,30,Estimate,Three cable assemblies; verify mating connector and temperature rating.,Planning estimate; no vendor quote
+E24,75,Shielded sensor cable,"Four-conductor shielded, 22 AWG, 25 ft",1,roll,25,25,Estimate,Sensor and Hall pickup harness stock.,Planning estimate; no vendor quote
+E25,76,Power wire,"14 AWG red / black, 25 ft total",1,roll,20,20,Estimate,Purchased wire length; verify current rating and routing.,Planning estimate; no vendor quote
+E26,77,Terminal strip,12-position screw terminal block,1,each,10,10,Estimate,Control harness termination.,Planning estimate; no vendor quote
+E27,78,Cable glands,"M12/M16 cable-entry glands, ten-pack",1,pack,10,10,Estimate,Choose hole sizes to match final enclosure/cables.,Planning estimate; no vendor quote
+E28,79,Heat-shrink tubing,"Assorted diameters, 100-piece pack",1,pack,8,8,Estimate,Harness insulation and labeling stock.,Planning estimate; no vendor quote
+E29,80,Signal-conditioning components,Perfboard plus resistor / TVS assortment,1,pack,10,10,Estimate,One small electronics assortment for ADC input scaling/protection; final circuit TBD.,Planning estimate; no vendor quote
+E30,81,Logger memory card,16 GB microSD card,1,each,8,8,Estimate,Removable logging storage.,Planning estimate; no vendor quote
+E31,82,USB cable,"USB-A to USB-C data cable, 1 m",1,each,6,6,Estimate,Logger setup and data connection.,Planning estimate; no vendor quote
+E32,83,Starter battery,"3S 11.1 V LiPo, 2200 mAh, candidate",1,each,30,30,Estimate,Starting power allowance; discharge capability and protection TBD.,Planning estimate; no vendor quote
+E33,84,Battery balance charger,3S-capable LiPo balance charger,1,each,25,25,Estimate,Compatible charging supply included in allowance.,Planning estimate; no vendor quote
+E34,85,Hall-sensor bench targets,"Small magnet sample pack, ten pieces",1,pack,8,8,Estimate,For stationary bench sensor-development tests. No high-speed rotor mounting arrangement is assumed.,Planning estimate; no vendor quote
+H01,86,M4 socket-head bolts,"M4 × 12 mm, A2 stainless, 25 pieces",1,pack,10,10,Estimate,Provisional cold-assembly size/count; final drawing controls fastener grade and length.,Planning estimate; no vendor quote
+H02,87,M5 socket-head bolts,"M5 × 16 mm, A2 stainless, 25 pieces",1,pack,12,12,Estimate,Provisional cold-assembly fasteners.,Planning estimate; no vendor quote
+H03,88,M6 socket-head bolts,"M6 × 20 mm, A2 stainless, 25 pieces",1,pack,15,15,Estimate,Provisional brackets / cold flanges.,Planning estimate; no vendor quote
+H04,89,M8 stand bolts,"M8 × 30 mm, class 8.8 steel, 25 pieces",1,pack,18,18,Estimate,Test-stand connections; final lengths and joint checks TBD.,Planning estimate; no vendor quote
+H05,90,M4 hex nuts,A2 stainless; 25 pieces,1,pack,6,6,Estimate,Matches budget M4 hardware; hot-section grade not specified by this allowance.,Planning estimate; no vendor quote
+H06,91,M5 hex nuts,A2 stainless; 25 pieces,1,pack,6,6,Estimate,Matches budget M5 hardware.,Planning estimate; no vendor quote
+H07,92,M6 hex nuts,A2 stainless; 25 pieces,1,pack,8,8,Estimate,Matches budget M6 hardware.,Planning estimate; no vendor quote
+H08,93,M8 stand nuts,Steel class 8; 25 pieces,1,pack,8,8,Estimate,Matches M8 stand bolts.,Planning estimate; no vendor quote
+H09,94,Small flat washers,"M4 / M5 / M6 stainless, 150-piece pack",1,pack,10,10,Estimate,Explicit retail assortment with spare pieces.,Planning estimate; no vendor quote
+H10,95,M8 flat washers,Steel; 50 pieces,1,pack,8,8,Estimate,Stand mounting washers.,Planning estimate; no vendor quote
+H11,96,Lockwire,"304 stainless, 0.032 in diameter, 1 lb spool",1,spool,15,15,Estimate,Retention consumable; final locations per assembly plan.,Planning estimate; no vendor quote
+H12,97,Cobalt drill set,Metric 1–8 mm set,1,set,35,35,Estimate,"Project cutting tools, not a final combustor hole specification.",Planning estimate; no vendor quote
+H13,98,Carbide end mills,"1/4 in diameter, four-flute",2,each,15,30,Estimate,Two replaceable general-purpose cutters; specialty finishing service is separate.,Planning estimate; no vendor quote
+H14,99,Cutoff discs,"4-1/2 in abrasive discs, ten-pack",1,pack,12,12,Estimate,Fabrication consumables.,Planning estimate; no vendor quote
+H15,100,Cutting lubricant,32 fl oz bottle,1,bottle,12,12,Estimate,Incremental project consumable.,Planning estimate; no vendor quote
+H16,101,Anti-seize compound,"High-temperature compound, 8 oz",1,bottle,12,12,Estimate,Compatibility with final alloys to be checked.,Planning estimate; no vendor quote
+H17,102,Threadlocker,"Medium-strength, 10 mL",1,bottle,10,10,Estimate,Cold fasteners only where drawing permits.,Planning estimate; no vendor quote
+T01,103,Test-stand square tubing,"A500/A513, 1.5 × 1.5 × 0.120 in wall × 72 in",3,length,40,120,Benchmark,"Published USD 39.14 per 72 in length, before freight. Eighteen feet of stock; final structural layout remains provisional.",https://www.onlinemetals.com/en/buy/carbon-steel/1-5-x-0-12-carbon-steel-square-tube-a500-a513-hot-rolled/pid/10326
+T02,104,Steel mounting plate,"A36, 1/4 × 6 × 12 in",1,plate,30,30,Estimate,Engine / load-cell fixture plate stock.,Planning estimate; no vendor quote
+T03,105,Steel angle,"A36, 1.5 × 1.5 × 1/8 in × 36 in",2,length,15,30,Estimate,Brackets and gusset support stock.,Planning estimate; no vendor quote
+T04,106,Local heat-shield sheet,"304 stainless, 0.036 × 24 × 24 in",1,sheet,55,55,Estimate,Heat shielding only; shared reviewed rotor containment is assumed in kind.,Planning estimate; no vendor quote
+T05,107,ABC fire extinguishers,"Rechargeable 5 lb, 3-A:40-B:C benchmark",2,each,50,100,Benchmark,"Buckeye listing USD 48.49, supplied untagged. Final type and quantity per test-site requirement.",https://www.webstaurantstore.com/buckeye-5-lb-abc-dry-chemical-fire-extinguisher-rechargeable-untagged-with-wall-mount-ul-rating-3-a-40-b-c/47210914.html
+T06,108,Extinguisher inspection tags,"Inspection / tagging service, per extinguisher",2,service,20,40,Estimate,Local service allowance.,Planning estimate; no vendor quote
+T07,109,Fuel spill tray,"Metal tray, about 24 × 18 in",1,each,25,25,Estimate,Size must contain selected tank and plumbing arrangement.,Planning estimate; no vendor quote
+T08,110,Absorbent pads,"Hydrocarbon-compatible, 25-piece pack",1,pack,15,15,Estimate,Initial spill cleanup supplies.,Planning estimate; no vendor quote
+T09,111,Tie-down straps,Four-strap pack,1,pack,20,20,Estimate,Transport and ancillary equipment restraint; stand anchoring still needs site-specific design.,Planning estimate; no vendor quote
+T10,112,Safety glasses,ANSI Z87.1 glasses,4,each,5,20,Estimate,Four team members; additional site-required PPE may be needed.,Planning estimate; no vendor quote
+T11,113,Hearing-protection plugs,"Disposable plugs, 100-pair box",1,box,20,20,Estimate,Consumable hearing protection; site selection controls adequacy.,Planning estimate; no vendor quote
+I01,114,Inlet bellmouth sheet,"6061 aluminum, 0.063 × 12 × 24 in",1,sheet,25,25,Estimate,Formed campus-made inlet; forming tooling assumed available.,Planning estimate; no vendor quote
+I02,115,Inlet screen,"304 stainless wire mesh, 12 × 12 in",1,sheet,15,15,Estimate,Mesh/open area must be selected for final inlet loss and debris criteria.,Planning estimate; no vendor quote
+I03,116,Exhaust nozzle sheet,"316/316L, 0.060 × 12 × 24 in",1,sheet,65,65,Benchmark,Published USD 59.63 per 12 × 24 in sheet; rounded up. Separate from combustor panel.,https://www.onlinemetals.com/en/buy/stainless-steel/0-06-stainless-sheet-316-316l-cold-roll-2b/pid/9861
+I04,117,Inlet / outlet clamps,"Stainless band clamps, 4–6 in range",2,each,6,12,Estimate,For suitable cold / ancillary joints only; final hot-joint retention TBD.,Planning estimate; no vendor quote
+V01,118,Local test travel,Vehicle fuel / toll allowance per local trip,2,trip,100,200,Estimate,"Two local trips, no airfare/lodging and no statutory mileage rate assumed.",Planning estimate; no vendor quote
+P01,122,Domestic supplier shipping,Six consolidated shipments,6,shipment,15,90,,,
+P02,123,Balancing freight,One outbound / return shipping allowance,1,round trip,60,60,,,
+P03,124,Turbine supplier freight,One shipment; duties beyond allowance TBD,1,shipment,50,50,,,

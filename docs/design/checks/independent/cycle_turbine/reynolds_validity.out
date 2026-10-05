@@ -1,0 +1,47 @@
+== Fork-A turbine Reynolds numbers on docs/design/results/pd1-jm85; bound 2e+04 (core/turbine_rating.py:297, unsourced; Soderberg basis Re = 1e5)
+  N_rpm  Re_N rep   Re_N(a)   Re_N(b)  Re_R rep   Re_R(a)   Re_R(b) flag rep  flag(b) fRe_R(a) fRe_R(b)
+  55000     20420     24671     20424     15146     18323     15149     True     True    1.528    1.603
+  56000     20961     25329     20965     15555     18822     15558     True     True    1.518    1.592
+  58000     22017     26614     22022     16354     19797     16357     True     True    1.499    1.572
+  60000     23038     27855     23043     17129     20743     17132     True     True    1.482    1.554
+  62000     24027     29056     24033     17881     21660     17885     True     True    1.466    1.538
+  64000     24987     30221     24993     18613     22553     18617     True     True    1.451    1.522
+  66000     25920     31354     25928     19326     23423     19331     True     True    1.437    1.508
+  68000     26831     32458     26839     20024     24273     20029    False    False    1.425    1.495
+  72000     28791     34818     28802     21536     26106     21544    False    False    1.399    1.468
+  76000     30695     37101     30707     23014     27892     23024    False    False    1.376    1.444
+  80000     32481     39236     32496     24409     29575     24421    False    False    1.356    1.423
+
+55000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=20423.633        repo=20419.913        diff=  +0.0182 % PASS 
+55000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=15148.654        repo=15146.332        diff=  +0.0153 % PASS 
+56000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=20965.056        repo=20961.052        diff=  +0.0191 % PASS 
+56000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=15557.56         repo=15555.044        diff=  +0.0162 % PASS 
+58000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=22021.65         repo=22017.046        diff=  +0.0209 % PASS 
+58000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=16357.08         repo=16354.147        diff=  +0.0179 % PASS 
+60000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=23043.276        repo=23038.033        diff=  +0.0228 % PASS 
+60000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=17132.138        repo=17128.748        diff=  +0.0198 % PASS 
+62000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=24032.683        repo=24026.765        diff=  +0.0246 % PASS 
+62000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=17884.679        repo=17880.794        diff=  +0.0217 % PASS 
+64000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=24993.206        repo=24986.578        diff=  +0.0265 % PASS 
+64000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=18617.097        repo=18612.678        diff=  +0.0237 % PASS 
+66000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=25927.733        repo=25920.362        diff=  +0.0284 % PASS 
+66000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=19331.457        repo=19326.466        diff=  +0.0258 % PASS 
+68000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=26838.645        repo=26830.501        diff=  +0.0304 % PASS 
+68000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=20029.448        repo=20023.846        diff=  +0.0280 % PASS 
+72000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=28801.576        repo=28791.481        diff=  +0.0351 % PASS 
+72000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=21543.591        repo=21536.255        diff=  +0.0341 % PASS 
+76000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=30707.348        repo=30695.09         diff=  +0.0399 % PASS 
+76000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=23023.698        repo=23014.231        diff=  +0.0411 % PASS 
+80000 rpm Re_ngv reported vs recomputed (Sutherland air)   indep=32495.945        repo=32481.456        diff=  +0.0446 % PASS 
+80000 rpm Re_rotor reported vs recomputed (Sutherland air) indep=24421.056        repo=24409.181        diff=  +0.0486 % PASS 
+steady-range speeds 56000-68000 rpm                        value=7                INFO 
+flagged in the run (reported flags)                        value=6                INFO [56000, 58000, 60000, 62000, 64000, 66000]
+flagged by recomputation with Sutherland air               value=6                INFO [56000, 58000, 60000, 62000, 64000, 66000]
+min rotor Re in steady range (pre-fix law / Sutherland)    value=18822 / 15558    INFO 
+max rotor Re in steady range (pre-fix law / Sutherland)    value=24273 / 20029    INFO 
+fraction of Soderberg basis Re 1e5 (rotor, steady range)   value=0.19-0.24 (pre-fix law) INFO 
+viscosity at 785 K: pre-fix power law / Sutherland air [Pa s] value=2.9545e-05 / 3.5812e-05 (ratio 1.212) INFO 
+viscosity at 805 K: pre-fix power law / Sutherland air [Pa s] value=3.0069e-05 / 3.6376e-05 (ratio 1.210) INFO 
+viscosity at 1000 K: pre-fix power law / Sutherland air [Pa s] value=3.5000e-05 / 4.1520e-05 (ratio 1.186) INFO 
+
+All comparisons within tolerance.

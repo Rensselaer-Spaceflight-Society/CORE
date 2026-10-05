@@ -1,0 +1,7 @@
+run folder: docs\design\results\pd1-jm85   steady range 56000-68000 rpm   E=2.05e+11 Pa rho=7850.0
+supports: [(9.0, 2000000.0, 1000.0), (122.789, 2000000.0, 1000.0)]
+run FE critical speeds: [18264.0, 19917.6, 88023.7]   separation 0.29447
+TMM undamped synchronous criticals 60-140 krpm, bearing k =       2 N/um: [90976] rpm
+TMM undamped synchronous criticals 60-140 krpm, bearing k =      20 N/um: [60659, 71373, 108052] rpm
+TMM undamped synchronous criticals 60-140 krpm, bearing k =     200 N/um: [76893, 101861] rpm
+TMM undamped synchronous criticals 60-140 krpm, bearing k =    2000 N/um: [77773, 109561] rpm

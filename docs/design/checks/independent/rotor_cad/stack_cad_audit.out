@@ -1,0 +1,147 @@
+run folder docs\design\results\pd1-jm85; cold liner length taken from the run (M20): 85.788718 mm
+
+[1] axial stations re-derived from the records (mm)
+  cw_backface        hand=    0.00000 stack=    0.00000 bundle=        0.0 PASS
+  cw_nose            hand=  -32.00000 stack=  -32.00000 bundle=      -32.0 PASS
+  shaft_front        hand=  -40.00000 stack=  -40.00000 bundle=      -40.0 PASS
+  comp_nut_front     hand=  -38.00000 stack=  -38.00000 bundle=      -38.0 PASS
+  diffuser_floor     hand=   -2.36000 stack=   -2.36000 bundle=      -2.36 PASS
+  diffuser_cover     hand=   -8.36000 stack=   -8.36000 bundle=      -8.36 PASS
+  backplate_rear     hand=   10.00000 stack=   10.00000 bundle=       10.0 PASS
+  fb_front           hand=    5.00000 stack=    5.00000 bundle=        5.0 PASS
+  fb_rear            hand=   13.00000 stack=   13.00000 bundle=       13.0 PASS
+  fb_c               hand=    9.00000 stack=    9.00000 bundle=        9.0 PASS
+  dome               hand=   18.00000 stack=   18.00000 bundle=       18.0 PASS
+  liner_end          hand=  103.78872 stack=  103.78872 bundle=  103.78872 PASS
+  ngv_front          hand=  118.78872 stack=  118.78872 bundle=  118.78872 PASS
+  rotor_le           hand=  138.78872 stack=  138.78872 bundle=  138.78872 PASS
+  ngv_te             hand=  136.78872 stack=  136.78872 bundle=  136.78872 PASS
+  ngv_le             hand=  124.78872 stack=  124.78872 bundle=  124.78872 PASS
+  rotor_te           hand=  146.28872 stack=  146.28872 bundle=  146.28872 PASS
+  tw_c               hand=  142.53872 stack=  142.53872 bundle=  142.53872 PASS
+  boss_front         hand=  130.78872 stack=  130.78872 bundle=  130.78872 PASS
+  boss_rear          hand=  149.78872 stack=  149.78872 bundle=  149.78872 PASS
+  rs_front           hand=  126.78872 stack=  126.78872 bundle=  126.78872 PASS
+  rb_rear            hand=  126.78872 stack=  126.78872 bundle=  126.78872 PASS
+  rb_front           hand=  118.78872 stack=  118.78872 bundle=  118.78872 PASS
+  rb_c               hand=  122.78872 stack=  122.78872 bundle=  122.78872 PASS
+  shaft_rear         hand=  159.78872 stack=  159.78872 bundle=  159.78872 PASS
+  ngv_ring_rear      hand=  152.78872 stack=  152.78872 bundle=  152.78872 PASS
+  casing_front       hand=   -2.36000 stack=   -2.36000 bundle=      -2.36 PASS
+  ngv_flange_front   hand=  138.78872 stack=  138.78872 bundle=  138.78872 PASS
+  casing_rear_cover  hand=  137.26472 stack=  137.26472 bundle=  137.26472 PASS
+  nozzle_entry       hand=  152.78872 stack=  152.78872 bundle=  152.78872 PASS
+  nozzle_exit        hand=  232.78872 stack=  232.78872 bundle=  232.78872 PASS
+  inlet_lip          hand=  -65.00000 stack=  -65.00000 bundle=      -65.0 PASS
+  cw_cg              hand=   -9.00000 stack=   -9.00000 bundle=       -9.0 PASS
+  gas-path ordering monotonic: True
+  bearing_span_m     hand= 113.7887 stack= 113.7887 PASS
+  comp_overhang_m    hand=  18.0000 stack=  18.0000 PASS
+  turb_overhang_m    hand=  19.7500 stack=  19.7500 PASS
+  shaft_length_m     hand= 199.7887 stack= 199.7887 PASS
+  engine_length_m    hand= 297.7887 stack= 297.7887 PASS
+
+[2] part envelopes (stack boxes x0..x1, r_in..r_out, mm)
+  overlap CH-01 /CW-01  axial  23.640 radial  11.090 mm  STATIC/ROTATING explained: box artefact: shroud follows the blade tip contour (contour unresolved)
+  overlap CW-01 /DF-01  axial   8.360 radial  33.010 mm  STATIC/ROTATING explained: box artefact: DF-01 box starts at the diffuser-cover plane; under the wheel the backplate face is at x = +0.4 mm (figure polygon / IF-CW-DF)
+  overlap CW-01 /SH-01  axial  32.000 radial   3.500 mm  static/static   explained: wheel on shaft
+  overlap DF-01 /BC-01  axial   6.000 radial  10.749 mm  static/static   explained: sleeve sits in the backplate pocket (pocket diameter not defined in bundle; see [3])
+  overlap DF-01 /BR-01  axial   5.000 radial   6.400 mm  static/static   explained: bearing inside backplate pocket
+  overlap BR-01 /SH-01  axial   8.000 radial   1.500 mm  STATIC/ROTATING explained: journal
+  overlap SH-01 /BR-02  axial   8.000 radial   1.500 mm  STATIC/ROTATING explained: journal
+  overlap SH-01 /TR-01  axial  19.000 radial   1.500 mm  static/static   explained: wheel on shaft
+  overlap SH-01 /EX-02  axial   7.000 radial   6.500 mm  STATIC/ROTATING UNEXPLAINED: 
+  overlap TU-01 /BC-02  axial   3.000 radial   0.251 mm  static/static   UNEXPLAINED: 
+  overlap BC-02 /TR-01  axial   6.000 radial  11.000 mm  STATIC/ROTATING explained: box artefact: 14 mm boss inside the 26 mm carrier bore; disc starts 2 mm aft of carrier
+  overlap CB-01 /CB-02  axial   1.524 radial   1.524 mm  static/static   explained: dome joins liner
+  overlap CB-01 /CB-03  axial   1.524 radial   1.524 mm  static/static   explained: dome joins liner
+  overlap NG-01 /TR-01  axial  19.000 radial  18.500 mm  STATIC/ROTATING explained: box artefact: rotor runs inside the 85.7 mm shroud bore of the casting
+  overlap NG-01 /CS-02  axial   1.524 radial   5.500 mm  static/static   explained: box artefact: cover sits on the 92 mm outer ring ahead of the 104 mm flange
+  overlap EX-01 /EX-02  axial  40.000 radial   0.500 mm  static/static   explained: box artefact: EX-01 box r_in is the exit radius; the wall is at r 42.85 at the tailcone base
+  ROTATING turbine nut            vs static EX-02  overlap axial  4.000 radial  6.500 mm  (no check covers this)
+  ROTATING shaft rear thread end  vs static EX-02  overlap axial  7.000 radial  4.000 mm  (no check covers this)
+  clamp stack compressor nut -> front bearing: interface gaps [0.0, 0.0, 0.0] mm  PASS
+  clamp stack rear bearing -> turbine nut: interface gaps [0.0, 0.0, 0.0] mm  PASS
+  shoulders: body 13.0000..118.7887 mm vs front bearing rear face 13.0000 and rear bearing front face 118.7887
+  aft rotating-to-static axial gaps: boss rear face 149.789 -> tailcone/nozzle plane 152.789 = 3.000 mm; disc rear face 146.289 -> 152.789 = 6.500 mm; nut ends 156.789, shaft ends 159.789
+  TU-01 ID 47.498 mm, x 10.000..117.789; BC-02 envelope OD 48.000 mm, x 114.789..136.789; overlap 3.000 mm long, 0.251 mm radial interference
+
+[3] cross_section.svg read back (axis ticks -> mm)
+  scale x 2.675928 px/mm, r -2.675928 px/mm (aspect equal: True)
+  IN-01  drawn as stack box: yes (patch_6)
+  BC-01  drawn as stack box: yes (patch_7)
+  BR-01  drawn as stack box: yes (patch_8)
+  TU-01  drawn as stack box: yes (patch_9)
+  BC-02  drawn as stack box: yes (patch_10)
+  BR-02  drawn as stack box: yes (patch_11)
+  CB-01  drawn as stack box: yes (patch_12)
+  CB-02  drawn as stack box: yes (patch_13)
+  CB-03  drawn as stack box: yes (patch_14)
+  NG-01  drawn as stack box: yes (patch_15)
+  CS-01  drawn as stack box: yes (patch_16)
+  CS-02  drawn as stack box: yes (patch_17)
+  NG-01 is drawn as one solid annulus r 24.00..52.00 mm over x 118.79..152.79: no 48 mm blind pocket/web, no 92/104 mm step, no 85.7 mm shroud bore; turbine patches [21, 22, 23] are drawn later on top of it (patch 15)
+  DF-01 drawn bearing-pocket radius 16.000 mm (dia 32.00); BC-01 stack envelope OD 47.498 mm over x 4.00..16.00; BC-01 is painted over DF-01
+  shaft profile drawn vs stack sections (threads at nominal dia): worst corner error 0.0000 mm, missing corners [] PASS
+  bearing markers drawn at x = [9.0, 122.789] mm (stack 9.000, 122.789)
+  not drawn as envelopes: EX-02 tailcone (line only; the nut/shaft end inside it is not shown), CB-05 (invalid box), CB-04, EX-01 (lines)
+
+[4] CAD bundle
+  parameters: 186 (unique names 186); status counts {'fixed purchased geometry': 19, 'envelope only': 14, 'unresolved - do not model': 6, 'provisional design': 147}; sum 186
+  unresolved parameters (no value): ['CW01_SHROUD_CONTOUR', 'SH01_COMPRESSOR_FINISHED_SEAT_DIA', 'SH01_TURBINE_FINISHED_SEAT_DIA', 'BC01_SLEEVE_OD', 'NG01_HUB_THROUGH_BORE_FINISHED', 'TR01_BLADE_SECTIONS']
+  CW01_EXDUCER_DIA              76.13 fixed purchased  record: exducer_diameter <- kinugawa-billet-56trim
+  CW01_EXDUCER_EXT_TIP_DIA      79.22 fixed purchased  record: exducer_extended_tip_diameter <- kinugawa-billet-56trim
+  CW01_INDUCER_DIA              57.04 fixed purchased  record: inducer_diameter <- kinugawa-billet-56trim
+  CW01_EXIT_BLADE_HEIGHT         5.75 fixed purchased  record: exducer_tip_height <- kinugawa-billet-56trim
+  CW01_SUPER_BACK_HEIGHT         2.36 fixed purchased  record: super_back_height <- kinugawa-billet-56trim
+  CW01_BORE_DIA                  5.99 fixed purchased  record: bore_diameter <- kinugawa-billet-56trim
+  CW01_FULL_BLADES                 11 fixed purchased  record: full_blade_count <- kinugawa-billet-56trim
+  BR_BORE                        10.0 fixed purchased  record: bore <- monton-turbo-bearings
+  BR_OD                          26.0 fixed purchased  record: outer_diameter <- monton-turbo-bearings
+  BR_WIDTH                        8.0 fixed purchased  record: width <- monton-turbo-bearings
+  CB05_INNER_CONE_END_DIA        55.4 provisional desi record: ngv_ring.vane_hub_diameter (copied into a CORE-made part; basis label "supplied") <- jetmax-ngv85-blank
+  NG01_HUB_DIA                   55.4 fixed purchased  record: vane_hub_diameter <- jetmax-ngv85-blank drawing=55.4 MATCH
+  NG01_FLANGE_OD                104.0 fixed purchased  record: flange_od <- jetmax-ngv85-blank drawing=104.0 MATCH
+  TR01_TIP_DIA                   85.0 fixed purchased  record: tip_diameter <- jetmax-tw85-finished drawing=85.0 MATCH
+  TR01_HUB_DIA                   55.0 fixed purchased  record: hub_diameter <- jetmax-tw85-finished drawing=55.0 MATCH
+  TR01_BORE_DIA                  9.99 fixed purchased  record: bore_diameter <- jetmax-tw85-finished drawing=9.99 MATCH
+  TR01_BOSS_DIA                  14.0 fixed purchased  record: hub_boss_diameter <- jetmax-tw85-finished drawing=14.0 MATCH
+  TR01_RIM_WIDTH                  7.5 fixed purchased  record: blade_axial_width_at_rim <- jetmax-tw85-finished drawing=7.5 MATCH
+  TR01_BOSS_LENGTH               19.0 fixed purchased  record: hub_boss_total_length <- jetmax-tw85-finished drawing=19.0 MATCH
+  TR01_BOSS_SIDE_A                8.0 fixed purchased  record: hub_boss_protrusion_side_a <- jetmax-tw85-finished drawing=8.0 MATCH
+  EX02_TAILCONE_BASE_DIA         55.0 provisional desi record: turbine_rotor.hub_diameter (copied into a CORE-made part; basis label "supplied") <- jetmax-tw85-finished
+  interfaces:
+    IF-ROT            None   None must agree                                       
+    IF-CW-SH         -32.0   5.99 slip/transition proposed; finished seat diameter 
+    IF-CW-DF           0.0   None 0.40 mm axial                                    
+    IF-SL-BR1          5.0   13.0 clamp                                            
+    IF-SH-BR1          9.0   10.0 k5 light interference                            
+    IF-BR1-BC1         9.0   26.0 J6 + retaining ring                              
+    IF-BC1-DF          9.0   None O-ring radial squeeze; anti-rotation pin         <- mating diameter missing
+    IF-DF-CS         -2.36  149.0 g6/H7, 12 x M4                                   
+    IF-TU-DF          10.0   50.8 press/retained                                   
+    IF-TU-BC2     118.7887   50.8 sliding; joint geometry UNRESOLVED               <- 50.8 mm sliding joint at x 118.7887: tunnel ends at 117.7887; carrier envelope OD 48.0 mm < tunnel OD; geometry of the slip joint not defined
+    IF-BC2-NG     118.7887   48.0 UNRESOLVED - finish-machining and fit review     
+    IF-BR2-BC2    122.7887   26.0 G6 sliding                                       
+    IF-SH-TR      130.7887   9.99 fit unresolved                                   
+    IF-TR-NG-TIP  138.7887   85.0 0.35 mm radial cold                              
+    IF-TR-NG-AX   136.7887   None 2.0 mm cold                                      
+    IF-CB-NG      118.7887   None sliding, liners located at rear                  
+    IF-CB-CS          18.0   None radial + axial sliding                           
+    IF-NG-CS2     138.7887  104.0 12 x M3 hot fasteners + gasket                   
+    IF-EX-NG      152.7887   None shared bolts                                     
+    IF-FUEL           14.0   None fitting + needles                                
+    IF-IGN         30.8683   None M10 boss                                         
+    IF-STARTER       -38.0   None one-way clutch, disengaging                      
+    IF-MOUNT         27.64  152.4 band clamps                                      
+
+FLAGS (not numeric failures):
+  - envelope overlap SH-01/EX-02: 7.000 mm axial x 6.500 mm radial (STATIC/ROTATING)
+  - envelope overlap TU-01/BC-02: 3.000 mm axial x 0.251 mm radial (static/static)
+  - rotating turbine nut overlaps static EX-02 envelope (4.00 mm axial x 6.50 mm radial)
+  - rotating shaft rear thread end overlaps static EX-02 envelope (7.00 mm axial x 4.00 mm radial)
+  - figure: NG-01 drawn as an open 48 mm-bore solid annulus; the blind pocket/web (R9) and the rotor-in-shroud relation are not shown; turbine rectangles are painted over the NGV box
+  - BC-01 sleeve OD / backplate pocket diameter undefined in bundle: figure pocket 32.0 mm vs stack envelope 47.50 mm (IF-BC1-DF diameter null)
+  - IF-TU-BC2 slip joint not realisable from the exported envelopes (tunnel ID 47.50 < carrier OD 48.0; interface quotes 50.8 mm at x 118.61, 1 mm aft of the tunnel end)
+
+SUMMARY: no numeric differences

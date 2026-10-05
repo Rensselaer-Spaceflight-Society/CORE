@@ -1,0 +1,74 @@
+schema_version: 1
+record_type: assembly_design
+component_id: assembly_pd1
+title: PD-1 axial stack, stepped shaft and CORE-made part envelopes (design choices)
+summary: >
+  Global frame: x along the engine axis, positive aft (gas-flow direction); origin at the
+  compressor wheel backface plane, cold, at assembly. r is radius from the axis.
+  Angular zero is top dead centre; positive clockwise viewed from the front (looking aft).
+  All dimensions are cold (293 K) unless a name says hot. Values with basis 'design' are
+  CORE choices for parts CORE makes; they may change without new supplier evidence.
+  Purchased-part dimensions come from their own records. Combustor liner diameters and
+  length come from the combustor model at the design point, not from this file.
+source_documents: []
+parameters:
+  # ---------------- compressor end
+  backface_clearance: {value: 0.40, unit: mm, basis: design, range: [0.30, 0.60],
+                       note: Cold axial gap wheel backface to backplate recess; check against thrust float and growth.}
+  shroud_tip_clearance: {value: 0.30, unit: mm, basis: design, range: [0.20, 0.40],
+                         note: Cold radial/axial running clearance at the compressor shroud contour.}
+  front_thread_length: {value: 8.0, unit: mm, basis: design, note: M6 x 1 front thread for compressor nut.}
+  compressor_nut_length: {value: 6.0, unit: mm, basis: design}
+  backplate_rear_face_x: {value: 10.0, unit: mm, basis: design,
+                          note: "Diffuser/backplate from diffuser floor (x = -super back height) to x = 10; 12.7 mm plate stock."}
+  backplate_od: {value: 149.0, unit: mm, basis: design, note: Spigot into casing ID with flange; see casing.}
+  front_sleeve_od: {value: 13.0, unit: mm, basis: design,
+                    note: "Rotating seal sleeve between wheel and front bearing; >= the ~12.5 mm inner-ring abutment typical of 7000-size bearings (verify supplier)."}
+  labyrinth_radial_clearance: {value: 0.10, unit: mm, basis: design, range: [0.07, 0.15]}
+  front_bearing_gap_to_backplate: {value: 1.0, unit: mm, basis: design}
+  front_bearing_recess: {value: 6.0, unit: mm, basis: design, range: [0.0, 8.0],
+                         note: "Front bearing sleeve sits in a pocket in the backplate hub; cuts the compressor overhang from 24 to 18 mm and lifts the overhung-compressor bending critical (see rotordynamics). Leaves a 5 mm seal sleeve."}
+  # ---------------- shaft
+  shaft_journal_d: {value: 10.0, unit: mm, basis: design, note: "Nominal 10 mm bearing journal. The 9.99 mm turbine bore implies interference; fits, assembly path and hub stress remain unresolved."}
+  shaft_body_d: {value: 13.0, unit: mm, basis: design, range: [12.5, 14.0],
+                 note: "Between bearings. Shoulder must be >= the inner-ring abutment minimum (~12.5 mm typical for 7000 size) and below the ring land (~14.5 mm); verify against supplier data."}
+  shaft_comp_seat_d: {value: 6.0, unit: mm, basis: assumption, note: "Structural envelope only. Finished seat must be set from the measured 5.99 mm-class bore and an approved fit."}
+  shaft_rear_thread_d: {value: 8.0, unit: mm, basis: design, note: "M8 x 1 rear thread for turbine nut; steel nut, anti-seize, locked."}
+  rear_thread_length: {value: 10.0, unit: mm, basis: design}
+  turbine_nut_length: {value: 7.0, unit: mm, basis: design}
+  shoulder_fillet_r: {value: 0.4, unit: mm, basis: design, range: [0.3, 0.6],
+                      note: Must stay below the bearing inner-ring corner chamfer (verify supplier chamfer).}
+  # ---------------- rear rotor end
+  rear_spacer_length: {value: 4.0, unit: mm, basis: design}
+  rear_spacer_od: {value: 13.5, unit: mm, basis: design}
+  ngv_rotor_axial_gap: {value: 2.0, unit: mm, basis: design, range: [1.5, 3.0],
+                        note: NGV trailing edge to rotor leading edge at the rim, cold.}
+  turbine_boss_long_side_forward: {value: 1, unit: count, basis: design,
+                                   note: "1 = the 8 mm boss side faces forward (toward the rear bearing). Verify blade handedness first."}
+  # ---------------- combustor / casing
+  plenum_gap: {value: 8.0, unit: mm, basis: design, range: [6.0, 12.0],
+               note: Backplate rear face to combustor dome; feeds the inner annulus and vaporizer scoops.}
+  transition_length: {value: 15.0, unit: mm, basis: design,
+                      note: Conical liner discharge transition from combustor annulus to NGV inlet annulus.}
+  casing_od: {value: 152.4, unit: mm, basis: design, note: "DP-2 6-inch envelope retained."}
+  casing_wall_stock: {value: 1.524, unit: mm, basis: design, note: "0.060 in 316/316L sheet (budget C01); replaces the 1.5 mm model value."}
+  liner_wall_stock: {value: 1.524, unit: mm, basis: design, note: Same sheet as casing (C01); cold stock thickness.}
+  tunnel_od_stock: {value: 50.8, unit: mm, basis: design, note: "2 in tube (budget C02)."}
+  tunnel_wall_stock: {value: 1.651, unit: mm, basis: design, note: "0.065 in wall stock (budget C02); replaces the 1.5 mm model value."}
+  rear_cover_x_offset: {value: 4.0, unit: mm, basis: design, note: "OBSOLETE - not used. The casing rear cover now bolts to the NGV flange front face (vane-ring height aft of the ring front)."}
+  ngv_flange_bolt_count: {value: 12, unit: count, basis: design,
+                          note: "M3 hot-strength bolts on the 6 mm flange land between the 92 mm outer ring and the 104 mm flange OD (JETMAX uses 12 x M3 on its 70 mm NGV flange)."}
+  ngv_flange_pcd: {value: 98.0, unit: mm, basis: design}
+  ngv_flange_bolt_hole: {value: 3.4, unit: mm, basis: design, note: M3 clearance hole.}
+  casing_front_bolt_count: {value: 12, unit: count, basis: design, note: M4 into backplate rim.}
+  # ---------------- exhaust
+  nozzle_exit_d: {value: 54.0, unit: mm, basis: design, range: [50.0, 58.0],
+                  note: "Provisional 54 mm exit for the 56-68 krpm candidate range; see current matched results. Make replaceable."}
+  nozzle_length: {value: 80.0, unit: mm, basis: design, note: Turbine exit to nozzle exit plane; half-angle about 11 deg.}
+  tailcone_length: {value: 40.0, unit: mm, basis: design}
+  # ---------------- inlet
+  bellmouth_length: {value: 25.0, unit: mm, basis: design}
+  bellmouth_lip_radius: {value: 8.0, unit: mm, basis: design}
+  # ---------------- rotor-dynamics support model
+  rear_carrier_material_note: {value: null, unit: '-', basis: unresolved,
+                               note: "Rear carrier runs hot near the NGV hub; PD-1 assumes a stainless or alloy-steel carrier, not 6061 (budget R08 assumed aluminium)."}

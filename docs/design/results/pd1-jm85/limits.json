@@ -1,0 +1,130 @@
+[
+  {
+    "label": "turbine tip speed",
+    "variable": "U_turb_tip_m_s",
+    "value": 302.64009229581677,
+    "operator": "<=",
+    "limit": 450.0,
+    "status": "pass"
+  },
+  {
+    "label": "turbine inlet temperature",
+    "variable": "T04_K",
+    "value": 848.0155183640301,
+    "operator": "<=",
+    "limit": 1200.0,
+    "status": "pass"
+  },
+  {
+    "label": "impeller tip speed",
+    "variable": "U2_m_s",
+    "value": 271.05870854682973,
+    "operator": "<=",
+    "limit": 520.0,
+    "status": "pass"
+  },
+  {
+    "label": "inducer shroud relative Mach",
+    "variable": "M1s_rel_ratio",
+    "value": 0.6487866270111728,
+    "operator": "<=",
+    "limit": 0.9,
+    "status": "pass"
+  },
+  {
+    "label": "blade stress speed screening",
+    "variable": "blade_stress_speed_margin_ratio",
+    "value": 1.9286397872505765,
+    "operator": ">=",
+    "limit": 1.5,
+    "status": "pass"
+  },
+  {
+    "label": "turbine AN^2",
+    "variable": "AN2_m2_rpm2",
+    "value": 15253060.651709167,
+    "operator": "<=",
+    "limit": 60000000.0,
+    "status": "pass"
+  },
+  {
+    "label": "bearing DN",
+    "variable": "DN_mm_rpm",
+    "value": 680000.0,
+    "operator": "<=",
+    "limit": 1600000.0,
+    "status": "pass"
+  },
+  {
+    "label": "combustor liner wall temperature",
+    "variable": "T_liner_wall_K",
+    "value": 692.6111732221016,
+    "operator": "<=",
+    "limit": 1150.0,
+    "status": "pass"
+  },
+  {
+    "label": "critical speed separation",
+    "variable": "N_crit_margin_frac",
+    "value": 0.2944658496908628,
+    "operator": ">=",
+    "limit": 0.2,
+    "status": "pass"
+  },
+  {
+    "label": "combustor dome heat flux",
+    "variable": "q_dome_W_m2",
+    "value": 377100.0,
+    "operator": "<=",
+    "limit": 600000.0,
+    "status": "pass"
+  },
+  {
+    "label": "primary jet momentum ratio (low)",
+    "variable": "J_primary_ratio",
+    "value": 20.867687536897236,
+    "operator": ">=",
+    "limit": 5.0,
+    "status": "pass"
+  },
+  {
+    "label": "primary jet momentum ratio (high)",
+    "variable": "J_primary_ratio",
+    "value": 20.867687536897236,
+    "operator": "<=",
+    "limit": 80.0,
+    "status": "pass"
+  },
+  {
+    "label": "dilution jet penetration",
+    "variable": "dil_pen_ratio",
+    "value": 0.6692315060148358,
+    "operator": "<=",
+    "limit": 0.75,
+    "status": "pass"
+  },
+  {
+    "label": "combustor residence time",
+    "variable": "tau_res_s",
+    "value": 0.0014,
+    "operator": ">=",
+    "limit": 0.0012,
+    "status": "pass"
+  },
+  {
+    "label": "liner hole pressure-drop coefficient",
+    "variable": "hole_K_ratio",
+    "value": 8.537412972970076,
+    "operator": ">=",
+    "limit": 6.0,
+    "status": "pass"
+  },
+  {
+    "label": "combustor clearance in the casing",
+    "variable": "casing_fit_margin_m",
+    "value": 0.014990447521776203,
+    "operator": ">=",
+    "limit": 0.002,
+    "status": "pass"
+  }
+]

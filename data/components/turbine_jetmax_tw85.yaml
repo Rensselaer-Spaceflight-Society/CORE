@@ -1,0 +1,86 @@
+schema_version: 1
+record_type: component
+component_id: turbine_rotor
+part_ids: [TR-01]
+title: JETMAX 85 mm cast axial turbine wheel, finished and prebalanced (purchased)
+make_buy: buy
+budget_rows: [R02, S01, S02]
+software_owner: core/turbine_rating.py, modules/m13_turbine.py (fixed-wheel mode)
+summary: >
+  Primary purchased-turbine candidate: the closest documented JETMAX wheel to the
+  nominal 88.2 / 53.9 mm DP-2 rotor. Dimensions are read from the supplier's
+  finished-wheel drawing. Blade angles, throat, blade count, alloy, mass and
+  speed rating are not published and are carried as unresolved or assumptions.
+  The blank (85.2 mm tip, solid 14 mm boss) is an alternative if a different bore
+  is needed; it then needs specialist bore/tip finishing and balancing.
+source_documents:
+  - id: jetmax-tw85-finished
+    kind: supplier_drawing
+    url: https://www.jetmax.ch/media/pdf_en/turbine_wheels/tw85finished_en.pdf
+    accessed: 2026-10-04
+    sha256: 73d679da20d3853510181c90426b2436c94d90967aad6e178aabd81b08845f9f
+    redistribution: Supplier drawing; not stored in this repository.
+  - id: jetmax-tw85-blank
+    kind: supplier_drawing
+    url: https://www.jetmax.ch/media/pdf_en/turbine_wheels/tw85blank_en.pdf
+    accessed: 2026-10-04
+    sha256: 49a2729d51d4ceb57ad5a7fb9870e940aee3e6010a27eec192fbbf0ebfde6c59
+  - id: jetmax-turbine-wheels-page
+    kind: supplier_listing
+    url: https://www.jetmax.ch/en/turbine_wheels.htm
+    accessed: 2026-10-04
+    note: "Vacuum investment cast; x-ray and crack examination; finished wheels prebalanced. 85 mm finished CHF 370 / EUR 305; blank CHF 265 / EUR 220. No thrust class listed for 85 mm (66 mm: 80-120 N; 70 mm: 140-180 N)."
+parameters:
+  tip_diameter: {value: 85.0, unit: mm, basis: supplied, source: jetmax-tw85-finished,
+                 note: Tolerance not stated on drawing; measure for tip-clearance stack.}
+  hub_diameter: {value: 55.0, unit: mm, basis: supplied, source: jetmax-tw85-finished,
+                 note: Blade root (rim) diameter.}
+  bore_diameter: {value: 9.99, unit: mm, basis: supplied, source: jetmax-tw85-finished, range: [9.985, 9.995]}
+  hub_boss_diameter: {value: 14.0, unit: mm, basis: supplied, source: jetmax-tw85-finished}
+  blade_axial_width_at_rim: {value: 7.5, unit: mm, basis: supplied, source: jetmax-tw85-finished,
+                 note: Axial chord at the rim/disc as dimensioned; tip axial chord not dimensioned.}
+  hub_boss_total_length: {value: 19.0, unit: mm, basis: supplied, source: jetmax-tw85-finished}
+  hub_boss_protrusion_side_a: {value: 8.0, unit: mm, basis: supplied, source: jetmax-tw85-finished,
+                 note: "Boss length beyond the disc face on the dimensioned side. Which face is upstream is not stated."}
+  hub_boss_protrusion_side_b: {value: 3.5, unit: mm, basis: calculated,
+                 note: "19 - 8 - 7.5 mm from the same drawing."}
+  blank_tip_diameter: {value: 85.2, unit: mm, basis: supplied, source: jetmax-tw85-blank}
+  blank_boss_length: {value: 20.0, unit: mm, basis: supplied, source: jetmax-tw85-blank}
+  blade_count_estimate: {value: 30, unit: count, basis: assumption, range: [28, 32],
+                 note: "Counted from the schematic plan view (angular profile ~29.5 pitches); count on the part."}
+  blade_height: {value: 15.0, unit: mm, basis: calculated, note: "(85 - 55)/2 from supplied diameters."}
+  annulus_area: {value: 3298.7, unit: mm2, basis: calculated, note: "pi/4 (85^2 - 55^2)."}
+  blade_mass_assumed: {value: 0.86, unit: g, basis: assumption, range: [0.6, 1.2],
+                       note: "15 mm span x ~7.2 mm2 mean section (1.3 mm max thickness, 35 deg stagger) x 8000 kg/m3."}
+  blade_root_area_assumed: {value: 9.0, unit: mm2, basis: assumption, range: [6.0, 12.0],
+                            note: Root section area for the centrifugal screen; measure a sectioned or scanned blade.}
+  blade_cg_radius_assumed: {value: 34.4, unit: mm, basis: assumption, range: [33.5, 35.5],
+                            note: "Linear taper (tip/root 0.6) centroid from 27.5 mm rim."}
+  rotor_exit_relative_angle: {value: -58.0, unit: deg, basis: assumption, range: [-65.0, -50.0],
+                 note: "Mean-line relative exit flow angle from axial (negative opposite rotation). Typical small-turbine value; NOT measured. Determines rotor throat and work."}
+  rotor_throat_area: {value: null, unit: mm2, basis: unresolved,
+                 note: "Measure throat opening o at hub/mid/tip on several passages; A = N o h. Highest-value turbine measurement."}
+  rotor_inlet_metal_angle: {value: null, unit: deg, basis: unresolved,
+                 note: Measure from section; incidence loss is modelled relative to an assumed design incidence.}
+  tip_clearance_design: {value: 0.35, unit: mm, basis: assumption, range: [0.20, 0.50],
+                 note: "Cold radial clearance to the finished NGV shroud; set by shroud machining; hot value from clearance stack."}
+  alloy: {value: null, unit: '-', basis: unresolved,
+          note: "Supplier states vacuum investment casting with chemical analysis and sample bar per batch; alloy (commonly Inconel 713LC class) and heat treatment not published."}
+  density_assumed: {value: 8000.0, unit: kg_m3, basis: assumption, range: [7900.0, 8200.0],
+          note: Nickel casting alloy class; replace with certified alloy.}
+  mass_estimate: {value: 0.17, unit: kg, basis: calculated, range: [0.15, 0.21],
+          note: "Uniform 7.5 mm disc from bore to 55 mm rim (17,230 mm3) + 14 mm boss to 19 mm (870 mm3) + 30 blades of ~108 mm3 (assumed 1.3 mm max thickness, 35 deg stagger), at 8000 kg/m3. Weigh the part."}
+  polar_inertia_estimate: {value: 8.4e-5, unit: kg_m2, basis: calculated, range: [7.0e-5, 1.05e-4],
+          note: "Disc 5.4e-5 + blades 3.0e-5 kg m2 from the same envelope model; replace by measurement or CAD."}
+  diametral_inertia_estimate: {value: 4.3e-5, unit: kg_m2, basis: calculated, range: [3.5e-5, 5.5e-5],
+          note: "Thin-disc approximation Ip/2 + m t^2/12."}
+  maximum_speed: {value: null, unit: rpm, basis: unresolved,
+          note: "No speed rating published. Needed from supplier or a disc/blade strength and life analysis."}
+  list_price_finished: {value: 370.0, unit: CHF, basis: supplied, source: jetmax-turbine-wheels-page,
+          note: Foreign list price; not a delivered USD quote.}
+  list_price_blank: {value: 265.0, unit: CHF, basis: supplied, source: jetmax-turbine-wheels-page}
+unknowns:
+  - Blade angles, throat opening and blade count (measure on the part or request from supplier).
+  - Alloy, heat treatment, allowable temperature/speed and life (supplier certification; analysis).
+  - Which hub face is upstream; boss/bore concentricity and balance grade/plane of the prebalance.
+  - Actual mass, CG and inertias (weigh; CAD from scan).

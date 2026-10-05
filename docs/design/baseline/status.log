@@ -1,0 +1,21 @@
+
+MODULE MATURITY BOARD
+==============================================================================
+module                owner     second    status    title
+------------------------------------------------------------------------------
+m01_cycle             CYCLE-1   CYCLE-2   -> draft    Design point cycle and station table
+m10_compressor        TURBO-1   TURBO-2   -> draft    Impeller sizing: exducer, inducer, blade width
+m11_diffuser          TURBO-2   TURBO-1   .. stub     Radial diffuser: exit diameter, vane count, throat
+m12_ngv               TURBO-3   TURBO-4   -> draft    NGV throat area, vane count, exit swirl
+m13_turbine           TURBO-3   TURBO-4   -> draft    Turbine mean-line: diameters, blade height, count, mass
+m20_combustor         CSYS-1    CSYS-2    -> draft    Combustor: liner, zones, air splits, holes, vaporizers
+m24_combustor_checks  CSYS-2    SAFE-1    .. stub     Frozen combustor diagnostic checks
+m30_shaft             STRUCT-1  STRUCT-2  -> draft    Shaft diameter, length, bearing span, torque
+m31_bearings          STRUCT-1  STRUCT-3  -> draft    Bearing DN, axial load, stiffness
+m32_rotordyn          STRUCT-2  STRUCT-1  .. stub     First bending critical and separation margin
+m33_turb_stress       STRUCT-2  TURBO-4   -> draft    Blade centrifugal stress screening and AN^2
+m34_casing            STRUCT-3  STRUCT-2  -> draft    Engine envelope: OD, length, dry mass
+m40_nozzle            TURBO-2   STRUCT-3  -> draft    Nozzle exit area, velocity, gross thrust
+m50_fuel              CSYS-3    CSYS-2    -> draft    Fuel flow, line sizing, pump pressure
+------------------------------------------------------------------------------
+14 modules: 0 verified, 11 draft, 3 stub

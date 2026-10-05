@@ -1,0 +1,52 @@
+schema_version: 1
+record_type: component
+component_id: turbine_rotor_tw70
+part_ids: [TR-01B]
+title: JETMAX 70 mm cast axial turbine wheel, finished and prebalanced (alternative)
+make_buy: buy
+budget_rows: [R02]
+software_owner: core/turbine_rating.py
+summary: >
+  Alternative matched-pair candidate. The UT160 plan engine (designer Ulrich Thiel)
+  uses this wheel with the JETMAX 70 mm finished NGV and a Garrett 179-24 70 mm
+  compressor wheel; its designer reports 140-180 N at 123,000 rpm. That is evidence
+  that the pair works in that engine, not in CORE.
+source_documents:
+  - id: jetmax-tw70-finished
+    kind: supplier_drawing
+    url: https://www.jetmax.ch/media/pdf_en/turbine_wheels/tw70finished_en.pdf
+    accessed: 2026-10-04
+    sha256: 39448e60e92832f344127cdc9e806f22144b7901af06e0812b43266a1ea5b99b
+  - id: jetmax-turbine-wheels-page
+    kind: supplier_listing
+    url: https://www.jetmax.ch/en/turbine_wheels.htm
+    accessed: 2026-10-04
+    note: 70 mm finished CHF 280 / EUR 235; thrust class 140-180 N.
+  - id: ut160-plan-page
+    kind: designer_statement
+    url: https://ut160.de.tl/Bauplan-s-building-guidance.htm
+    accessed: 2026-10-04
+    note: "Designer states 140-180 N at 123,000 rpm depending on build; mixture lubrication with kerosene + 5 % turbine oil."
+parameters:
+  tip_diameter: {value: 70.0, unit: mm, basis: supplied, source: jetmax-tw70-finished}
+  hub_diameter: {value: 44.2, unit: mm, basis: supplied, source: jetmax-tw70-finished}
+  bore_diameter: {value: 7.99, unit: mm, basis: supplied, source: jetmax-tw70-finished, range: [7.985, 7.995]}
+  hub_boss_diameter: {value: 12.0, unit: mm, basis: supplied, source: jetmax-tw70-finished}
+  blade_axial_width_at_rim: {value: 7.2, unit: mm, basis: supplied, source: jetmax-tw70-finished}
+  hub_boss_total_length: {value: 15.3, unit: mm, basis: supplied, source: jetmax-tw70-finished}
+  hub_boss_protrusion_side_a: {value: 5.5, unit: mm, basis: supplied, source: jetmax-tw70-finished}
+  blade_count_estimate: {value: 27, unit: count, basis: assumption, range: [23, 30],
+                         note: Schematic plan view; count on part.}
+  blade_height: {value: 12.9, unit: mm, basis: calculated}
+  rotor_exit_relative_angle: {value: -58.0, unit: deg, basis: assumption, range: [-65.0, -50.0]}
+  rotor_throat_area: {value: null, unit: mm2, basis: unresolved}
+  tip_clearance_design: {value: 0.30, unit: mm, basis: assumption, range: [0.18, 0.45]}
+  density_assumed: {value: 8000.0, unit: kg_m3, basis: assumption, range: [7900.0, 8200.0]}
+  mass_estimate: {value: 0.10, unit: kg, basis: assumption, range: [0.08, 0.13]}
+  polar_inertia_estimate: {value: 3.6e-5, unit: kg_m2, basis: assumption, range: [2.8e-5, 4.6e-5]}
+  diametral_inertia_estimate: {value: 1.9e-5, unit: kg_m2, basis: assumption, range: [1.5e-5, 2.5e-5]}
+  maximum_speed: {value: null, unit: rpm, basis: unresolved,
+                  note: "UT160 operation at 123,000 rpm is a designer report, not a rating for the CORE duty."}
+  list_price_finished: {value: 280.0, unit: CHF, basis: supplied, source: jetmax-turbine-wheels-page}
+unknowns:
+  - Same blade-angle/throat/alloy unknowns as the 85 mm wheel.

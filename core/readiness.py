@@ -21,7 +21,10 @@ def design_fingerprint(root):
              if p.suffix in ('.py','.yaml') and p.name != 'readiness.yaml']
     paths += [root/name for name in ('run.py','V22_CombustionChamberDesign.py',
               'RPM_Sweep_OffDesign.py','requirements.txt') if (root/name).is_file()]
-    paths = sorted(paths)
+    paths += [p for p in (root/'data').rglob('*') if p.is_file()]
+    if (root/'run_case.py').is_file():
+        paths.append(root/'run_case.py')
+    paths = sorted(set(paths))
     h = hashlib.sha256()
     for p in paths:
         h.update(p.relative_to(root).as_posix().encode())

@@ -9,6 +9,11 @@ engine either will not make power or will overspeed the compressor into surge.
 
 Sized from the rotor's velocity triangles: the rotor needs a certain absolute
 swirl at its inlet, and the NGV exists to produce exactly that.
+
+FIXED PURCHASED NGV (ngv_fixed_flag = 1): throat area, exit angle and vane
+count come from the component record and are not resized. The module reports
+the local throat Mach number for the actual hot flow and whether the throat is
+choked. Overall engine pressure ratio is not used to infer local choking.
 """
 
 import math
@@ -28,12 +33,17 @@ from core import gas, thermo
         "D_turb_mean_m", "reaction_turb_ratio", "zweifel_ratio",
         "aspect_ratio_ngv_ratio", "n_blades_turb_count",
     ],
+    optional_reads=["ngv_fixed_flag", "A_throat_ngv_fixed_m2", "alpha_ngv_exit_fixed_deg",
+                    "n_vanes_ngv_fixed_count", "mdot_fuel_kg_s", "cycle_imported_point_flag",
+                    "op_ngv_M_ratio", "op_ngv_T_K", "op_ngv_P_Pa"],
     writes=[
         "A_throat_ngv_m2", "n_vanes_ngv_count", "alpha_ngv_exit_deg",
         "ngv_choked_flag", "M_ngv_exit_ratio", "P_ngv_exit_Pa", "T_ngv_exit_K",
     ],
 )
 def m12_ngv(s):
+    if "ngv_fixed_flag" in s and s["ngv_fixed_flag"]:
+        return _fixed_ngv(s)
     mdot_hot = s["mdot_kg_s"] * (1.0 + s["FAR_ratio"])
     g = s["gamma_hot_ratio"]
 
@@ -82,4 +92,32 @@ def m12_ngv(s):
         "n_vanes_ngv_count": float(n_vanes),
         "alpha_ngv_exit_deg": alpha2,
         "ngv_choked_flag": 1.0 if choked else 0.0,
+    }
+
+
+def _fixed_ngv(s):
+    if 'cycle_imported_point_flag' in s and s['cycle_imported_point_flag']:
+        # The engine rating already includes NGV loss and tunnel-air mixing.
+        # Re-solving an isentropic throat at combustor T04 creates a different station.
+        return {'M_ngv_exit_ratio': s['op_ngv_M_ratio'], 'P_ngv_exit_Pa': s['op_ngv_P_Pa'],
+                'T_ngv_exit_K': s['op_ngv_T_K'], 'A_throat_ngv_m2': s['A_throat_ngv_fixed_m2'],
+                'n_vanes_ngv_count': float(s['n_vanes_ngv_fixed_count']),
+                'alpha_ngv_exit_deg': s['alpha_ngv_exit_fixed_deg'],
+                'ngv_choked_flag': float(s['op_ngv_M_ratio'] >= 1.0)}
+    R, far = s["R_gas_J_kgK"], s["FAR_ratio"]
+    mdot_hot = s["mdot_kg_s"] + s["mdot_fuel_kg_s"]   # all compressor air (incl. leakage) + fuel
+    A = s["A_throat_ngv_fixed_m2"]
+    vs, ts = thermo.sonic(s["T04_K"], far, R)
+    ps = thermo.pressure(ts, s["T04_K"], s["P04_Pa"], far, R)
+    capacity = A * ps / (R * ts) * vs
+    choked = mdot_hot >= capacity
+    if choked:
+        M, Ts, Ps = 1.0, ts, ps
+    else:
+        V, Ts, Ps = thermo.area_state(mdot_hot, A, s["T04_K"], s["P04_Pa"], far, R)
+        M = V / math.sqrt(thermo.gamma(Ts, far, R) * R * Ts)
+    return {
+        "M_ngv_exit_ratio": M, "P_ngv_exit_Pa": Ps, "T_ngv_exit_K": Ts,
+        "A_throat_ngv_m2": A, "n_vanes_ngv_count": float(s["n_vanes_ngv_fixed_count"]),
+        "alpha_ngv_exit_deg": s["alpha_ngv_exit_fixed_deg"], "ngv_choked_flag": 1.0 if choked else 0.0,
     }

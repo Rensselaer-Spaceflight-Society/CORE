@@ -49,10 +49,18 @@ VALID_STATUS = ("stub", "draft", "verified")
 class ModuleSpec:
     """Everything the solver and the status board need to know about one module."""
 
-    def __init__(self, fn, reads, writes, owner, second, status, title, notes, tier):
+    def __init__(self, fn, reads, writes, owner, second, status, title, notes, tier, optional_reads=(),
+                 case_sets=('baseline', 'candidate')):
         self.fn = fn
         self.name = fn.__name__
         self.reads = tuple(reads)
+        # Inputs used only in an explicitly selected mode (e.g. fixed purchased
+        # geometry). They may be absent; the module must check its mode flag and
+        # fail loudly if a selected mode's input is missing.
+        self.optional_reads = tuple(r for r in optional_reads if r not in reads)
+        # Named module sets: a candidate-only module (e.g. the explicit assembly
+        # layout) never enters the legacy baseline graph.
+        self.case_sets = tuple(case_sets)
         self.writes = tuple(writes)
         self.owner = owner
         self.second = second
@@ -67,7 +75,8 @@ class ModuleSpec:
 
     def run(self, state):
         """Call the module with a read-guarded view of state, validate its output."""
-        view = _TrackedState(state, allowed=set(self.reads), module_name=self.name)
+        view = _TrackedState(state, allowed=set(self.reads) | set(self.optional_reads),
+                             module_name=self.name)
         out = self.fn(view)
 
         if not isinstance(out, dict):
@@ -124,7 +133,13 @@ class _TrackedState(Mapping):
     def __getitem__(self, key):
         if key not in self._allowed:
             raise ModuleError(f"{self._module}: undeclared read '{key}'")
+        if key not in self._backing:
+            raise ModuleError(f"{self._module}: input '{key}' is required by the selected mode "
+                              f"but is not in the seed or produced by any module")
         return self._backing[key]
+
+    def __contains__(self, key):
+        return key in self._allowed and key in self._backing
 
     def __iter__(self):
         return iter(self._backing)
@@ -136,7 +151,8 @@ class _TrackedState(Mapping):
         raise ModuleError(f"{self._module}: state is read-only; return outputs")
 
 
-def module(*, reads, writes, owner, second=None, status="stub", title="", notes="", tier=0):
+def module(*, reads, writes, owner, second=None, status="stub", title="", notes="", tier=0,
+           optional_reads=(), case_sets=('baseline', 'candidate')):
     """Register a function as an engine module. See the docstring at the top of this file."""
     if status not in VALID_STATUS:
         raise ValueError(f"status must be one of {VALID_STATUS}, got '{status}'")
@@ -144,7 +160,8 @@ def module(*, reads, writes, owner, second=None, status="stub", title="", notes=
         raise ValueError("a module that writes nothing has no effect -- declare its outputs")
 
     def deco(fn):
-        spec = ModuleSpec(fn, reads, writes, owner, second, status, title, notes, tier)
+        spec = ModuleSpec(fn, reads, writes, owner, second, status, title, notes, tier, optional_reads,
+                          case_sets)
         if spec.name in REGISTERED:
             raise ValueError(
                 f"two modules are both named '{spec.name}'. Module names must be unique "

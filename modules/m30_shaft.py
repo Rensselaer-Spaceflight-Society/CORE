@@ -9,6 +9,11 @@ why it comes before Gate C.
 
 L_shaft_m is the sum of the axial stack, and it is one of the two numbers that
 set overall engine length.
+
+ASSEMBLY MODE (assembly_mode_flag = 1, candidate set): shaft length, bearing
+span and mass come from the explicit stepped-shaft stack published by M29
+(core/assembly.py) instead of the proportional estimates below. d_shaft_m is
+then the bearing-journal diameter; the full stepped profile is in the CAD export.
 """
 
 import math
@@ -27,6 +32,8 @@ from core import gas
         "tau_allow_shaft_Pa", "rho_shaft_kg_m3", "bear_span_frac",
         "D_shaft_tunnel_m",
     ],
+    optional_reads=["assembly_mode_flag", "x_front_bearing_m", "x_rear_bearing_m", "x_shaft_front_m",
+                    "x_shaft_rear_m", "m_shaft_stack_kg", "shaft_journal_d_m", "op_shaft_comp_power_W"],
     writes=["d_shaft_m", "L_shaft_m", "L_bear_span_m", "torque_Nm", "m_shaft_kg"],
 )
 def m30_shaft(s):
@@ -35,6 +42,16 @@ def m30_shaft(s):
     # -- torque from shaft power --------------------------------------------
     power = s["mdot_kg_s"] * s["w_comp_J_kg"] / s["eta_mech_frac"]
     torque = power / omega
+
+    if "assembly_mode_flag" in s and s["assembly_mode_flag"]:
+        torque = s['op_shaft_comp_power_W'] / omega
+        return {
+            "d_shaft_m": s["shaft_journal_d_m"],
+            "L_shaft_m": s["x_shaft_rear_m"] - s["x_shaft_front_m"],
+            "L_bear_span_m": s["x_rear_bearing_m"] - s["x_front_bearing_m"],
+            "torque_Nm": torque,
+            "m_shaft_kg": s["m_shaft_stack_kg"],
+        }
 
     # -- diameter from torsion, then floored by the bearing bore ------------
     # solid round shaft: tau = 16*T/(pi*d^3)

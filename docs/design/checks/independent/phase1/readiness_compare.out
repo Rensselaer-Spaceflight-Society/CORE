@@ -1,0 +1,6 @@
+stored design_fingerprint: pending
+reviewed evidence entries: []
+HEAD fingerprint   : e91f55a6a0817d4b | new fingerprint: a81afb6f9e4b020a | differ: True
+blockers identical : True | count 11 11
+newly covered files: 15 (data/** + run_case.py)
+simulated: doc keyed to HEAD-function fingerprint -> new function flags mismatch: True

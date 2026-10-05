@@ -1,0 +1,48 @@
+{
+  "max_fuel_kg_h": 9.52869491335246,
+  "pump_flow_required_L_h": 16.25833569590764,
+  "lube_flow_L_h": 0.5955434320845289,
+  "design_margin": 1.3,
+  "lube_fraction_of_fuel": 0.05,
+  "pressure_items_Pa": [
+    {
+      "item": "combustor (vaporizer stick) pressure, max in range",
+      "dP_Pa": 44979.22165951668
+    },
+    {
+      "item": "needle laminar restrictors (distribution)",
+      "dP_Pa": 60000.0
+    },
+    {
+      "item": "line friction (M50)",
+      "dP_Pa": 18230.986399771566
+    },
+    {
+      "item": "filter (allowance)",
+      "dP_Pa": 10000.0
+    },
+    {
+      "item": "fittings minor losses (M50 K)",
+      "dP_Pa": 2000.0
+    },
+    {
+      "item": "check valve cracking (allowance)",
+      "dP_Pa": 7000.0
+    },
+    {
+      "item": "shutoff solenoid valve (allowance)",
+      "dP_Pa": 15000.0
+    }
+  ],
+  "pump_differential_required_Pa": 157210.20805928824,
+  "pump_outlet_required_abs_Pa": 258535.20805928824,
+  "needle": {
+    "n": 8,
+    "id_m": 0.0005,
+    "length_m": 0.1390913879377103,
+    "velocity_m_s": 2.1063040231592276,
+    "Re": 526.5760057898069,
+    "laminar": true
+  },
+  "note": "Liquid budget only. Vaporizer air budget is inside the combustor model and is not paid by the pump. Lube flow (fuel + 5 % oil mixture to bearings) bypasses the combustor and its heat release is not credited."
+}

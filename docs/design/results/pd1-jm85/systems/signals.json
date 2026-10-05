@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "record_type": "signal_dictionary",
+  "component_id": "signals_pd1",
+  "title": "PD-1 instrumentation and control signal dictionary (requirements, not selected hardware)",
+  "summary": "Each channel states what physical quantity it measures and why, the range and resolution that purpose needs, sample rate/latency, and what the controller must do with invalid data. Trip thresholds are ILLUSTRATIVE simulation values only; they are not approved operating limits. Hardware outputs remain disabled in software.\n",
+  "channels": [
+    {
+      "id": "N",
+      "quantity": "shaft speed",
+      "unit": "rpm",
+      "purpose": "overspeed protection, start sequencing, matching validation",
+      "location": "compressor nut / front of shaft (optical reflective mark or magnet + Hall), inside inlet bracket",
+      "range": [
+        0,
+        90000
+      ],
+      "resolution": 10,
+      "sample_or_update_hz": 100,
+      "max_latency_ms": 10,
+      "method": "timer-capture of 1 pulse/rev (1,133 Hz at 68 krpm); not ADC sampling",
+      "invalid": "no pulse > 100 ms while starter or fuel active -> SPEED_LOST fault -> shutdown",
+      "budget_rows": [
+        "E07",
+        "E34",
+        "E08"
+      ]
+    },
+    {
+      "id": "EGT",
+      "quantity": "exhaust gas temperature at nozzle entry (T5 region)",
+      "unit": "K",
+      "purpose": "over-temperature protection and light-off detection; NOT turbine inlet temperature",
+      "location": "3 mm sheathed K probe, nozzle entry, 45 deg, immersed to mid-annulus",
+      "range": [
+        273,
+        1373
+      ],
+      "resolution": 1,
+      "sample_or_update_hz": 10,
+      "max_latency_ms": 1500,
+      "method": "MAX31856 thermocouple interface; probe time constant ~1 s class (verify) limits fast trips",
+      "invalid": "open-circuit or out-of-range -> EGT_INVALID -> shutdown if fuel active",
+      "note": "Model relation at design point: T04 - T5 ~ 50 K; EGT cannot substitute for TIT or metal temperature.",
+      "budget_rows": [
+        "E01",
+        "E03",
+        "E23"
+      ]
+    },
+    {
+      "id": "P03",
+      "quantity": "compressor delivery static pressure (outer annulus, gauge)",
+      "unit": "Pa",
+      "purpose": "operating-line validation vs map, surge/flameout detection, combustor loss evidence",
+      "location": "1/8 NPT boss in casing over outer annulus near dome plane, 90 deg",
+      "range": [
+        0,
+        200000
+      ],
+      "resolution": 200,
+      "sample_or_update_hz": 200,
+      "max_latency_ms": 20,
+      "method": "0-30 psig class transmitter recommended (design gauge ~49 kPa = 7 psig); 0-100 psig units in the budget give poor resolution",
+      "invalid": "out-of-range or flatline > 1 s while running -> P03_INVALID -> controlled shutdown",
+      "budget_rows": [
+        "E04",
+        "E05",
+        "E22"
+      ]
+    },
+    {
+      "id": "PF",
+      "quantity": "fuel pressure at manifold inlet (gauge)",
+      "unit": "Pa",
+      "purpose": "pump delivery verification, blockage/leak detection",
+      "location": "tee at manifold inlet outside casing",
+      "range": [
+        0,
+        400000
+      ],
+      "resolution": 1000,
+      "sample_or_update_hz": 50,
+      "max_latency_ms": 50,
+      "method": "0-60 psig transmitter",
+      "invalid": "out-of-range -> PF_INVALID -> shutdown",
+      "budget_rows": [
+        "E04",
+        "E05",
+        "E22"
+      ]
+    },
+    {
+      "id": "T03",
+      "quantity": "compressor delivery total temperature (bead probe)",
+      "unit": "K",
+      "purpose": "compressor efficiency evidence with P03 and N",
+      "location": "casing boss 270 deg, outer annulus",
+      "range": [
+        273,
+        473
+      ],
+      "resolution": 0.5,
+      "sample_or_update_hz": 5,
+      "max_latency_ms": 2000,
+      "method": "glass-braid K bead + MAX31856",
+      "invalid": "reported, no trip",
+      "budget_rows": [
+        "E02",
+        "E03"
+      ]
+    },
+    {
+      "id": "THRUST",
+      "quantity": "gross static thrust",
+      "unit": "N",
+      "purpose": "performance evidence (secondary objective)",
+      "location": "stand load cell",
+      "range": [
+        0,
+        196
+      ],
+      "resolution": 0.1,
+      "sample_or_update_hz": 20,
+      "max_latency_ms": 100,
+      "method": "20 kg beam + HX711",
+      "invalid": "reported, no trip",
+      "budget_rows": [
+        "E09",
+        "E10"
+      ]
+    },
+    {
+      "id": "FUEL_MASS",
+      "quantity": "tank mass",
+      "unit": "kg",
+      "purpose": "fuel-flow evidence (difference over time)",
+      "location": "bench scale under tank",
+      "range": [
+        0,
+        10
+      ],
+      "resolution": 0.001,
+      "sample_or_update_hz": 1,
+      "max_latency_ms": 2000,
+      "method": "manual or serial scale log",
+      "invalid": "reported",
+      "budget_rows": [
+        "F14"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "id": "FUEL_CMD",
+      "quantity": "pump drive duty",
+      "unit": "-",
+      "range": [
+        0,
+        1
+      ],
+      "note": "Saturated in software; slew-limited; zero on any fault."
+    },
+    {
+      "id": "VALVE_OPEN",
+      "quantity": "normally-closed fuel shutoff solenoid",
+      "unit": "flag",
+      "note": "Also cut by hardware E-stop chain independent of the microcontroller."
+    },
+    {
+      "id": "IGNITER_ON",
+      "quantity": "ignition module enable",
+      "unit": "flag"
+    },
+    {
+      "id": "STARTER_CMD",
+      "quantity": "starter ESC throttle",
+      "unit": "-",
+      "range": [
+        0,
+        1
+      ]
+    }
+  ],
+  "illustrative_thresholds": {
+    "note": "Simulation values only; not approved limits.",
+    "overspeed_rpm": 74800,
+    "egt_trip_K": 980,
+    "light_off_egt_rise_K": 80,
+    "light_off_timeout_s": 6.0,
+    "sensor_stale_s": 0.5
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "torque_Nm": 1.28999373362706,
+  "bending_moment_Nm": 0.06376368379996193,
+  "shaft": {
+    "d_min_m": 0.006,
+    "tau_nom_Pa": 30416130.261380196,
+    "sigma_b_nom_Pa": 3006905.323411126,
+    "tau_peak_Pa": 48665808.418208316,
+    "sigma_b_peak_Pa": 6013810.646822252,
+    "von_mises_peak_Pa": 84505908.938305
+  },
+  "liner_buckling": {
+    "p_cr_elastic_Pa": 15567041.679601995,
+    "p_cr_knocked_down_Pa": 7783520.839800998,
+    "knockdown": 0.5,
+    "external_dP_Pa": 6011.3746059991245,
+    "D_m": 0.10294583111789278,
+    "t_m": 0.001524,
+    "L_m": 0.08578871788625389,
+    "E_Pa": 175000000000.0
+  },
+  "casing_hoop_Pa": 2398251.091113857,
+  "checks": [
+    {
+      "name": "shaft peak von Mises vs 0.5 yield (4140 RT)",
+      "status": "pass",
+      "value": 84505908.938305,
+      "limit": 327500000.0,
+      "margin": 0.7419666902647175,
+      "unit": "Pa",
+      "criterion": "<= 327500000.0",
+      "basis": "assumption",
+      "reason": "stress concentration Kt 2.0 bending / 1.6 torsion at the 6 mm seat"
+    },
+    {
+      "name": "shaft alternating bending vs corrected endurance",
+      "status": "pass",
+      "value": 6013810.646822252,
+      "limit": 240000000.0,
+      "margin": 0.9749424556382407,
+      "unit": "Pa",
+      "criterion": "<= 240000000.0",
+      "basis": "assumption",
+      "reason": "rotating bending from overhang loads; Goodman mean-torsion effect neglected"
+    },
+    {
+      "name": "shaft threaded ends: torque share, nut preload and thread Kt",
+      "status": "unknown",
+      "value": null,
+      "limit": null,
+      "margin": null,
+      "unit": "Pa",
+      "criterion": "not evaluated",
+      "basis": "unresolved",
+      "reason": "M6/M8 ends (minor diameter ~0.85 x nominal) may carry part of the wheel torque through the clamped nut plus the clamp preload; neither is modelled, so the seat value is not shown to govern."
+    },
+    {
+      "name": "outer liner elastic buckling margin (knockdown 0.5)",
+      "status": "pass",
+      "value": 1294.7988355331138,
+      "limit": 3.0,
+      "margin": 430.5996118443713,
+      "unit": "-",
+      "criterion": ">= 3.0",
+      "basis": "calculated",
+      "reason": "Windenburg-Trilling; creep buckling at temperature not covered"
+    },
+    {
+      "name": "casing hoop stress vs 0.3 x 316 yield (seam-welded)",
+      "status": "pass",
+      "value": 2398251.091113857,
+      "limit": 61500000.0,
+      "margin": 0.9610040472989616,
+      "unit": "Pa",
+      "criterion": "<= 61500000.0",
+      "basis": "assumption",
+      "reason": "membrane stress only; flange/joint and fragment containment NOT covered"
+    }
+  ]
+}

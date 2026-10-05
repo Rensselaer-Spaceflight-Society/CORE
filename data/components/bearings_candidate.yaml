@@ -1,0 +1,45 @@
+schema_version: 1
+record_type: component
+component_id: bearings
+part_ids: [BR-01, BR-02]
+title: Candidate hybrid angular-contact bearings, 10 x 26 x 8 mm (front locating, rear floating)
+make_buy: buy
+budget_rows: [R04, R10, R13]
+software_owner: core/assembly.py, core/rotor_fe.py, core/engine_match.py (friction)
+summary: >
+  The October 2 budget names an 8 x 22 x 7 mm MTSV708 candidate. The JETMAX 85 mm
+  finished wheel has a 9.99 mm bore, so the turbine seat and the rear bearing journal
+  that passes over it are 10 mm. PD-1 therefore uses the same supplier family's
+  10 x 26 x 8 mm size at both ends (one spare type, stiffer 13 mm shaft body between
+  bearings). Speed rating, preload, cage and lubrication conditions are NOT published
+  on the accessed page and remain supplier questions.
+source_documents:
+  - id: monton-turbo-bearings
+    kind: supplier_listing
+    url: https://www.montonbearing.com/hkhtzc/wpfdjzc.html
+    accessed: 2026-10-04
+    note: "Lists MTSV708 (8x22x7) and MTSV7000 (10x26x8) with Si3N4 ceramic balls; no speed, load or preload data on the page."
+parameters:
+  bore: {value: 10.0, unit: mm, basis: supplied, source: monton-turbo-bearings}
+  outer_diameter: {value: 26.0, unit: mm, basis: supplied, source: monton-turbo-bearings}
+  width: {value: 8.0, unit: mm, basis: supplied, source: monton-turbo-bearings}
+  ball_material_note: {value: null, unit: '-', basis: unresolved, note: Si3N4 per listing; ring steel, cage and contact angle unpublished.}
+  limiting_speed: {value: null, unit: rpm, basis: unresolved,
+                   note: "Required: supplier limiting speed for the chosen lubrication (fuel/oil mist) at the preload; >= 1.2 x 80,000 rpm requested."}
+  radial_stiffness_preloaded: {value: 15.0, unit: N_um, basis: assumption, range: [5.0, 40.0],
+                               note: Light spring preload; depends on contact angle, preload and speed (softens at speed).}
+  housing_stiffness: {value: 50.0, unit: N_um, basis: assumption, range: [20.0, 150.0],
+                      note: Aluminium carrier + 316 tunnel/backplate path in series with the bearing.}
+  support_damping: {value: 150.0, unit: N_s_m, basis: assumption, range: [50.0, 2000.0],
+                    note: "Viscous damping; dry metal mounting ~50-300; an O-ring/squeeze-film mount could give ~500-2000 (design option)."}
+  preload_spring_force: {value: 40.0, unit: N, basis: design, range: [25.0, 60.0],
+                         note: Wave-spring axial preload on the floating rear outer ring.}
+  friction_f0: {value: 1.7, unit: '-', basis: assumption, range: [1.0, 2.5],
+                note: SKF/Palmgren viscous friction factor for angular-contact bearings, oil-mist class.}
+  lubricant_viscosity: {value: 8.0, unit: cSt, basis: assumption, range: [2.0, 15.0],
+                        note: "Operating kinematic viscosity; kerosene + 5 % turbine oil mixture lubrication is near the low end."}
+  list_price_each: {value: null, unit: USD, basis: unresolved, note: Budget allowance USD 150 each (R04) is not a quote.}
+unknowns:
+  - Limiting speed and life at fuel/oil-mist lubrication and the actual temperatures.
+  - Contact angle, preload class and recommended preload; radial/axial stiffness vs speed.
+  - Cage material/temperature limit near the turbine (rear bearing).

@@ -51,6 +51,7 @@ KNOWN_UNITS = {
     "J_kgK": "joule per kilogram kelvin",
     "kg_m2": "kilogram square metre",
     "N_m": "newton per metre",
+    "N_s_m": "newton second per metre (viscous damping)",
     "m2_rpm2": "square metre times rpm squared (AN^2 convention)",
     "mm_rpm": "millimetre times rpm (bearing DN convention)",
     "deg": "degree",
